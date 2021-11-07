@@ -1,3 +1,1 @@
-# spg
-
-test
+# Welcome to SPG
