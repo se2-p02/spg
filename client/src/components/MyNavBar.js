@@ -8,15 +8,15 @@ import Image from "react-bootstrap/Image"
 function MyNavBar(props) {
     return (
 
-        <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top" expand="lg">
-            <Navbar.Toggle aria-controls="CollapseLeft" />
+        <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top justify-content-center" expand="lg">
+            {/*<Navbar.Toggle aria-controls="CollapseLeft" /> */}
 
-            <Navbar.Brand className="w-25">
-                <Row>
-                    <Col sm="3" className="p-0 m-0 ">
-                        <Image src="../solidarity.png" className="w-50 m-4 mt-0 mb-0 p-0"/>
+            <Navbar.Brand >
+                <Row className=" align-items-center">
+                    <Col sm="3" className="p-0 m-0 d-none d-sm-block">
+                        <Image src="../solidarity.png" className="w-25 m-4 mt-0 mb-0 p-0"/>
                     </Col>
-                    <Col sm="9" className="p-0 m-0 ml-2 pl-2">
+                    <Col xs="12" sm="9" className="p-0 m-0 ml-2 pl-2">
                         <b><h2 className="mt-0 mb-0 w-100 m-0 p-1 pb-1 pt-1">Social Purchasing Group</h2></b>
                     </Col>
 

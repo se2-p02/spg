@@ -1,39 +1,63 @@
-import { useEffect, useState } from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
-import API from "./API.js"
+import API from "./API";
+
 
 function MyClients(props) {
-    const [goBack, setGoBack] = useState(false)
-    const [clients, setClients] = useState("")
+    const [goBack, setGoBack] = useState(false);
+    const [clients, setClients] = useState([]);
+    const [reqUpdate, setReqUpdate] = useState(true);
 
     useEffect(() => {
-        const fetchClients = async () => {
-            const response = await fetch('http://localhost:3000/api/clients');
-            const responseBody = await response.json();
-            if (responseBody.error) return;
-            setClients(responseBody)
+        if (reqUpdate) {
+            API.loadClients().then((c) => {
+                if (c.error === undefined) {
+                    setClients(c);
+                    setReqUpdate(false);
+                }
+                else {
+                }
+            }).catch((err) => {
+            });
         }
-        fetchClients();
-    }, []);
+    }, [reqUpdate]);
 
     if (goBack) {
         return (<Navigate to="/employee"></Navigate>)
     }
 
+
+
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav m-0 pl-0 pr-0 pb-0" fluid>
-                <Container className="w-100 bg-success m-0 p-2">
-                <ListGroup className="w-25 text-center p-0 ">
-                    {clients.map((x)=>{
-                        return <ListGroup.Item variant="dark" action className="text-dark w-100"><b>{x.name + " " + x.surname}</b> </ListGroup.Item>
-                    })}
-                </ListGroup>
-                </Container>
+            <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
+
                 <Button size="lg" className="btn-danger p-2 w-25" onClick={() => setGoBack(true)}>Back</Button>
+                <ListGroup className="my-3 mx-5" horizontal>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Id</ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Name</ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Surname</ListGroup.Item>
+                </ListGroup>
+                {clients &&
+                    <>
+                        {
+                            clients.map(c => {
+                                return (
+                                    <ListGroup as={Link} to={"/employee/clients/" + c.id} key={c.id} style={{ textDecoration: 'none' }} className="my-2 mx-5" horizontal>
+                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.id}</ListGroup.Item>
+                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.name}</ListGroup.Item>
+                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.surname}</ListGroup.Item>
+                                    </ListGroup>
+                                );
+                            })
+                        }
+
+                    </>
+                }
+
             </Container>
 
         </>
