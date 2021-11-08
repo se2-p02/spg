@@ -1,5 +1,14 @@
 const URL = "http://localhost:3000"
 
+async function loadProducts() {
+    let myURL = URL + "/api/products";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        const fetchedProducts = await response.json();
+        return fetchedProducts;
+    } else return { 'error': 'Failed to load Products from server' }
+}
+
 async function loadClients() {
     let myURL = URL + "/api/clients";
     const response = await fetch(myURL);
@@ -15,7 +24,21 @@ async function loadClient(id) {
     if (response.ok) {
         const fetchedClient = await response.json();
         return fetchedClient;
-    } else return { 'error': 'Failed to load clients from server' }
+    } else return { 'error': 'Failed to load client from server' }
+}
+
+async function sendOrder(order) {
+    const response = await fetch(URL + "/api/orders/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(order),
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
 }
 
 async function login(user) {
@@ -53,5 +76,5 @@ async function isLoggedIn() {
     }
 }
 
-const API = { loadClients, loadClient, login, logout, isLoggedIn };
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn };
 export default API;
