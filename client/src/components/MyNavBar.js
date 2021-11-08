@@ -11,7 +11,7 @@ function MyNavBar(props) {
         <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top" expand="lg">
             <Navbar.Toggle aria-controls="CollapseLeft" />
 
-            <Navbar.Brand className="w-25" fluid>
+            <Navbar.Brand className="w-25">
                 <Row>
                     <Col sm="3" className="p-0 m-0 ">
                         <Image src="../solidarity.png" className="w-50 m-4 mt-0 mb-0 p-0"/>

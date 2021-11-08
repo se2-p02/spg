@@ -71,6 +71,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// activate the server
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
+
+
 /*** APIs ***/
 
 
@@ -117,8 +124,20 @@ app.get('/api/sessions/current', (req, res) => {
     res.status(401).json({ error: 'Unauthenticated user!' });
 });
 
-// activate the server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
 
+
+// GET clients
+app.get('/api/clients', async (req, res) => {
+  try {
+    const service = await spgDao.getClientsSummary();
+    if (service.error) {
+      res.status(404).json(service);
+    }
+    else {
+      res.json(service);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});

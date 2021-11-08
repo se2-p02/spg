@@ -35,5 +35,6 @@ async function isLoggedIn() {
     }
 }
 
+
 const API = { login, logout, isLoggedIn };
 export default API;
