@@ -73,6 +73,38 @@ app.use(passport.session());
 
 /*** APIs ***/
 
+// GET clients
+app.get('/api/clients', async (req, res) => {
+  try {
+    const clients = await spgDao.getClients();
+    if (clients.error) {
+      res.status(404).json(clients);
+    }
+    else {
+      res.json(clients);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
+// GET specific client
+app.get('/api/clients/:id', async (req, res) => {
+  try {
+    const client = await spgDao.getClient(req.params.id);
+    if (client.error) {
+      res.status(404).json(client);
+    }
+    else {
+      res.json(client);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
 
 /*** User APIs ***/
 

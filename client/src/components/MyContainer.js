@@ -53,7 +53,7 @@ function MyContainer(props) {
                     }
                 />
                 <Route
-                    path="/employee"
+                    path="/employee" exact
                     element={
                         <>
                             <MyNavBar></MyNavBar>
