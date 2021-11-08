@@ -1,8 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyLogin from "./MyLogin";
-import MyForm from "./MyForm";
+import MyEmployee from "./MyEmployee"
 import API from "./API";
+import MyNavBar from "./MyNavBar";
+import MyClients from "./MyClients";
 
 
 function MyContainer(props) {
@@ -51,10 +53,20 @@ function MyContainer(props) {
                     }
                 />
                 <Route
-                    path="/employee:id"
+                    path="/employee"
                     element={
                         <>
-                            <MyForm/>
+                            <MyNavBar></MyNavBar>
+                            <MyEmployee></MyEmployee>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/clients"
+                    element={
+                        <>
+                            <MyNavBar></MyNavBar>
+                            <MyClients></MyClients>
                         </>
                     }
                 />
