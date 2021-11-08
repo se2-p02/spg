@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyLogin from "./MyLogin";
+import MyForm from "./MyForm";
 import API from "./API";
 
 
@@ -53,7 +54,7 @@ function MyContainer(props) {
                     path="/employee:id"
                     element={
                         <>
-                            
+                            <MyForm/>
                         </>
                     }
                 />
