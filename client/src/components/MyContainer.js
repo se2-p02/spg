@@ -11,7 +11,16 @@ import MyProducts from "./MyProducts";
 function MyContainer(props) {
 
     const [user, setUser] = useState([]);    
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(() => {
+        // getting stored value
+        const saved = localStorage.getItem("cart");
+        const initialValue = JSON.parse(saved);
+        return initialValue || [];
+      });
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }, [cart]);
 
     useEffect(() => {
         API.isLoggedIn().then((response) => {
