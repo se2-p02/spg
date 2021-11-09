@@ -72,6 +72,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// activate the server
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
+
+
 /*** APIs ***/
 
 // GET products
@@ -122,6 +129,25 @@ app.get('/api/clients/:id', async (req, res) => {
   }
 });
 
+//PUT update wallet client
+app.put('/api/clients/:id/wallet', async (req, res) => {
+
+  const info = req.body;
+
+  let amount = info.wallet
+  try {
+    await spgDao.updateWallet(req.params.id, amount)
+    res.status(200).end();
+  }
+  catch {
+    res.status(500).json({ error: "cannot update wallet" });
+  }
+
+
+  return;
+});
+
+
 // POST /api/orders/
 //new order
 app.post('/api/orders/', async (req, res) => {
@@ -130,11 +156,11 @@ app.post('/api/orders/', async (req, res) => {
 
   try {
     let flag = false;
-    Object.entries(order.products).forEach(async (prod)=> {
+    Object.entries(order.products).forEach(async (prod) => {
       const res = await spgDao.orderPrep(prod);
-      if(!res) flag = true;
+      if (!res) flag = true;
     })
-    if(flag) return;
+    if (flag) return;
     order.id = await spgDao.getNextNumber();
 
     order.date = dayjs().format('YYYY-MM-DD');
@@ -195,9 +221,3 @@ app.get('/api/sessions/current', (req, res) => {
   else
     res.status(401).json({ error: 'Unauthenticated user!' });
 });
-
-// activate the server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
-

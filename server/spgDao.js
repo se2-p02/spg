@@ -19,6 +19,25 @@ exports.getProducts = () => {
 }
 
 
+// get all counters for a counter
+exports.getClientsSummary = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM users';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const tasks = rows.map((t) => ({ id: t.id, name: t.name, surname: t.surname, wallet: t.wallet, email: t.email }));
+            console.log("jdi")
+            resolve(tasks);
+        });
+    });
+};
+
+
+
+
 // get all clients
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
@@ -34,6 +53,7 @@ exports.getClients = () => {
     });
 };
 
+
 // get specific client
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
@@ -48,6 +68,23 @@ exports.getClient = (id) => {
         });
     });
 };
+
+// update specific client wallet
+exports.updateWallet = (id, amount) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE users SET wallet=? WHERE id = ?';
+        db.run(sql, [amount, id], function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(id);
+        });
+    });
+};
+
+
+
 
 //get next order number
 exports.getNextNumber = async () => {
