@@ -72,6 +72,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// activate the server
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
+
+
 /*** APIs ***/
 
 // GET products
@@ -196,8 +203,4 @@ app.get('/api/sessions/current', (req, res) => {
     res.status(401).json({ error: 'Unauthenticated user!' });
 });
 
-// activate the server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
 

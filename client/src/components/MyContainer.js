@@ -5,6 +5,7 @@ import MyEmployee from "./MyEmployee"
 import API from "./API";
 import MyNavBar from "./MyNavBar";
 import MyClients from "./MyClients";
+import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyClient from "./MyClient";
 import MyAvailableProducts from "./MyAvailableProducts";
@@ -75,7 +76,16 @@ function MyContainer(props) {
                     }
                 />
                 <Route
-                    path="/employee/clients"
+                    path="/employee/clients/:id"
+                    element={
+                        <>  
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MySingleClient></MySingleClient>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/clients" exact
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
