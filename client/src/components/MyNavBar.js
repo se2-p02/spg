@@ -36,7 +36,7 @@ function MyNavBar(props) {
 
             <Dropdown>
                 <Dropdown.Toggle variant="dark" className="d-flex justify-content-between align-items-start mx-5 px-5">
-                    <div className="fw-bold" className="mx-2">Cart</div>
+                    <div className="fw-bold mx-2">Cart</div>
                     <Badge variant="primary" pill>
                         {props.cart.length}
                     </Badge>

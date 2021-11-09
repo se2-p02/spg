@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Badge, Button, Col, Form, ListGroup, Row } from "react-bootstrap";
+import { Button, Form, ListGroup } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
@@ -60,11 +60,7 @@ function MyProducts(props) {
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
 
-                <Row className="align-items-center mx-4">
-                    <Col>
-                        <Button size="lg" className="btn-danger p-2 w-25" onClick={() => setGoBack(true)}>Back</Button>
-                    </Col>
-                </Row>
+
                 <ListGroup className="my-3 mx-5" horizontal>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Id</ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Name</ListGroup.Item>
@@ -101,7 +97,7 @@ function MyProducts(props) {
 
                     </>
                 }
-
+                <Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button>
             </Container>
 
         </>

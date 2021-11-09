@@ -204,19 +204,3 @@ app.get('/api/sessions/current', (req, res) => {
 });
 
 
-
-// GET clients
-app.get('/api/clients', async (req, res) => {
-  try {
-    const service = await spgDao.getClientsSummary();
-    if (service.error) {
-      res.status(404).json(service);
-    }
-    else {
-      res.json(service);
-    }
-  } catch (err) {
-    console.log(err)
-    res.status(500).end();
-  }
-});

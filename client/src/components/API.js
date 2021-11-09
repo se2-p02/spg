@@ -18,6 +18,7 @@ async function loadClients() {
     } else return { 'error': 'Failed to load clients from server' }
 }
 
+
 async function loadClient(id) {
     let myURL = URL + "/api/clients/" + id;
     const response = await fetch(myURL);
