@@ -136,11 +136,17 @@ app.post('/api/orders/', async (req, res) => {
   const order = req.body;
 
   try {
+    let flag = false;
+    Object.entries(order.products).forEach(async (prod)=> {
+      const res = await spgDao.orderPrep(prod);
+      if(!res) flag = true;
+    })
+    if(flag) return;
     order.id = await spgDao.getNextNumber();
+
     order.date = dayjs().format('YYYY-MM-DD');
     order.time = dayjs().format('HH:mm');
     order.products = JSON.stringify(order.products);
-
     const result = await spgDao.addOrder(order);
     if (result.err)
       res.status(404).json(result);

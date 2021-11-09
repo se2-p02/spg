@@ -90,14 +90,27 @@ exports.getNextNumber = async () => {
     });
 };
 
+exports.orderPrep = async (product) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'UPDATE products SET quantity = quantity - ? WHERE name = ? ';
+            db.run(sql, [product[1], product[0]], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
+
 // insert a new order
 exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
-            console.log([order.id, null, order.products, null, order.date, order.time, order.amount, 0])
-            console.log()
-            console.log()
-            console.log()
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
                 if (err) {
