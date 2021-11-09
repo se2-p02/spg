@@ -69,6 +69,22 @@ exports.getClient = (id) => {
     });
 };
 
+// update specific client wallet
+exports.updateWallet = (id, amount) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE users SET wallet=? WHERE id = ?';
+        db.run(sql, [amount, id], function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(id);
+        });
+    });
+};
+
+
+
 
 //get next order number
 exports.getNextNumber = async () => {
