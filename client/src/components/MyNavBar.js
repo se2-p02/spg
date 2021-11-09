@@ -65,7 +65,7 @@ function MyNavBar(props) {
                 </Dropdown.Menu>
             </Dropdown>
             {props.cart.length !== 0 &&
-                <MyModal cart={props.cart} show={show} setShow={setShow} />
+                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} />
             }
         </Navbar>
     );
@@ -95,6 +95,7 @@ function MyModal(props) {
             if (response.error !== undefined) {
             } else {
                 setSuccessful(true);
+                props.setCart([])
             }
         })
     }
