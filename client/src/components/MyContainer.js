@@ -5,11 +5,13 @@ import MyEmployee from "./MyEmployee"
 import API from "./API";
 import MyNavBar from "./MyNavBar";
 import MyClients from "./MyClients";
+import MyProducts from "./MyProducts";
 
 
 function MyContainer(props) {
 
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState([]);    
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         API.isLoggedIn().then((response) => {
@@ -56,7 +58,7 @@ function MyContainer(props) {
                     path="/employee" exact
                     element={
                         <>
-                            <MyNavBar></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MyEmployee></MyEmployee>
                         </>
                     }
@@ -65,8 +67,17 @@ function MyContainer(props) {
                     path="/employee/clients"
                     element={
                         <>
-                            <MyNavBar></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MyClients></MyClients>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/products"
+                    element={
+                        <>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyProducts cart={cart} setCart={setCart}></MyProducts>
                         </>
                     }
                 />

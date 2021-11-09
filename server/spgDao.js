@@ -3,38 +3,57 @@
 const dayjs = require('dayjs');
 const db = require('./db');
 
-
-<<<<<<< HEAD
-// get all counters for a counter
-exports.getClientsSummary = () => {
+// get all products
+exports.getProducts = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM users';
-=======
-// get all clients
-exports.getClients = () => {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname FROM users';
->>>>>>> 333d076f0e922f5f63ab32801f73a4ceadc56108
+        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
         db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-<<<<<<< HEAD
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price }));
+            resolve(products);
+        });
+    });
+}
+
+
+// get all counters for a counter
+exports.getClientsSummary = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM users';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
             const tasks = rows.map((t) => ({ id: t.id, name: t.name, surname: t.surname, wallet: t.wallet, email: t.email }));
             console.log("jdi")
             resolve(tasks);
-=======
-            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname }));
-            resolve(clients);
->>>>>>> 333d076f0e922f5f63ab32801f73a4ceadc56108
         });
     });
 };
 
-<<<<<<< HEAD
 
-=======
+
+
+// get all clients
+exports.getClients = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT id, name, surname FROM users';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname }));
+            resolve(clients);
+        });
+    });
+};
+
+
 // get specific client
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
@@ -49,4 +68,46 @@ exports.getClient = (id) => {
         });
     });
 };
->>>>>>> 333d076f0e922f5f63ab32801f73a4ceadc56108
+
+
+//get next order number
+exports.getNextNumber = async () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT max (id) as id FROM orders';
+        db.all(sql, function (err, rows) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            if (rows !== undefined) {
+                const number = rows[0].id + 1;
+                resolve(number);
+            }
+            else {
+                resolve(1);
+            }
+        });
+    });
+};
+
+// insert a new order
+exports.addOrder = async (order) => {
+    try {
+        return new Promise((resolve, reject) => {
+            console.log([order.id, null, order.products, null, order.date, order.time, order.amount, 0])
+            console.log()
+            console.log()
+            console.log()
+            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};

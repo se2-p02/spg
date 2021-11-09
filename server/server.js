@@ -12,6 +12,7 @@ const session = require('express-session'); // enable sessions
 const userDao = require('./userDao'); // module for accessing the users in the DB
 const dao = require('./db'); // module for accessing the users in the DB
 const url = require('url');
+const dayjs = require('dayjs');
 
 
 /*** Set up Passport ***/
@@ -80,6 +81,22 @@ app.listen(port, () => {
 
 /*** APIs ***/
 
+// GET products
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await spgDao.getProducts();
+    if (products.error) {
+      res.status(404).json(products);
+    }
+    else {
+      res.json(products);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
 // GET clients
 app.get('/api/clients', async (req, res) => {
   try {
@@ -110,6 +127,30 @@ app.get('/api/clients/:id', async (req, res) => {
     console.log(err)
     res.status(500).end();
   }
+});
+
+// POST /api/orders/
+//new order
+app.post('/api/orders/', async (req, res) => {
+
+  const order = req.body;
+
+  try {
+    order.id = await spgDao.getNextNumber();
+    order.date = dayjs().format('YYYY-MM-DD');
+    order.time = dayjs().format('HH:mm');
+    order.products = JSON.stringify(order.products);
+
+    const result = await spgDao.addOrder(order);
+    if (result.err)
+      res.status(404).json(result);
+    else
+      res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+
 });
 
 
