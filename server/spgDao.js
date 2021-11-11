@@ -124,3 +124,35 @@ exports.addOrder = async (order) => {
         return;
     }
 };
+
+// get all orders
+exports.getOrders = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM orders';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address:c.address, date:c.date, time:c.time, amount:c.amount, conf:c.confPreparation }));
+            resolve(orders);
+        });
+    });
+};
+
+exports.updateOrder = async (id) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'UPDATE orders SET confPreparation=1 WHERE id = ? ';
+            db.run(sql, id, function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};

@@ -9,6 +9,7 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyClient from "./MyClient";
 import MyAvailableProducts from "./MyAvailableProducts";
+import Orders from "./Orders";
 
 
 function MyContainer(props) {
@@ -81,6 +82,15 @@ function MyContainer(props) {
                         <>  
                             <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MySingleClient></MySingleClient>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/getorders"
+                    element={
+                        <>  
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <Orders></Orders>
                         </>
                     }
                 />
