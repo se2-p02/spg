@@ -5,11 +5,24 @@ import MyEmployee from "./MyEmployee"
 import API from "./API";
 import MyNavBar from "./MyNavBar";
 import MyClients from "./MyClients";
+import MySingleClient from "./MySingleClient";
+import MyProducts from "./MyProducts";
+import MyForm from "./MyForm";
 
 
 function MyContainer(props) {
 
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState([]);    
+    const [cart, setCart] = useState(() => {
+        // getting stored value
+        const saved = localStorage.getItem("cart");
+        const initialValue = JSON.parse(saved);
+        return initialValue || [];
+      });
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }, [cart]);
 
     useEffect(() => {
         API.isLoggedIn().then((response) => {
@@ -53,20 +66,38 @@ function MyContainer(props) {
                     }
                 />
                 <Route
-                    path="/employee"
+                    path="/employee" exact
                     element={
                         <>
-                            <MyNavBar></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MyEmployee></MyEmployee>
                         </>
                     }
                 />
                 <Route
-                    path="/employee/clients"
+                    path="/employee/clients/:id"
+                    element={
+                        <>  
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MySingleClient></MySingleClient>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/clients" exact
                     element={
                         <>
-                            <MyNavBar></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MyClients></MyClients>
+                        </>
+                    }
+                />
+                <Route
+                    path="/employee/products"
+                    element={
+                        <>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyProducts cart={cart} setCart={setCart}></MyProducts>
                         </>
                     }
                 />
@@ -75,6 +106,15 @@ function MyContainer(props) {
                     element={
                         <>
                             
+                        </>
+                    }
+                />
+
+                <Route
+                    path="/employeeform"
+                    element={
+                        <>
+                            <MyForm/>
                         </>
                     }
                 />

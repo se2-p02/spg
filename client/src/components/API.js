@@ -1,5 +1,47 @@
 const URL = "http://localhost:3000"
 
+async function loadProducts() {
+    let myURL = URL + "/api/products";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        const fetchedProducts = await response.json();
+        return fetchedProducts;
+    } else return { 'error': 'Failed to load Products from server' }
+}
+
+async function loadClients() {
+    let myURL = URL + "/api/clients";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        const fetchedClients = await response.json();
+        return fetchedClients;
+    } else return { 'error': 'Failed to load clients from server' }
+}
+
+
+async function loadClient(id) {
+    let myURL = URL + "/api/clients/" + id;
+    const response = await fetch(myURL);
+    if (response.ok) {
+        const fetchedClient = await response.json();
+        return fetchedClient;
+    } else return { 'error': 'Failed to load client from server' }
+}
+
+async function sendOrder(order) {
+    const response = await fetch(URL + "/api/orders/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(order),
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function login(user) {
     const response = await fetch(URL + "/api/sessions/",
         {
@@ -35,5 +77,28 @@ async function isLoggedIn() {
     }
 }
 
-const API = { login, logout, isLoggedIn };
+async function addNewUser(name, surname, password, email) {
+    try {
+        console.log("Preparing the request in the API file...");
+        const response = await fetch(URL + "/api/addNewUser",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({name: name, surname: surname, password: password, email: email}),
+        });
+        if (response.ok) {
+            const user_id = response.json();
+            return user_id;
+        } else {
+            return { 'error': 'Failed to store data on server' };
+        }
+    }
+    catch (err) {
+        return { 'error': 'Failed' };
+    }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, addNewUser };
 export default API;

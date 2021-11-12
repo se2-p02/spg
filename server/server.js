@@ -12,6 +12,7 @@ const session = require('express-session'); // enable sessions
 const userDao = require('./userDao'); // module for accessing the users in the DB
 const dao = require('./db'); // module for accessing the users in the DB
 const url = require('url');
+const dayjs = require('dayjs');
 
 
 /*** Set up Passport ***/
@@ -71,7 +72,111 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// activate the server
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
+
+
 /*** APIs ***/
+
+// GET products
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await spgDao.getProducts();
+    if (products.error) {
+      res.status(404).json(products);
+    }
+    else {
+      res.json(products);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
+// GET clients
+app.get('/api/clients', async (req, res) => {
+  try {
+    const clients = await spgDao.getClients();
+    if (clients.error) {
+      res.status(404).json(clients);
+    }
+    else {
+      res.json(clients);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
+// GET specific client
+app.get('/api/clients/:id', async (req, res) => {
+  try {
+    const client = await spgDao.getClient(req.params.id);
+    if (client.error) {
+      res.status(404).json(client);
+    }
+    else {
+      res.json(client);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
+//PUT update wallet client
+app.put('/api/clients/:id/wallet', async (req, res) => {
+
+  const info = req.body;
+
+  let amount = info.wallet
+  try {
+    await spgDao.updateWallet(req.params.id, amount)
+    res.status(200).end();
+  }
+  catch {
+    res.status(500).json({ error: "cannot update wallet" });
+  }
+
+
+  return;
+});
+
+
+// POST /api/orders/
+//new order
+app.post('/api/orders/', async (req, res) => {
+
+  const order = req.body;
+
+  try {
+    let flag = false;
+    Object.entries(order.products).forEach(async (prod) => {
+      const res = await spgDao.orderPrep(prod);
+      if (!res) flag = true;
+    })
+    if (flag) return;
+    order.id = await spgDao.getNextNumber();
+
+    order.date = dayjs().format('YYYY-MM-DD');
+    order.time = dayjs().format('HH:mm');
+    order.products = JSON.stringify(order.products);
+    const result = await spgDao.addOrder(order);
+    if (result.err)
+      res.status(404).json(result);
+    else
+      res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+
+});
 
 
 /*** User APIs ***/
@@ -99,6 +204,24 @@ app.post('/api/sessions', function (req, res, next) {
   })(req, res, next);
 });
 
+// POST addNewUser
+// add a new user
+app.post('/api/addNewUser', async(req, res) => {
+  console.log('Request arrived to the server');
+  const user_info = req;
+  try {
+    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email);
+    if (result.err){
+      res.status(404).json(result);
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
 
 // DELETE /sessions/current 
 // logout
@@ -116,9 +239,3 @@ app.get('/api/sessions/current', (req, res) => {
   else
     res.status(401).json({ error: 'Unauthenticated user!' });
 });
-
-// activate the server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
-

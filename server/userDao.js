@@ -44,3 +44,19 @@ exports.getUser = (username, password) => {
     });
   });
 };
+
+exports.addUser = (name, surname, password, email) => {
+  console.log("Inside add user (userDao)");
+  return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO users(id, name, surname, wallet, basket, hash, email) VALUES (?,?, ?, ?, ?, ?, ?)'
+    db.run(sql, [null, name, surname, 0.0, "", bcrypt.hash(password), email], (err, row) => {
+      if(err)
+        reject(err);
+      else if (row === undefined) {
+        reject({error: 'Error adding user'})
+      } else {
+        resolve(row.id)
+      }
+    })
+  })
+}
