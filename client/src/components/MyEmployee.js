@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Navigate} from 'react-router-dom';
@@ -6,13 +6,13 @@ import './MyNavBar.css';
 
 
 function MyEmployee(props) {
-    const [goBack, setGoBack] = useState(false)
+    const [goBack, setGoBack] = useState(false);
 
     if (goBack==="clients") {
         return (<Navigate to="/employee/clients"></Navigate>)
     }
     else if(goBack === "products"){
-        return (<Navigate to="/"></Navigate>)
+        return (<Navigate to="/employee/products"></Navigate>)
     }
 
     return (
