@@ -40,7 +40,7 @@ function MyForm() {
         resetForm();
         API.addNewUser(name, surname, password, email).then((response) => {
             if (response.error === undefined) {
-                setErrorMessageFields("() => response.error");
+                setErrorMessageFields("User inserted");
             } else {
                 setErrorMessageFields(response.error);
             }

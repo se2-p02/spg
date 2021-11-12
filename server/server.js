@@ -208,7 +208,7 @@ app.post('/api/sessions', function (req, res, next) {
 // add a new user
 app.post('/api/addNewUser', async(req, res) => {
   console.log('Request arrived to the server');
-  const user_info = req;
+  const user_info = req.body;
   try {
     const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email);
     if (result.err){
