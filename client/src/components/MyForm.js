@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import {Navigate} from 'react-router-dom';
+import API from "./API";
 
 
 function MyForm() {
@@ -16,16 +17,7 @@ function MyForm() {
     const [errorMessageEmail, setErrorMessageEmail] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
     const [errorMessageFields, setErrorMessageFields] = useState("");
-    const [goBack, setGoBack] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
-
-    
-    window.addEventListener("resize", function() {
-        if(window.innerWidth.size < 7690000000000) {
-            setIsMobile(true)
-            console.log(this.window.innerWidth)
-        }
-    });
+    const [goBack, setGoBack] = useState(false);
 
     function resetForm() {
         setErrorMessageEmail(() => "");
@@ -38,17 +30,22 @@ function MyForm() {
 
     function handleSubmit(ev) {
         ev.preventDefault();
-
-        let valid = true;
         
-        if (!checkFields()) valid = false;
-        if (!checkEmail(email)) valid = false;
-        if (!checkPassword(password, repeat)) valid = false;
-
-        if (valid) {
-            resetForm();
-            /// API
-        }
+        if (!checkFields()) return;
+        if (!checkEmail(email)) return;
+        if (!checkPassword(password, repeat)) return;
+        console.log("Checks passed");
+        
+        console.log("Sending request...");
+        resetForm();
+        API.addNewUser(name, surname, password, email).then((response) => {
+            if (response.error === undefined) {
+                setErrorMessageFields("User inserted");
+            } else {
+                setErrorMessageFields(response.error);
+            }
+        })
+        
     }
 
     function checkFields() {

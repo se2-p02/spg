@@ -204,6 +204,24 @@ app.post('/api/sessions', function (req, res, next) {
   })(req, res, next);
 });
 
+// POST addNewUser
+// add a new user
+app.post('/api/addNewUser', async(req, res) => {
+  console.log('Request arrived to the server');
+  const user_info = req.body;
+  try {
+    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email);
+    if (result.err){
+      res.status(404).json(result);
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
 
 // DELETE /sessions/current 
 // logout

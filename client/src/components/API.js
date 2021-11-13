@@ -77,5 +77,28 @@ async function isLoggedIn() {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn };
+async function addNewUser(name, surname, password, email) {
+    try {
+        console.log("Preparing the request in the API file...");
+        const response = await fetch(URL + "/api/addNewUser",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({name: name, surname: surname, password: password, email: email}),
+        });
+        if (response.ok) {
+            const user_id = response.json();
+            return user_id;
+        } else {
+            return { 'error': 'Failed to store data on server' };
+        }
+    }
+    catch (err) {
+        return { 'error': 'Failed' };
+    }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, addNewUser };
 export default API;
