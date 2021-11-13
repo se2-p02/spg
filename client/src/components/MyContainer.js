@@ -7,6 +7,7 @@ import MyNavBar from "./MyNavBar";
 import MyClients from "./MyClients";
 import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
+import MyForm from "./MyForm";
 
 
 function MyContainer(props) {
@@ -53,6 +54,13 @@ function MyContainer(props) {
                     element={
                         <>
                             
+                        </>
+                    }
+                />
+                <Route
+                    path="/signup"
+                    element={
+                        <>
                         </>
                     }
                 />
