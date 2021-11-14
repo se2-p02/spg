@@ -61,9 +61,9 @@ function MyForm() {
         }
     }
 
-    function checkEmail(email) {
-        const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!(re.test(email))) {
+    function checkEmail(email_to_test) {
+        const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!(re.test(email_to_test))) {
             setErrorMessageEmail((e) => {
                 return "The email is not valid";
             })
@@ -77,8 +77,8 @@ function MyForm() {
         }
     }
 
-    function checkPassword(password, repeat) {
-        if (!(password === repeat)) {
+    function checkPassword(password_to_check, repeat_to_check) {
+        if (password_to_check !== repeat_to_check) {
             setErrorMessagePassword((e) => {
                 return "The password is different";
             })

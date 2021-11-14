@@ -90,8 +90,7 @@ async function addNewUser(name, surname, password, email) {
                 body: JSON.stringify({name: name, surname: surname, password: password, email: email}),
         });
         if (response.ok) {
-            const user_id = response.json();
-            return user_id;
+            return response.json(); // userId
         } else {
             return { 'error': 'Failed to store data on server' };
         }

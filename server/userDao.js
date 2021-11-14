@@ -74,10 +74,10 @@ exports.addUser = (name, surname, password, email) => {
           else 
             id = row[0].id+1;
           console.log("Id: "+id);
-          db.run(sql, [id, name, surname, 0.0, null, hash, email], (err, row) => {
-            if(err){
-              console.log("Error inserting the row in the db"+err);
-              reject(err);
+          db.run(sql, [id, name, surname, 0.0, null, hash, email], (err_insert, val) => {
+            if(err_insert){
+              console.log("Error inserting the row in the db"+err_insert);
+              reject(err_insert);
             }
             resolve(id);
           });
