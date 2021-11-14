@@ -157,8 +157,8 @@ app.post('/api/orders/', async (req, res) => {
   try {
     let flag = false;
     Object.entries(order.products).forEach(async (prod) => {
-      const res = await spgDao.orderPrep(prod);
-      if (!res) flag = true;
+      const res_prod = await spgDao.orderPrep(prod);
+      if (!res_prod) flag = true;
     })
     if (flag) return;
     order.id = await spgDao.getNextNumber();
@@ -193,9 +193,9 @@ app.post('/api/sessions', function (req, res, next) {
       return res.status(401).json(info);
     }
     // success, perform the login
-    req.login(user, (err) => {
-      if (err)
-        return next(err);
+    req.login(user, (error) => {
+      if (error)
+        return next(error);
 
       // req.user contains the authenticated user, we send all the user info back
       // this is coming from userDao.getUser()
