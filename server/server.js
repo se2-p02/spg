@@ -181,7 +181,7 @@ app.post('/api/orders/', async (req, res) => {
 
 /*** User APIs ***/
 
-// POST /sessions 
+// POST sessions 
 // login
 app.post('/api/sessions', function (req, res, next) {
   passport.authenticate('local', (err, user, info) => {
@@ -223,7 +223,7 @@ app.post('/api/addNewUser', async(req, res) => {
 });
 
 
-// DELETE /sessions/current 
+// DELETE sessions/current 
 // logout
 app.delete('/api/sessions/current', (req, res) => {
   req.logout();

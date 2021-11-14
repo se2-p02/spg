@@ -44,14 +44,14 @@ function MyProducts(props) {
         let tempProductCart = cartItems.find((prod) => prod.id === id);
         if (tempProductCart) {
             tempProductCart.quantity = props.cart.find((prod) => prod.id === id).quantity + q;
-            props.setCart((old) => old.filter((prod) => prod !== props.cart.find((prod) => prod.id === id)));
+            props.setCart((old) => old.filter((prod) => prod !== props.cart.find((product) => product.id === id)));
             props.setCart((old) => [...old, tempProductCart].sort((a, b) => a.id - b.id));
         }
         else {
             props.setCart((c) => [...c, { ...tempProduct, quantity: q }]);
         }
         tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
-        setProducts((old) => old.filter((prod) => prod !== products.find((prod) => prod.id === id)));
+        setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
         if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
     }
 
