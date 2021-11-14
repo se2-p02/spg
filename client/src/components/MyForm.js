@@ -19,6 +19,7 @@ function MyForm() {
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
     const [errorMessageFields, setErrorMessageFields] = useState("");
     const [goBack, setGoBack] = useState(false);
+    const [registered, setRegistered] = useState(false);
 
     function resetForm() {
         setErrorMessageEmail(() => "");
@@ -45,7 +46,8 @@ function MyForm() {
             } else {
                 setErrorMessageFields(response.error);
             }
-        }).then(setGoBack(true))        
+        });
+        setRegistered(true);
     }
 
     function checkFields() {
@@ -90,11 +92,52 @@ function MyForm() {
         }
     }
 
+    function handleGoBack() {
+        setRegistered(false);
+        setGoBack(true);
+    }
+
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0 below-nav" fluid>
-            
-                <Form className="pt-5 mt-5 p-0 m-0">
+            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0" fluid>
+            {registered === true && (
+                <>
+                <h1 className="text-info text-center mt-5 pt-5">User Registered Successfully!</h1>
+                <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
+                    <Col lg = {1}/>
+                    <Col className=" m-0 p-0" sm={5} lg ={3}>
+                        <Button
+                            size = "lg"
+                            variant="danger"
+                            type="submit"
+                            className="w-100 m-0 p-3"
+                            onClick={() => handleGoBack()}
+                        >
+                            Back
+                        </Button>
+                    </Col>
+                    <Col sm = {2}/>
+                    <br/>
+                    <Col className=" m-0 p-0" sm={5} lg = {3}>
+                        <Button
+                            size = "lg"
+                            variant="success"
+                            type="submit"
+                            className="w-100 m-0 p-3"
+                            onClick={() => setRegistered(false)}
+                            >
+                                Register another user
+                        </Button>
+                    </Col>
+                    <Col lg = {1}/>
+                </Row>
+                <h1>User registration completed!</h1>
+                
+                </>
+            )}
+            {registered === false && (
+                <>
+                <Form className="pt-5 p-0 m-0">
                     <Row>
                     <Col lg = {2}></Col>
                     <Col>
@@ -209,42 +252,43 @@ function MyForm() {
                     <Row className="pt-4">
                         <Col sm={5} className="text-left m-0 p-0">
                             
-                        <Button
-                            size = "lg"
-                            variant="danger"
-                            type="submit"
-                            className="w-100 m-0"
-                            onClick={() => setGoBack(true)}
-                        >
-                            Back
-                        </Button>
-                            </Col>
-                            <Col sm={2} className=""></Col>
-                            <br/>
-                        <Col sm={5} className="text-right m-0 p-0">
-                        <Button
-                            size = "lg"
-                            variant="success"
-                            type="submit"
-                            className="w-100 mr-5"
-                            onClick={(ev) => {handleSubmit(ev)}}
+                            <Button
+                                size = "lg"
+                                variant="danger"
+                                type="submit"
+                                className="w-100 m-0"
+                                onClick={() => setGoBack(true)}
                             >
-                                Register
-                        </Button>
+                                Back
+                            </Button>
                         </Col>
-                        </Row>
+                        <Col sm={2} className=""></Col>
+                        <br/>
+                        <Col sm={5} className="text-right m-0 p-0">
+                            <Button
+                                size = "lg"
+                                variant="success"
+                                type="submit"
+                                className="w-100 mr-5"
+                                onClick={(ev) => handleSubmit(ev)}
+                                >
+                                    Register
+                            </Button>
+                        </Col>
                         <br/>
                         {errorMessageFields.length !== 0 && (
                             <div
-                                className="alert alert-danger alert-float-static fade show"
+                                className="alert alert-danger alert-float-static fade show mt-4"
                                 role="alert"
                             >
                                 {errorMessageFields}
                             </div>
                         )}
+                        </Row>
                     </Col>
                     <Col sm={2}></Col>
                 </Row>
+                </>)}
             </Container>
         </>
     );

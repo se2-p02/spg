@@ -212,7 +212,7 @@ app.post('/api/addNewUser', async(req, res) => {
   try {
     const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email);
     if (result.err){
-      res.status(404).json(result);
+      res.status(500).json(result);
     } else {
       res.status(200).json(result);
     }
