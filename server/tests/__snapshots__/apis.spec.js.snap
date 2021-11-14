@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests GET /api/clients 1`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients 2`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients 3`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients 4`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients 5`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients 6`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
+exports[`tests GET /api/clients/:id 1`] = `
+Object {
+  "basket": null,
+  "email": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+  "wallet": Any<Number>,
+}
+`;
+
+exports[`tests GET /api/products 1`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 2`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 3`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 4`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;

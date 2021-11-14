@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Col, Row, Modal, Form, FormControl } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import { Button, Col, Row, Modal, Form, FormControl, Container } from "react-bootstrap";
 import {  Navigate } from 'react-router-dom';
 import { useParams } from "react-router";
 

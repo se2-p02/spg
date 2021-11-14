@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./server",
+    "test": "jest -u --coverage",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +21,19 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "supertest": "^6.1.6"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "testResultsProcessor": "jest-sonar-reporter",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/"
+    ]
   }
 }

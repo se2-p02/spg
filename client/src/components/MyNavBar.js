@@ -1,12 +1,7 @@
-import Navbar from "react-bootstrap/Navbar";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import { useState } from "react";
 import './MyNavBar.css';
 import './solidarity.png'
-import Image from "react-bootstrap/Image"
-import { Badge, Dropdown, ListGroup, Modal } from "react-bootstrap";
-import Button from "react-bootstrap/button";
+import { Badge, Dropdown, ListGroup, Modal, Button, Image, Navbar, Col, Row } from "react-bootstrap";
 import API from "./API";
 
 function MyNavBar(props) {

@@ -41,7 +41,7 @@ exports.getClientsSummary = () => {
 // get all clients
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname FROM users';
+        const sql = 'SELECT id, name, surname FROM users WHERE id >= 0';
         db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
@@ -129,6 +129,24 @@ exports.addOrder = async (order) => {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
+
+// delete test order
+exports.deleteTestOrder = async () => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'DELETE FROM orders WHERE id = -1';
+            db.run(sql, function (err) {
                 if (err) {
                     reject(err);
                     return;

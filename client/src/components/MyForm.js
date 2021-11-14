@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import {Navigate} from 'react-router-dom';
 import API from "./API";
 import './MyNavBar.css';

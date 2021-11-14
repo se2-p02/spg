@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Form, ListGroup } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import { Button, Form, ListGroup, Container } from "react-bootstrap";
 import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
 import API from "./API";

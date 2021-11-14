@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import { useNavigate, Navigate } from "react-router-dom";
 import API from "./API";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
 
 
 function MyLogin(props) {

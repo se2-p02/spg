@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import { Button, Col, Row, Container } from "react-bootstrap";
 import {Navigate} from 'react-router-dom';
 import './MyNavBar.css';
 
