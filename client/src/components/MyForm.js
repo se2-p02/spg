@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import {Navigate} from 'react-router-dom';
 import API from "./API";
+import './MyNavBar.css';
 
 
 function MyForm() {
@@ -25,7 +26,7 @@ function MyForm() {
     }
 
     if (goBack) {
-        return (<Navigate to="/"></Navigate>)
+        return (<Navigate to="/employee/"></Navigate>)
     }
 
     function handleSubmit(ev) {
@@ -44,8 +45,7 @@ function MyForm() {
             } else {
                 setErrorMessageFields(response.error);
             }
-        })
-        
+        }).then(setGoBack(true))        
     }
 
     function checkFields() {
@@ -60,7 +60,8 @@ function MyForm() {
     }
 
     function checkEmail(email) {
-        if (!(email.includes("@")) && email !== "") {
+        const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!(re.test(email))) {
             setErrorMessageEmail((e) => {
                 return "The email is not valid";
             })
@@ -91,9 +92,9 @@ function MyForm() {
 
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0" fluid>
+            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0 below-nav" fluid>
             
-                <Form className="pt-5 p-0 m-0">
+                <Form className="pt-5 mt-5 p-0 m-0">
                     <Row>
                     <Col lg = {2}></Col>
                     <Col>
@@ -202,7 +203,7 @@ function MyForm() {
                     <Col lg = {2}></Col>
                     </Row>
                 </Form>
-                <Row className = "m-0">
+                <Row className = "m-0 mt-3">
                     <Col lg = {2}></Col>
                     <Col>
                     <Row className="pt-4">
@@ -226,7 +227,7 @@ function MyForm() {
                             variant="success"
                             type="submit"
                             className="w-100 mr-5"
-                            onClick={(ev) => handleSubmit(ev)}
+                            onClick={(ev) => {handleSubmit(ev)}}
                             >
                                 Register
                         </Button>
@@ -242,7 +243,7 @@ function MyForm() {
                             </div>
                         )}
                     </Col>
-                    <Col lg = {2}></Col>
+                    <Col sm={2}></Col>
                 </Row>
             </Container>
         </>

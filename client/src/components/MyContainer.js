@@ -57,13 +57,7 @@ function MyContainer(props) {
                         </>
                     }
                 />
-                <Route
-                    path="/signup"
-                    element={
-                        <>
-                        </>
-                    }
-                />
+
                 <Route
                     path="/login"
                     element={
@@ -118,9 +112,11 @@ function MyContainer(props) {
                 />
                 {/* just for testing */}
                 <Route
-                    path="/employeeform"
+                    path="/employee/form"
                     element={
                         <>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+
                             <MyForm/>
                         </>
                     }

@@ -29,6 +29,7 @@ async function loadClient(id) {
 }
 
 async function sendOrder(order) {
+    console.log(order)
     const response = await fetch(URL + "/api/orders/",
         {
             method: "POST",

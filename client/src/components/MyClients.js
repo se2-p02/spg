@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
@@ -8,6 +8,7 @@ import API from "./API";
 
 function MyClients(props) {
     const [goBack, setGoBack] = useState(false);
+    const [goNew, setGoNew] = useState(false);
     const [clients, setClients] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
 
@@ -28,7 +29,9 @@ function MyClients(props) {
     if (goBack) {
         return (<Navigate to="/employee"></Navigate>)
     }
-
+    if (goNew) {
+        return (<Navigate to="/employee/form"></Navigate>)
+    }
 
 
     return (
@@ -36,9 +39,9 @@ function MyClients(props) {
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
 
                 <ListGroup className="my-3 mx-5" horizontal>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Id</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Name</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Surname</ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Surname</b></ListGroup.Item>
                 </ListGroup>
                 {clients &&
                     <>
@@ -56,7 +59,18 @@ function MyClients(props) {
 
                     </>
                 }
-                <Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                <Row>
+                    <Col sm="1"></Col>
+                    <Col sm="4" className="justify-content-right align-items-right m-0 p-0 text-right">
+                    <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                    </Col>
+                    <Col sm="2">
+                    </Col>
+                    <Col sm="4" className="justify-content-left align-items-left m-0 p-0">
+                    <Button size="lg" className="btn-primary p-2 w-100 mt-3" onClick={() => setGoNew(true)}>Add Client</Button>
+                    </Col>
+                    <Col sm="1"></Col>
+                </Row>
 
             </Container>
 

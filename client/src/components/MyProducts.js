@@ -62,12 +62,12 @@ function MyProducts(props) {
 
 
                 <ListGroup className="my-3 mx-5" horizontal>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Id</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Name</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Quantity</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Farmer</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Price</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center">Add</ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Quantity</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Farmer</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Price</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Add</b></ListGroup.Item>
                 </ListGroup>
                 {products &&
                     <>
