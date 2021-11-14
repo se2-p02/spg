@@ -4,8 +4,7 @@ async function loadProducts() {
     let myURL = URL + "/api/products";
     const response = await fetch(myURL);
     if (response.ok) {
-        const fetchedProducts = await response.json();
-        return fetchedProducts;
+        return await response.json(); //fetchedProducts
     } else return { 'error': 'Failed to load Products from server' }
 }
 
@@ -13,8 +12,7 @@ async function loadClients() {
     let myURL = URL + "/api/clients";
     const response = await fetch(myURL);
     if (response.ok) {
-        const fetchedClients = await response.json();
-        return fetchedClients;
+        return await response.json(); //fetchedClients
     } else return { 'error': 'Failed to load clients from server' }
 }
 
@@ -23,8 +21,7 @@ async function loadClient(id) {
     let myURL = URL + "/api/clients/" + id;
     const response = await fetch(myURL);
     if (response.ok) {
-        const fetchedClient = await response.json();
-        return fetchedClient;
+        return await response.json(); //fetchedClient
     } else return { 'error': 'Failed to load client from server' }
 }
 

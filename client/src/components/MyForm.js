@@ -62,7 +62,7 @@ function MyForm() {
     }
 
     function checkEmail(email_to_test) {
-        const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re = /[A-z0-9\.\+_-]+@[A-z0-9\._-]+\.[A-z]{2,6}/ //   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!(re.test(email_to_test))) {
             setErrorMessageEmail((e) => {
                 return "The email is not valid";

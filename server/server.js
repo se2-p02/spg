@@ -144,7 +144,7 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
   }
 
 
-  return;
+  //return;
 });
 
 
