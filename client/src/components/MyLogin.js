@@ -49,11 +49,11 @@ function MyLogin(props) {
             resetForm();
             API.login({ username: username, password: password }).then((response) => {
                 if (response.error === undefined) {
-                    API.isLoggedIn().then((response) => {
-                        if (response.error === undefined) {
-                            //props.setUser(() => response);
-                            //props.setLoggedIn(() => true);
-                            //props.setFirstLogin(() => true);
+                    API.isLoggedIn().then((res) => {
+                        if (res.error === undefined) {
+                            // comment props.setUser(() => res);
+                            // comment props.setLoggedIn(() => true);
+                            // comment props.setFirstLogin(() => true);
                             props.setUser(() => username);
                             history.push("/" + username);
                         }
