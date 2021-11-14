@@ -152,3 +152,22 @@
     }
   ]
   ```
+
+- POST `/api/addNewUser`
+  - Request parameter: None.
+  - Request body: An object representing the user (Content-Type: `application/json`).
+  ``` 
+  {
+    "name": "Mario",
+    "surname": "Rossi",
+    "password": "password",
+    "email": "mariorossi@gmail.com"
+  }
+  ```
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: user id if everything is ok.
+  ```
+  {
+    "id": 1
+  }
+  ```
