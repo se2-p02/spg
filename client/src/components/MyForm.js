@@ -62,7 +62,7 @@ function MyForm() {
     }
 
     function checkEmail(email_to_test) {
-        const re = /[A-z0-9\.\+_-]+@[A-z0-9\._-]+\.[A-z]{2,6}/;
+        const re = /\S+@\S+\.\S+/;
         if (!(re.test(email_to_test))) {
             setErrorMessageEmail((e) => {
                 return "The email is not valid";
