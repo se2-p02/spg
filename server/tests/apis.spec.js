@@ -49,6 +49,40 @@ describe('Clients test', () => {
 });
 
 describe('Orders test', () => {
+  it('tests GET /api/orders', async () => {
+    const response = await request(app).get("/api/orders");
+    response.body.forEach((order) => {
+      expect(order).toMatchSnapshot({
+        id: expect.any(Number),
+        userId: expect.any(Number),
+        products: expect.any(Object),
+        address: expect.any(String),
+        date: expect.any(String),
+        time: expect.any(String),
+        amount: expect.any(Number),
+        conf: expect.any(Boolean),
+        fulfilled: expect.any(Boolean)
+      });
+    });
+  });
+
+  it('tests GET /api/orders/:id', async () => {
+    const response = await request(app).get("/api/orders/1");
+    response.body.forEach((order) => {
+      expect(order).toMatchSnapshot({
+        id: expect.any(Number),
+        userId: expect.any(Number),
+        products: expect.any(Object),
+        address: expect.any(String),
+        date: expect.any(String),
+        time: expect.any(String),
+        amount: expect.any(Number),
+        conf: expect.any(Boolean),
+        fulfilled: expect.any(Boolean)
+      });
+    });
+  });
+
   it('tests POST /api/orders', async () => {
     const test = 'yes';
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
@@ -60,7 +94,7 @@ describe('Users test', () => {
     const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it" }).expect(200);
     console.log(response.body.id)
     const response2 = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it" }).expect(500);
-    const deleteRes = await request(app).delete("/api/deleteUser").send({ email : "test_email@email.it" }).expect(200);
+    const deleteRes = await request(app).delete("/api/deleteUser").send({ email: "test_email@email.it" }).expect(200);
   });
 
   it('tests error POST /api/addNewUser', async () => {
@@ -76,5 +110,5 @@ describe('Session test', () => {
   it('tests get /api/sessions/current', async () => {
     const deleteRes = await request(app).get("/api/sessions/current").expect(401);
   });
-  
+
 });

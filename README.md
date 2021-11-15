@@ -21,8 +21,9 @@
 - Route `/login`: login form for that in future will redirect to the user page
 - Route `/employee`: display the possible actions available for an employee
 - Route `/employee/clients`: display a the list of registered clients
-- Route `/employee/clients/:id`: display the informations of the client with client id = {id}
+- Route `/employee/clients/:id`: display the informations and orders of the client with client id = {id}
 - Route `/employee/products`: display the list of available products
+- Route `/employee/orders`: display the list of all orders
 - Route `/employee/form` : shows the form used by the employee to register the users
   
 ## Database Tables
@@ -124,7 +125,6 @@
   - Response body: `True` or `False`
 
 
-<br></br>
 - GET `/api/products`
   - Request parameter: None.
   - Request body: None.
@@ -144,7 +144,7 @@
     {
         "id": 2,
         "name": "Eggs",
-        "quantity": -2,
+        "quantity": 2,
         "unit": "pieces",
         "farmer": 1,
         "farmerName": "FattoriaBella",
@@ -152,6 +152,61 @@
     }
   ]
   ```
+- GET `/api/orders`
+  - Request parameter: None.
+  - Request body: None.
+  - Response: `200 OK` (success) or `401 Unauthenticated user`.
+  - Response body: orders list if logged in.
+  ```
+  [
+    {
+        "id": 1,
+        "userID": 1,
+        "products": "{\"milk\":2,\"eggs\":1}",
+        "address": "via roma 24",
+        "date": "2021-01-12",
+        "time": "08:12",
+        "amount": 12,
+        "conf": 1,
+        "fulfilled": 1
+    },
+    ...
+  ]
+  ```
+- GET `/api/orders/{id}`
+  - Request parameter: userID.
+  - Request body: None.
+  - Response: `200 OK` (success) or `401 Unauthenticated user`.
+  - Response body: orders list of userdID if logged in.
+  ```
+  [
+    {
+        "id": 1,
+        "userID": 1,
+        "products": "{\"milk\":2,\"eggs\":1}",
+        "address": "via roma 24",
+        "date": "2021-01-12",
+        "time": "08:12",
+        "amount": 12,
+        "conf": 1,
+        "fulfilled": 1
+    }
+  ]
+  ```
+
+- PUT `/api/orders/{id}`
+  - Request parameter: userID.
+  - Request body: 
+  ```
+  [
+    {
+        "fulfilled": 1
+    }
+  ]
+  ```
+  - Response: `200 OK` (success) or `401 Unauthenticated user`.
+  - Response body: `True` or `False`.
+ 
 
 - POST `/api/addNewUser`
   - Request parameter: None.
