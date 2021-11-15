@@ -6,5 +6,6 @@
     <testCase name="tests GET /api/clients/:id" duration="3"/>
     <testCase name="tests PUT /api/clients/:id/wallet" duration="16"/>
     <testCase name="tests POST /api/orders" duration="14"/>
+    <testCase name="tests POST /api/addNewUser" duration="14"/>
   </file>
 </testExecutions>
