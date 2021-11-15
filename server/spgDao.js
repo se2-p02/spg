@@ -142,7 +142,7 @@ exports.addOrder = async (order) => {
 };
 
 // delete test order
-exports.deleteTestOrder = async () => {
+exports.deleteTestOrder = () => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'DELETE FROM orders WHERE id = -1';
@@ -150,9 +150,15 @@ exports.deleteTestOrder = async () => {
                 if (err) {
                     reject(err);
                     return;
-                }else{
+                } else {
                     resolve(true);
                 }
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
 // get all orders
 exports.getOrders = () => {
     return new Promise((resolve, reject) => {
@@ -162,7 +168,7 @@ exports.getOrders = () => {
                 reject(err);
                 return;
             }
-            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address:c.address, date:c.date, time:c.time, amount:c.amount, conf:c.confPreparation }));
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation }));
             resolve(orders);
         });
     });
@@ -171,7 +177,7 @@ exports.getOrders = () => {
 exports.updateOrder = async (id) => {
     try {
         return new Promise((resolve, reject) => {
-            const sql = 'UPDATE orders SET confPreparation=1 WHERE id = ? ';
+            const sql = 'UPDATE orders SET fulfilled=1 WHERE id = ? ';
             db.run(sql, id, function (err) {
                 if (err) {
                     reject(err);

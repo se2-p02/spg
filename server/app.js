@@ -198,7 +198,7 @@ app.get("/api/getorders", async (req, res) => {
 
 //update order
 app.post("/api/updateOrder/:id", async (req, res) => {
-  const id =req.params.id
+  const id =req.params.id;
   try {
     const result = await spgDao.updateOrder(id);
     if (result.err) res.status(404).json(result);
@@ -219,7 +219,7 @@ app.post('/api/sessions', function (req, res, next) {
       return next(err);
     if (!user) {
       // display wrong login messages
-      console.log(user)
+      //console.log(user)
       return res.status(401).json(info);
     }
     // success, perform the login
@@ -240,7 +240,7 @@ app.post('/api/addNewUser', async (req, res) => {
   console.log('Request arrived to the server');
   const user_info = req.body;
   try {
-    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email);
+    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email, 'client');
     if (result.err) {
       res.status(500).json(result);
     } else {

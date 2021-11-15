@@ -12,7 +12,7 @@ function MyLogin(props) {
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
     const [goBack, setGoBack] = useState(false)
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     function checkValid(username_to_check, password_to_check) {
         if (username_to_check === "") {
@@ -51,8 +51,8 @@ function MyLogin(props) {
                             // comment props.setUser(() => res);
                             // comment props.setLoggedIn(() => true);
                             // comment props.setFirstLogin(() => true);
-                            props.setUser(() => username);
-                            history.push("/" + username);
+                            props.setUser({username: username, role: res.role});
+                            navigate("/" + res.role);
                         }
                     });
                 } else {

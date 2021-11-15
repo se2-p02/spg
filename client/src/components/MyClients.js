@@ -18,7 +18,7 @@ function MyClients(props) {
                 if (c.error === undefined) {
                     setClients(c);
                     setReqUpdate(false);
-                    console.log(c)
+                    //console.log(c)
                 }
             }).catch((err) => {
                 console.log(err)
