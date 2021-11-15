@@ -2,14 +2,27 @@ import { useState } from "react";
 import './MyNavBar.css';
 import Logo from './solidarity.png';
 import { Badge, Dropdown, ListGroup, Modal, Button, Image, Navbar, Col, Row } from "react-bootstrap";
+import { PersonCircle } from "react-bootstrap-icons";
 import API from "./API";
+import { useNavigate } from "react-router-dom";
 
 function MyNavBar(props) {
 
     const [show, setShow] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleRemoveFromCart = (p) => {
         props.setCart((c) => c.filter((old) => old !== p));
+    }
+
+    const handleLogout = () => {
+        API.logout().then((response) => {
+            if (response.error === undefined) {
+                props.setUser({});
+                navigate("/login");
+            }
+        });
     }
 
     return (
@@ -28,37 +41,53 @@ function MyNavBar(props) {
 
                 </Row>
             </Navbar.Brand>
+            <ListGroup key={"cart+logout"} horizontal>
+                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <Dropdown>
+                        <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start">
+                            <div className="fw-bold mx-2">Cart</div>
+                            <Badge variant="primary" pill>
+                                {props.cart.length}
+                            </Badge>
+                        </Dropdown.Toggle>
 
-            <Dropdown>
-                <Dropdown.Toggle variant="dark" className="d-flex justify-content-between align-items-start mx-5 px-5">
-                    <div className="fw-bold mx-2">Cart</div>
-                    <Badge variant="primary" pill>
-                        {props.cart.length}
-                    </Badge>
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    {props.cart.length !== 0 &&
-                        props.cart.map((c) => (
-                            <Dropdown.Item>
-                                <ListGroup horizontal>
-                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
-                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                        <Dropdown.Menu align="end">
+                            {props.cart.length !== 0 &&
+                                props.cart.map((c) => (
+                                    <Dropdown.Item>
+                                        <ListGroup key={c.id+"a"} horizontal>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                        </ListGroup>
+                                    </Dropdown.Item>
+                                ))
+                            }
+                            {props.cart.length !== 0 &&
+                                <ListGroup className="mx-3">
+                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
                                 </ListGroup>
+                            }
+                            {props.cart.length === 0 &&
+                                <span className="mx-3">No products here</span>
+                            }
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ListGroup.Item>
+                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <Dropdown>
+                        <Dropdown.Toggle variant="dark" className="d-flex">
+                            <PersonCircle className="mx-2">Cart</PersonCircle>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu align="end">
+                            <Dropdown.Item>
+                                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
                             </Dropdown.Item>
-                        ))
-                    }
-                    {props.cart.length !== 0 &&
-                        <ListGroup className="mx-3">
-                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
-                        </ListGroup>
-                    }
-                    {props.cart.length === 0 &&
-                        <span className="mx-3">No products here</span>
-                    }
-                </Dropdown.Menu>
-            </Dropdown>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ListGroup.Item>
+            </ListGroup>
             {props.cart.length !== 0 &&
                 <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} />
             }
@@ -78,7 +107,7 @@ function MyModal(props) {
     const handleSubmit = async () => {
         let order;
         let products = {};
-        props.cart.forEach((prod) => products = {...products, [prod.name]: prod.quantity });
+        props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
             amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price)
@@ -90,7 +119,7 @@ function MyModal(props) {
             if (response.error === undefined) {
                 setSuccessful(true);
                 props.setCart([])
-            } 
+            }
         })
     }
 
@@ -107,24 +136,24 @@ function MyModal(props) {
             </Modal.Header>
             <Modal.Body>
                 {props.cart.map((c) => (
-                    <ListGroup className="my-1" horizontal>
+                    <ListGroup key={c.id+"b"} className="my-1" horizontal>
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity * c.price + " €"}</ListGroup.Item>
                     </ListGroup>
                 ))
                 }
-                <ListGroup className="my-1" horizontal>
+                <ListGroup key={"total"} className="my-1" horizontal>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-start align-items-center">Grand total:</ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-end align-items-center">
                         {props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
                         {props.cart.length !== 1 && props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price) + " €"}</ListGroup.Item>
                 </ListGroup>
-                <ListGroup className="mx-3">
+                <ListGroup key={"placeOrder"} className="mx-3">
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={handleSubmit}>Place order</Button></ListGroup.Item>
                 </ListGroup>
                 {successful &&
-                    <ListGroup className="mx-3">
+                    <ListGroup key={"orderPlaced"} className="mx-3">
                         <ListGroup.Item variant="success" className="d-flex w-100 justify-content-center align-items-center">Order successfully submitted</ListGroup.Item>
                     </ListGroup>
                 }

@@ -72,7 +72,7 @@ function MyContainer(props) {
                     path="/employee" exact
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
                             <MyEmployee></MyEmployee>
                         </>
                     }
@@ -81,7 +81,7 @@ function MyContainer(props) {
                     path="/employee/clients/:id"
                     element={
                         <>  
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
                             <MySingleClient></MySingleClient>
                         </>
                     }
@@ -90,7 +90,7 @@ function MyContainer(props) {
                     path="/employee/orders"
                     element={
                         <>  
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
                             <MyOrders></MyOrders>
                         </>
                     }
@@ -99,7 +99,7 @@ function MyContainer(props) {
                     path="/employee/clients" exact
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
                             <MyClients></MyClients>
                         </>
                     }
