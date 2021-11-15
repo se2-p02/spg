@@ -149,10 +149,11 @@ app.post('/api/orders', async (req, res) => {
 
   try {
     if (order.test) {
+      // just to test, after the call is set to -1
+      order.id = await spgDao.getNextNumber();
       order.id = -1;
       order.products = {};
       order.amount = 0.0;
-      const id = await spgDao.getNextNumber();
     }
     else {
       let flag = false;
