@@ -130,7 +130,7 @@ exports.addOrder = async (order) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
                 if (err) {
-                    reject(err);
+                    reject(500);
                     return;
                 }
                 resolve(true);
@@ -150,8 +150,9 @@ exports.deleteTestOrder = async () => {
                 if (err) {
                     reject(err);
                     return;
+                }else{
+                    resolve(true);
                 }
-                resolve(true);
             });
         });
     } catch (err) {

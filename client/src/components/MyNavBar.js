@@ -87,11 +87,10 @@ function MyModal(props) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
         }
         API.sendOrder(order).then((response) => {
-            if (response.error !== undefined) {
-            } else {
+            if (response.error === undefined) {
                 setSuccessful(true);
                 props.setCart([])
-            }
+            } 
         })
     }
 

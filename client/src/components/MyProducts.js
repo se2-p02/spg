@@ -24,9 +24,8 @@ function MyProducts(props) {
                     setProducts(p.filter((prod) => prod.quantity !== 0));
                     setReqUpdate(false);
                 }
-                else {
-                }
             }).catch((err) => {
+                console.log(err)
             });
         }
     }, [reqUpdate, props.cart]);

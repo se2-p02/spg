@@ -23,9 +23,8 @@ function MySingleClient(props) {
                     setClient(c);
                     setReqUpdate(false);
                 }
-                else {
-                }
             }).catch((err) => {
+                console.log(err)
             });
         }
     }, [reqUpdate, id]);
