@@ -62,4 +62,19 @@ describe('Users test', () => {
     const response2 = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it" }).expect(500);
     const deleteRes = await request(app).delete("/api/deleteUser").send({ email : "test_email@email.it" }).expect(200);
   });
+
+  it('tests error POST /api/addNewUser', async () => {
+    const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", email: "test_email@email.it" }).expect(500);
+  });
+});
+
+describe('Session test', () => {
+  it('tests delete /api/sessions/current', async () => {
+    const deleteRes = await request(app).delete("/api/sessions/current").expect(200);
+  });
+
+  it('tests get /api/sessions/current', async () => {
+    const deleteRes = await request(app).get("/api/sessions/current").expect(401);
+  });
+  
 });

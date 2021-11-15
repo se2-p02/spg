@@ -226,12 +226,7 @@ app.post('/api/addNewUser', async (req, res) => {
 // DELETE user
 app.delete('/api/deleteUser', async (req, res) => {
   const result = await userDao.deleteUser(req.body.email);
-  if (result.err) {
-    res.status(500).json(result);
-  }
-  else {
-    res.status(200).json(result);
-  }
+  res.status(200).json(result);
 });
 
 

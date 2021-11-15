@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="96"/>
-    <testCase name="tests GET /api/clients" duration="23"/>
-    <testCase name="tests GET /api/clients/:id" duration="19"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="78"/>
-    <testCase name="tests POST /api/orders" duration="45"/>
-    <testCase name="tests POST /api/addNewUser" duration="488"/>
+    <testCase name="tests GET /api/products" duration="101"/>
+    <testCase name="tests GET /api/clients" duration="28"/>
+    <testCase name="tests GET /api/clients/:id" duration="24"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="88"/>
+    <testCase name="tests POST /api/orders" duration="44"/>
+    <testCase name="tests POST /api/addNewUser" duration="354"/>
+    <testCase name="tests error POST /api/addNewUser" duration="42"/>
+    <testCase name="tests delete /api/sessions/current" duration="16"/>
+    <testCase name="tests get /api/sessions/current" duration="14"/>
   </file>
 </testExecutions>
