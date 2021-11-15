@@ -6,6 +6,7 @@ import API from "./API";
 
 
 function MyClients(props) {
+    
     const [goBack, setGoBack] = useState(false);
     const [goNew, setGoNew] = useState(false);
     const [clients, setClients] = useState([]);
@@ -17,6 +18,7 @@ function MyClients(props) {
                 if (c.error === undefined) {
                     setClients(c);
                     setReqUpdate(false);
+                    console.log(c)
                 }
             }).catch((err) => {
                 console.log(err)
@@ -46,7 +48,7 @@ function MyClients(props) {
                         {
                             clients.map(c => {
                                 return (
-                                    <ListGroup as={Link} to={"/employee/clients/" + c.id} key={c.id} style={{ textDecoration: 'none' }} className="my-2 mx-5" horizontal>
+                                    <ListGroup as={Link} to={"/employee/client?" + c.id} key={c.id} style={{ textDecoration: 'none' }} className="my-2 mx-5" horizontal>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.id}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.name}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.surname}</ListGroup.Item>

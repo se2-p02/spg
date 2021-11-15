@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
 const app = require('./app');
 const port = 3001;
-
 
 // activate the server
 app.listen(port, () => {

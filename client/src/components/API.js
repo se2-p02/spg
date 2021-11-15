@@ -16,6 +16,14 @@ async function loadClients() {
     } else return { 'error': 'Failed to load clients from server' }
 }
 
+async function loadOrders() {
+    let myURL = URL + "/api/getorders";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        const fetchedOrders = await response.json();
+        return fetchedOrders;
+    } else return { 'error': 'Failed to load Orders from server' }
+}
 
 async function loadClient(id) {
     let myURL = URL + "/api/clients/" + id;
@@ -34,6 +42,20 @@ async function sendOrder(order) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(order),
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
+async function updateOrder(id) {
+    const response = await fetch(URL + `/api/updateOrder/${id}`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            
         });
     if (response.ok) {
         return true;
@@ -97,5 +119,5 @@ async function addNewUser(name, surname, password, email) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, addNewUser };
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser };
 export default API;
