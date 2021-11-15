@@ -152,6 +152,8 @@ app.post('/api/orders', async (req, res) => {
       order.id = -1;
       order.products = {};
       order.amount = 0.0;
+      const res_prod = await spgDao.orderPrep(prod);
+      const id = await spgDao.getNextNumber();
     }
     else {
       let flag = false;

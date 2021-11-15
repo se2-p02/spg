@@ -98,7 +98,7 @@ exports.deleteUser = (email) => {
           reject(err);
       }else{
           resolve(true);
-      };
+      }
   });
   
 });
