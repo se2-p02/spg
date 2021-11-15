@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/home/fedefluork/spg-main-testing/server/tests/apis.spec.js">
-    <testCase name="tests GET /api/products" duration="30"/>
-    <testCase name="tests GET /api/clients" duration="4"/>
-    <testCase name="tests GET /api/clients/:id" duration="3"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="16"/>
-    <testCase name="tests POST /api/orders" duration="14"/>
-    <testCase name="tests POST /api/addNewUser" duration="14"/>
+  <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
+    <testCase name="tests GET /api/products" duration="96"/>
+    <testCase name="tests GET /api/clients" duration="23"/>
+    <testCase name="tests GET /api/clients/:id" duration="19"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="78"/>
+    <testCase name="tests POST /api/orders" duration="45"/>
+    <testCase name="tests POST /api/addNewUser" duration="488"/>
   </file>
 </testExecutions>

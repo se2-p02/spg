@@ -89,3 +89,17 @@ exports.addUser = (name, surname, password, email) => {
     }
   })
 }
+
+exports.deleteUser = (email) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM users WHERE email = ?'
+    db.run(sql, [email], function (err) {
+      if (err) {
+          reject(err);
+      }else{
+          resolve(true);
+      };
+  });
+  
+});
+}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636915386698" clover="3.2.0">
-  <project timestamp="1636915386698" name="All files">
-    <metrics statements="265" coveredstatements="117" conditionals="70" coveredconditionals="13" methods="63" coveredmethods="27" elements="398" coveredelements="157" complexity="0" loc="265" ncloc="265" packages="1" files="4" classes="4"/>
-    <file name="app.js" path="/home/fedefluork/spg-main-testing/server/app.js">
-      <metrics statements="116" coveredstatements="62" conditionals="30" coveredconditionals="6" methods="19" coveredmethods="5"/>
+<coverage generated="1636983852087" clover="3.2.0">
+  <project timestamp="1636983852087" name="All files">
+    <metrics statements="277" coveredstatements="155" conditionals="74" coveredconditionals="21" methods="67" coveredmethods="37" elements="418" coveredelements="213" complexity="0" loc="277" ncloc="277" packages="1" files="4" classes="4"/>
+    <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
+      <metrics statements="121" coveredstatements="74" conditionals="32" coveredconditionals="8" methods="20" coveredmethods="7"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -103,32 +103,37 @@
       <line num="199" count="0" type="stmt"/>
       <line num="203" count="0" type="stmt"/>
       <line num="210" count="1" type="stmt"/>
-      <line num="211" count="0" type="stmt"/>
-      <line num="212" count="0" type="stmt"/>
-      <line num="213" count="0" type="stmt"/>
-      <line num="214" count="0" type="stmt"/>
-      <line num="215" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="211" count="2" type="stmt"/>
+      <line num="212" count="2" type="stmt"/>
+      <line num="213" count="2" type="stmt"/>
+      <line num="214" count="2" type="stmt"/>
+      <line num="215" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="216" count="0" type="stmt"/>
-      <line num="218" count="0" type="stmt"/>
-      <line num="221" count="0" type="stmt"/>
-      <line num="222" count="0" type="stmt"/>
-      <line num="229" count="1" type="stmt"/>
+      <line num="218" count="1" type="stmt"/>
+      <line num="221" count="1" type="stmt"/>
+      <line num="222" count="1" type="stmt"/>
+      <line num="227" count="1" type="stmt"/>
+      <line num="228" count="1" type="stmt"/>
+      <line num="229" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="230" count="0" type="stmt"/>
-      <line num="231" count="0" type="stmt"/>
-      <line num="236" count="1" type="stmt"/>
-      <line num="237" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="238" count="0" type="stmt"/>
+      <line num="233" count="1" type="stmt"/>
+      <line num="240" count="1" type="stmt"/>
       <line num="241" count="0" type="stmt"/>
-      <line num="244" count="1" type="stmt"/>
+      <line num="242" count="0" type="stmt"/>
+      <line num="247" count="1" type="stmt"/>
+      <line num="248" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="249" count="0" type="stmt"/>
+      <line num="252" count="0" type="stmt"/>
+      <line num="255" count="1" type="stmt"/>
     </file>
-    <file name="db.js" path="/home/fedefluork/spg-main-testing/server/db.js">
+    <file name="db.js" path="C:\Users\Mattia\Desktop\spg\server\db.js">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="3" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
       <line num="7" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="10" count="1" type="stmt"/>
     </file>
-    <file name="spgDao.js" path="/home/fedefluork/spg-main-testing/server/spgDao.js">
+    <file name="spgDao.js" path="C:\Users\Mattia\Desktop\spg\server\spgDao.js">
       <metrics statements="88" coveredstatements="46" conditionals="20" coveredconditionals="6" methods="31" coveredmethods="21"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
@@ -217,10 +222,10 @@
       <line num="151" count="0" type="stmt"/>
       <line num="152" count="0" type="stmt"/>
       <line num="154" count="1" type="stmt"/>
-      <line num="158" count="0" type="stmt"/>
+      <line num="159" count="0" type="stmt"/>
     </file>
-    <file name="userDao.js" path="/home/fedefluork/spg-main-testing/server/userDao.js">
-      <metrics statements="57" coveredstatements="5" conditionals="18" coveredconditionals="0" methods="12" coveredmethods="0"/>
+    <file name="userDao.js" path="C:\Users\Mattia\Desktop\spg\server\userDao.js">
+      <metrics statements="64" coveredstatements="31" conditionals="20" coveredconditionals="6" methods="15" coveredmethods="8"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
@@ -247,37 +252,44 @@
       <line num="39" count="0" type="stmt"/>
       <line num="41" count="0" type="stmt"/>
       <line num="48" count="1" type="stmt"/>
-      <line num="49" count="0" type="stmt"/>
-      <line num="50" count="0" type="stmt"/>
-      <line num="51" count="0" type="stmt"/>
-      <line num="52" count="0" type="stmt"/>
-      <line num="53" count="0" type="stmt"/>
-      <line num="54" count="0" type="stmt"/>
-      <line num="55" count="0" type="stmt"/>
-      <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="49" count="2" type="stmt"/>
+      <line num="50" count="2" type="stmt"/>
+      <line num="51" count="2" type="stmt"/>
+      <line num="52" count="2" type="stmt"/>
+      <line num="53" count="2" type="stmt"/>
+      <line num="54" count="2" type="stmt"/>
+      <line num="55" count="2" type="stmt"/>
+      <line num="56" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="57" count="0" type="stmt"/>
       <line num="58" count="0" type="stmt"/>
       <line num="59" count="0" type="stmt"/>
-      <line num="61" count="0" type="stmt"/>
-      <line num="62" count="0" type="stmt"/>
-      <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="61" count="2" type="stmt"/>
+      <line num="62" count="2" type="stmt"/>
+      <line num="63" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="64" count="0" type="stmt"/>
       <line num="65" count="0" type="stmt"/>
       <line num="66" count="0" type="stmt"/>
-      <line num="68" count="0" type="stmt"/>
-      <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="68" count="2" type="stmt"/>
+      <line num="69" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="70" count="0" type="stmt"/>
       <line num="71" count="0" type="stmt"/>
       <line num="72" count="0" type="stmt"/>
-      <line num="75" count="0" type="stmt"/>
-      <line num="76" count="0" type="stmt"/>
-      <line num="77" count="0" type="stmt"/>
-      <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="79" count="0" type="stmt"/>
-      <line num="80" count="0" type="stmt"/>
-      <line num="82" count="0" type="stmt"/>
+      <line num="75" count="2" type="stmt"/>
+      <line num="76" count="2" type="stmt"/>
+      <line num="77" count="2" type="stmt"/>
+      <line num="78" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="79" count="1" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="82" count="2" type="stmt"/>
       <line num="87" count="0" type="stmt"/>
       <line num="88" count="0" type="stmt"/>
+      <line num="93" count="1" type="stmt"/>
+      <line num="94" count="1" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="96" count="1" type="stmt"/>
+      <line num="97" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="98" count="0" type="stmt"/>
+      <line num="100" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
