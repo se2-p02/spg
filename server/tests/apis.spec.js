@@ -46,18 +46,16 @@ describe('Clients test', () => {
     const wallet = 0.0;
     await request(app).put("/api/clients/-1/wallet").send({ wallet }).expect(200);
   });
+
+  it('tests POST /api/addNewUser', async () => {
+    const test = {name: "Mario", surname: "Rossi", password: "password", email: "email@email.it"};
+    const response = await request(app).post("/api/addNewUser").send({ test }).expect(200);
+  });
 });
 
 describe('Orders test', () => {
   it('tests POST /api/orders', async () => {
     const test = 'yes';
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
-  });
-});
-
-describe('Users test', () => {
-  it('tests POST /api/addNewUser', async () => {
-    const test = {name: "Mario", surname: "Rossi", password: "password", email: "email@email.it"};
-    const response = await request(app).post("/api/addNewUser").send({ test }).expect(200);
   });
 });
