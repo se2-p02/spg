@@ -54,3 +54,10 @@ describe('Orders test', () => {
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
   });
 });
+
+describe('Users test', () => {
+  it('tests POST /api/addNewUser', async () => {
+    const test = {name: "Mario", surname: "Rossi", password: "password", email: "email@email.it"};
+    const response = await request(app).post("/api/addNewUser").send({ test }).expect(200);
+  });
+});
