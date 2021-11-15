@@ -15,25 +15,26 @@ function Orders(props) {
       .then((c) => {
         if (c.error === undefined) {
           setReqUpdate(true);
-          console.log(c);
+          //console.log(c);
         } else {
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
     if (reqUpdate) {
-      API.loadOrders()
+      API.loadOrders(props.id)
         .then((c) => {
           if (c.error === undefined) {
+            c.sort((a, b) => b.id - a.id);
             setOrders(c);
             setReqUpdate(false);
-            console.log(c);
+            //console.log(c);
           } else {
           }
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [reqUpdate]);
 
@@ -44,7 +45,7 @@ function Orders(props) {
   return (
     <>
       <Container
-        className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"
+        className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
         fluid
       >
         <ListGroup className="my-3 mx-5" horizontal>
@@ -95,6 +96,12 @@ function Orders(props) {
             className="d-flex w-100 justify-content-center"
           >
             confPreparation
+          </ListGroup.Item>
+          <ListGroup.Item
+            variant="warning"
+            className="d-flex w-100 justify-content-center"
+          >
+            fulfilled
           </ListGroup.Item>
         </ListGroup>
         {orders && (
@@ -149,12 +156,17 @@ function Orders(props) {
                   >
                     {c.amount}
                   </ListGroup.Item>
-
                   <ListGroup.Item
                     variant="primary"
                     className="d-flex w-100 justify-content-center"
                   >
-                    {c.conf === 0 ? (
+                    {c.conf}
+                  </ListGroup.Item>
+                  <ListGroup.Item
+                    variant="primary"
+                    className="d-flex w-100 justify-content-center"
+                  >
+                    {c.fulfilled === 0 ? (
                       <Button
                         onClick={() => {
                           updateHandler(c.id);
@@ -172,13 +184,14 @@ function Orders(props) {
             })}
           </>
         )}
-        <Button
+        {!props.id && <Button
           size="lg"
           className="btn-danger p-2 w-50 mt-3"
           onClick={() => setGoBack(true)}
         >
           Back
         </Button>
+        }
       </Container>
     </>
   );

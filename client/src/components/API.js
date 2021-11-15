@@ -16,8 +16,9 @@ async function loadClients() {
     } else return { 'error': 'Failed to load clients from server' }
 }
 
-async function loadOrders() {
-    let myURL = URL + "/api/getorders";
+async function loadOrders(id) {
+    let myURL = URL + "/api/orders";
+    if (id) myURL += "/" + id;
     const response = await fetch(myURL);
     if (response.ok) {
         const fetchedOrders = await response.json();
@@ -51,11 +52,12 @@ async function sendOrder(order) {
 async function updateOrder(id) {
     const response = await fetch(URL + `/api/updateOrder/${id}`,
         {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            
+            body: JSON.stringify({ fulfilled: true }),
+
         });
     if (response.ok) {
         return true;
@@ -106,8 +108,8 @@ async function addNewUser(name, surname, password, email) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name: name, surname: surname, password: password, email: email}),
-        });
+                body: JSON.stringify({ name: name, surname: surname, password: password, email: email }),
+            });
         if (response.ok) {
             return response.json(); // userId
         } else {

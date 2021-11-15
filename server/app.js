@@ -171,7 +171,7 @@ app.post('/api/orders', async (req, res) => {
     if (result.err)
       res.status(404).json(result);
     else {
-      if(order.test) await spgDao.deleteTestOrder();
+      if (order.test) await spgDao.deleteTestOrder();
       res.status(200).json(result);
     }
   } catch (err) {
@@ -182,7 +182,7 @@ app.post('/api/orders', async (req, res) => {
 });
 
 // GET orders
-app.get("/api/getorders", async (req, res) => {
+app.get("/api/orders", async (req, res) => {
   try {
     const orders = await spgDao.getOrders();
     if (orders.error) {
@@ -196,13 +196,30 @@ app.get("/api/getorders", async (req, res) => {
   }
 });
 
-//update order
-app.post("/api/updateOrder/:id", async (req, res) => {
-  const id =req.params.id;
+// GET orders of specific client
+app.get("/api/orders/:id", async (req, res) => {
   try {
-    const result = await spgDao.updateOrder(id);
-    if (result.err) res.status(404).json(result);
-    else res.json(result);
+    const orders = await spgDao.getOrders(req.params.id);
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      res.json(orders);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+//update order
+app.put("/api/updateOrder/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    if (req.body.fulfilled) {
+      const result = await spgDao.updateOrderFulfilled(id);
+      if (result.err) res.status(404).json(result);
+      else res.json(result);
+    }
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;

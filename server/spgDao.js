@@ -57,13 +57,13 @@ exports.getClients = () => {
 // get specific client
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname, wallet, basket, email FROM users WHERE id = ?';
+        const sql = 'SELECT id, name, surname, wallet, basket, email, role FROM users WHERE id = ?';
         db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email }));
+            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email, role: c.role }));
             resolve(clients[0]);
         });
     });
@@ -160,21 +160,37 @@ exports.deleteTestOrder = () => {
     }
 };
 // get all orders
-exports.getOrders = () => {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM orders';
-        db.all(sql, (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation }));
-            resolve(orders);
+exports.getOrders = (id) => {
+    if (id) {
+        return new Promise((resolve, reject) => {
+            const sql = 'SELECT * FROM orders WHERE userID = ?';
+            db.all(sql, [id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                resolve(orders);
+            });
         });
-    });
+    }
+    else {
+        return new Promise((resolve, reject) => {
+            const sql = 'SELECT * FROM orders';
+            db.all(sql, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                resolve(orders);
+            });
+        });
+    }
+
 };
 
-exports.updateOrder = async (id) => {
+exports.updateOrderFulfilled = async (id) => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'UPDATE orders SET fulfilled=1 WHERE id = ? ';

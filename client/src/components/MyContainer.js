@@ -9,8 +9,7 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
 import MyClient from "./MyClient";
-import MyAvailableProducts from "./MyAvailableProducts";
-import Orders from "./Orders";
+import MyOrders from "./MyOrders";
 
 
 function MyContainer(props) {
@@ -88,11 +87,11 @@ function MyContainer(props) {
                     }
                 />
                 <Route
-                    path="/employee/getorders"
+                    path="/employee/orders"
                     element={
                         <>  
                             <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
-                            <Orders></Orders>
+                            <MyOrders></MyOrders>
                         </>
                     }
                 />
@@ -105,7 +104,7 @@ function MyContainer(props) {
                         </>
                     }
                 />
-                <Route
+                {/*<Route
                     path="/employee/client"
                     element={
                         <>
@@ -113,22 +112,13 @@ function MyContainer(props) {
                             <MyClient></MyClient>
                         </>
                     }
-                />
+                />*/}
                 <Route
                     path="/employee/products"
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
                             <MyProducts cart={cart} setCart={setCart}></MyProducts>
-                        </>
-                    }
-                />
-                <Route
-                    path="/employee/listproducts"
-                    element={
-                        <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
-                            <MyAvailableProducts cart={cart} setCart={setCart}></MyAvailableProducts>
                         </>
                     }
                 />
