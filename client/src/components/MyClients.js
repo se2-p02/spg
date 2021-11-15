@@ -18,8 +18,6 @@ function MyClients(props) {
                     setClients(c);
                     setReqUpdate(false);
                 }
-                else {
-                }
             }).catch((err) => {
             });
         }

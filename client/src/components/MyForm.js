@@ -59,22 +59,21 @@ function MyForm() {
     }
 
     function checkEmail(email) {
-        if (!(email.includes("@")) && email !== "") {
-            const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!(re.test(email))) {
-                setErrorMessageEmail((e) => {
-                    return "The email is not valid";
-                })
-                return false;
-            }
-            else {
-                setErrorMessageEmail((e) => {
-                    return "";
-                })
-                return true;
-            }
+        const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!(re.test(email))) {
+            setErrorMessageEmail((e) => {
+                return "The email is not valid";
+            })
+            return false;
+        }
+        else {
+            setErrorMessageEmail((e) => {
+                return "";
+            })
+            return true;
         }
     }
+
 
     function checkPassword(password_to_check, repeat_to_check) {
         if (password_to_check !== repeat_to_check) {
