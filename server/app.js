@@ -181,6 +181,33 @@ app.post('/api/orders', async (req, res) => {
 
 });
 
+// GET orders
+app.get("/api/getorders", async (req, res) => {
+  try {
+    const orders = await spgDao.getOrders();
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      res.json(orders);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+//update order
+app.post("/api/updateOrder/:id", async (req, res) => {
+  const id =req.params.id
+  try {
+    const result = await spgDao.updateOrder(id);
+    if (result.err) res.status(404).json(result);
+    else res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
 
 /*** User APIs ***/
 
