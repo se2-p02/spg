@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './MyNavBar.css';
-import './solidarity.png'
+import Logo from './solidarity.png';
 import { Badge, Dropdown, ListGroup, Modal, Button, Image, Navbar, Col, Row } from "react-bootstrap";
 import API from "./API";
 
@@ -20,7 +20,7 @@ function MyNavBar(props) {
             <Navbar.Brand >
                 <Row className=" align-items-center">
                     <Col sm="3" className="p-0 m-0 d-none d-sm-block">
-                        <Image src="./solidarity.png" className="w-25 m-4 mt-0 mb-0 p-0" />
+                        <Image src={Logo} className="w-25 m-4 mt-0 mb-0 p-0" />
                     </Col>
                     <Col xs="12" sm="9" className="p-0 m-0 ml-2 pl-2">
                         <b><h2 className="mt-0 mb-0 w-100 m-0 p-1 pb-1 pt-1">Social Purchasing Group</h2></b>

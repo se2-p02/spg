@@ -74,6 +74,11 @@ app.use(passport.session());
 
 /*** APIs ***/
 
+//GET logo
+app.get('/images/solidarity.png', (req, res) => {
+  res.sendFile(path.join(__dirname, "./images/solidarity.png"));
+});
+
 // GET products
 app.get('/api/products', async (req, res) => {
   try {
