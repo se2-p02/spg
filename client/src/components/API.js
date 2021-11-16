@@ -21,8 +21,7 @@ async function loadOrders(id) {
     if (id) myURL += "/" + id;
     const response = await fetch(myURL);
     if (response.ok) {
-        const fetchedOrders = await response.json();
-        return fetchedOrders;
+        return response.json();
     } else return { 'error': 'Failed to load Orders from server' }
 }
 
