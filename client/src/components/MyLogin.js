@@ -93,13 +93,14 @@ function MyLogin(props) {
                                 <Form.Control
                                     className="w-100 p-4"
                                     type="username"
+                                    id="username"
                                     placeholder="Enter username"
                                     required
                                     isInvalid={errorMessageUsername}
                                     onChange={(ev) => { setUsername(ev.target.value); checkValid(ev.target.value, password) }}
                                     value={username}
                                 />
-                                <Form.Control.Feedback type="invalid">
+                                <Form.Control.Feedback type="invalid" id="erroru">
                                     {errorMessageUsername}
                                 </Form.Control.Feedback>
                                 <Form.Text className="text-muted"></Form.Text>
@@ -109,6 +110,7 @@ function MyLogin(props) {
                                 <Form.Label className="text-info"><h5>Password</h5></Form.Label>
                                 <Form.Control
                                     type="password"
+                                    id="password"
                                     className="w-100 p-4"
                                     placeholder="Password"
                                     required
@@ -116,13 +118,14 @@ function MyLogin(props) {
                                     onChange={(ev) => { setPassword(ev.target.value); checkValid(username, ev.target.value); }}
                                     value={password}
                                 />
-                                <Form.Control.Feedback type="invalid">
+                                <Form.Control.Feedback type="invalid" id="errorp">
                                     {errorMessagePassword}
                                 </Form.Control.Feedback>
                             </Form.Group>
                             {error.length !== 0 && (
                                 <div
                                     className="alert alert-danger alert-float-static fade show"
+                                    id="errors"
                                     role="alert"
                                 >
                                     {error}
@@ -150,6 +153,7 @@ function MyLogin(props) {
                                 size = "lg"
                                 variant="success"
                                 type="submit"
+                                id="submit"
                                 //className={errorMessagePassword ? "mt-1" : "mt-3 float-right mr-4"}
                                 className="w-100 mr-5"
                                 onClick={(ev) => handleSubmit(ev)}
