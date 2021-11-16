@@ -2,7 +2,7 @@
   "name": "spg",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://se:3001",
   "dependencies": {
     "@testing-library/react": "^12.1.2",
     "bootstrap": "^5.1.3",
