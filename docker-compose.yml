@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  server:
+    build: ./server
+    image: s290168/se02-spg-server:demo1
+    ports:
+      - "3001:3001"
+    networks:
+      - webappnetwork
+  client:
+    build: ./client
+    image: s290168/se02-spg-client:demo1
+    ports:
+      - "3000:3000"
+    links:
+      - "server:se"
+    networks:
+      - webappnetwork
+networks:
+    webappnetwork:
+        driver: bridge
