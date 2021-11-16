@@ -83,7 +83,7 @@ function MySingleClient(props) {
                 }} />
                 <h1 className="text-white">Orders</h1>
                 {!reqUpdate && <MyOrders setUser={props.setUser} id={client.id}/>}
-                <Row className="text-center justify-content-center"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
+                <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
                 <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate}></MyModal>
             </Container>
 

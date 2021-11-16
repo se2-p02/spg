@@ -53,55 +53,55 @@ function Orders(props) {
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            id
+            <b>id</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            userID
+            <b>userID</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            products
+            <b>products</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            address
+            <b>address</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            date
+            <b>date</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            time
+            <b>time</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            amount
+            <b>amount</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            confPreparation
+            <b>confPreparation</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            fulfilled
+            <b>fulfilled</b>
           </ListGroup.Item>
         </ListGroup>
         {orders && (
@@ -186,7 +186,7 @@ function Orders(props) {
         )}
         {!props.id && <Button
           size="lg"
-          className="btn-danger p-2 w-50 mt-3"
+          className="btn-danger p-2 w-50 mt-3 mb-5"
           onClick={() => setGoBack(true)}
         >
           Back
