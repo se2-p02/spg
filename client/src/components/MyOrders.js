@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 
-function Orders(props) {
+function MyOrders(props) {
   const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
@@ -15,11 +15,11 @@ function Orders(props) {
       .then((c) => {
         if (c.error === undefined) {
           setReqUpdate(true);
-          //console.log(c);
         } else {
+          console.log(c.error)
         }
       })
-      .catch((err) => { });
+      .catch((err) => { console.log(err) });
   };
 
   useEffect(() => {
@@ -30,13 +30,13 @@ function Orders(props) {
             c.sort((a, b) => b.id - a.id);
             setOrders(c);
             setReqUpdate(false);
-            //console.log(c);
           } else {
+            console.log(c.error)
           }
         })
-        .catch((err) => { });
+        .catch((err) => { console.log(err)});
     }
-  }, [reqUpdate]);
+  }, [reqUpdate, props.id]);
 
   if (goBack) {
     return <Navigate to="/employee"></Navigate>;
@@ -197,4 +197,4 @@ function Orders(props) {
   );
 }
 
-export default Orders;
+export default MyOrders;

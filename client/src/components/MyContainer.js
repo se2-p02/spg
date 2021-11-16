@@ -8,7 +8,6 @@ import MyClients from "./MyClients";
 import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
-import MyClient from "./MyClient";
 import MyOrders from "./MyOrders";
 
 
@@ -104,15 +103,7 @@ function MyContainer(props) {
                         </>
                     }
                 />
-                {/*<Route
-                    path="/employee/client"
-                    element={
-                        <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
-                            <MyClient></MyClient>
-                        </>
-                    }
-                />*/}
+                
                 <Route
                     path="/employee/products"
                     element={
