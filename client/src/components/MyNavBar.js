@@ -42,7 +42,7 @@ function MyNavBar(props) {
                 </Row>
             </Navbar.Brand>
             <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
-                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                <ListGroup.Item key="1" variant="primary" className="d-flex justify-content-center align-items-center">
                     <Dropdown>
                         <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start">
                             <div className="fw-bold mx-2">Cart</div>
@@ -56,16 +56,16 @@ function MyNavBar(props) {
                                 props.cart.map((c) => (
                                     <Dropdown.Item>
                                         <ListGroup key={c.id+"a"} horizontal>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                            <ListGroup.Item  key="a" variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
+                                            <ListGroup.Item  key="b" variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                            <ListGroup.Item  key="c" variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
                                         </ListGroup>
                                     </Dropdown.Item>
                                 ))
                             }
                             {props.cart.length !== 0 &&
                                 <ListGroup className="mx-3">
-                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
+                                    <ListGroup.Item key="2" variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
                                 </ListGroup>
                             }
                             {props.cart.length === 0 &&
@@ -74,15 +74,15 @@ function MyNavBar(props) {
                         </Dropdown.Menu>
                     </Dropdown>
                 </ListGroup.Item>
-                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                <ListGroup.Item  key="x" variant="primary" className="d-flex justify-content-center align-items-center">
                     <Dropdown>
                         <Dropdown.Toggle variant="dark" className="d-flex p-2">
-                            <PersonCircle className="mx-2">Cssart</PersonCircle>
+                            <PersonCircle className="mx-2">Cart</PersonCircle>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu align="end">
                             <Dropdown.Item>
-                                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
+                                <ListGroup.Item  key="1d" variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
