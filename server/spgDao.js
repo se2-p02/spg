@@ -197,6 +197,7 @@ exports.updateOrderFulfilled = async (id) => {
             db.run(sql, id, function (err) {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 resolve(true);
             });
