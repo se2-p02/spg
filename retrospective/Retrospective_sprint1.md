@@ -47,27 +47,26 @@ sections:
 
 - Unit Testing:
   - Total hours estimated. 8 h
-  - Total hours spent: 7h 30m
-  - Nr of automated unit test cases 
-  - Coverage: 32%
+  - Total hours spent: 6h
+  - Nr of automated unit test cases: 11 
+  - Coverage: 28.8%
 - E2E testing:
   - Total hours estimated: 4h
-  - Total hours spent: 0h
+  - Total hours spent: 1h 30m
 - Code review 
   - Total hours estimated: 6h
   - Total hours spent: 2h 15m
 - Technical Debt management:
   - Total hours estimated: 5h
   - Total hours spent: 3h 35m
-  - Hours estimated for remediation by SonarQube
-  - Hours estimated for remediation by SonarQube only for the selected and planned issues 
-  - Hours spent on remediation 
-  - debt ratio (as reported by SonarQube under "Measures-Maintainability")
+  - Hours estimated for remediation by SonarQube: 1h 19m
+  - Hours spent on remediation: 3h 35m 
+  - debt ratio (as reported by SonarQube under "Measures-Maintainability"): 0.1%
   - rating for each quality characteristic reported in SonarQube under "Measures":
-   - reliability: A
-   - maintainability: A
-   - security: A
-   - security review: A
+     - reliability: A
+     - maintainability: A
+     - security: A
+     - security review: A
   
 
 
@@ -78,7 +77,7 @@ As we did during the office project, we overestimated our coding capabilities, s
 
 
 - What lessons did you learn (both positive and negative) in this sprint?<br/>
-We have to communicate more face to face since this sprint we mainly communicate via Telegram. This led to people during their job without interacting with others. If we spend more time for brief but frequent interaction, we could avoid time wasted during the development, and moreover, it would be a way to check that each team member was following the sprint plan. 
+We have to communicate more face to face since this sprint we mainly communicate via Telegram. This led to people doing their job without interacting with others. If we spend more time for brief but frequent interaction, we could avoid time wasted during the development, and moreover, it would be a way to check that each team member was following the sprint plan. 
 Moreover, we still have to correctly estimate the task time. We often just think about the high-level functions without considering all the possible issues that real-life coding has. We must set more estimation hours for the coding tasks in order to avoid completely wrong estimations. 
 On the other hand, we learn how to test our web applications, so in future, we will have to spend less time on learning tasks and we can immediately test the results of the coding phase. 
 
