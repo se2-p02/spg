@@ -19,6 +19,7 @@ function MyForm() {
     const [registered, setRegistered] = useState(false);
     
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [errorNumber, setErrorNumber] = useState("");
     const [city, setCity] = useState("");
     const [address, setAddress] = useState("");
     const [country, setCountry] = useState("");
@@ -34,22 +35,35 @@ function MyForm() {
 
     function handleSubmit(ev) {
         ev.preventDefault();
+        var r = false;
+        if (!checkFields()) r = true;
+        if (!checkEmail(email)) r = true;
+        if (!checkPassword(password, repeat)) r = true;
+        if (!checkNumber()) r = true;
 
-        if (!checkFields()) return;
-        if (!checkEmail(email)) return;
-        if (!checkPassword(password, repeat)) return;
-        console.log("Checks passed");
+        // inserted to check each time all the fields
+        if (r) return;
 
-        console.log("Sending request...");
         resetForm();
         API.addNewUser(name, surname, password, email, phoneNumber, city, address, country).then((response) => {
             if (response.error === undefined) {
-                setErrorMessageFields("User inserted");
+                setErrorMessageFields("");
             } else {
                 setErrorMessageFields(response.error);
             }
         });
         setRegistered(true);
+    }
+
+    function checkNumber() {
+        if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
+            setErrorNumber("Insert a valid phone number"); 
+            return false;
+        }
+        else {
+            setErrorNumber("");
+            return true;
+        }
     }
 
     function checkFields() {
@@ -264,6 +278,14 @@ function MyForm() {
                                             value={phoneNumber}
                                         />
                                     </Form.Group>
+                                    {errorNumber.length !== 0 && (
+                                            <div
+                                                className="alert alert-danger alert-float-static fade show"
+                                                role="alert"
+                                            >
+                                                {errorNumber}
+                                            </div>
+                                        )}
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="country">
