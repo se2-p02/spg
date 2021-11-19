@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Button, Col, Row, Modal, Form, FormControl, Container } from "react-bootstrap";
+import { Button, Col, Row, Modal, Form, FormControl, Container, Image, Badge } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import { useParams } from "react-router";
 import './MyNavBar.css';
 import API from "./API";
 import MyOrders from "./MyOrders";
+import minus from './minus-circle-solid2.png';
+import plus from './minus-circle-solid.png';
 
 
 function MySingleClient(props) {
@@ -12,6 +14,7 @@ function MySingleClient(props) {
     const [client, setClient] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true)
     const [showMod, setShowMod] = useState(false)
+    const [text, setText] = useState()
 
 
     const { id } = useParams();
@@ -66,13 +69,17 @@ function MySingleClient(props) {
                 <Row className="m-0 p-4 pt-0 pb-2">
                     <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Wallet: </b></h2>
                     </Col>
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white">{client.wallet + " €"}</h2>
+                    <Col sm="2" className="m-0 p-0"><h2 className="text-white m-0 p-0">{client.wallet + " €"}</h2>
                     </Col>
-                    <Col sm="2" className="m-0 p-0" fluid="true">
-                        <Button className="bg-transparent border border-dark p-0 m-4 mt-0 mb-0" onClick={() => setShowMod(true)}><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-plus-circle text-info m-0 p-0 mt-0 mb-0" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg></Button>
+                    <Col sm="1" className="m-0 p-0" fluid="true">
+                        <Button className="bg-transparent border border-dark p-0 m-4 mt-0 mb-0" onClick={() => {setText("add");setShowMod(true)}}>
+                            <Image src={plus} className="w-100 m-0 mt-1 mb-0 p-0" />
+                        </Button>
+                    </Col>
+                    <Col sm="1" className="m-0 p-0" fluid="true">
+                        <Button className="bg-transparent border border-dark p-0 m-4 mt-0 mb-0" onClick={() => {setText("subtract");setShowMod(true)}}>
+                            <Image src={minus} className="w-100 m-0 mt-1 mb-0 p-0" />
+                        </Button>
                     </Col>
                 </Row>
                 <hr className="text-white my-5" style={{
@@ -84,7 +91,7 @@ function MySingleClient(props) {
                 <h1 className="text-white">Orders</h1>
                 {!reqUpdate && <MyOrders setUser={props.setUser} id={client.id}/>}
                 <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
-                <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate}></MyModal>
+                <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
             </Container>
 
         </>
@@ -94,6 +101,7 @@ function MySingleClient(props) {
 function MyModal(props) {
     const [amount, setAmount] = useState("")
     const [trigger, setTrigger] = useState(false)
+    const [error, setError] = useState()
 
     useEffect(() => {
         //insert survey with the list of questions
@@ -110,29 +118,49 @@ function MyModal(props) {
             }
         }
         //set up the data to be send by the post
-        let new_amount = Number(props.wallet) + Number(amount)
+        let new_amount = 0
+        if (props.text==="add"){
+            new_amount = Number(props.wallet) + Number(amount)
+        }
+        else{
+            new_amount = Number(props.wallet) - Number(amount)
+        }
         let send_obj = { "wallet": new_amount }
         if (trigger) {
-            updateWallet()
-            setAmount("")
-            setTrigger(false)
+            if (new_amount<0){
+                setError("The new amount would be negative!")
+
+            }
+            else if(amount < 0){
+                setError("Cannot set a negative value")
+            }  
+            else{
+                updateWallet()
+                setAmount("")
+                setTrigger(false)
+                props.setShow(false)
+                setError(undefined)
+            }
 
         }
-    }, [trigger, amount, props.id, props.wallet]);
+    }, [trigger, amount, props.id, props.wallet, props.text, props.setShow]);
 
     const handleAmount = (event) => { setAmount(event.target.value); };
 
     return (
         <Modal show={props.show} className="p-4">
             <Container className="bg-dark w-100 p-4">
-                <h3 className="text-white text-left">Select the amount to add:</h3>
+                <h3 className="text-white text-left">Select the amount to {props.text}:</h3>
                 <Form className="m-0 mt-3 mb-3">
                     <FormControl type="number" placeholder="€" value={amount} onChange={handleAmount}></FormControl>
                 </Form>
+                {
+                    error?<Badge bg="danger" pill>{error}</Badge>:<></>
+                }
                 <Row className="p-3 pb-1">
-                    <Col sm="5"><Button size="lg" variant="danger" className="p-auto m-0 w-100" onClick={() => { props.setShow(false); setAmount("") }}>Delete</Button></Col>
+                    <Col sm="5"><Button size="lg" variant="danger" className="p-auto m-0 w-100" onClick={() => { props.setShow(false); setAmount(""); setError(undefined) }}>Delete</Button></Col>
                     <Col sm="2"></Col>
-                    <Col sm="5"><Button size="lg" variant="success" className="p-auto m-0 w-100" onClick={() => { setTrigger(true); setAmount(amount); props.setShow(false); props.setUpdate(true) }}>Confirm</Button></Col>
+                    <Col sm="5"><Button size="lg" variant="success" className="p-auto m-0 w-100" onClick={() => { setTrigger(true); setAmount(amount); props.setUpdate(true) }}>Confirm</Button></Col>
 
                 </Row>
             </Container>

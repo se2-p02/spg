@@ -7,6 +7,7 @@
     "@testing-library/react": "^12.1.2",
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.7.0",
+    "fas": "^0.3.6",
     "jest-sonar-reporter": "^2.0.0",
     "puppeteer": "^11.0.0",
     "react": "^17.0.2",
