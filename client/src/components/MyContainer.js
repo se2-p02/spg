@@ -68,10 +68,19 @@ function MyContainer(props) {
                     }
                 />
                 <Route
+                    path="/signup"
+                    element={
+                        <>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyForm setUser={setUser} />
+                        </>
+                    }
+                />
+                <Route
                     path="/employee" exact
                     element={
                         <>
-                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
                             <MyEmployee></MyEmployee>
                         </>
                     }
@@ -80,7 +89,7 @@ function MyContainer(props) {
                     path="/employee/clients/:id"
                     element={
                         <>  
-                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
                             <MySingleClient></MySingleClient>
                         </>
                     }
@@ -89,7 +98,7 @@ function MyContainer(props) {
                     path="/employee/orders"
                     element={
                         <>  
-                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
                             <MyOrders></MyOrders>
                         </>
                     }
@@ -98,7 +107,7 @@ function MyContainer(props) {
                     path="/employee/clients" exact
                     element={
                         <>
-                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar  setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
                             <MyClients></MyClients>
                         </>
                     }
@@ -108,8 +117,8 @@ function MyContainer(props) {
                     path="/employee/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
-                            <MyProducts cart={cart} setCart={setCart}></MyProducts>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyProducts cart={cart} setCart={setCart} showCart={true}></MyProducts>
                         </>
                     }
                 />

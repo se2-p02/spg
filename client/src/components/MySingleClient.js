@@ -72,13 +72,13 @@ function MySingleClient(props) {
                     <Col sm="2" className="m-0 p-0"><h2 className="text-white m-0 p-0">{client.wallet + " €"}</h2>
                     </Col>
                     <Col sm="1" className="m-0 p-0" fluid="true">
-                        <Button className="bg-transparent border border-dark p-0 m-4 mt-0 mb-0" onClick={() => {setText("add");setShowMod(true)}}>
-                            <Image src={plus} className="w-100 m-0 mt-1 mb-0 p-0" />
+                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => {setText("add");setShowMod(true)}}>
+                            <Image src={plus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
                     <Col sm="1" className="m-0 p-0" fluid="true">
-                        <Button className="bg-transparent border border-dark p-0 m-4 mt-0 mb-0" onClick={() => {setText("subtract");setShowMod(true)}}>
-                            <Image src={minus} className="w-100 m-0 mt-1 mb-0 p-0" />
+                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => {setText("subtract");setShowMod(true)}}>
+                            <Image src={minus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
                 </Row>
