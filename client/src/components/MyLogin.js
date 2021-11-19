@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import { useNavigate, Navigate } from "react-router-dom";
 import API from "./API";
+import './MyNavBar.css';
+
+
 
 
 function MyLogin(props) {
@@ -80,7 +83,7 @@ function MyLogin(props) {
 
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center m-0 p-0" style={{ display: 'flex' }} fluid>
+            <Container className="bg-dark min-height-100 justify-content-center m-0 p-0 below-nav" style={{ display: 'flex' }} fluid>
 
             <Row className="w-100 mt-5 vheight-100 m-0 p-0">
                 <Col sm={3}></Col>
@@ -133,6 +136,7 @@ function MyLogin(props) {
                             )}
                             
                         </Form>
+                        <p className="text-white p-0 pt-2 ">Not already registered? <a className="text-info" href="/signup">Sign up</a></p>
                         <Row className="pt-4 w-100 m-0">
                                 <Col sm={5} className="text-left m-0 p-0">
                                 

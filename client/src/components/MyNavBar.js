@@ -41,7 +41,9 @@ function MyNavBar(props) {
 
                 </Row>
             </Navbar.Brand>
-            <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
+            { console.log(props.showCart)}
+            {
+            props.showCart?<ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
                 <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
                     <Dropdown>
                         <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
@@ -87,7 +89,7 @@ function MyNavBar(props) {
                         </Dropdown.Menu>
                     </Dropdown>
                 </ListGroup.Item>
-            </ListGroup>
+            </ListGroup>:<></>}
             {props.cart.length !== 0 &&
                 <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} />
             }

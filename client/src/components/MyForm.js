@@ -135,7 +135,7 @@ function MyForm() {
                 )}
                 {registered === false && (
                     <>
-                        <Form className="pt-5 p-0 m-0">
+                        <Form className="pt-5 p-0 m-0 mt-5">
                             <Row>
                                 <Col lg={2}></Col>
                                 <Col>

@@ -51,13 +51,13 @@ function MyOrders(props) {
         <ListGroup className="my-3 mx-5" horizontal>
           <ListGroup.Item
             variant="warning"
-            className="d-flex w-100 justify-content-center"
+            className="d-flex w-50 justify-content-center"
           >
             <b>id</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
-            className="d-flex w-100 justify-content-center"
+            className="d-flex w-50 justify-content-center"
           >
             <b>userID</b>
           </ListGroup.Item>
@@ -107,6 +107,8 @@ function MyOrders(props) {
         {orders && (
           <>
             {orders.map((c) => {
+              let j = JSON.parse(c.products)
+              let list = Object.keys(j).map((key)=>[key, j[key]])
               return (
                 <ListGroup
                   key={c.id}
@@ -116,13 +118,13 @@ function MyOrders(props) {
                 >
                   <ListGroup.Item
                     variant="primary"
-                    className="d-flex w-100 justify-content-center"
+                    className="d-flex w-50 justify-content-center"
                   >
                     {c.id}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"
-                    className="d-flex w-100 justify-content-center"
+                    className="d-flex w-50 justify-content-center"
                   >
                     {c.userID}
                   </ListGroup.Item>
@@ -130,7 +132,7 @@ function MyOrders(props) {
                     variant="primary"
                     className="d-flex w-100 justify-content-center"
                   >
-                    {c.products}
+                  <ul>{list.map((x)=>{return(<li>{x[0] + ":" + x[1]}</li>)})}</ul>
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"
@@ -152,19 +154,19 @@ function MyOrders(props) {
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"
-                    className="d-flex w-100 justify-content-center"
+                    className="d-flex w-50 justify-content-center"
                   >
                     {c.amount}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"
-                    className="d-flex w-100 justify-content-center"
+                    className="d-flex w-50 justify-content-center"
                   >
                     {c.conf}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"
-                    className="d-flex w-100 justify-content-center"
+                    className="d-flex w-50 justify-content-center"
                   >
                     {c.fulfilled === 0 ? (
                       <Button
