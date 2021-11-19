@@ -42,7 +42,7 @@ function MyForm() {
 
         console.log("Sending request...");
         resetForm();
-        API.addNewUser(name, surname, password, email).then((response) => {
+        API.addNewUser(name, surname, password, email, phoneNumber, city, address, country).then((response) => {
             if (response.error === undefined) {
                 setErrorMessageFields("User inserted");
             } else {

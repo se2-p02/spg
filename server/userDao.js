@@ -45,10 +45,10 @@ exports.getUser = (username, password) => {
   });
 };
 
-exports.addUser = (name, surname, password, email, role) => {
+exports.addUser = (name, surname, password, email, phoneNumber, city, address, country, role) => {
   return new Promise((resolve, reject) => {
     console.log("Password: "+password);
-    const sql = 'INSERT INTO users(id, name, surname, wallet, basket, hash, email, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO users(id, name, surname, wallet, basket, hash, email, phoneNumber, city, address, country, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     try {
       bcrypt.hash(password, 10, function(error, hash) {
         if(error) {
@@ -68,7 +68,7 @@ exports.addUser = (name, surname, password, email, role) => {
           }
           else 
             id = row[0].id+1;
-          db.run(sql, [id, name, surname, 0.0, null, hash, email, role], (err_insert, val) => {
+          db.run(sql, [id, name, surname, 0.0, null, hash, email, phoneNumber, city, address, country, role], (err_insert, val) => {
             if(err_insert){
               reject(err_insert);
             }

@@ -98,7 +98,7 @@ async function isLoggedIn() {
     }
 }
 
-async function addNewUser(name, surname, password, email) {
+async function addNewUser(name, surname, password, email, phoneNumber, city, address, country) {
     try {
         console.log("Preparing the request in the API file...");
         const response = await fetch(URL + "/api/addNewUser",
@@ -107,7 +107,7 @@ async function addNewUser(name, surname, password, email) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name: name, surname: surname, password: password, email: email }),
+                body: JSON.stringify({ name: name, surname: surname, password: password, email: email, phoneNumber: phoneNumber, city: city, address: address, country: country }),
             });
         if (response.ok) {
             return response.json(); // userId

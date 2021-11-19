@@ -262,7 +262,7 @@ app.post('/api/addNewUser', async (req, res) => {
   console.log('Request arrived to the server');
   const user_info = req.body;
   try {
-    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email, 'client');
+    const result = await userDao.addUser(user_info.name, user_info.surname, user_info.password, user_info.email, user_info.phoneNumber, user_info.city, user_info.address, user_info.country, 'client');
     if (result.err) {
       res.status(500).json(result);
     } else {
