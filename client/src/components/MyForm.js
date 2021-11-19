@@ -17,6 +17,11 @@ function MyForm() {
     const [errorMessageFields, setErrorMessageFields] = useState("");
     const [goBack, setGoBack] = useState(false);
     const [registered, setRegistered] = useState(false);
+    
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [city, setCity] = useState("");
+    const [address, setAddress] = useState("");
+    const [country, setCountry] = useState("");
 
     function resetForm() {
         setErrorMessageEmail(() => "");
@@ -48,7 +53,7 @@ function MyForm() {
     }
 
     function checkFields() {
-        if (name === "" || password === "" || repeat === "" || email === "" || surname === "") {
+        if (name === "" || password === "" || repeat === "" || email === "" || surname === "" || phoneNumber === "" || country === "" || city === "" || address === "") {
             setErrorMessageFields("Fill all the fields of the form")
             return false;
         }
@@ -135,6 +140,7 @@ function MyForm() {
                 )}
                 {registered === false && (
                     <>
+                        <br/>
                         <Form className="pt-5 p-0 m-0">
                             <Row>
                                 <Col lg={2}></Col>
@@ -244,6 +250,68 @@ function MyForm() {
                                 <Col lg={2}></Col>
                             </Row>
                         </Form>
+                        <Form className="pt-3 p-0 m-0">
+                            <Row>
+                                <Col lg={2}></Col>
+                                <Col>
+                                    <Form.Group controlId="number">
+                                        <Form.Label className="text-info"><h5>Phone Number</h5></Form.Label>
+                                        <Form.Control
+                                            type="tel"
+                                            className="w-100 p-3"
+                                            placeholder="Phone number"
+                                            required
+                                            onChange={(ev) => { setPhoneNumber(ev.target.value) }}
+                                            value={phoneNumber}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="country">
+                                        <Form.Label className="text-info"><h5>Country</h5></Form.Label>
+                                        <Form.Control
+                                            className="w-100 p-3"
+                                            placeholder="Country"
+                                            required
+                                            onChange={(ev) => { setCountry(ev.target.value) }}
+                                            value={country}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col lg={2}></Col>
+                            </Row>
+                        </Form>
+                        <Form className="pt-3 p-0 m-0">
+                            <Row>
+                                <Col lg={2}></Col>
+                                <Col>
+                                    <Form.Group controlId="city">
+                                        <Form.Label className="text-info"><h5>City</h5></Form.Label>
+                                        <Form.Control
+                                            className="w-100 p-3"
+                                            placeholder="City"
+                                            required
+                                            onChange={(ev) => { setCity(ev.target.value) }}
+                                            value={city}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="address">
+                                        <Form.Label className="text-info"><h5>Address</h5></Form.Label>
+                                        <Form.Control
+                                            className="w-100 p-3"
+                                            placeholder="Address"
+                                            required
+                                            onChange={(ev) => { setAddress(ev.target.value) }}
+                                            value={address}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col lg={2}></Col>
+                            </Row>
+                        </Form>
+                        
                         <Row className="m-0 mt-3">
                             <Col lg={2}></Col>
                             <Col>
@@ -260,7 +328,7 @@ function MyForm() {
                                             Back
                                         </Button>
                                     </Col>
-                                    <Col sm={2} className=""></Col>
+                                    <Col sm={2}></Col>
                                     <br />
                                     <Col sm={5} className="text-right m-0 p-0">
                                         <Button
@@ -284,7 +352,7 @@ function MyForm() {
                                     )}
                                 </Row>
                             </Col>
-                            <Col sm={2}></Col>
+                            <Col lg={2}></Col>
                         </Row>
                     </>)}
             </Container>
