@@ -13,6 +13,7 @@ const userDao = require('./userDao'); // module for accessing the users in the D
 const dao = require('./db'); // module for accessing the users in the DB
 const url = require('url');
 const dayjs = require('dayjs');
+const moment = require('moment');
 
 
 /*** Set up Passport ***/
@@ -165,9 +166,14 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
 // POST /api/orders/
 //new order
 app.post('/api/orders', async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if ((datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8))) {
+    res.status(500).end('New orders are not permitted in this timeslot.');
+    return;
+  }
 
   const order = req.body;
-
   try {
     if (order.test) {
       // just to test, after the call is set to -1
@@ -180,7 +186,7 @@ app.post('/api/orders', async (req, res) => {
       let flag = false;
       Object.entries(order.products).forEach(async (prod) => {
         const res_prod = await spgDao.orderPrep(prod);
-        if (!res_prod) flag = true;
+        if (res_prod.error) flag = true;
       })
       if (flag) return;
       order.id = await spgDao.getNextNumber();
@@ -244,6 +250,36 @@ app.put("/api/updateOrder/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;
+  }
+});
+
+// GET server clock
+app.get("/api/clock", async (req, res) => {
+  try {
+    const clock = await spgDao.getClock();
+    if (clock.error) {
+      res.status(404).json(clock);
+    } else {
+      res.json(clock);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+// PUT server clock
+app.put("/api/clock", async (req, res) => {
+  try {
+    const clock = await spgDao.setClock(req.body.serverTime);
+    if (clock.error) {
+      res.status(404).json(clock);
+    } else {
+      res.json(clock);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
   }
 });
 

@@ -128,5 +128,29 @@ async function loadNextProducts() {
     } else return { 'error': 'Failed to load the new products from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts };
+async function getClock() {
+    const response = await fetch(URL + "/api/clock");
+    if (response.ok) {
+        return response.json();
+    }
+    else return { 'error': 'Failed to load clock from server' };
+}
+
+async function setClock(clock) {
+    const response = await fetch(URL + "/api/clock",
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ serverTime: clock })
+        });
+    if (response.ok) {
+        return {}; 
+    } else {
+        return { 'error': 'Failed to store data on server' };
+    }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock };
 export default API;

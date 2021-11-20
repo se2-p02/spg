@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import API from "./API";
@@ -56,7 +56,7 @@ function MyForm() {
     }
 
     function checkNumber() {
-        if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
+        if (phoneNumber.length !== 10 || isNaN(phoneNumber)) {
             setErrorNumber("Insert a valid phone number"); 
             return false;
         }

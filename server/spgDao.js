@@ -1,6 +1,5 @@
 " use strict ";
 
-const dayjs = require('dayjs');
 const db = require('./db');
 
 // get all products
@@ -48,9 +47,6 @@ exports.getClientsSummary = () => {
     });
 };
 
-
-
-
 // get all clients
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
@@ -65,7 +61,6 @@ exports.getClients = () => {
         });
     });
 };
-
 
 // get specific client
 exports.getClient = (id) => {
@@ -95,9 +90,6 @@ exports.updateWallet = (id, amount) => {
         });
     });
 };
-
-
-
 
 //get next order number
 exports.getNextNumber = async () => {
@@ -172,6 +164,7 @@ exports.deleteTestOrder = () => {
         return;
     }
 };
+
 // get all orders
 exports.getOrders = (id) => {
     if (id) {
@@ -218,4 +211,30 @@ exports.updateOrderFulfilled = async (id) => {
     } catch (err) {
         return;
     }
+};
+
+exports.getClock = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT serverTime FROM clock';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({ serverTime: rows[0].serverTime });
+        });
+    });
+};
+
+exports.setClock = (clock) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE clock SET serverTime=?';
+        db.run(sql, [clock], (err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        });
+    });
 };
