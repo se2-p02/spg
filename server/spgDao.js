@@ -18,6 +18,19 @@ exports.getProducts = () => {
     });
 }
 
+exports.getNextProducts = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price }));
+            resolve(products);
+        });
+    });
+}
 
 // get all counters for a counter
 exports.getClientsSummary = () => {

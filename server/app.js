@@ -95,6 +95,22 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+// GET nextProducts
+app.get('/api/nextProducts', async (req, res) => {
+  try {
+    const products = await spgDao.getNextProducts();
+    if (products.error) {
+      res.status(404).json(products);
+    }
+    else {
+      res.json(products);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
 // GET clients
 app.get('/api/clients', async (req, res) => {
   try {

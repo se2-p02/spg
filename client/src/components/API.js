@@ -120,5 +120,13 @@ async function addNewUser(name, surname, password, email, phoneNumber, city, add
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser };
+async function loadNextProducts() {
+    let myURL = URL + "/api/nextProducts";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json();
+    } else return { 'error': 'Failed to load the new products from server' }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts };
 export default API;

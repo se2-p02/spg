@@ -9,6 +9,7 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
 import MyOrders from "./MyOrders";
+import MyNewProducts from "./MyNewProducts";
 
 
 function MyContainer(props) {
@@ -130,7 +131,6 @@ function MyContainer(props) {
                         </>
                     }
                 />
-                {/* just for testing */}
                 <Route
                     path="/employee/form"
                     element={
@@ -138,6 +138,17 @@ function MyContainer(props) {
                             <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
 
                             <MyForm/>
+                        </>
+                    }
+                />
+                {/* just for testing */}
+                <Route
+                    path="/newProducts"
+                    element={
+                        <>
+                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+
+                            <MyNewProducts/>
                         </>
                     }
                 />
