@@ -26,6 +26,7 @@ function MyClock(props) {
         format='yyyy-MM-dd HH:mm'
         required={true}
         clearIcon={null}
+        locale='en-us'
       />
     </Button>{' '}
     <div style={{display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden'}}>
