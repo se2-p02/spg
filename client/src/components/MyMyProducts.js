@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, ListGroup, Container } from "react-bootstrap";
+import { PencilSquare } from "react-bootstrap-icons";
 import { Link, Navigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal'
 import './MyNavBar.css';
 import API from "./API";
 
 
-function MyNewProducts(props) {
+function MyMyProducts(props) {
     const [goBack, setGoBack] = useState(false);
     const [products, setProducts] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
-    const [quantity, setQuantity] = useState(0);
+    const [id, setId] = useState();
+    const [show, setShow] = useState(false);
+
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         if (reqUpdate || props.cart) {
@@ -28,29 +33,15 @@ function MyNewProducts(props) {
                 console.log(err)
             });
         }
-    }, [reqUpdate, props.cart]);
+    }, [reqUpdate, props.cart, props.user]);
 
     if (goBack) {
-        return (<Navigate to={"/"+ props.user.role}></Navigate>)
+        return (<Navigate to={"/" + props.user.role}></Navigate>)
     }
 
-    const handleAddToCart = (id, q) => {
-        let items = [...products];
-        let cartItems = [...props.cart];
-        if (products.find((prod) => prod.id === id).quantity < q || q <= 0) return;
-        let tempProduct = items.find((prod) => prod.id === id);
-        let tempProductCart = cartItems.find((prod) => prod.id === id);
-        if (tempProductCart) {
-            tempProductCart.quantity = props.cart.find((prod) => prod.id === id).quantity + q;
-            props.setCart((old) => old.filter((prod) => prod !== props.cart.find((product) => product.id === id)));
-            props.setCart((old) => [...old, tempProductCart].sort((a, b) => a.id - b.id));
-        }
-        else {
-            props.setCart((c) => [...c, { ...tempProduct, quantity: q }]);
-        }
-        tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
-        setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
-        if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
+    const handleModify = (id) => {
+        setId(id);
+        handleShow();
     }
 
 
@@ -65,7 +56,7 @@ function MyNewProducts(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Quantity</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Farmer</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Price</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Add</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Modify</b></ListGroup.Item>
                 </ListGroup>
                 {products &&
                     <>
@@ -79,14 +70,7 @@ function MyNewProducts(props) {
                                         <ListGroup.Item as={Link} to={"/employee/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 justify-content-center">{p.farmerName}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            <Form.Control
-                                                className="w-100 mx-1"
-                                                placeholder={0}
-                                                required
-                                                type="number"
-                                                onChange={(ev) => { setQuantity(ev.target.value) }}
-                                            />
-                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity))}>+</Button>
+                                            <Button variant="warning" onClick={() => handleModify(p.id)}><PencilSquare /></Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 );
@@ -96,10 +80,39 @@ function MyNewProducts(props) {
                     </>
                 }
                 <Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                <MyModal show={show} products={products} setShow={setShow} id={id}/>
             </Container>
 
         </>
     );
 }
 
-export default MyNewProducts;
+function MyModal(props) {
+
+    const handleClose = () => props.setShow(false);
+
+    return (
+        <Modal
+            {...props}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>Modify product {props.products.find((prod) => prod.id === props.id) && props.products.find((prod) => prod.id === props.id).name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                I will not close if you click outside me. Don't even try to press
+                escape key.
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary">Understood</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+export default MyMyProducts;

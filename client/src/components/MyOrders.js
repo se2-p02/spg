@@ -46,7 +46,7 @@ function MyOrders(props) {
   }, [reqUpdate, props.id]);
 
   if (goBack) {
-    return <Navigate to="/employee"></Navigate>;
+    return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
   return (

@@ -22,7 +22,7 @@ function MyNavBar(props) {
     const handleLogout = () => {
         API.logout().then((response) => {
             if (response.error === undefined) {
-                props.setUser({});
+                props.setUser(undefined);
                 navigate("/login");
             }
         });
@@ -51,7 +51,9 @@ function MyNavBar(props) {
                 </Row>
             </Navbar.Brand>
             <MyClock clock={clock} updateClock={updateClock} setClock={setClock} />
-            {console.log(props.showCart)}
+            {
+                //console.log(props.showCart)
+            }
             {
                 props.showCart ? <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
                     <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">

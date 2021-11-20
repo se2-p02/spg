@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { propTypes } from "react-bootstrap/esm/Image";
 import { Navigate } from 'react-router-dom';
 import API from "./API";
 import './MyNavBar.css';
 
 
-function MyForm() {
+function MyForm(props) {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ function MyForm() {
     }
 
     if (goBack) {
-        return (<Navigate to="/employee/"></Navigate>)
+        return (<Navigate to={"/"+ props.user.name}></Navigate>)
     }
 
     function handleSubmit(ev) {

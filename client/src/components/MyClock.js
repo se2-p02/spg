@@ -17,23 +17,24 @@ function MyClock(props) {
       }
     });
   }, []);
-  
-  return (<div>
-    <Button variant="primary" className="clockButton">
-      <DateTimePicker
-        onChange={setValue}
-        value={value}
-        format='yyyy-MM-dd HH:mm'
-        required={true}
-        clearIcon={null}
-        locale='en-us'
-      />
-    </Button>{' '}
-    <div style={{display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden'}}>
-      <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
-      <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>
-    </div>
-  </div>);
+
+  return (
+    <div>
+      <Button variant="primary" className="clockButton">
+        <DateTimePicker
+          onChange={setValue}
+          value={value}
+          format='yyyy-MM-dd HH:mm'
+          required={true}
+          clearIcon={null}
+          locale='en-us'
+        />
+      </Button>{' '}
+      <div style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
+        <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
+        <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>
+      </div>
+    </div>);
 }
 
 export default MyClock;

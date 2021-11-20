@@ -33,7 +33,7 @@ function MySingleClient(props) {
     }, [reqUpdate, id]);
 
     if (goBack) {
-        return (<Navigate to="/employee/clients"></Navigate>)
+        return (<Navigate to={"/"+props.user.role+"/clients"}></Navigate>)
     }
 
 

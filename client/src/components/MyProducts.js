@@ -31,7 +31,7 @@ function MyProducts(props) {
     }, [reqUpdate, props.cart]);
 
     if (goBack) {
-        return (<Navigate to="/employee"></Navigate>)
+        return (<Navigate to={"/"+props.user.role}></Navigate>)
     }
 
     const handleAddToCart = (id, q) => {

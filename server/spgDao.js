@@ -17,10 +17,19 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = () => {
+exports.getNextProducts = (user) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
-        db.all(sql, (err, rows) => {
+        let sql;
+        if (user.role === "farmer") {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId FROM products p LEFT JOIN farmer f ON f.id = p.farmer LEFT JOIN users u ON u.farmerId = f.id WHERE u.id = ?';
+            
+        }
+        else {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
+            
+        }
+
+        db.all(sql, [user.id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;

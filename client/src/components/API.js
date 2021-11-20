@@ -120,8 +120,8 @@ async function addNewUser(name, surname, password, email, phoneNumber, city, add
     }
 }
 
-async function loadNextProducts() {
-    let myURL = URL + "/api/nextProducts";
+async function loadNextProducts(role) {
+    let myURL = URL + "/api/nextProducts"
     const response = await fetch(myURL);
     if (response.ok) {
         return response.json();
