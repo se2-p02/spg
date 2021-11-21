@@ -91,14 +91,14 @@ describe('Orders test', () => {
 
 describe('Users test', () => {
   it('tests POST /api/addNewUser', async () => {
-    const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it" }).expect(200);
+    const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it", phoneNumber: "3333333333", city: "Torino", address: "Via X, 5", country: "Italy" }).expect(200);
     console.log(response.body.id)
-    const response2 = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it" }).expect(500);
+    const response2 = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it", phoneNumber: "3333333333", city: "Torino", address: "Via X, 5", country: "Italy" }).expect(500);
     const deleteRes = await request(app).delete("/api/deleteUser").send({ email: "test_email@email.it" }).expect(200);
   });
 
   it('tests error POST /api/addNewUser', async () => {
-    const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", email: "test_email@email.it" }).expect(500);
+    const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", email: "test_email@email.it", phoneNumber: "3333333333", city: "Torino", address: "Via X, 5", country: "Italy" }).expect(500);
   });
 });
 
