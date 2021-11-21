@@ -260,6 +260,28 @@ app.put("/api/updateOrder/:id", async (req, res) => {
   }
 });
 
+//update product confirm
+app.put("/api/updateProduct/:id", async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (!((datetime.day() === 6 && datetime.hour() >= 8) || datetime.day() === 0 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19)))) {
+    res.status(500).end('Confirming a product is not permitted in this timeslot.');
+    return;
+  }
+  
+  const id = req.params.id;
+  try {
+    if (req.body.fulfilled) {
+      const result = await spgDao.updateOrderFulfilled(id);
+      if (result.err) res.status(404).json(result);
+      else res.json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
 // GET server clock
 app.get("/api/clock", async (req, res) => {
   try {

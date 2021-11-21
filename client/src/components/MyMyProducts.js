@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Container } from "react-bootstrap";
-import { PencilSquare } from "react-bootstrap-icons";
+import { PencilSquare, CheckSquare } from "react-bootstrap-icons";
 import { Link, Navigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import './MyNavBar.css';
@@ -44,6 +44,11 @@ function MyMyProducts(props) {
         handleShow();
     }
 
+    const handleConfirm = (id) => {
+        setId(id);
+        handleShow();
+    }
+
 
     return (
         <>
@@ -57,6 +62,7 @@ function MyMyProducts(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Farmer</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Price</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Modify</b></ListGroup.Item>
+                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Confirm</b></ListGroup.Item>
                 </ListGroup>
                 {products &&
                     <>
@@ -71,6 +77,9 @@ function MyMyProducts(props) {
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
                                             <Button variant="warning" onClick={() => handleModify(p.id)}><PencilSquare /></Button>
+                                        </ListGroup.Item>
+                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
+                                            <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 );

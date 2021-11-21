@@ -63,6 +63,21 @@ async function updateOrder(id) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function updateProduct(id) {
+    const response = await fetch(URL + `/api/updateProduct/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ confirm: true }),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function login(user) {
     const response = await fetch(URL + "/api/sessions/",
         {
