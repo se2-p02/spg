@@ -54,7 +54,7 @@ function MyLogin(props) {
                             // comment props.setUser(() => res);
                             // comment props.setLoggedIn(() => true);
                             // comment props.setFirstLogin(() => true);
-                            props.setUser({ username: username, role: res.role });
+                            props.setUser({ username: username, role: res.role, id: res.id });
                             navigate("/" + res.role);
                         }
                     });
@@ -85,9 +85,10 @@ function MyLogin(props) {
         return (<Navigate to="/"></Navigate>)
     }
 
+
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center m-0 p-0 below-nav" style={{ display: 'flex' }} fluid>
+            <Container className="bg-dark min-height-100 justify-content-center m-0 p-0 below-nav pt-5" style={{ display: 'flex' }} fluid>
 
                 <Row className="w-100 mt-5 vheight-100 m-0 p-0">
                     <Col sm={3}></Col>
@@ -107,7 +108,7 @@ function MyLogin(props) {
                                         onChange={(ev) => { setUsername(ev.target.value); checkValid(ev.target.value, password) }}
                                         value={username}
                                     />
-                                    <Form.Control.Feedback type="invalid" id="erroru">
+                                    <Form.Control.Feedback type="invalid" id="error">
                                         {errorMessageUsername}
                                     </Form.Control.Feedback>
                                     <Form.Text className="text-muted"></Form.Text>

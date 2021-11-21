@@ -12,6 +12,8 @@ import MyOrders from "./MyOrders";
 import MyNewProducts from "./MyNewProducts";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
+import MyClientPage from "./MyClientPage";
+import MyClientProfile from './MyClientProfile'
 
 
 function MyContainer(props) {
@@ -31,7 +33,7 @@ function MyContainer(props) {
     useEffect(() => {
         API.isLoggedIn().then((response) => {
             if (response.error === undefined && response.role !== undefined) {
-                setUser({username: response.username, role: response.role});
+                setUser({username: response.username, role: response.role, id : response.id});
             }
             else {
                 setUser(() => undefined);
@@ -57,7 +59,18 @@ function MyContainer(props) {
                     path="/client"
                     element={
                         <>
+                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                        <MyClientPage/>
 
+                        </>
+                    }
+                />
+                <Route
+                    path="/client/profile"
+                    element={
+                        <>
+                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                        <MyClientProfile user={user} id={user?user.id:undefined}/>
                         </>
                     }
                 />
@@ -92,6 +105,7 @@ function MyContainer(props) {
                     path="/login"
                     element={
                         <>
+                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
                             <MyLogin user={user} setUser={setUser} />
                         </>
                     }
@@ -141,13 +155,22 @@ function MyContainer(props) {
                         </>
                     }
                 />
+                <Route
+                    path="/client/products"
+                    element={
+                        <>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
+                        </>
+                    }
+                />
 
                 <Route
                     path="/employee/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyProducts cart={cart} setCart={setCart} showCart={true}></MyProducts>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
                         </>
                     }
                 />
@@ -163,18 +186,18 @@ function MyContainer(props) {
                     path="/employee/form"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
-
+                            <MyNavBar cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
                             <MyForm user={user}/>
                         </>
                     }
                 />
+                
                 {/* just for testing */}
                 <Route
                     path="/newProducts"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
 
                             <MyNewProducts user={user}/>
                         </>
