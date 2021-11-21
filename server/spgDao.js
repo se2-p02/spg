@@ -17,20 +17,31 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = () => {
+exports.getNextProducts = (user) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?'; 
-
+        let sql;
+        let params = [];
         const today = dayjs().day() // from 0 (Sunday) to 6 (Saturday)
         let difference_from_sunday = 0;
         if (today != 0) {
             difference_from_sunday = 7 - today;
         }
-        const next_week = dayjs().add(today, 'day').toDate();
+        const next_week = dayjs().add(today, 'day').toDate(); 
         
-        console.log(next_week)
+        console.log(next_week);
+        params.push(next_week);
 
-        db.all(sql, [next_week], (err, rows) => {
+        if (user.role === "farmer") {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer LEFT JOIN users u ON u.farmerId = f.id WHERE p.availability > ? AND u.id = ?';
+            params.push(user.id);
+        }
+        else {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?';
+
+        }
+
+        
+        db.all(sql, params, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
