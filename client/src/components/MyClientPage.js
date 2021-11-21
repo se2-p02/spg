@@ -4,27 +4,25 @@ import { Navigate } from 'react-router-dom';
 import './MyNavBar.css';
 
 
-function MyEmployee(props) {
+function MyClientPage(props) {
     const [goBack, setGoBack] = useState(false);
 
-    if (goBack === "clients") {
-        return (<Navigate to="/employee/clients"></Navigate>)
+    if (goBack === "profile") {
+        return (<Navigate to="/client/profile"></Navigate>)
     }
     else if (goBack === "products") {
-        return (<Navigate to="/employee/products"></Navigate>)
+        return (<Navigate to="/client/products"></Navigate>)
     }
     else if (goBack === "orders") {
-        return (<Navigate to="/employee/orders"></Navigate>)
+        return (<Navigate to="/client/orders"></Navigate>)
     }
 
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
-
-
                 <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("clients") }}><h3>Clients</h3></Button>
+                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("profile") }}><h3>Profile</h3></Button>
                     </Col>
                 </Row>
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5">
@@ -34,7 +32,7 @@ function MyEmployee(props) {
                 </Row>
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("orders") }}><h3>Orders</h3></Button>
+                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("orders") }}><h3>My Orders</h3></Button>
                     </Col>
                 </Row>
             </Container>
@@ -42,4 +40,4 @@ function MyEmployee(props) {
     );
 }
 
-export default MyEmployee;
+export default MyClientPage;

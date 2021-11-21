@@ -4,17 +4,14 @@ import { Navigate } from 'react-router-dom';
 import './MyNavBar.css';
 
 
-function MyEmployee(props) {
+function MyFarmer(props) {
     const [goBack, setGoBack] = useState(false);
 
-    if (goBack === "clients") {
-        return (<Navigate to="/employee/clients"></Navigate>)
+    if (goBack === "products") {
+        return (<Navigate to="/farmer/products"></Navigate>)
     }
-    else if (goBack === "products") {
-        return (<Navigate to="/employee/products"></Navigate>)
-    }
-    else if (goBack === "orders") {
-        return (<Navigate to="/employee/orders"></Navigate>)
+    else if (goBack === "myProducts") {
+        return (<Navigate to="/farmer/myProducts"></Navigate>)
     }
 
     return (
@@ -24,17 +21,12 @@ function MyEmployee(props) {
 
                 <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("clients") }}><h3>Clients</h3></Button>
-                    </Col>
-                </Row>
-                <Row className="justify-content-center m-0 p-0 w-100 mb-5">
-                    <Col className=" m-0 p-0" sm={6}>
                         <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("products") }}><h3>Products</h3></Button>
                     </Col>
                 </Row>
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("orders") }}><h3>Orders</h3></Button>
+                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("myProducts") }}><h3>My products</h3></Button>
                     </Col>
                 </Row>
             </Container>
@@ -42,4 +34,4 @@ function MyEmployee(props) {
     );
 }
 
-export default MyEmployee;
+export default MyFarmer;

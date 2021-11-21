@@ -13,6 +13,7 @@ const userDao = require('./userDao'); // module for accessing the users in the D
 const dao = require('./db'); // module for accessing the users in the DB
 const url = require('url');
 const dayjs = require('dayjs');
+const moment = require('moment');
 
 
 /*** Set up Passport ***/
@@ -95,6 +96,22 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+// GET nextProducts
+app.get('/api/nextProducts', async (req, res) => {
+  try {
+    const products = await spgDao.getNextProducts(req.user);
+    if (products.error) {
+      res.status(404).json(products);
+    }
+    else {
+      res.json(products);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
 // GET clients
 app.get('/api/clients', async (req, res) => {
   try {
@@ -149,9 +166,14 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
 // POST /api/orders/
 //new order
 app.post('/api/orders', async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if ((datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8))) {
+    res.status(500).end('New orders are not permitted in this timeslot.');
+    return;
+  }
 
   const order = req.body;
-
   try {
     if (order.test) {
       // just to test, after the call is set to -1
@@ -164,7 +186,7 @@ app.post('/api/orders', async (req, res) => {
       let flag = false;
       Object.entries(order.products).forEach(async (prod) => {
         const res_prod = await spgDao.orderPrep(prod);
-        if (!res_prod) flag = true;
+        if (res_prod.error) flag = true;
       })
       if (flag) return;
       order.id = await spgDao.getNextNumber();
@@ -218,6 +240,13 @@ app.get("/api/orders/:id", async (req, res) => {
 
 //update order
 app.put("/api/updateOrder/:id", async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (!((datetime.day() === 3 && datetime.hour() >= 8) || datetime.day() === 4 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19)))) {
+    res.status(500).end('Handing out is not permitted in this timeslot.');
+    return;
+  }
+  
   const id = req.params.id;
   try {
     if (req.body.fulfilled) {
@@ -228,6 +257,58 @@ app.put("/api/updateOrder/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;
+  }
+});
+
+//update product confirm
+app.put("/api/updateProduct/:id", async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (!((datetime.day() === 6 && datetime.hour() >= 8) || datetime.day() === 0 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19)))) {
+    res.status(500).end('Confirming a product is not permitted in this timeslot.');
+    return;
+  }
+  
+  const id = req.params.id;
+  try {
+    if (req.body.fulfilled) {
+      const result = await spgDao.updateOrderFulfilled(id);
+      if (result.err) res.status(404).json(result);
+      else res.json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
+// GET server clock
+app.get("/api/clock", async (req, res) => {
+  try {
+    const clock = await spgDao.getClock();
+    if (clock.error) {
+      res.status(404).json(clock);
+    } else {
+      res.json(clock);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+// PUT server clock
+app.put("/api/clock", async (req, res) => {
+  try {
+    const clock = await spgDao.setClock(req.body.serverTime);
+    if (clock.error) {
+      res.status(404).json(clock);
+    } else {
+      res.json(clock);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
   }
 });
 

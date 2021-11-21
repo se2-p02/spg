@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import API from "./API";
 import './MyNavBar.css';
 
 
-function MyForm() {
+function MyForm(props) {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -30,7 +30,10 @@ function MyForm() {
     }
 
     if (goBack) {
-        return (<Navigate to="/employee/"></Navigate>)
+        if (props.user === undefined){
+            return (<Navigate to={"/login"}></Navigate>)
+        }
+        return (<Navigate to={"/"+ props.user.name}></Navigate>)
     }
 
     function handleSubmit(ev) {
@@ -56,7 +59,7 @@ function MyForm() {
     }
 
     function checkNumber() {
-        if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
+        if (phoneNumber.length !== 10 || isNaN(phoneNumber)) {
             setErrorNumber("Insert a valid phone number"); 
             return false;
         }
@@ -116,7 +119,7 @@ function MyForm() {
 
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0" fluid>
+            <Container className="bg-dark min-height-100 justify-content-center p-3 m-0 pb-5" fluid>
                 {registered === true && (
                     <>
                         <h1 className="text-info text-center mt-5 pt-5">User Registered Successfully!</h1>

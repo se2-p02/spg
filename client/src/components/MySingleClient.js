@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Modal, Form, FormControl, Container, Image, Badge } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import { useParams } from "react-router";
@@ -33,7 +33,7 @@ function MySingleClient(props) {
     }, [reqUpdate, id]);
 
     if (goBack) {
-        return (<Navigate to="/employee/clients"></Navigate>)
+        return (<Navigate to={"/"+props.user.role+"/clients"}></Navigate>)
     }
 
 

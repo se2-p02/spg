@@ -1,25 +1,32 @@
-import { useState, useEffect } from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, ListGroup, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
+import moment from "moment";
 
 function MyOrders(props) {
   const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
+  const [handouts, setHandouts] = useState(true);
 
-  const updateHandler = (id) => {
-    API.updateOrder(id)
-      .then((c) => {
-        if (c.error === undefined) {
-          setReqUpdate(true);
-        } else {
-          console.log(c.error)
-        }
-      })
-      .catch((err) => { console.log(err) });
+  const updateHandler = async (id) => {
+    const response = await API.getClock();
+    const datetime = moment(response.serverTime);
+    const permitted = (datetime.day() === 3 && datetime.hour() >= 8) || datetime.day() === 4 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19));
+    setHandouts(() => permitted);
+    if (permitted)
+      API.updateOrder(id)
+        .then((c) => {
+          if (c.error === undefined) {
+            setReqUpdate(true);
+          } else {
+            console.log(c.error)
+          }
+        })
+        .catch((err) => { console.log(err) });
   };
 
   useEffect(() => {
@@ -34,12 +41,12 @@ function MyOrders(props) {
             console.log(c.error)
           }
         })
-        .catch((err) => { console.log(err)});
+        .catch((err) => { console.log(err) });
     }
   }, [reqUpdate, props.id]);
 
   if (goBack) {
-    return <Navigate to="/employee"></Navigate>;
+    return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
   return (
@@ -48,6 +55,7 @@ function MyOrders(props) {
         className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
         fluid
       >
+        {!handouts && <Alert variant="danger">You can hand out products from Wednesday 8:00 to Friday 19:00.</Alert>}
         <ListGroup className="my-3 mx-5" horizontal>
           <ListGroup.Item
             variant="warning"
@@ -108,7 +116,7 @@ function MyOrders(props) {
           <>
             {orders.map((c) => {
               let j = JSON.parse(c.products)
-              let list = Object.keys(j).map((key)=>[key, j[key]])
+              let list = Object.keys(j).map((key) => [key, j[key]])
               return (
                 <ListGroup
                   key={c.id}
@@ -132,7 +140,7 @@ function MyOrders(props) {
                     variant="primary"
                     className="d-flex w-100 justify-content-center"
                   >
-                  <ul>{list.map((x)=>{return(<li>{x[0] + ":" + x[1]}</li>)})}</ul>
+                    <ul>{list.map((x) => { return (<li>{x[0] + ":" + x[1]}</li>) })}</ul>
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant="primary"

@@ -28,7 +28,7 @@
   
 ## Database Tables
 
-- Table `users` - contains **id name username email wallet basket hash**
+- Table `users` - contains **id name username email wallet basket hash email phoneNumber city address country role farmedId**
 - Table `products` - contains **id name quantity unit farmer confirmed delivered price**
 - Table `orders` - contains **id userID products address date time amount confPreparation**
 - Table `farmers` - contains **id name confirmed**
@@ -216,7 +216,12 @@
     "name": "Mario",
     "surname": "Rossi",
     "password": "password",
-    "email": "mariorossi@gmail.com"
+    "email": "mariorossi@gmail.com",
+    "phoneNumber": "3333333333", 
+    "city": "Torino", 
+    "address": "Via X, 5", 
+    "country": "Italy",
+    "role": "customer"
   }
   ```
   - Response: `200 OK` (success) or `500 Internal server error`.

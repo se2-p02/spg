@@ -63,6 +63,21 @@ async function updateOrder(id) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function updateProduct(id) {
+    const response = await fetch(URL + `/api/updateProduct/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ confirm: true }),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function login(user) {
     const response = await fetch(URL + "/api/sessions/",
         {
@@ -120,5 +135,37 @@ async function addNewUser(name, surname, password, email, phoneNumber, city, add
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser };
+async function loadNextProducts(role) {
+    let myURL = URL + "/api/nextProducts"
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json();
+    } else return { 'error': 'Failed to load the new products from server' }
+}
+
+async function getClock() {
+    const response = await fetch(URL + "/api/clock");
+    if (response.ok) {
+        return response.json();
+    }
+    else return { 'error': 'Failed to load clock from server' };
+}
+
+async function setClock(clock) {
+    const response = await fetch(URL + "/api/clock",
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ serverTime: clock })
+        });
+    if (response.ok) {
+        return {}; 
+    } else {
+        return { 'error': 'Failed to store data on server' };
+    }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock };
 export default API;

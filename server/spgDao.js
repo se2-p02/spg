@@ -1,6 +1,5 @@
 " use strict ";
-
-const dayjs = require('dayjs');
+var dayjs = require('dayjs')
 const db = require('./db');
 
 // get all products
@@ -18,6 +17,40 @@ exports.getProducts = () => {
     });
 }
 
+exports.getNextProducts = (user) => {
+    return new Promise((resolve, reject) => {
+        let sql;
+        let params = [];
+        const today = dayjs().day() // from 0 (Sunday) to 6 (Saturday)
+        let difference_from_sunday = 0;
+        if (today != 0) {
+            difference_from_sunday = 7 - today;
+        }
+        const next_week = dayjs().add(today, 'day').toDate(); 
+        
+        console.log(next_week);
+        params.push(next_week);
+
+        if (user.role === "farmer") {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability > ? AND f.id = ?';
+            params.push(user.id);
+        }
+        else {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?';
+
+        }
+
+        
+        db.all(sql, params, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price, availability: p.availability }));
+            resolve(products);
+        });
+    });
+}
 
 // get all counters for a counter
 exports.getClientsSummary = () => {
@@ -35,9 +68,6 @@ exports.getClientsSummary = () => {
     });
 };
 
-
-
-
 // get all clients
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
@@ -52,7 +82,6 @@ exports.getClients = () => {
         });
     });
 };
-
 
 // get specific client
 exports.getClient = (id) => {
@@ -82,9 +111,6 @@ exports.updateWallet = (id, amount) => {
         });
     });
 };
-
-
-
 
 //get next order number
 exports.getNextNumber = async () => {
@@ -159,6 +185,7 @@ exports.deleteTestOrder = () => {
         return;
     }
 };
+
 // get all orders
 exports.getOrders = (id) => {
     if (id) {
@@ -205,4 +232,30 @@ exports.updateOrderFulfilled = async (id) => {
     } catch (err) {
         return;
     }
+};
+
+exports.getClock = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT serverTime FROM clock';
+        db.all(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({ serverTime: rows[0].serverTime });
+        });
+    });
+};
+
+exports.setClock = (clock) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE clock SET serverTime=?';
+        db.run(sql, [clock], (err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        });
+    });
 };

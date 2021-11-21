@@ -9,3 +9,10 @@
 .below-nav{
     padding-top: 5rem;
   }
+
+.ordersClosed {
+    color: red;
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
+}
