@@ -159,7 +159,7 @@ function MyContainer(props) {
                     path="/client/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
                             <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
                         </>
                     }
@@ -169,7 +169,7 @@ function MyContainer(props) {
                     path="/employee/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
                             <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
                         </>
                     }
@@ -186,7 +186,7 @@ function MyContainer(props) {
                     path="/employee/form"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
                             <MyForm user={user}/>
                         </>
                     }
@@ -197,7 +197,7 @@ function MyContainer(props) {
                     path="/newProducts"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart}></MyNavBar>
+                            <MyNavBar cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
 
                             <MyNewProducts user={user}/>
                         </>
