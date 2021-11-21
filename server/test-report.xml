@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="167"/>
-    <testCase name="tests GET /api/clients" duration="54"/>
-    <testCase name="tests GET /api/clients/:id" duration="33"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="196"/>
-    <testCase name="tests GET /api/orders" duration="68">
+    <testCase name="tests GET /api/products" duration="124"/>
+    <testCase name="tests GET /api/clients" duration="37"/>
+    <testCase name="tests GET /api/clients/:id" duration="26"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="130"/>
+    <testCase name="tests GET /api/orders" duration="38">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders 1`
@@ -217,7 +217,7 @@ Snapshot name: `tests GET /api/orders 7`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests GET /api/orders/:id" duration="42">
+    <testCase name="tests GET /api/orders/:id" duration="22">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders/:id 1`
@@ -249,10 +249,10 @@ Snapshot name: `tests GET /api/orders/:id 1`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:71:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests POST /api/orders" duration="93"/>
-    <testCase name="tests POST /api/addNewUser" duration="506"/>
-    <testCase name="tests error POST /api/addNewUser" duration="23"/>
-    <testCase name="tests delete /api/sessions/current" duration="12"/>
+    <testCase name="tests POST /api/orders" duration="64"/>
+    <testCase name="tests POST /api/addNewUser" duration="455"/>
+    <testCase name="tests error POST /api/addNewUser" duration="22"/>
+    <testCase name="tests delete /api/sessions/current" duration="13"/>
     <testCase name="tests get /api/sessions/current" duration="12"/>
   </file>
 </testExecutions>
