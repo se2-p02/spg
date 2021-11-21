@@ -32,7 +32,7 @@ exports.getNextProducts = (user) => {
         params.push(next_week);
 
         if (user.role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer LEFT JOIN users u ON u.farmerId = f.id WHERE p.availability > ? AND u.id = ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability > ? AND f.id = ?';
             params.push(user.id);
         }
         else {
