@@ -1,5 +1,5 @@
 " use strict ";
-
+var dayjs = require('dayjs')
 const db = require('./db');
 
 // get all products
@@ -17,24 +17,25 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = (user) => {
+exports.getNextProducts = () => {
     return new Promise((resolve, reject) => {
-        let sql;
-        if (user.role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId FROM products p LEFT JOIN farmer f ON f.id = p.farmer LEFT JOIN users u ON u.farmerId = f.id WHERE u.id = ?';
-            
-        }
-        else {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
-            
-        }
+        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?'; 
 
-        db.all(sql, [user.id], (err, rows) => {
+        const today = dayjs().day() // from 0 (Sunday) to 6 (Saturday)
+        let difference_from_sunday = 0;
+        if (today != 0) {
+            difference_from_sunday = 7 - today;
+        }
+        const next_week = dayjs().add(today, 'day').toDate();
+        
+        console.log(next_week)
+
+        db.all(sql, [next_week], (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price }));
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price, availability: p.availability }));
             resolve(products);
         });
     });
