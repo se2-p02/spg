@@ -63,6 +63,21 @@ async function updateOrder(id) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function updateBasket(id,items) {
+    const response = await fetch(URL + `/api/clients/basket/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(items),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function updateProduct(id) {
     const response = await fetch(URL + `/api/updateProduct/${id}`,
         {
@@ -167,5 +182,5 @@ async function setClock(clock) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock };
+const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket };
 export default API;

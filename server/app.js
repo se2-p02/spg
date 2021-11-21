@@ -162,6 +162,23 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
   //return;
 });
 
+//PUT update basket client
+app.put('/api/clients/basket/:id', async (req, res) => {
+
+  const items =JSON.stringify(req.body);
+  try {
+    await spgDao.updateBasket(items,2)
+    res.status(200).end();
+  }
+  catch {
+    res.status(500).json({ error: "cannot update basket" });
+  }
+
+
+  //return;
+});
+
+
 
 // POST /api/orders/
 //new order

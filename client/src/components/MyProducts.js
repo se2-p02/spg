@@ -34,7 +34,8 @@ function MyProducts(props) {
         return (<Navigate to={"/"+props.user.role}></Navigate>)
     }
 
-    const handleAddToCart = (id, q) => {
+    const handleAddToCart = (id, q,name,unit,price) => {
+        console.log(id,q,price,unit,name)
         let items = [...products];
         let cartItems = [...props.cart];
         if (products.find((prod) => prod.id === id).quantity < q || q <= 0) return;
@@ -51,6 +52,7 @@ function MyProducts(props) {
         tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
         setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
         if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
+        props.updateCart({"name":name, "id":id,"quantity":q, "unit":unit, "unitPrice":price})
     }
 
 
@@ -86,7 +88,7 @@ function MyProducts(props) {
                                                 type="number"
                                                 onChange={(ev) => { setQuantity(ev.target.value) }}
                                             />
-                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity))}>+</Button>
+                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity),p.name,p.unit,p.price)}>+</Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 );

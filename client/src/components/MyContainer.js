@@ -21,29 +21,64 @@ function MyContainer(props) {
 
   //some comments
 
-  useEffect(() => {
-    API.isLoggedIn()
-      .then((response) => {
-        if (response.error === undefined) {
+  // useEffect(() => {
+  //   API.isLoggedIn()
+  //     .then((response) => {
+  //       if (response.error === undefined) {
             
-          setUser(() => response);
-        } else {
-          setUser(() => undefined);
+  //         setUser(() => response);
+  //       } else {
+  //         setUser(() => undefined);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+  useEffect(() => {
+    API.isLoggedIn().then((response) => {
+        if (response.error === undefined && response.role !== undefined) {
+            setUser({username: response.username, role: response.role, id : response.id});
+        }
+        else {
+            setUser(() => undefined);
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+}, []);
+
+const updateCart = (item)=>{
+  //whenever working with states which keep arrays
+  const oldCart = [...cart]
+  oldCart.push(item)
+  setCart([...oldCart]);
+  
+  API.updateBasket(2,cart)
+      .then((c) => {
+        // console.log(user.id)
+        if (c.error === undefined) {
+          
+          console.log("SUCCESSFUL");
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+}
 
+  
+
+//getting the items from the user table and fill the state(cart)
   useEffect(() => {
-    API.loadClient(user.id)
+    API.loadClient(2)
       .then((c) => {
+        // console.log(user.id)
         if (c.error === undefined) {
           const json = c.basket;
           const basket = JSON.parse(json);
           console.log(basket);
-          setCart([...basket], cart);
+          setCart([...basket]);
         }
       })
       .catch((err) => {
@@ -51,18 +86,7 @@ function MyContainer(props) {
       });
   }, []);
 
-    useEffect(() => {
-        API.isLoggedIn().then((response) => {
-            if (response.error === undefined && response.role !== undefined) {
-                setUser({username: response.username, role: response.role, id : response.id});
-            }
-            else {
-                setUser(() => undefined);
-            }
-        }).catch(err => {
-            console.log(err);
-        });
-    }, []);
+    
 
     return (
         <>
@@ -109,7 +133,7 @@ function MyContainer(props) {
                     element={
                         <>
                             <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}/>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -118,7 +142,7 @@ function MyContainer(props) {
                     element={
                         <>
                             <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyMyProducts user={user} cart={cart} setCart={setCart} showCart={true}/>
+                            <MyMyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -181,7 +205,7 @@ function MyContainer(props) {
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} updateCart={updateCart}></MyProducts>
                         </>
                     }
                 />
@@ -191,7 +215,7 @@ function MyContainer(props) {
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true}></MyProducts>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />

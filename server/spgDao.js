@@ -259,3 +259,19 @@ exports.setClock = (clock) => {
         });
     });
 };
+
+
+//updating the basket field in the user table
+exports.updateBasket = (items,id) => {
+    
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE users SET basket=? WHERE id = ?';
+        db.run(sql, [items, id], function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(id);
+        });
+    });
+};
