@@ -16,7 +16,7 @@ function MyClock(props) {
         setValue(() => new Date(response.serverTime));
       }
     });
-  }, []);
+  }, [props.setClock]);
 
   return (
     <div>

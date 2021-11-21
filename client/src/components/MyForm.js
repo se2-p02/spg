@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { propTypes } from "react-bootstrap/esm/Image";
 import { Navigate } from 'react-router-dom';
 import API from "./API";
 import './MyNavBar.css';
@@ -31,6 +30,9 @@ function MyForm(props) {
     }
 
     if (goBack) {
+        if (props.user === undefined){
+            return (<Navigate to={"/login"}></Navigate>)
+        }
         return (<Navigate to={"/"+ props.user.name}></Navigate>)
     }
 
@@ -117,7 +119,7 @@ function MyForm(props) {
 
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center p-5 m-0" fluid>
+            <Container className="bg-dark min-height-100 justify-content-center p-3 m-0 pb-5" fluid>
                 {registered === true && (
                     <>
                         <h1 className="text-info text-center mt-5 pt-5">User Registered Successfully!</h1>

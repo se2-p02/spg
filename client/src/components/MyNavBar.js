@@ -22,7 +22,7 @@ function MyNavBar(props) {
     const handleLogout = () => {
         API.logout().then((response) => {
             if (response.error === undefined) {
-                props.setUser(undefined);
+                props.setUser(undefined)
                 navigate("/login");
             }
         });
