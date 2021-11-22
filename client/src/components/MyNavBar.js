@@ -11,7 +11,6 @@ import moment from "moment";
 function MyNavBar(props) {
 
     const [show, setShow] = useState(false);
-    const [clock, setClock] = useState();
 
     const navigate = useNavigate();
 
@@ -30,7 +29,7 @@ function MyNavBar(props) {
 
     const updateClock = (value) => {
         API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) setClock(() => value);
+            if (response.error === undefined) props.setClock(() => moment(moment(value).format('YYYY-MM-DD HH:mm')));
         });
     };
 
@@ -50,7 +49,7 @@ function MyNavBar(props) {
 
                 </Row>
             </Navbar.Brand>
-            <MyClock clock={clock} updateClock={updateClock} setClock={setClock} />
+            <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
             {
                 //console.log(props.showCart)
             }
@@ -103,7 +102,7 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                 </ListGroup> : <></>}
             {props.cart.length !== 0 &&
-                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={clock} />
+                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -139,7 +138,7 @@ function MyModal(props) {
     }
 
     useEffect(() => {
-        const datetime = moment(props.clock);
+        const datetime = props.clock;
         setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
     }, [props.clock]);
 

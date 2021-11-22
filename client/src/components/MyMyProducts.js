@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, Container, Row, Col } from "react-bootstrap";
+import { Button, ListGroup, Container, Row, Col, Alert } from "react-bootstrap";
 import { PencilSquare, CheckSquare } from "react-bootstrap-icons";
 import { Link, Navigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
@@ -55,13 +55,24 @@ function MyMyProducts(props) {
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
-
+                {(props.clock && !((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))
+                    &&
+                    <Alert variant="danger">You can add new products from Monday 9:00 to Saturday 9:00.</Alert>)
+                }
+                {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))
+                    &&
+                    <Alert variant="danger">You can confirm products from Saturday 9:00 to Monday 9:00.</Alert>)
+                }
                 <Row>
                     <Col>
                         <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
                     </Col>
                     <Col>
-                        <Button size="lg" className="btn-info p-2 w-100 mt-3" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
+                        {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                            <Button size="lg" className="btn-info p-2 w-100 mt-3" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
+                            :
+                            <Button size="lg" className="btn-light p-2 w-100 mt-3">Add new product</Button>
+                        }
                     </Col>
                 </Row>
                 <ListGroup className="my-3 mx-5" horizontal>
@@ -85,10 +96,18 @@ function MyMyProducts(props) {
                                         <ListGroup.Item as={Link} to={"/employee/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 justify-content-center">{p.farmerName}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            <Button variant="warning" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
+                                            {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                                <Button variant="warning" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
+                                                :
+                                                <Button variant="light" ><PencilSquare /></Button>
+                                            }
                                         </ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
+                                            {(props.clock && !((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                                <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
+                                                :
+                                                <Button variant="light" ><CheckSquare /></Button>
+                                            }
                                         </ListGroup.Item>
                                     </ListGroup>
                                 );
@@ -111,18 +130,18 @@ function MyModal(props) {
     const [quantity, setQuantity] = useState();
     const [unit, setUnit] = useState();
 
-    const handleClose = () => {        
+    const handleClose = () => {
         props.setProduct();
         props.setShow(false);
     }
-    
+
     useEffect(() => {
-        if(props.modal === 'modify'){
+        if (props.modal === 'modify') {
             setName(props.product && props.product.name);
             setQuantity(props.product && props.product.quantity);
             setUnit(props.product && props.product.unit);
         }
-    }, [ props.modal, props.product]);
+    }, [props.modal, props.product]);
 
     return (
         <Modal
@@ -170,7 +189,7 @@ function MyModal(props) {
                                     min={0}
                                     required
                                     onChange={(ev) => { setQuantity(ev.target.value); }}
-                                    value={ quantity ? quantity : ""}
+                                    value={quantity ? quantity : ""}
                                 />
                                 <Form.Text className="text-muted"></Form.Text>
                             </Form.Group>
@@ -184,7 +203,7 @@ function MyModal(props) {
                                     placeholder="Unit"
                                     required
                                     onChange={(ev) => { setUnit(ev.target.value); }}
-                                    value={ unit ? unit : ""}
+                                    value={unit ? unit : ""}
                                 />
                                 <Form.Text className="text-muted"></Form.Text>
                             </Form.Group>
@@ -193,10 +212,15 @@ function MyModal(props) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
+                {props.modal === 'modify' &&
+                    <Button variant="danger" onClick={()=> {} }>
+                        Delete
+                    </Button>
+                }
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="success">Understood</Button>
+                <Button variant="success">Submit</Button>
             </Modal.Footer>
         </Modal>
     );

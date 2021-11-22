@@ -12,7 +12,6 @@ function MyClock(props) {
   useEffect(() => {
     API.getClock().then((response) => {
       if (response.error === undefined) {
-        props.setClock(new Date(response.serverTime));
         setValue(() => new Date(response.serverTime));
       }
     });

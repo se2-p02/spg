@@ -14,11 +14,13 @@ import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
 import MyClientProfile from './MyClientProfile'
+import moment from "moment";
 
 function MyContainer(props) {
     const [user, setUser] = useState();
     const [cart, setCart] = useState([]);
     const [login, setLogin] = useState();
+    const [clock, setClock] = useState();
 
     const location = useLocation();
 
@@ -38,6 +40,16 @@ function MyContainer(props) {
     //       console.log(err);
     //     });
     // }, []);
+
+    useEffect(() => {
+        API.getClock().then((c) => {
+            if (c.error === undefined) {
+                setClock(moment(c.serverTime));
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
+    }, []);
 
     useEffect(() => {
         API.isLoggedIn().then((response) => {
@@ -111,8 +123,8 @@ function MyContainer(props) {
                     path="/client"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyClientPage />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientPage clock={clock} setClock={setClock}/>
 
                         </>
                     }
@@ -121,8 +133,8 @@ function MyContainer(props) {
                     path="/client/profile"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyClientProfile user={user} id={user ? user.id : undefined} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientProfile clock={clock} setClock={setClock} user={user} id={user ? user.id : undefined} />
                         </>
                     }
                 />
@@ -130,8 +142,8 @@ function MyContainer(props) {
                     path="/farmer" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyFarmer user={user} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyFarmer clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />
@@ -139,8 +151,8 @@ function MyContainer(props) {
                     path="/farmer/products"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -148,8 +160,8 @@ function MyContainer(props) {
                     path="/farmer/myProducts"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyMyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyMyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -157,8 +169,8 @@ function MyContainer(props) {
                     path="/login"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
-                            <MyLogin user={user} setUser={setUser} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyLogin clock={clock} setClock={setClock} user={user} setUser={setUser} />
                         </>
                     }
                 />
@@ -166,8 +178,8 @@ function MyContainer(props) {
                     path="/signup"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
-                            <MyForm user={user} setUser={setUser} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyForm clock={clock} setClock={setClock} user={user} setUser={setUser} />
                         </>
                     }
                 />
@@ -175,8 +187,8 @@ function MyContainer(props) {
                     path="/employee" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyEmployee user={user}></MyEmployee>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyEmployee clock={clock} setClock={setClock} user={user}></MyEmployee>
                         </>
                     }
                 />
@@ -184,8 +196,8 @@ function MyContainer(props) {
                     path="/employee/clients/:id"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MySingleClient user={user}></MySingleClient>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MySingleClient clock={clock} setClock={setClock} user={user}></MySingleClient>
                         </>
                     }
                 />
@@ -193,8 +205,8 @@ function MyContainer(props) {
                     path="/employee/orders"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyOrders user={user}></MyOrders>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyOrders clock={clock} setClock={setClock} user={user}></MyOrders>
                         </>
                     }
                 />
@@ -202,8 +214,8 @@ function MyContainer(props) {
                     path="/employee/clients" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyClients></MyClients>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClients clock={clock} setClock={setClock}></MyClients>
                         </>
                     }
                 />
@@ -211,8 +223,8 @@ function MyContainer(props) {
                     path="/client/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />
@@ -221,8 +233,8 @@ function MyContainer(props) {
                     path="/employee/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />
@@ -238,8 +250,8 @@ function MyContainer(props) {
                     path="/employee/form"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
-                            <MyForm user={user} />
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
+                            <MyForm clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />
@@ -249,9 +261,9 @@ function MyContainer(props) {
                     path="/newProducts"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
 
-                            <MyNewProducts user={user} />
+                            <MyNewProducts clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />
