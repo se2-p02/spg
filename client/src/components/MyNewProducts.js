@@ -12,21 +12,19 @@ function MyNewProducts(props) {
 
     useEffect(() => {
         if (reqUpdate || props.cart) {
-            API.getClock().then((time) => {
-                API.loadNextProducts(time).then((p) => {
-                    if (p.error === undefined) {
-                        setProducts(p.filter((prod) => prod.quantity !== 0));
-                        setReqUpdate(false);
-                    }
-                }).catch((err) => {
-                    console.log(err)
-                });
-            })
+            API.loadNextProducts().then((p) => {
+                if (p.error === undefined) {
+                    setProducts(p.filter((prod) => prod.quantity !== 0));
+                    setReqUpdate(false);
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
         }
     }, [reqUpdate, props.cart]);
 
     if (goBack) {
-        return (<Navigate to={"/"+ props.user.role}></Navigate>)
+        return (<Navigate to={"/" + props.user.role}></Navigate>)
     }
 
 

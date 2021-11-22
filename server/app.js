@@ -99,7 +99,9 @@ app.get('/api/products', async (req, res) => {
 // GET nextProducts
 app.get('/api/nextProducts', async (req, res) => {
   try {
-    const products = await spgDao.getNextProducts(req.user, req.query.time);
+    const clock = await spgDao.getClock();
+    const datetime = moment(clock.serverTime);
+    const products = await spgDao.getNextProducts(req.user, datetime);
     if (products.error) {
       res.status(404).json(products);
     }
@@ -165,9 +167,9 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
 //PUT update basket client
 app.put('/api/clients/basket/:id', async (req, res) => {
 
-  const items =JSON.stringify(req.body);
+  const items = JSON.stringify(req.body);
   try {
-    await spgDao.updateBasket(items,2)
+    await spgDao.updateBasket(items, 2)
     res.status(200).end();
   }
   catch {
@@ -263,7 +265,7 @@ app.put("/api/updateOrder/:id", async (req, res) => {
     res.status(500).end('Handing out is not permitted in this timeslot.');
     return;
   }
-  
+
   const id = req.params.id;
   try {
     if (req.body.fulfilled) {
@@ -285,7 +287,7 @@ app.put("/api/updateProduct/:id", async (req, res) => {
     res.status(500).end('Confirming a product is not permitted in this timeslot.');
     return;
   }
-  
+
   const id = req.params.id;
   try {
     if (req.body.fulfilled) {

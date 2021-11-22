@@ -21,25 +21,24 @@ exports.getNextProducts = (user, time) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
-        const today = time//dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
-        let difference_from_sunday = 0;
-        if (today != 0) {
-            difference_from_sunday = 7 - today;
-        }
-        const next_week = dayjs().add(today, 'day').toDate(); 
         
-        console.log(next_week);
-        params.push(next_week);
+        const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
+        let difference_from_sunday = 0;
+        if (today.day() != 0) {
+            difference_from_sunday = 7 - today.day();
+        }
+        const next_week = today.add(difference_from_sunday, 'day');
+        params.push(next_week.format('YYYY-MM-DD'));
+        params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
 
         if (user.role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability > ? AND f.id = ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
             params.push(user.id);
         }
         else {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
-
         
         db.all(sql, params, (err, rows) => {
             if (err) {
