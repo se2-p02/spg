@@ -64,7 +64,7 @@ async function updateOrder(id) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
-async function updateBasket(id,items) {
+async function updateBasket(id, items) {
     const response = await fetch(URL + `/api/clients/basket/${id}`,
         {
             method: "PUT",
@@ -79,15 +79,41 @@ async function updateBasket(id,items) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
-async function updateProduct(id) {
-    const response = await fetch(URL + `/api/updateProduct/${id}`,
+async function updateProduct(product, action) {
+    //action is something like { confirm: true }
+    const response = await fetch(URL + `/api/products/${product.id}`,
         {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ confirm: true }),
+            body: JSON.stringify({product: product, action: action}),
 
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
+async function createProduct(product) {
+    const response = await fetch(URL + `/api/products`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(product),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
+async function deleteProduct(id) {
+    const response = await fetch(URL + `/api/products/${id}`,
+        {
+            method: "DELETE"
         });
     if (response.ok) {
         return true;
@@ -177,11 +203,11 @@ async function setClock(clock) {
             body: JSON.stringify({ serverTime: clock })
         });
     if (response.ok) {
-        return {}; 
+        return {};
     } else {
         return { 'error': 'Failed to store data on server' };
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket };
 export default API;

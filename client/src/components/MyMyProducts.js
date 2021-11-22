@@ -117,7 +117,7 @@ function MyMyProducts(props) {
                     </>
                 }
 
-                <MyModal show={show} setShow={setShow} product={product} modal={modal} setProduct={setProduct} />
+                <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} />
             </Container>
 
         </>
@@ -130,11 +130,6 @@ function MyModal(props) {
     const [quantity, setQuantity] = useState();
     const [unit, setUnit] = useState();
 
-    const handleClose = () => {
-        props.setProduct();
-        props.setShow(false);
-    }
-
     useEffect(() => {
         if (props.modal === 'modify') {
             setName(props.product && props.product.name);
@@ -142,6 +137,44 @@ function MyModal(props) {
             setUnit(props.product && props.product.unit);
         }
     }, [props.modal, props.product]);
+
+    const handleClose = () => {
+        props.setProduct();
+        props.setShow(false);
+    }
+
+    const handleSubmit = () => {
+        if (props.modal === 'modify') {
+            API.updateProduct({id: props.product.id, name: name, quantity: quantity, unit: unit}, { confirm: true }).then((r) => {
+                if (r.error === undefined) {
+                    props.setReqUpdate(true);
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+        else{
+            API.createProduct({name: name, quantity: quantity, unit: unit}).then((r) => {
+                if (r.error === undefined) {
+                    props.setReqUpdate(true);
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+        props.setShow(false);
+    }
+
+    const handleDelete = () => {
+        API.deleteProduct(props.product.id).then((p) => {
+            if (p.error === undefined) {
+                props.setReqUpdate(true);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+        props.setShow(false);
+    }
 
     return (
         <Modal
@@ -213,14 +246,10 @@ function MyModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 {props.modal === 'modify' &&
-                    <Button variant="danger" onClick={()=> {} }>
-                        Delete
-                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>Delete</Button>
                 }
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="success">Submit</Button>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="success" onClick={handleSubmit}>Submit</Button>
             </Modal.Footer>
         </Modal>
     );
