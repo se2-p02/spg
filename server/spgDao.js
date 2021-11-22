@@ -86,13 +86,13 @@ exports.getClients = () => {
 // get specific client
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname, wallet, basket, email, role FROM users WHERE id = ?';
+        const sql = 'SELECT id, name, surname, wallet, basket, email, role, phoneNumber, city, address, country FROM users WHERE id = ?';
         db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email, role: c.role }));
+            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email, role: c.role, phone: c.phoneNumber, city: c.city, address: c.address, country: c.country }));
             resolve(clients[0]);
         });
     });
@@ -196,7 +196,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid : c.paid }));
                 resolve(orders);
             });
         });
@@ -209,7 +209,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
                 resolve(orders);
             });
         });

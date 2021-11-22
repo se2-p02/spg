@@ -1,5 +1,6 @@
 const URL = "http://localhost:3000"
 
+
 async function loadProducts() {
     let myURL = URL + "/api/products";
     const response = await fetch(myURL);
