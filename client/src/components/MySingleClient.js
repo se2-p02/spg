@@ -25,6 +25,7 @@ function MySingleClient(props) {
                 if (c.error === undefined) {
                     setClient(c);
                     setReqUpdate(false);
+                    console.log(c)
                 }
             }).catch((err) => {
                 console.log(err)
@@ -33,7 +34,7 @@ function MySingleClient(props) {
     }, [reqUpdate, id]);
 
     if (goBack) {
-        return (<Navigate to={"/"+props.user.role+"/clients"}></Navigate>)
+        return (<Navigate to={"/" + props.user.role + "/clients"}></Navigate>)
     }
 
 
@@ -41,58 +42,88 @@ function MySingleClient(props) {
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center below-nav mt-3" fluid>
-
+            <Row>
+                <Col sm="6" className=" m-0 p-0">
                 <Row className="m-0 p-4 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Name: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Name: </b></h3>
                     </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.name}</h2>
-                    </Col>
-                </Row>
-                <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Surname: </b></h2>
-                    </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.surname}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.name}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Email: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Surname: </b></h3>
                     </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.email}</h2>
-                    </Col>
-                </Row>
-                <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Role: </b></h2>
-                    </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.role}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.surname}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Wallet: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Email: </b></h3>
                     </Col>
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white m-0 p-0">{client.wallet + " €"}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.email}</h3>
                     </Col>
-                    <Col sm="1" className="m-0 p-0" fluid="true">
-                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => {setText("add");setShowMod(true)}}>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Role: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.role}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Wallet: </b></h3>
+                    </Col>
+                    <Col sm="3" className="m-0 p-0"><h3 className="text-white m-0 p-0">{client.wallet + " €"}</h3>
+                    </Col>
+                    <Col sm="2" className="m-0 p-0" fluid="true">
+                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
                             <Image src={plus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
-                    <Col sm="1" className="m-0 p-0" fluid="true">
-                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => {setText("subtract");setShowMod(true)}}>
+                    <Col sm="2" className="m-0 p-0" fluid="true">
+                        <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
                             <Image src={minus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
                 </Row>
-                <hr className="text-white my-5" style={{
-                    marginTop: '1rem',
-                    marginBottom: '1rem',
-                    border: '0',
-                    borderTop: '2px solid rgba(0, 0, 0, 0.1)'
-                }} />
-                <h1 className="text-white">Orders</h1>
-                {!reqUpdate && <MyOrders setUser={props.setUser} id={client.id}/>}
-                <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
-                <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
-            </Container>
+                </Col>
+                <Col sm="6" className=" m-0 p-0">
+                <Row className="m-0 p-4 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Phone: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.phone===null?"NaN":client.phone}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Address: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.address}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>City: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.city}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Country: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.country}</h3>
+                    </Col>
+                </Row>
+                
+                </Col>
+            </Row>
+            <hr className="text-white my-5" style={{
+                marginTop: '1rem',
+                marginBottom: '1rem',
+                border: '0',
+                borderTop: '2px solid rgba(0, 0, 0, 0.1)'
+            }} />
+            <h1 className="text-white">Orders</h1>
+            {!reqUpdate && <MyOrders setUser={props.setUser} id={client.id} />}
+            <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
+            <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
+        </Container>
 
         </>
     );
@@ -119,22 +150,22 @@ function MyModal(props) {
         }
         //set up the data to be send by the post
         let new_amount = 0
-        if (props.text==="add"){
+        if (props.text === "add") {
             new_amount = Number(props.wallet) + Number(amount)
         }
-        else{
+        else {
             new_amount = Number(props.wallet) - Number(amount)
         }
         let send_obj = { "wallet": new_amount }
         if (trigger) {
-            if (new_amount<0){
+            if (new_amount < 0) {
                 setError("The new amount would be negative!")
 
             }
-            else if(amount < 0){
+            else if (amount < 0) {
                 setError("Cannot set a negative value")
-            }  
-            else{
+            }
+            else {
                 updateWallet()
                 setAmount("")
                 setTrigger(false)
@@ -155,7 +186,7 @@ function MyModal(props) {
                     <FormControl type="number" placeholder="€" value={amount} onChange={handleAmount}></FormControl>
                 </Form>
                 {
-                    error?<Badge bg="danger" pill>{error}</Badge>:<></>
+                    error ? <Badge bg="danger" pill>{error}</Badge> : <></>
                 }
                 <Row className="p-3 pb-1">
                     <Col sm="5"><Button size="lg" variant="danger" className="p-auto m-0 w-100" onClick={() => { props.setShow(false); setAmount(""); setError(undefined) }}>Delete</Button></Col>

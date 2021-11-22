@@ -16,7 +16,7 @@ import MyClientPage from "./MyClientPage";
 import MyClientProfile from './MyClientProfile'
 
 function MyContainer(props) {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
 
   //some comments

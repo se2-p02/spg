@@ -49,6 +49,7 @@ function MyOrders(props) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
+  console.log(props.user)
   return (
     <>
       <Container
@@ -117,63 +118,70 @@ function MyOrders(props) {
             {orders.map((c) => {
               let j = JSON.parse(c.products)
               let list = Object.keys(j).map((key) => [key, j[key]])
+              let b = "primary"
+              console.log(c.paid)
+              if (!c.paid){
+                  b = "danger"
+              }
+
               return (
                 <ListGroup
                   key={c.id}
                   style={{ textDecoration: "none" }}
-                  className="my-2 mx-5"
-                  horizontal
-                >
+                  className = "my-2 mx-5"
+                  horizontal>
+                
+                    
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
                     {c.id}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
                     {c.userID}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     <ul>{list.map((x) => { return (<li>{x[0] + ":" + x[1]}</li>) })}</ul>
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {c.address}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {c.date}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {c.time}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
                     {c.amount}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
                     {c.conf}
                   </ListGroup.Item>
                   <ListGroup.Item
-                    variant="primary"
+                    variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
                     {c.fulfilled === 0 ? (
