@@ -56,7 +56,7 @@ function MyNavBar(props) {
             }
             {
                 props.showCart ? <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
-                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <ListGroup.Item key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
                             <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
                                 <div className="fw-bold mx-2">Cart</div>
@@ -88,10 +88,10 @@ function MyNavBar(props) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </ListGroup.Item>
-                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
                             <Dropdown.Toggle variant="dark" className="d-flex p-2" id="dropdown">
-                                <PersonCircle className="mx-2">Cssart</PersonCircle>
+                                <PersonCircle className="mx-2"></PersonCircle>
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu align="end">

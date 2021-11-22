@@ -20,7 +20,7 @@ function MyClock(props) {
 
   return (
     <div>
-      <Button variant="primary" className="clockButton">
+      <span variant="primary" className="clockButton">
         <DateTimePicker
           onChange={setValue}
           value={value}
@@ -29,7 +29,7 @@ function MyClock(props) {
           clearIcon={null}
           locale='en-us'
         />
-      </Button>{' '}
+      </span>{' '}
       <div style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
         <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
         <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>

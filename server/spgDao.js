@@ -21,7 +21,7 @@ exports.getNextProducts = (user, time) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
-        
+
         const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
         let difference_from_sunday = 0;
         if (today.day() != 0) {
@@ -39,7 +39,7 @@ exports.getNextProducts = (user, time) => {
             sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
-        
+
         db.all(sql, params, (err, rows) => {
             if (err) {
                 reject(err);
@@ -195,7 +195,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid : c.paid }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
                 resolve(orders);
             });
         });
@@ -261,8 +261,7 @@ exports.setClock = (clock) => {
 
 
 //updating the basket field in the user table
-exports.updateBasket = (items,id) => {
-    
+exports.updateBasket = (items, id) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE users SET basket=? WHERE id = ?';
         db.run(sql, [items, id], function (err) {

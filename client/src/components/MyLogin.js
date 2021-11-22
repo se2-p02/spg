@@ -96,7 +96,7 @@ function MyLogin(props) {
                         <Container className=" p-5 m-0 b">
 
                             <Form className="pt-3 p-0 m-0">
-                                <Form.Group controlId="formusername" className="mt-1 w-100">
+                                <Form.Group className="mt-1 w-100">
                                     <Form.Label className="text-info w-100"><h5>Username</h5></Form.Label>
                                     <Form.Control
                                         className="w-100 p-4"
@@ -114,7 +114,7 @@ function MyLogin(props) {
                                     <Form.Text className="text-muted"></Form.Text>
                                 </Form.Group>
 
-                                <Form.Group controlId="formPassword" className={errorMessageUsername ? "pt-1" : "pt-3"}>
+                                <Form.Group className={errorMessageUsername ? "pt-1" : "pt-3"}>
                                     <Form.Label className="text-info"><h5>Password</h5></Form.Label>
                                     <Form.Control
                                         type="password"

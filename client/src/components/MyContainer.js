@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyLogin from "./MyLogin";
 import MyEmployee from "./MyEmployee";
@@ -16,77 +16,82 @@ import MyClientPage from "./MyClientPage";
 import MyClientProfile from './MyClientProfile'
 
 function MyContainer(props) {
-  const [user, setUser] = useState();
-  const [cart, setCart] = useState([]);
+    const [user, setUser] = useState();
+    const [cart, setCart] = useState([]);
 
-  //some comments
+    const location = useLocation();
 
-  // useEffect(() => {
-  //   API.isLoggedIn()
-  //     .then((response) => {
-  //       if (response.error === undefined) {
-            
-  //         setUser(() => response);
-  //       } else {
-  //         setUser(() => undefined);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-  useEffect(() => {
-    API.isLoggedIn().then((response) => {
-        if (response.error === undefined && response.role !== undefined) {
-            setUser({username: response.username, role: response.role, id : response.id});
+    //some comments
+
+    // useEffect(() => {
+    //   API.isLoggedIn()
+    //     .then((response) => {
+    //       if (response.error === undefined) {
+
+    //         setUser(() => response);
+    //       } else {
+    //         setUser(() => undefined);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }, []);
+
+    useEffect(() => {
+        API.isLoggedIn().then((response) => {
+            if (response.error === undefined && response.role !== undefined) {
+                setUser({ username: response.username, role: response.role, id: response.id });
+            }
+            else {
+                setUser(() => undefined);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            API.updateBasket(user.id, cart)
+                .then((c) => {
+                    // console.log(user.id)
+                    if (c.error === undefined) {
+
+                        //console.log("SUCCESSFUL");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-        else {
-            setUser(() => undefined);
+    }, [cart]);
+
+
+
+    //getting the items from the user table and fill the state(cart)
+    useEffect(() => {
+        if (user) {
+            API.loadClient(user.id)
+                .then((c) => {
+                    // console.log(user.id)
+                    if (c.error === undefined) {
+                        const json = c.basket;
+                        const basket = JSON.parse(json);
+                        //console.log(basket);
+                        setCart([...basket]);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-    }).catch(err => {
-        console.log(err);
-    });
-}, []);
 
-const updateCart = (item)=>{
-  //whenever working with states which keep arrays
-  const oldCart = [...cart]
-  oldCart.push(item)
-  setCart([...oldCart]);
-  
-  API.updateBasket(2,cart)
-      .then((c) => {
-        // console.log(user.id)
-        if (c.error === undefined) {
-          
-          console.log("SUCCESSFUL");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-}
+    }, [user]);
 
-  
-
-//getting the items from the user table and fill the state(cart)
-  useEffect(() => {
-    API.loadClient(2)
-      .then((c) => {
-        // console.log(user.id)
-        if (c.error === undefined) {
-          const json = c.basket;
-          const basket = JSON.parse(json);
-          console.log(basket);
-          setCart([...basket]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-    
+    if (!user && location.pathname !== '/login') {
+        return (<Navigate to="/login" />);
+    }
 
     return (
         <>
@@ -96,7 +101,7 @@ const updateCart = (item)=>{
                     path="/" exact
                     element={
                         <>
-                            <Navigate to="/login"/>
+                            <Navigate to="/login" />
                         </>
                     }
                 />
@@ -104,8 +109,8 @@ const updateCart = (item)=>{
                     path="/client"
                     element={
                         <>
-                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                        <MyClientPage/>
+                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientPage />
 
                         </>
                     }
@@ -114,8 +119,8 @@ const updateCart = (item)=>{
                     path="/client/profile"
                     element={
                         <>
-                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                        <MyClientProfile user={user} id={user?user.id:undefined}/>
+                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientProfile user={user} id={user ? user.id : undefined} />
                         </>
                     }
                 />
@@ -205,7 +210,7 @@ const updateCart = (item)=>{
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} updateCart={updateCart}></MyProducts>
+                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />
@@ -232,11 +237,11 @@ const updateCart = (item)=>{
                     element={
                         <>
                             <MyNavBar cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
-                            <MyForm user={user}/>
+                            <MyForm user={user} />
                         </>
                     }
                 />
-                
+
                 {/* just for testing */}
                 <Route
                     path="/newProducts"
@@ -244,7 +249,7 @@ const updateCart = (item)=>{
                         <>
                             <MyNavBar cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
 
-                            <MyNewProducts user={user}/>
+                            <MyNewProducts user={user} />
                         </>
                     }
                 />
