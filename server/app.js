@@ -166,9 +166,9 @@ app.put('/api/clients/:id/wallet', async (req, res) => {
 
 //PUT update basket client
 app.put('/api/clients/basket/:id', async (req, res) => {
-  console.log(req.body)
+  //console.log(req.body)
   const items = JSON.stringify(req.body);
-  console.log(items)
+  //console.log(items)
   try {
     await spgDao.updateBasket(items, req.params.id)
     res.status(200).end();

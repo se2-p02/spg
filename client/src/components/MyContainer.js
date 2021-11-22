@@ -18,6 +18,7 @@ import MyClientProfile from './MyClientProfile'
 function MyContainer(props) {
     const [user, setUser] = useState();
     const [cart, setCart] = useState([]);
+    const [login, setLogin] = useState();
 
     const location = useLocation();
 
@@ -45,7 +46,8 @@ function MyContainer(props) {
             }
             else {
                 setUser(() => undefined);
-            }
+            }            
+            setLogin(true);
         }).catch(err => {
             console.log(err);
         });
@@ -89,7 +91,7 @@ function MyContainer(props) {
 
     }, [user]);
 
-    if (!user && location.pathname !== '/login') {
+    if (login && !user && location.pathname !== '/login') {
         return (<Navigate to="/login" />);
     }
 

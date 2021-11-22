@@ -26,7 +26,7 @@ function MyFarmer(props) {
                 </Row>
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("myProducts") }}><h3>My products</h3></Button>
+                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("myProducts") }}><h3>My next products</h3></Button>
                     </Col>
                 </Row>
             </Container>

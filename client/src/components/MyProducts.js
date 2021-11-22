@@ -84,6 +84,7 @@ function MyProducts(props) {
                                                 className="w-100 mx-1"
                                                 placeholder={0}
                                                 required
+                                                min={0}
                                                 type="number"
                                                 onChange={(ev) => { setQuantity(ev.target.value) }}
                                             />
