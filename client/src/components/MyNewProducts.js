@@ -12,14 +12,16 @@ function MyNewProducts(props) {
 
     useEffect(() => {
         if (reqUpdate || props.cart) {
-            API.loadNextProducts().then((p) => {
-                if (p.error === undefined) {
-                    setProducts(p.filter((prod) => prod.quantity !== 0));
-                    setReqUpdate(false);
-                }
-            }).catch((err) => {
-                console.log(err)
-            });
+            API.getClock().then((time) => {
+                API.loadNextProducts(time).then((p) => {
+                    if (p.error === undefined) {
+                        setProducts(p.filter((prod) => prod.quantity !== 0));
+                        setReqUpdate(false);
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                });
+            })
         }
     }, [reqUpdate, props.cart]);
 

@@ -99,7 +99,7 @@ app.get('/api/products', async (req, res) => {
 // GET nextProducts
 app.get('/api/nextProducts', async (req, res) => {
   try {
-    const products = await spgDao.getNextProducts(req.user);
+    const products = await spgDao.getNextProducts(req.user, req.query.time);
     if (products.error) {
       res.status(404).json(products);
     }

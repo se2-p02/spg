@@ -17,11 +17,11 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = (user) => {
+exports.getNextProducts = (user, time) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
-        const today = dayjs().day() // from 0 (Sunday) to 6 (Saturday)
+        const today = time//dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
         let difference_from_sunday = 0;
         if (today != 0) {
             difference_from_sunday = 7 - today;
