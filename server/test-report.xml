@@ -1,258 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="124"/>
-    <testCase name="tests GET /api/clients" duration="37"/>
-    <testCase name="tests GET /api/clients/:id" duration="26"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="130"/>
-    <testCase name="tests GET /api/orders" duration="38">
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 1`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": "via roma 24",
-+   "amount": 12,
-+   "conf": 1,
-+   "date": "2021-01-12",
-+   "fulfilled": 1,
-+   "id": 1,
-+   "products": "{\"milk\":2,\"eggs\":1}",
-+   "time": "08:12",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 2`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 9,
-+   "conf": 0,
-+   "date": "2021-09-01",
-+   "fulfilled": 0,
-+   "id": 2,
-+   "products": "{\"Cheese\":0.3 }",
-+   "time": "09:44",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 3`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 20.5,
-+   "conf": 0,
-+   "date": "2021-11-09",
-+   "fulfilled": 0,
-+   "id": 3,
-+   "products": "{\"Eggs\":1,\"Flour\":3}",
-+   "time": "01:07",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 4`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 2.4,
-+   "conf": 0,
-+   "date": "2021-11-13",
-+   "fulfilled": 0,
-+   "id": 4,
-+   "products": "{\"Milk\":2}",
-+   "time": "09:53",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 5`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 4.5,
-+   "conf": 0,
-+   "date": "2021-11-13",
-+   "fulfilled": 0,
-+   "id": 5,
-+   "products": "{\"Flour\":1}",
-+   "time": "18:36",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 6`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 23,
-+   "conf": 0,
-+   "date": "2021-11-13",
-+   "fulfilled": 1,
-+   "id": 6,
-+   "products": "{\"Flour\":2,\"Eggs\":2}",
-+   "time": "18:36",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders 7`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": null,
-+   "amount": 1.2,
-+   "conf": 0,
-+   "date": "2021-11-20",
-+   "fulfilled": null,
-+   "id": 7,
-+   "products": "{\"Milk\":1}",
-+   "time": "19:53",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:54:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+    <testCase name="tests GET /api/products" duration="325"/>
+    <testCase name="tests GET /api/clients" duration="170"/>
+    <testCase name="tests GET /api/clients/:id" duration="132"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="173"/>
+    <testCase name="tests POST /api/addNewUser" duration="677"/>
+    <testCase name="tests error POST /api/addNewUser" duration="194"/>
+    <testCase name="tests delete /api/sessions/current" duration="169"/>
+    <testCase name="tests get /api/sessions/current" duration="173"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="308"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer" duration="161">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:134:61)
+    at Promise.then.completed (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\utils.js:390:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\utils.js:315:10)
+    at _callCircusTest (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at _runTest (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\run.js:66:9)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
     </testCase>
-    <testCase name="tests GET /api/orders/:id" duration="22">
-      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
-
-Snapshot name: `tests GET /api/orders/:id 1`
-
-- Expected properties  - 9
-+ Received value       + 8
-
-  Object {
--   "address": Any<String>,
--   "amount": Any<Number>,
--   "conf": Any<Boolean>,
--   "date": Any<String>,
--   "fulfilled": Any<Boolean>,
--   "id": Any<Number>,
--   "products": Any<Object>,
--   "time": Any<String>,
--   "userId": Any<Number>,
-+   "address": "via roma 24",
-+   "amount": 12,
-+   "conf": 1,
-+   "date": "2021-01-12",
-+   "fulfilled": 1,
-+   "id": 1,
-+   "products": "{\"milk\":2,\"eggs\":1}",
-+   "time": "08:12",
-  }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:72:21)
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:71:19)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="tests POST /api/orders" duration="64"/>
-    <testCase name="tests POST /api/addNewUser" duration="455"/>
-    <testCase name="tests error POST /api/addNewUser" duration="22"/>
-    <testCase name="tests delete /api/sessions/current" duration="13"/>
-    <testCase name="tests get /api/sessions/current" duration="12"/>
+    <testCase name="tests post /api/sesion" duration="273"/>
+    <testCase name="tests post /api/sesion error" duration="317"/>
   </file>
 </testExecutions>
