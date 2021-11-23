@@ -117,28 +117,33 @@ describe('Next week test', () => {
   it('tests get /api/nextProducts without performing the login', async () => {
     const res = await request(app).get("/api/nextProducts").expect(500);
   });
-  /*it('tests get /api/nextProducts after the login as a customer', async () => {
-    // login
-    const response = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
-    const res = await request(app).get("/api/nextProducts").expect(200);
-  });*/
-
 });
 
-//  I need a way to perform the login before the request
 describe('Next week test', () => {
   beforeEach(() => {
     return request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
   });
-  it('tests get /api/nextProducts after the login as a customer', async () => {
+  it('tests get /api/nextProducts after the login as a customer', () => {
     // login
-    const res = await request(app).get("/api/nextProducts").expect(200);
+    const res = request(app).get("/api/nextProducts").expect(200);
   });
   afterEach(()=>{
     return request(app).delete("/api/sessions/current").expect(200);
   })
 });
 
+describe('Next week test farmer', () => {
+  beforeEach(() => {
+    return request(app).post("/api/sessions").send({ username: "farmer@farmer.farmer", password: "farmer" }).expect(200);
+  });
+  it('tests get /api/nextProducts after the login as a farmer', () => {
+    // login
+    const res = request(app).get("/api/nextProducts").expect(200);
+  });
+  afterEach(()=>{
+    return request(app).delete("/api/sessions/current").expect(200);
+  })
+});
 
 describe('login test', () => {
   it('tests post /api/sesion', async () => {
