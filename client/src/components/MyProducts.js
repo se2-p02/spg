@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container } from "react-bootstrap";
+import { Button, Form, ListGroup, Container, FloatingLabel } from "react-bootstrap";
 import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
 import API from "./API";
@@ -10,6 +10,9 @@ function MyProducts(props) {
     const [products, setProducts] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
     const [quantity, setQuantity] = useState(0);
+    const [filter, setFilter] = useState('All');
+    const [filters, setFilters] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         if (reqUpdate || props.cart) {
@@ -22,6 +25,7 @@ function MyProducts(props) {
                         }
                     });
                     setProducts(p.filter((prod) => prod.quantity !== 0));
+                    //setFilteredProducts(p.filter((prod) => prod.quantity !== 0));
                     setReqUpdate(false);
                 }
             }).catch((err) => {
@@ -30,12 +34,25 @@ function MyProducts(props) {
         }
     }, [reqUpdate, props.cart]);
 
+    useEffect(() => {
+        if(products.length !== 0) {
+            const t_filters = filters;
+            products.forEach(p => {
+                if(!t_filters.includes(p.filter)) t_filters.push(p.filter);
+            });
+            setFilters(() => t_filters);
+        }
+    }, [products]);
+
+    useEffect(() => {
+        if(products.length !== 0) setFilteredProducts(() => products.filter(p => filter === 'All' || p.filter === filter));
+    }, [products, filter]);
+
     if (goBack) {
-        return (<Navigate to={"/"+props.user.role}></Navigate>)
+        return (<Navigate to={"/" + props.user.role}></Navigate>)
     }
 
-    const handleAddToCart = (id, q,name,unit,price) => {
-        //console.log(id,q,price,unit,name)
+    const handleAddToCart = (id, q, name, unit, price) => {
         let items = [...products];
         let cartItems = [...props.cart];
         if (products.find((prod) => prod.id === id).quantity < q || q <= 0) return;
@@ -58,8 +75,12 @@ function MyProducts(props) {
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
-
-
+                <FloatingLabel label="Filter products:">
+                    <Form.Select onChange={(e) => setFilter(() => e.target.value)}>
+                        <option key='f' value="All">All</option>
+                        {filters.map((f, i) => <option key={'f'+i} value={f}>{f}</option>)}
+                    </Form.Select>
+                </FloatingLabel>
                 <ListGroup className="my-3 mx-5" horizontal>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
@@ -68,10 +89,10 @@ function MyProducts(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Price</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Add</b></ListGroup.Item>
                 </ListGroup>
-                {products &&
+                {filteredProducts &&
                     <>
                         {
-                            products.map(p => {
+                            filteredProducts.map(p => {
                                 return (
                                     <ListGroup key={p.id} className="my-2 mx-5" horizontal>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.id}</ListGroup.Item>
@@ -88,7 +109,7 @@ function MyProducts(props) {
                                                 type="number"
                                                 onChange={(ev) => { setQuantity(ev.target.value) }}
                                             />
-                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity),p.name,p.unit,p.price)}>+</Button>
+                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 );

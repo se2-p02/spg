@@ -13,8 +13,7 @@ import MyNewProducts from "./MyNewProducts";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
-import MyClientProfile from "./MyClientProfile";
-import moment from "moment";
+import MyClientProfile from './MyClientProfile';
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -24,33 +23,14 @@ function MyContainer(props) {
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
 
-  //some comments
-
-  // useEffect(() => {
-  //   API.isLoggedIn()
-  //     .then((response) => {
-  //       if (response.error === undefined) {
-
-  //         setUser(() => response);
-  //       } else {
-  //         setUser(() => undefined);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    API.getClock()
-      .then((c) => {
-        if (c.error === undefined) {
-          setClock(moment(c.serverTime));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    API.getClock().then((c) => {
+      if (c.error === undefined) {
+        setClock(() => new Date(c.serverTime));
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
   }, []);
 
   useEffect(() => {
@@ -77,9 +57,7 @@ function MyContainer(props) {
     if (user) {
       API.loadWallet(user.id)
         .then((c) => {
-          // console.log(user.id)
           if (c.error === undefined) {
-            console.log("this is the walletttttwwww");
             if (c[0].wallet == 0) {
               setShowModal(true);
             }
@@ -95,12 +73,6 @@ function MyContainer(props) {
   useEffect(() => {
     if (user) {
       API.updateBasket(user.id, cart)
-        .then((c) => {
-          // console.log(user.id)
-          if (c.error === undefined) {
-            //console.log("SUCCESSFUL");
-          }
-        })
         .catch((err) => {
           console.log(err);
         });
@@ -112,11 +84,9 @@ function MyContainer(props) {
     if (user) {
       API.loadClient(user.id)
         .then((c) => {
-          // console.log(user.id)
           if (c.error === undefined) {
             const json = c.basket;
             const basket = JSON.parse(json);
-            //console.log(basket);
             setCart([...basket]);
           }
         })
@@ -132,7 +102,6 @@ function MyContainer(props) {
 
   return (
     <>
-      
       <Routes>
         {/* Route to show the homepage */}
         <Route
@@ -157,8 +126,8 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <MyClientPage clock={clock} setClock={setClock}
-              showModal={showModal}
-              onHide={() => setShowModal(false)} />
+                showModal={showModal}
+                onHide={() => setShowModal(false)} />
             </>
           }
         />

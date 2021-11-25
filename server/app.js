@@ -228,9 +228,11 @@ app.post('/api/orders', async (req, res) => {
       if (flag) return;
       order.id = await spgDao.getNextNumber();
     }
-    order.date = dayjs().format('YYYY-MM-DD');
-    order.time = dayjs().format('HH:mm');
+    const clockString = moment(clock.serverTime).format('YYYY-MM-DD HH:mm');
+    order.date = clockString.split(' ')[0];
+    order.time = clockString.split(' ')[1];
     order.products = JSON.stringify(order.products);
+    order.address = JSON.stringify(order.address);
     const result = await spgDao.addOrder(order);
     if (result.err)
       res.status(404).json(result);

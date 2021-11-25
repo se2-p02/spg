@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
 import { CheckLg, XLg } from 'react-bootstrap-icons';
 import moment from 'moment';
@@ -18,22 +18,26 @@ function MyClock(props) {
   }, [props.setClock]);
 
   return (
-    <div>
-      <span variant="primary" className="clockButton">
-        <DateTimePicker
-          onChange={setValue}
-          value={value}
-          format='yyyy-MM-dd HH:mm'
-          required={true}
-          clearIcon={null}
-          locale='en-us'
-        />
-      </span>{' '}
-      <div style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
-        <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
-        <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>
-      </div>
-    </div>);
+    <Row className="d-flex align-items-center">
+      <Col sm={8} className="d-flex justify-content-center">
+        <Card body className="clockButton">
+          <DateTimePicker
+            onChange={setValue}
+            value={value}
+            format='yyyy-MM-dd HH:mm'
+            required={true}
+            clearIcon={null}
+            locale='en-us'
+          />
+        </Card>
+      </Col>
+      <Col>
+        <div style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== moment(props.clock).format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
+          <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
+          <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>
+        </div>
+      </Col>
+    </Row>);
 }
 
 export default MyClock;

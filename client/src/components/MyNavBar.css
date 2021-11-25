@@ -1,18 +1,35 @@
 .navbar {
-    width: 100vw!important;
+  width: 100vw!important;
 }
 
 .myform {
-    align-self: center;
+  align-self: center;
 }
 
 .below-nav{
-    padding-top: 5rem;
-  }
+  padding-top: 5rem;
+}
 
 .ordersClosed {
-    color: red;
-    font-weight: bold;
-    font-size: small;
-    text-align: center;
+  color: red;
+  font-weight: bold;
+  font-size: small;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1060px) { 
+  .navTitle { 
+    display: none; 
+  } 
+}
+
+.form-select {
+  background-color: rgb(90, 181, 204);
+  border: 1px solid rgb(35, 120, 141);
+  margin-top: 20px;
+}
+
+.form-floating {
+  margin-left: 20%;
+  margin-right: 20%;
 }

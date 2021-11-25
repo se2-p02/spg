@@ -5,13 +5,13 @@ const db = require('./db');
 // get all products
 exports.getProducts = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
+        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
         db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price }));
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price, filter: p.filter }));
             resolve(products);
         });
     });
@@ -153,7 +153,7 @@ exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
+            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
