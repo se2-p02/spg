@@ -12,6 +12,7 @@ import MyOrders from "./MyOrders";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
+import dayjs from 'dayjs';
 import MyClientProfile from './MyClientProfile';
 
 function MyContainer(props) {
@@ -25,7 +26,8 @@ function MyContainer(props) {
   useEffect(() => {
     API.getClock().then((c) => {
       if (c.error === undefined) {
-        setClock(() => new Date(c.serverTime));
+        console.log(c.serverTime)
+        setClock(() => dayjs(c.serverTime));
       }
     }).catch((err) => {
       console.log(err)
@@ -165,6 +167,27 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <MyFarmer clock={clock} setClock={setClock} user={user} />
+            </>
+          }
+        />
+        <Route
+          path="/farmer/profile"
+          element={
+            <>
+              <MyNavBar
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={true}
+              ></MyNavBar>
+              <MyClientProfile
+                clock={clock}
+                setClock={setClock}
+                user={user}
+                id={user ? user.id : undefined}
+              />
             </>
           }
         />

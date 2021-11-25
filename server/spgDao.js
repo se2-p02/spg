@@ -17,7 +17,7 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = (user, time) => {
+exports.getNextProducts = (role, user, time, week) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
@@ -28,10 +28,17 @@ exports.getNextProducts = (user, time) => {
             difference_from_sunday = 7 - today.day();
         }
         const next_week = today.add(difference_from_sunday, 'day');
-        params.push(next_week.format('YYYY-MM-DD'));
-        params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
+        if (week === 'current') {
+            params.push(next_week.subtract(7, 'day').format('YYYY-MM-DD'));
+            params.push(next_week.format('YYYY-MM-DD'));
+        }
+        else {
+            params.push(next_week.format('YYYY-MM-DD'));
+            params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
+        }
 
-        if (user.role === "farmer") {
+
+        if (role === "farmer") {
             sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
             params.push(user.id);
         }
@@ -278,7 +285,7 @@ exports.updateBasket = (items, id) => {
 exports.getWallet = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'select wallet from users where id=?';
-        db.all(sql,[id],(err, rows) => {
+        db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;

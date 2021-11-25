@@ -19,23 +19,41 @@ function MyMyProducts(props) {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        if (reqUpdate || props.cart) {
-            API.loadNextProducts().then((p) => {
-                if (p.error === undefined) {
-                    p.forEach((prod) => {
-                        let find = props.cart.find((c) => c.id === prod.id)
-                        if (props.cart.find((c) => c.id === prod.id)) {
-                            prod.quantity = prod.quantity - find.quantity;
-                        }
-                    });
-                    setProducts(p.filter((prod) => prod.quantity !== 0));
-                    setReqUpdate(false);
-                }
-            }).catch((err) => {
-                console.log(err)
-            });
+        if (props.clock && props.user && (reqUpdate || props.cart)) {
+            if (props.clock.day < 5 && props.clock.day > 0) {
+                API.loadNextProducts(props.user.role, 'current').then((p) => {
+                    if (p.error === undefined) {
+                        p.forEach((prod) => {
+                            let find = props.cart.find((c) => c.id === prod.id)
+                            if (props.cart.find((c) => c.id === prod.id)) {
+                                prod.quantity = prod.quantity - find.quantity;
+                            }
+                        });
+                        setProducts(p.filter((prod) => prod.quantity !== 0));
+                        setReqUpdate(false);
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                });
+            }
+            else {
+                API.loadNextProducts(props.user.role).then((p) => {
+                    if (p.error === undefined) {
+                        p.forEach((prod) => {
+                            let find = props.cart.find((c) => c.id === prod.id)
+                            if (props.cart.find((c) => c.id === prod.id)) {
+                                prod.quantity = prod.quantity - find.quantity;
+                            }
+                        });
+                        setProducts(p.filter((prod) => prod.quantity !== 0));
+                        setReqUpdate(false);
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                });
+            }
         }
-    }, [reqUpdate, props.cart, props.user]);
+    }, [reqUpdate, props.cart, props.user, props.clock]);
 
     if (goBack) {
         return (<Navigate to={"/" + props.user.role}></Navigate>)
@@ -55,13 +73,9 @@ function MyMyProducts(props) {
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
-                {(props.clock && !((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))
+                {(props.clock && (!((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9)) && !(props.clock.day() === 1 && props.clock.hour() < 9))
                     &&
-                    <Alert variant="danger">You can add new products from Monday 9:00 to Saturday 9:00.</Alert>)
-                }
-                {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))
-                    &&
-                    <Alert variant="danger">You can confirm products from Saturday 9:00 to Monday 9:00.</Alert>)
+                    <Alert className="mt-3" variant="danger">You can add new products from Friday to Saturday 9:00 and confirm products on Monday by 9:00.</Alert>)
                 }
                 <Row>
                     <Col>
@@ -145,7 +159,7 @@ function MyModal(props) {
 
     const handleSubmit = () => {
         if (props.modal === 'modify') {
-            API.updateProduct({id: props.product.id, name: name, quantity: quantity, unit: unit}, { confirm: true }).then((r) => {
+            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, unit: unit }, { confirm: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
@@ -153,8 +167,8 @@ function MyModal(props) {
                 console.log(err);
             });
         }
-        else{
-            API.createProduct({name: name, quantity: quantity, unit: unit}).then((r) => {
+        else {
+            API.createProduct({ name: name, quantity: quantity, unit: unit }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }

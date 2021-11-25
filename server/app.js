@@ -101,7 +101,7 @@ app.get('/api/nextProducts', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
     const datetime = moment(clock.serverTime);
-    const products = await spgDao.getNextProducts(req.user, datetime);
+    const products = await spgDao.getNextProducts(req.query.role, req.user, datetime, req.query.week);
     if (products.error) {
       res.status(404).json(products);
     }

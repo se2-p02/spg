@@ -176,8 +176,14 @@ async function addNewUser(name, surname, password, email, phoneNumber, city, add
     }
 }
 
-async function loadNextProducts(role) {
+async function loadNextProducts(role, week) {
     let myURL = URL + "/api/nextProducts";
+    if(role){
+        myURL += "?role="+role
+    }
+    if(role && week === 'current'){
+        myURL += "&week=current"
+    }
     const response = await fetch(myURL);
     if (response.ok) {
         return response.json();
