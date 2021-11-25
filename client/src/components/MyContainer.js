@@ -9,7 +9,6 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
 import MyOrders from "./MyOrders";
-import MyNewProducts from "./MyNewProducts";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
@@ -396,24 +395,6 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <MyForm clock={clock} setClock={setClock} user={user} />
-            </>
-          }
-        />
-
-        {/* just for testing */}
-        <Route
-          path="/newProducts"
-          element={
-            <>
-              <MyNavBar
-                clock={clock}
-                setClock={setClock}
-                cart={cart}
-                setCart={setCart}
-                setUser={setUser}
-              ></MyNavBar>
-
-              <MyNewProducts clock={clock} setClock={setClock} user={user} />
             </>
           }
         />

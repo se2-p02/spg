@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container, FloatingLabel, Col } from "react-bootstrap";
+import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row } from "react-bootstrap";
 import { Link, Navigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import './MyNavBar.css';
@@ -83,42 +83,44 @@ function MyProducts(props) {
                 </FloatingLabel>
                 {filteredProducts &&
                     <>
-                        {
-                            filteredProducts.map(p => {
-                                return (
-                                    <>
-                                        <Col className="align-items-center my-4" sm={6} md={4} lg={3}>
-                                            <Card key={p.id} className="bg-primary" border="light">
-                                                <Card.Title className="text-truncate text-center">
-                                                    {p.name}
-                                                </Card.Title>
-                                                <Card.Body className="">
-                                                    <ListGroup className="">
-                                                        <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 ">Farmer: <p className="text-right w-100">{p.farmerName}</p></ListGroup.Item>
-                                                        <ListGroup.Item variant="primary" className="d-flex w-100 ">Quantity: <p className="text-right w-100">{p.quantity + " " + p.unit}</p></ListGroup.Item>
-                                                        <ListGroup.Item variant="primary" className="d-flex w-100 ">Price: <p className="text-right w-100">{p.price + " €"}</p></ListGroup.Item>
-                                                        <ListGroup.Item variant="primary" className="d-flex w-100 ">
-                                                            <Form.Control id={'pQnt' + p.id}
-                                                                className="w-100 mx-1"
-                                                                placeholder={0}
-                                                                required
-                                                                min={0}
-                                                                max={p.quantity}
-                                                                type="number"
-                                                                onChange={(ev) => { setQuantity(ev.target.value) }}
-                                                            />
-                                                            <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
-                                                        </ListGroup.Item>
-                                                    </ListGroup>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
+                        <Row className="justify-content-center align-items-start">
+                            {
+                                filteredProducts.map(p => {
+                                    return (
+                                        <>
 
-                                    </>
-                                );
-                            })
-                        }
+                                            <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
+                                                <Card key={p.id} className="bg-dark" border="light">
+                                                    <Card.Title className="text-truncate text-center">
+                                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
+                                                    </Card.Title>
+                                                    <Card.Body className="">
+                                                        <ListGroup className="">
+                                                            <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 ">Farmer: <p className="text-end w-100">{p.farmerName}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">Quantity: <p className="text-end w-100">{p.quantity + " " + p.unit}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">Price: <p className="text-end w-100">{p.price + " €/" + p.unit}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">
+                                                                <Form.Control id={'pQnt' + p.id}
+                                                                    className="w-100 mx-1"
+                                                                    placeholder={0}
+                                                                    required
+                                                                    min={0}
+                                                                    max={p.quantity}
+                                                                    type="number"
+                                                                    onChange={(ev) => { setQuantity(ev.target.value) }}
+                                                                />
+                                                                <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
+                                                            </ListGroup.Item>
+                                                        </ListGroup>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
 
+                                        </>
+                                    );
+                                })
+                            }
+                        </Row>
                     </>
                 }
                 <Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button>
