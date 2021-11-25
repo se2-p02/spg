@@ -209,5 +209,14 @@ async function setClock(clock) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket };
+//get wallet amount of the user
+async function loadWallet(id) {
+    let myURL = URL + "/api/wallet/" + id;
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json(); //fetchedWallet
+    } else return { 'error': 'Failed to load client from server' }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet };
 export default API;

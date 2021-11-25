@@ -273,3 +273,18 @@ exports.updateBasket = (items, id) => {
         });
     });
 };
+
+// get wallet amount
+exports.getWallet = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'select wallet from users where id=?';
+        db.all(sql,[id],(err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const wallet = rows;
+            resolve(wallet);
+        });
+    });
+};

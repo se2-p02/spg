@@ -146,6 +146,23 @@ app.get('/api/clients/:id', async (req, res) => {
   }
 });
 
+// GET Wallet amount of a user
+app.get('/api/wallet/:id', async (req, res) => {
+  try {
+    const wallet = await spgDao.getWallet(req.params.id);
+    if (wallet.error) {
+      res.status(404).json(wallet);
+    }
+    else {
+      console.log(wallet)
+      res.json(wallet);
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
+});
+
 //PUT update wallet client
 app.put('/api/clients/:id/wallet', async (req, res) => {
 
