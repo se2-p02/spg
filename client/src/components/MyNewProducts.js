@@ -11,7 +11,6 @@ function MyNewProducts(props) {
     const [reqUpdate, setReqUpdate] = useState(true);
 
     useEffect(() => {
-        if (reqUpdate || props.cart) {
             API.loadNextProducts().then((p) => {
                 if (p.error === undefined) {
                     setProducts(p.filter((prod) => prod.quantity !== 0));
@@ -20,8 +19,7 @@ function MyNewProducts(props) {
             }).catch((err) => {
                 console.log(err)
             });
-        }
-    }, [reqUpdate, props.cart]);
+    }, [reqUpdate, props.cart, props.clock]);
 
     if (goBack) {
         return (<Navigate to={"/" + props.user.role}></Navigate>)
