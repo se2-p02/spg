@@ -36,7 +36,7 @@ function MyClock(props) {
 
             <div style={{ display: 'inline', visibility: dayjs(value).format('YYYY-MM-DD HH:mm') !== props.clock.format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
               <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
-              <Button variant="danger" onClick={() => setValue(() => props.clock)}><XLg size="27" /></Button>
+              <Button variant="danger" onClick={() => setValue(() => new Date(props.clock))}><XLg size="27" /></Button>
             </div>
           </Col>
 
