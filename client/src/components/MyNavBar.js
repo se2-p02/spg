@@ -7,6 +7,7 @@ import API from "./API";
 import { useNavigate } from "react-router-dom";
 import MyClock from "./MyClock";
 import moment from "moment";
+import dayjs from "dayjs";
 import DateTimePicker from 'react-datetime-picker';
 
 function MyNavBar(props) {
@@ -30,7 +31,7 @@ function MyNavBar(props) {
 
     const updateClock = (value) => {
         API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(moment(value).format('YYYY-MM-DD HH:mm')));
+            if (response.error === undefined) props.setClock(() => dayjs(value));
         });
     };
 
@@ -151,7 +152,7 @@ function MyModal(props) {
     }
 
     useEffect(() => {
-        const datetime = moment(props.clock);
+        const datetime = moment(props.clock.format('YYYY-MM-DD HH:mm'));
         setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
     }, [props.clock]);
 
