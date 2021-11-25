@@ -118,6 +118,9 @@ function MyModal(props) {
 
     const handleClose = () => {
         setSuccessful(false);
+        setOrderMethod('store');
+        setDatetime(null);
+        setErrorMsg('');
         props.setShow(false);
     }
 

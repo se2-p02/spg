@@ -49,7 +49,6 @@ function MyOrders(props) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
-  console.log(props.user)
   return (
     <>
       <Container
@@ -119,7 +118,7 @@ function MyOrders(props) {
               let j = JSON.parse(c.products)
               let list = Object.keys(j).map((key) => [key, j[key]])
               let b = "primary"
-              console.log(c.paid)
+              //console.log(c.paid)
               if (!c.paid){
                   b = "danger"
               }

@@ -58,7 +58,7 @@ function MyContainer(props) {
       API.loadWallet(user.id)
         .then((c) => {
           if (c.error === undefined) {
-            if (c[0].wallet == 0) {
+            if (c[0].wallet === 0) {
               setShowModal(true);
             }
           }
@@ -77,7 +77,7 @@ function MyContainer(props) {
           console.log(err);
         });
     }
-  }, [cart]);
+  }, [user, cart]);
 
   //getting the items from the user table and fill the state(cart)
   useEffect(() => {

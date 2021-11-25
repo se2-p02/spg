@@ -25,7 +25,6 @@ function MyProducts(props) {
                         }
                     });
                     setProducts(p.filter((prod) => prod.quantity !== 0));
-                    //setFilteredProducts(p.filter((prod) => prod.quantity !== 0));
                     setReqUpdate(false);
                 }
             }).catch((err) => {
@@ -69,6 +68,7 @@ function MyProducts(props) {
         tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
         setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
         if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
+        document.getElementById('pQnt'+id).value = 0;
     }
 
 
@@ -101,11 +101,12 @@ function MyProducts(props) {
                                         <ListGroup.Item as={Link} to={"/employee/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 justify-content-center">{p.farmerName}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            <Form.Control
+                                            <Form.Control id={'pQnt'+p.id}
                                                 className="w-100 mx-1"
                                                 placeholder={0}
                                                 required
                                                 min={0}
+                                                max={p.quantity}
                                                 type="number"
                                                 onChange={(ev) => { setQuantity(ev.target.value) }}
                                             />

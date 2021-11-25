@@ -152,8 +152,8 @@ exports.orderPrep = async (product) => {
 exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0], function (err) {
+            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
