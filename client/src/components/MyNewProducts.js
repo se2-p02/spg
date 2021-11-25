@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container } from "react-bootstrap";
+import { Button, ListGroup, Container } from "react-bootstrap";
 import { Link, Navigate } from 'react-router-dom';
 import './MyNavBar.css';
 import API from "./API";
@@ -24,7 +24,7 @@ function MyNewProducts(props) {
     }, [reqUpdate, props.cart]);
 
     if (goBack) {
-        return (<Navigate to={"/"+ props.user.role}></Navigate>)
+        return (<Navigate to={"/" + props.user.role}></Navigate>)
     }
 
 

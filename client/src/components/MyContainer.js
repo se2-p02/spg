@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyLogin from "./MyLogin";
 import MyEmployee from "./MyEmployee";
@@ -14,79 +14,98 @@ import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
 import MyClientProfile from './MyClientProfile'
+import moment from "moment";
 
 function MyContainer(props) {
-  const [user, setUser] = useState([]);
-  const [cart, setCart] = useState([]);
+    const [user, setUser] = useState();
+    const [cart, setCart] = useState([]);
+    const [login, setLogin] = useState();
+    const [clock, setClock] = useState();
 
-  //some comments
+    const location = useLocation();
 
-  // useEffect(() => {
-  //   API.isLoggedIn()
-  //     .then((response) => {
-  //       if (response.error === undefined) {
-            
-  //         setUser(() => response);
-  //       } else {
-  //         setUser(() => undefined);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-  useEffect(() => {
-    API.isLoggedIn().then((response) => {
-        if (response.error === undefined && response.role !== undefined) {
-            setUser({username: response.username, role: response.role, id : response.id});
+    //some comments
+
+    // useEffect(() => {
+    //   API.isLoggedIn()
+    //     .then((response) => {
+    //       if (response.error === undefined) {
+
+    //         setUser(() => response);
+    //       } else {
+    //         setUser(() => undefined);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }, []);
+
+    useEffect(() => {
+        API.getClock().then((c) => {
+            if (c.error === undefined) {
+                setClock(moment(c.serverTime));
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
+    }, []);
+
+    useEffect(() => {
+        API.isLoggedIn().then((response) => {
+            if (response.error === undefined && response.role !== undefined) {
+                setUser({ username: response.username, role: response.role, id: response.id });
+            }
+            else {
+                setUser(() => undefined);
+            }            
+            setLogin(true);
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            API.updateBasket(user.id, cart)
+                .then((c) => {
+                    // console.log(user.id)
+                    if (c.error === undefined) {
+
+                        //console.log("SUCCESSFUL");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-        else {
-            setUser(() => undefined);
+    }, [cart]);
+
+
+
+    //getting the items from the user table and fill the state(cart)
+    useEffect(() => {
+        if (user) {
+            API.loadClient(user.id)
+                .then((c) => {
+                    // console.log(user.id)
+                    if (c.error === undefined) {
+                        const json = c.basket;
+                        const basket = JSON.parse(json);
+                        //console.log(basket);
+                        setCart([...basket]);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-    }).catch(err => {
-        console.log(err);
-    });
-}, []);
 
-const updateCart = (item)=>{
-  //whenever working with states which keep arrays
-  const oldCart = [...cart]
-  oldCart.push(item)
-  setCart([...oldCart]);
-  
-  API.updateBasket(2,cart)
-      .then((c) => {
-        // console.log(user.id)
-        if (c.error === undefined) {
-          
-          console.log("SUCCESSFUL");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-}
+    }, [user]);
 
-  
-
-//getting the items from the user table and fill the state(cart)
-  useEffect(() => {
-    API.loadClient(2)
-      .then((c) => {
-        // console.log(user.id)
-        if (c.error === undefined) {
-          const json = c.basket;
-          const basket = JSON.parse(json);
-          console.log(basket);
-          setCart([...basket]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-    
+    if (login && !user && location.pathname !== '/login') {
+        return (<Navigate to="/login" />);
+    }
 
     return (
         <>
@@ -96,7 +115,7 @@ const updateCart = (item)=>{
                     path="/" exact
                     element={
                         <>
-                            <Navigate to="/login"/>
+                            <Navigate to="/login" />
                         </>
                     }
                 />
@@ -104,8 +123,8 @@ const updateCart = (item)=>{
                     path="/client"
                     element={
                         <>
-                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                        <MyClientPage/>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientPage clock={clock} setClock={setClock}/>
 
                         </>
                     }
@@ -114,8 +133,8 @@ const updateCart = (item)=>{
                     path="/client/profile"
                     element={
                         <>
-                        <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                        <MyClientProfile user={user} id={user?user.id:undefined}/>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClientProfile clock={clock} setClock={setClock} user={user} id={user ? user.id : undefined} />
                         </>
                     }
                 />
@@ -123,8 +142,8 @@ const updateCart = (item)=>{
                     path="/farmer" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyFarmer user={user} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyFarmer clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />
@@ -132,8 +151,8 @@ const updateCart = (item)=>{
                     path="/farmer/products"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -141,8 +160,8 @@ const updateCart = (item)=>{
                     path="/farmer/myProducts"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyMyProducts user={user} cart={cart} setCart={setCart} showCart={true} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyMyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} />
                         </>
                     }
                 />
@@ -150,8 +169,8 @@ const updateCart = (item)=>{
                     path="/login"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
-                            <MyLogin user={user} setUser={setUser} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyLogin clock={clock} setClock={setClock} user={user} setUser={setUser} />
                         </>
                     }
                 />
@@ -159,8 +178,8 @@ const updateCart = (item)=>{
                     path="/signup"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
-                            <MyForm user={user} setUser={setUser} />
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={false}></MyNavBar>
+                            <MyForm clock={clock} setClock={setClock} user={user} setUser={setUser} />
                         </>
                     }
                 />
@@ -168,8 +187,8 @@ const updateCart = (item)=>{
                     path="/employee" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyEmployee user={user}></MyEmployee>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyEmployee clock={clock} setClock={setClock} user={user}></MyEmployee>
                         </>
                     }
                 />
@@ -177,8 +196,8 @@ const updateCart = (item)=>{
                     path="/employee/clients/:id"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MySingleClient user={user}></MySingleClient>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MySingleClient clock={clock} setClock={setClock} user={user}></MySingleClient>
                         </>
                     }
                 />
@@ -186,8 +205,8 @@ const updateCart = (item)=>{
                     path="/employee/orders"
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyOrders user={user}></MyOrders>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyOrders clock={clock} setClock={setClock} user={user}></MyOrders>
                         </>
                     }
                 />
@@ -195,8 +214,8 @@ const updateCart = (item)=>{
                     path="/employee/clients" exact
                     element={
                         <>
-                            <MyNavBar setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
-                            <MyClients></MyClients>
+                            <MyNavBar clock={clock} setClock={setClock} setUser={setUser} cart={cart} setCart={setCart} showCart={true}></MyNavBar>
+                            <MyClients clock={clock} setClock={setClock}></MyClients>
                         </>
                     }
                 />
@@ -204,8 +223,8 @@ const updateCart = (item)=>{
                     path="/client/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} updateCart={updateCart}></MyProducts>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />
@@ -214,8 +233,8 @@ const updateCart = (item)=>{
                     path="/employee/products"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
-                            <MyProducts user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={true} setUser={setUser}></MyNavBar>
+                            <MyProducts clock={clock} setClock={setClock} user={user} cart={cart} setCart={setCart} showCart={true} ></MyProducts>
                         </>
                     }
                 />
@@ -231,20 +250,20 @@ const updateCart = (item)=>{
                     path="/employee/form"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
-                            <MyForm user={user}/>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} showCart={false} setUser={setUser}></MyNavBar>
+                            <MyForm clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />
-                
+
                 {/* just for testing */}
                 <Route
                     path="/newProducts"
                     element={
                         <>
-                            <MyNavBar cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
+                            <MyNavBar clock={clock} setClock={setClock} cart={cart} setCart={setCart} setUser={setUser}></MyNavBar>
 
-                            <MyNewProducts user={user}/>
+                            <MyNewProducts clock={clock} setClock={setClock} user={user} />
                         </>
                     }
                 />

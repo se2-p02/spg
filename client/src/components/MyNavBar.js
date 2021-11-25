@@ -11,7 +11,6 @@ import moment from "moment";
 function MyNavBar(props) {
 
     const [show, setShow] = useState(false);
-    const [clock, setClock] = useState();
 
     const navigate = useNavigate();
 
@@ -30,7 +29,7 @@ function MyNavBar(props) {
 
     const updateClock = (value) => {
         API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) setClock(() => value);
+            if (response.error === undefined) props.setClock(() => moment(moment(value).format('YYYY-MM-DD HH:mm')));
         });
     };
 
@@ -50,13 +49,13 @@ function MyNavBar(props) {
 
                 </Row>
             </Navbar.Brand>
-            <MyClock clock={clock} updateClock={updateClock} setClock={setClock} />
+            <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
             {
                 //console.log(props.showCart)
             }
             {
                 props.showCart ? <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
-                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <ListGroup.Item key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
                             <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
                                 <div className="fw-bold mx-2">Cart</div>
@@ -88,10 +87,10 @@ function MyNavBar(props) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </ListGroup.Item>
-                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center">
+                    <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
                             <Dropdown.Toggle variant="dark" className="d-flex p-2" id="dropdown">
-                                <PersonCircle className="mx-2">Cssart</PersonCircle>
+                                <PersonCircle className="mx-2"></PersonCircle>
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu align="end">
@@ -103,7 +102,7 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                 </ListGroup> : <></>}
             {props.cart.length !== 0 &&
-                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={clock} />
+                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -139,7 +138,7 @@ function MyModal(props) {
     }
 
     useEffect(() => {
-        const datetime = moment(props.clock);
+        const datetime = props.clock;
         setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
     }, [props.clock]);
 

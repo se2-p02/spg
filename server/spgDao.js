@@ -17,30 +17,29 @@ exports.getProducts = () => {
     });
 }
 
-exports.getNextProducts = (user) => {
+exports.getNextProducts = (user, time) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
-        const today = dayjs().day() // from 0 (Sunday) to 6 (Saturday)
+
+        const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
         let difference_from_sunday = 0;
-        if (today != 0) {
-            difference_from_sunday = 7 - today;
+        if (today.day() != 0) {
+            difference_from_sunday = 7 - today.day();
         }
-        const next_week = dayjs().add(today, 'day').toDate(); 
-        
-        console.log(next_week);
-        params.push(next_week);
+        const next_week = today.add(difference_from_sunday, 'day');
+        params.push(next_week.format('YYYY-MM-DD'));
+        params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
 
         if (user.role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability > ? AND f.id = ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
             params.push(user.id);
         }
         else {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability > ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
 
-        
         db.all(sql, params, (err, rows) => {
             if (err) {
                 reject(err);
@@ -86,13 +85,13 @@ exports.getClients = () => {
 // get specific client
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname, wallet, basket, email, role FROM users WHERE id = ?';
+        const sql = 'SELECT id, name, surname, wallet, basket, email, role, phoneNumber, city, address, country FROM users WHERE id = ?';
         db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email, role: c.role }));
+            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, wallet: c.wallet, basket: c.basket, email: c.email, role: c.role, phone: c.phoneNumber, city: c.city, address: c.address, country: c.country }));
             resolve(clients[0]);
         });
     });
@@ -196,7 +195,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
                 resolve(orders);
             });
         });
@@ -209,7 +208,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
                 resolve(orders);
             });
         });
@@ -262,8 +261,7 @@ exports.setClock = (clock) => {
 
 
 //updating the basket field in the user table
-exports.updateBasket = (items,id) => {
-    
+exports.updateBasket = (items, id) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE users SET basket=? WHERE id = ?';
         db.run(sql, [items, id], function (err) {

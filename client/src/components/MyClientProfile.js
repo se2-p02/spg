@@ -34,37 +34,67 @@ function MyClientProfile(props) {
     return (
         <>
             <Container className="bg-dark min-height-100 justify-content-center align-items-center below-nav mt-3" fluid>
-
+            <Row>
+                <Col sm="6" className=" m-0 p-0">
                 <Row className="m-0 p-4 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Name: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Name: </b></h3>
                     </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.name}</h2>
-                    </Col>
-                </Row>
-                <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Surname: </b></h2>
-                    </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.surname}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.name}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Email: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Surname: </b></h3>
                     </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.email}</h2>
-                    </Col>
-                </Row>
-                <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Role: </b></h2>
-                    </Col>
-                    <Col sm="4" className="m-0 p-0"><h2 className="text-white">{client.role}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.surname}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white"><b>Wallet: </b></h2>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Email: </b></h3>
                     </Col>
-                    <Col sm="2" className="m-0 p-0"><h2 className="text-white m-0 p-0">{client.wallet + " €"}</h2>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.email}</h3>
                     </Col>
                 </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Role: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.role}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Wallet: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white m-0 p-0">{client.wallet + " €"}</h3>
+                    </Col>
+                </Row>
+                </Col>
+                <Col sm="6" className=" m-0 p-0">
+                <Row className="m-0 p-4 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Phone: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.phone===null?"NaN":client.phone}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Address: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.address}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>City: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.city}</h3>
+                    </Col>
+                </Row>
+                <Row className="m-0 p-4 pt-0 pb-2">
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Country: </b></h3>
+                    </Col>
+                    <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.country}</h3>
+                    </Col>
+                </Row>
+                
+                </Col>
+            </Row>
 
 
                 <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>

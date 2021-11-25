@@ -58,10 +58,14 @@ Object {
 
 exports[`tests GET /api/clients/:id 1`] = `
 Object {
+  "address": null,
   "basket": null,
+  "city": null,
+  "country": null,
   "email": Any<String>,
   "id": Any<Number>,
   "name": Any<String>,
+  "phone": null,
   "role": null,
   "surname": Any<String>,
   "wallet": Any<Number>,

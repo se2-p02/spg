@@ -35,7 +35,7 @@ function MyProducts(props) {
     }
 
     const handleAddToCart = (id, q,name,unit,price) => {
-        console.log(id,q,price,unit,name)
+        //console.log(id,q,price,unit,name)
         let items = [...products];
         let cartItems = [...props.cart];
         if (products.find((prod) => prod.id === id).quantity < q || q <= 0) return;
@@ -52,7 +52,6 @@ function MyProducts(props) {
         tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
         setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
         if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
-        props.updateCart({"name":name, "id":id,"quantity":q, "unit":unit, "unitPrice":price})
     }
 
 
@@ -85,6 +84,7 @@ function MyProducts(props) {
                                                 className="w-100 mx-1"
                                                 placeholder={0}
                                                 required
+                                                min={0}
                                                 type="number"
                                                 onChange={(ev) => { setQuantity(ev.target.value) }}
                                             />
