@@ -181,7 +181,6 @@ exports.deleteTestOrder = () => {
             db.run(sql, function (err) {
                 if (err) {
                     reject(err);
-                    return;
                 } else {
                     resolve(true);
                 }

@@ -59,7 +59,8 @@ function MyContainer(props) {
       API.loadWallet(user.id)
         .then((c) => {
           if (c.error === undefined) {
-            if (c[0].wallet === 0) {
+            console.log(c);
+            if (c ===false) {
               setShowModal(true);
             }
           }
