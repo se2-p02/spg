@@ -234,4 +234,31 @@
 - POST `'/api/nextProducts'`
   - Request parameter: role, week.
   - Request body: None.
+  ``` 
+  {}
+  ``` 
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: the list of the products available from the next week if logged in.
   ```
+  [
+    {
+        "id": 1,
+        "name": "Flour",
+        "quantity": 1,
+        "unit": "kg",
+        "farmer": 1,
+        "farmerName": "FattoriaBella",
+        "price": 4.5,
+        "availability": "2021-12-03"
+    },
+    {
+        "id": 2,
+        "name": "Eggs",
+        "quantity": 2,
+        "unit": "pieces",
+        "farmer": 1,
+        "farmerName": "FattoriaBella",
+        "price": 7,
+        "availability": "2021-12-15"
+    }
+  ]
