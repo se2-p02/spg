@@ -48,7 +48,7 @@ describe('Clients test', () => {
     await request(app).put("/api/clients/-1/wallet").send({ wallet }).expect(200);
   });
 });
-/*
+
 describe('Orders test', () => {
   it('tests GET /api/orders', async () => {
     const response = await request(app).get("/api/orders");
@@ -89,7 +89,7 @@ describe('Orders test', () => {
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
   });
 });
-*/
+
 describe('Users test', () => {
   it('tests POST /api/addNewUser', async () => {
     const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it", phoneNumber: "3333333333", city: "Torino", address: "Via X, 5", country: "Italy", role: "customer" }).expect(200);
