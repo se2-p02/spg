@@ -5,19 +5,19 @@ const db = require('./db');
 // get all products
 exports.getProducts = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
+        const sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer ';
         db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price }));
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price, filter: p.filter }));
             resolve(products);
         });
     });
 }
 
-exports.getNextProducts = (user, time) => {
+exports.getNextProducts = (role, user, time, week) => {
     return new Promise((resolve, reject) => {
         let sql;
         let params = [];
@@ -28,15 +28,22 @@ exports.getNextProducts = (user, time) => {
             difference_from_sunday = 7 - today.day();
         }
         const next_week = today.add(difference_from_sunday, 'day');
-        params.push(next_week.format('YYYY-MM-DD'));
-        params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
+        if (week === 'current') {
+            params.push(next_week.subtract(7, 'day').format('YYYY-MM-DD'));
+            params.push(next_week.format('YYYY-MM-DD'));
+        }
+        else {
+            params.push(next_week.format('YYYY-MM-DD'));
+            params.push(next_week.add(7, 'day').format('YYYY-MM-DD'));
+        }
 
-        if (user.role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
+
+        if (role === "farmer") {
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, f.id as farmerId, p.availability FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
             params.push(user.id);
         }
         else {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
 
@@ -45,7 +52,7 @@ exports.getNextProducts = (user, time) => {
                 reject(err);
                 return;
             }
-            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, farmer: p.farmer, farmerName: p.farmerName, price: p.price, availability: p.availability }));
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, filter: p.filter, farmer: p.farmer, farmerName: p.farmerName, price: p.price, availability: p.availability }));
             resolve(products);
         });
     });
@@ -152,8 +159,8 @@ exports.orderPrep = async (product) => {
 exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, null, order.products, null, order.date, order.time, order.amount, 0], function (err) {
+            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
@@ -278,7 +285,7 @@ exports.updateBasket = (items, id) => {
 exports.getWallet = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'select wallet from users where id=?';
-        db.all(sql,[id],(err, rows) => {
+        db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
                 return;

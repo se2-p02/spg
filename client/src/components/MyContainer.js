@@ -9,12 +9,11 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
 import MyOrders from "./MyOrders";
-import MyNewProducts from "./MyNewProducts";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
-import MyClientProfile from "./MyClientProfile";
-import moment from "moment";
+import dayjs from 'dayjs';
+import MyClientProfile from './MyClientProfile';
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -24,33 +23,15 @@ function MyContainer(props) {
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
 
-  //some comments
-
-  // useEffect(() => {
-  //   API.isLoggedIn()
-  //     .then((response) => {
-  //       if (response.error === undefined) {
-
-  //         setUser(() => response);
-  //       } else {
-  //         setUser(() => undefined);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    API.getClock()
-      .then((c) => {
-        if (c.error === undefined) {
-          setClock(moment(c.serverTime));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    API.getClock().then((c) => {
+      if (c.error === undefined) {
+        console.log(c.serverTime)
+        setClock(() => dayjs(c.serverTime));
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
   }, []);
 
   useEffect(() => {
@@ -94,28 +75,20 @@ function MyContainer(props) {
   useEffect(() => {
     if (user) {
       API.updateBasket(user.id, cart)
-        .then((c) => {
-          // console.log(user.id)
-          if (c.error === undefined) {
-            //console.log("SUCCESSFUL");
-          }
-        })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [cart]);
+  }, [user, cart]);
 
   //getting the items from the user table and fill the state(cart)
   useEffect(() => {
     if (user) {
       API.loadClient(user.id)
         .then((c) => {
-          // console.log(user.id)
           if (c.error === undefined) {
             const json = c.basket;
             const basket = JSON.parse(json);
-            //console.log(basket);
             setCart([...basket]);
           }
         })
@@ -131,7 +104,6 @@ function MyContainer(props) {
 
   return (
     <>
-      
       <Routes>
         {/* Route to show the homepage */}
         <Route
@@ -156,8 +128,8 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <MyClientPage clock={clock} setClock={setClock}
-              showModal={showModal}
-              onHide={() => setShowModal(false)} />
+                showModal={showModal}
+                onHide={() => setShowModal(false)} />
             </>
           }
         />
@@ -196,6 +168,27 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <MyFarmer clock={clock} setClock={setClock} user={user} />
+            </>
+          }
+        />
+        <Route
+          path="/farmer/profile"
+          element={
+            <>
+              <MyNavBar
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={true}
+              ></MyNavBar>
+              <MyClientProfile
+                clock={clock}
+                setClock={setClock}
+                user={user}
+                id={user ? user.id : undefined}
+              />
             </>
           }
         />
@@ -426,24 +419,6 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <MyForm clock={clock} setClock={setClock} user={user} />
-            </>
-          }
-        />
-
-        {/* just for testing */}
-        <Route
-          path="/newProducts"
-          element={
-            <>
-              <MyNavBar
-                clock={clock}
-                setClock={setClock}
-                cart={cart}
-                setCart={setCart}
-                setUser={setUser}
-              ></MyNavBar>
-
-              <MyNewProducts clock={clock} setClock={setClock} user={user} />
             </>
           }
         />

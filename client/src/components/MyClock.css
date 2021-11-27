@@ -1,9 +1,5 @@
 .clockButton {
   background-color: #6599FF;
-  border-color: #6599FF;
-  color: black;
-}
-
-.clockButton:hover, .clockButton:active, .clockButton:focus {
+  border-color: #4068b8;
   color: black;
 }
