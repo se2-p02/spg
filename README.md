@@ -231,7 +231,7 @@
     "id": 1
   }
   ```
-- POST `'/api/nextProducts'`
+- GET `'/api/nextProducts'`
   - Request parameter: role, week.
   - Request body: None.
   ``` 
