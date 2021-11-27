@@ -154,8 +154,13 @@ app.get('/api/wallet/:id', async (req, res) => {
       res.status(404).json(wallet);
     }
     else {
-      console.log(wallet)
-      res.json(wallet);
+      if(wallet[0].wallet >0){
+        res.json(true);
+      }else{
+        res.json(false);
+      }
+      
+      
     }
   } catch (err) {
     console.log(err)
