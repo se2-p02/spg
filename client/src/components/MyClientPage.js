@@ -6,7 +6,7 @@ import ModalWindow from "./ModalWindow";
 
 function MyClientPage(props) {
     const [goBack, setGoBack] = useState(false);
-    
+
 
     if (goBack === "profile") {
         return (<Navigate to="/client/profile"></Navigate>)
@@ -17,7 +17,6 @@ function MyClientPage(props) {
     else if (goBack === "orders") {
         return (<Navigate to="/client/orders"></Navigate>)
     }
-
     return (
         <>
         {props.showModal === true ? (
