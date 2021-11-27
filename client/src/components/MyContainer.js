@@ -249,6 +249,10 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
+                {console.log(clock)}
+                {console.log(user)}
+
+
               <MyLogin
                 clock={clock}
                 setClock={setClock}

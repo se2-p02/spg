@@ -9,7 +9,6 @@
     "bootstrap-icons": "^1.7.0",
     "dayjs": "^1.10.7",
     "fas": "^0.3.6",
-    "jest": "^27.3.1",
     "jest-sonar-reporter": "^2.0.0",
     "moment": "^2.29.1",
     "puppeteer": "^11.0.0",
