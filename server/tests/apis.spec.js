@@ -117,7 +117,7 @@ describe('Next week test', () => {
     return request(app).delete("/api/sessions/current").expect(200);
   })
   it('tests get /api/nextProducts without performing the login', () => {
-    const res = request(app).get("/api/nextProducts").expect(500);
+    const res = await request(app).get("/api/nextProducts").expect(500);
   });
 });
 
