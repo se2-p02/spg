@@ -55,9 +55,8 @@ describe('Orders test', () => {
     response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
         id: expect.any(Number),
-        userId: expect.any(Number),
         products: expect.any(Object),
-        address: expect.any(String),
+        address: expect.any(Object),
         date: expect.any(String),
         time: expect.any(String),
         amount: expect.any(Number),
@@ -72,9 +71,8 @@ describe('Orders test', () => {
     response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
         id: expect.any(Number),
-        userId: expect.any(Number),
         products: expect.any(Object),
-        address: expect.any(String),
+        address: expect.any(Object),
         date: expect.any(String),
         time: expect.any(String),
         amount: expect.any(Number),
