@@ -1,6 +1,7 @@
 const { describe } = require('jest-circus');
 const request = require('supertest');
 const app = require("../app");
+var dayjs = require('dayjs')
 
 describe('Products test', () => {
   it('tests GET /api/products', async () => {
@@ -122,12 +123,53 @@ describe('Next week test', () => {
   });
 });
 
-describe('Next week test', () => {
+describe('Next week test not on sunday', () => {
   beforeEach(() => {
     return request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
   });
-  it('tests get /api/nextProducts after the login as a customer', async () => {
+  it('tests get /api/nextProducts after the login as a customer not on sunday', async () => {
     // login
+    var today = dayjs();
+    if (today.day() == 0) {
+      today = today.add(1, 'day');
+    }
+    // set the clock
+    const res_clock = await request(app).put("/api/clock").send({serverTime: toString(today)}).expect(200);
+
+    const res = await request(app).get("/api/nextProducts");
+    res.body.forEach((product) => {
+      expect(product).toMatchSnapshot({
+        id: expect.any(Number),
+        name: expect.any(String),
+        quantity: expect.any(Number),
+        unit: expect.any(String),
+        farmer: expect.any(Number),
+        price: expect.any(Number),
+        availability: expect.any(String),
+        filter: expect.any(String)
+      });
+    });
+  });
+  afterEach(()=>{
+    return request(app).delete("/api/sessions/current").expect(200);
+  })
+});
+
+describe('Next week test on sunday', () => {
+  beforeEach(() => {
+    return request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
+  });
+  it('tests get /api/nextProducts after the login as a customer on sunday', async () => {
+    // compute the day of the sunday of the week
+    const today = dayjs();
+    let difference_from_sunday = 0;
+    if (today.day() != 0) {
+        difference_from_sunday = 7 - today.day();
+    }
+    const next_week = today.add(difference_from_sunday, 'day');
+    // set the clock
+    const res_clock = await request(app).put("/api/clock").send({serverTime: toString(next_week)}).expect(200);
+
     const res = await request(app).get("/api/nextProducts");
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
@@ -152,6 +194,7 @@ describe('Next week test farmer', () => {
     return request(app).post("/api/sessions").send({ username: "farmer@farmer.farmer", password: "farmer" }).expect(200);
   });
   it('tests get /api/nextProducts after the login as a farmer', async () => {
+    const res_login = request(app).post("/api/sessions").send({ username: "farmer@farmer.farmer", password: "farmer" }).expect(200);
     const res = await request(app).get("/api/nextProducts");
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
