@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="330"/>
-    <testCase name="tests GET /api/clients" duration="267"/>
-    <testCase name="tests GET /api/clients/:id" duration="263"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="260"/>
-    <testCase name="tests POST /api/addNewUser" duration="526"/>
-    <testCase name="tests error POST /api/addNewUser" duration="272"/>
-    <testCase name="tests delete /api/sessions/current" duration="280"/>
-    <testCase name="tests get /api/sessions/current" duration="258"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="299"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer" duration="280"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer" duration="268"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="250"/>
-    <testCase name="tests post /api/sesion" duration="338"/>
-    <testCase name="tests post /api/sesion error" duration="322"/>
+    <testCase name="tests GET /api/products" duration="499"/>
+    <testCase name="tests GET /api/clients" duration="342"/>
+    <testCase name="tests GET /api/clients/:id" duration="432"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="384"/>
+    <testCase name="tests POST /api/addNewUser" duration="1182"/>
+    <testCase name="tests error POST /api/addNewUser" duration="323"/>
+    <testCase name="tests delete /api/sessions/current" duration="427"/>
+    <testCase name="tests get /api/sessions/current" duration="418"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="292"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer" duration="322"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="429"/>
+    <testCase name="tests post /api/sesion" duration="492"/>
+    <testCase name="tests post /api/sesion error" duration="363"/>
   </file>
 </testExecutions>

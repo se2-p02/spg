@@ -76,6 +76,7 @@ exports[`tests GET /api/products 1`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
+  "filter": "All-Purpose",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -88,6 +89,7 @@ exports[`tests GET /api/products 2`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
+  "filter": "Animal Products",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -100,6 +102,7 @@ exports[`tests GET /api/products 3`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
+  "filter": "Dairy",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -112,6 +115,255 @@ exports[`tests GET /api/products 4`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
+  "filter": "Dairy",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 5`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 6`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 7`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 8`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 1`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 2`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "CampoGrande",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 3`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 4`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 5`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "CampoGrande",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 6`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer 7`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 1`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 2`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "CampoGrande",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 3`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 4`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 5`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "CampoGrande",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 6`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "TerraGrossa",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a farmer 7`] = `
+Object {
+  "availability": Any<String>,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
