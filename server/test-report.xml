@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="725"/>
-    <testCase name="tests GET /api/clients" duration="471"/>
-    <testCase name="tests GET /api/clients/:id" duration="473"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="515"/>
-    <testCase name="tests GET /api/orders" duration="491">
+    <testCase name="tests GET /api/products" duration="588"/>
+    <testCase name="tests GET /api/clients" duration="481"/>
+    <testCase name="tests GET /api/clients/:id" duration="448"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="470"/>
+    <testCase name="tests GET /api/orders" duration="487">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders 1`
@@ -239,7 +239,7 @@ Snapshot name: `tests GET /api/orders 8`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:55:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests GET /api/orders/:id" duration="429">
+    <testCase name="tests GET /api/orders/:id" duration="449">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders/:id 1`
@@ -473,16 +473,16 @@ Snapshot name: `tests GET /api/orders/:id 8`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:71:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests POST /api/orders" duration="709"/>
-    <testCase name="tests POST /api/addNewUser" duration="1119"/>
-    <testCase name="tests error POST /api/addNewUser" duration="546"/>
-    <testCase name="tests delete /api/sessions/current" duration="616"/>
-    <testCase name="tests get /api/sessions/current" duration="496"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="474"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="546"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="428"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="542"/>
-    <testCase name="tests post /api/sesion" duration="572"/>
-    <testCase name="tests post /api/sesion error" duration="639"/>
+    <testCase name="tests POST /api/orders" duration="659"/>
+    <testCase name="tests POST /api/addNewUser" duration="865"/>
+    <testCase name="tests error POST /api/addNewUser" duration="486"/>
+    <testCase name="tests delete /api/sessions/current" duration="476"/>
+    <testCase name="tests get /api/sessions/current" duration="673"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="536"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="577"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="467"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="451"/>
+    <testCase name="tests post /api/sesion" duration="686"/>
+    <testCase name="tests post /api/sesion error" duration="568"/>
   </file>
 </testExecutions>
