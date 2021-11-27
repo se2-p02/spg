@@ -47,7 +47,7 @@ describe('Clients test', () => {
     await request(app).put("/api/clients/-1/wallet").send({ wallet }).expect(200);
   });
 });
-
+/*
 describe('Orders test', () => {
   it('tests GET /api/orders', async () => {
     const response = await request(app).get("/api/orders");
@@ -88,7 +88,7 @@ describe('Orders test', () => {
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
   });
 });
-
+*/
 describe('Users test', () => {
   it('tests POST /api/addNewUser', async () => {
     const response = await request(app).post("/api/addNewUser").send({ name: "Mario", surname: "Rossi", password: "password", email: "test_email@email.it", phoneNumber: "3333333333", city: "Torino", address: "Via X, 5", country: "Italy", role: "customer" }).expect(200);
@@ -114,8 +114,11 @@ describe('Session test', () => {
 });
 
 describe('Next week test', () => {
-  it('tests get /api/nextProducts without performing the login', async () => {
-    const res = await request(app).get("/api/nextProducts").expect(500);
+  beforeEach(()=>{
+    return request(app).delete("/api/sessions/current").expect(200);
+  })
+  it('tests get /api/nextProducts without performing the login', () => {
+    const res = request(app).get("/api/nextProducts").expect(500);
   });
 });
 
@@ -123,9 +126,21 @@ describe('Next week test', () => {
   beforeEach(() => {
     return request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
   });
-  it('tests get /api/nextProducts after the login as a customer', () => {
+  it('tests get /api/nextProducts after the login as a customer', async () => {
     // login
-    const res = request(app).get("/api/nextProducts").expect(200);
+    const res = await request(app).get("/api/nextProducts");
+    res.body.forEach((product) => {
+      expect(product).toMatchSnapshot({
+        id: expect.any(Number),
+        name: expect.any(String),
+        quantity: expect.any(Number),
+        unit: expect.any(String),
+        farmer: expect.any(Number),
+        price: expect.any(Number),
+        availability: expect.any(String),
+        filter: expect.any(String)
+      });
+    });
   });
   afterEach(()=>{
     return request(app).delete("/api/sessions/current").expect(200);
@@ -136,9 +151,20 @@ describe('Next week test farmer', () => {
   beforeEach(() => {
     return request(app).post("/api/sessions").send({ username: "farmer@farmer.farmer", password: "farmer" }).expect(200);
   });
-  it('tests get /api/nextProducts after the login as a farmer', () => {
-    // login
-    const res = request(app).get("/api/nextProducts").expect(200);
+  it('tests get /api/nextProducts after the login as a farmer', async () => {
+    const res = await request(app).get("/api/nextProducts");
+    res.body.forEach((product) => {
+      expect(product).toMatchSnapshot({
+        id: expect.any(Number),
+        name: expect.any(String),
+        quantity: expect.any(Number),
+        unit: expect.any(String),
+        farmer: expect.any(Number),
+        price: expect.any(Number),
+        availability: expect.any(String),
+        filter: expect.any(String)
+      });
+    });
   });
   afterEach(()=>{
     return request(app).delete("/api/sessions/current").expect(200);
