@@ -160,7 +160,7 @@ exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
+            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
@@ -243,6 +243,7 @@ exports.getClock = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT serverTime FROM clock';
         db.all(sql, (err, rows) => {
+            
             if (err) {
                 reject(err);
                 return;

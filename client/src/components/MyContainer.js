@@ -26,7 +26,6 @@ function MyContainer(props) {
   useEffect(() => {
     API.getClock().then((c) => {
       if (c.error === undefined) {
-        console.log(c.serverTime)
         setClock(() => dayjs(c.serverTime));
       }
     }).catch((err) => {
@@ -60,7 +59,7 @@ function MyContainer(props) {
         .then((c) => {
           if (c.error === undefined) {
             console.log(c);
-            if (c ===false) {
+            if (c === false) {
               setShowModal(true);
             }
           }
@@ -98,7 +97,7 @@ function MyContainer(props) {
     }
   }, [user]);
 
-  if (login && !user && location.pathname !== "/login") {
+  if (login && !user && location.pathname !== "/login" && location.pathname !== "/signup") {
     return <Navigate to="/login" />;
   }
 
@@ -120,6 +119,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -138,6 +138,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -160,6 +161,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -176,6 +178,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -197,6 +200,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -220,6 +224,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -243,6 +248,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -250,9 +256,6 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-                {console.log(clock)}
-                {console.log(user)}
-
 
               <MyLogin
                 clock={clock}
@@ -268,6 +271,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -290,6 +294,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -310,6 +315,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -330,6 +336,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -351,6 +358,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
@@ -367,6 +375,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 cart={cart}
@@ -391,6 +400,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 cart={cart}
@@ -415,6 +425,7 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                user={user}
                 clock={clock}
                 setClock={setClock}
                 cart={cart}

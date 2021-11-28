@@ -193,6 +193,7 @@ async function loadNextProducts(role, week) {
 async function getClock() {
     const response = await fetch(URL + "/api/clock");
     if (response.ok) {
+        console.log(response.json)
         return response.json();
     }
     else return { 'error': 'Failed to load clock from server' };
