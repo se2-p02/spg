@@ -3,9 +3,6 @@ const request = require("supertest");
 const app = require("../app");
 var dayjs = require('dayjs')
 
-const MockStrategy = require('passport-mock-strategy');
-const passport = require("passport");
-
 describe("Products test", () => {
   it("tests GET /api/products", async () => {
     const response = await request(app).get("/api/products");
@@ -170,21 +167,6 @@ describe('Next week test', () => {
 });
 
 describe('Next week test not on sunday', () => {
-  passport.use(new MockStrategy({
-    id:1,
-    username: "gigi@libero.it",
-    role: "client"
-  }, async(user, done) => {
-    var today = dayjs();
-    if (today.day() == 0) {
-      today = today.add(1, 'day');
-    }
-    // set the clock
-    const res_clock = await request(app).put("/api/clock").send({serverTime: toString(today)}).expect(200);
-    const res = await request(app).get("/api/nextProducts").expect(200);
-    done();
-  }));
-  /*
   it('tests get /api/nextProducts after the login as a customer not on sunday', async () => {
     var today = dayjs();
     if (today.day() == 0) {
@@ -198,7 +180,7 @@ describe('Next week test not on sunday', () => {
     console.log ("LOGIN----------------"+res_login.body.id)
     const res = await request(app).get("/api/nextProducts").expect(200);
   
-    res.body.forEach((product) => {
+    /*res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
         name: expect.any(String),
@@ -209,9 +191,9 @@ describe('Next week test not on sunday', () => {
         availability: expect.any(String),
         filter: expect.any(String)
       });
-    });
+    });*/
     const logout = await request(app).delete("/api/sessions/current").expect(200);
-  });*/
+  });
 });
 
 /*
