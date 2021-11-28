@@ -1,3 +1,290 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js">
+    <testCase name="renders the info of a client from employee page" duration="119">
+      <failure message="TestingLibraryElementError: Unable to find an element with the text: Name. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible."><![CDATA[TestingLibraryElementError: Unable to find an element with the text: Name. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+<body>
+  <div>
+    <div
+      class="bg-dark min-height-100 justify-content-center align-items-center below-nav mt-3 container-fluid"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class=" m-0 p-0 col-sm-6"
+        >
+          <div
+            class="m-0 p-4 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Name: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Surname: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Email: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Role: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Wallet: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-3"
+            >
+              <h3
+                class="text-white m-0 p-0"
+              >
+                undefined €
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-2"
+              fluid="true"
+            >
+              <button
+                class="bg-transparent border border-dark p-0 m-0 mt-0 mb-0 btn btn-primary"
+                type="button"
+              >
+                <img
+                  class="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0"
+                  src="minus-circle-solid.png"
+                  testid="plus"
+                />
+              </button>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-2"
+              fluid="true"
+            >
+              <button
+                class="bg-transparent border border-dark p-0 m-0 mt-0 mb-0 btn btn-primary"
+                type="button"
+              >
+                <img
+                  class="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0"
+                  src="minus-circle-solid2.png"
+                  testid="minus"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class=" m-0 p-0 col-sm-6"
+        >
+          <div
+            class="m-0 p-4 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Phone: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Address: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  City: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+          <div
+            class="m-0 p-4 pt-0 pb-2 row"
+          >
+            <div
+              class="m-0 p-0 col-sm-4"
+            >
+              <h3
+                class="text-white"
+              >
+                <b>
+                  Country: 
+                </b>
+              </h3>
+            </div>
+            <div
+              class="m-0 p-0 col-sm-8"
+            >
+              <h3
+                class="text-white"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr
+        class="text-white my-5"
+        style="margin-top: 1rem; margin-bottom: 1rem; border: 0px;"
+      />
+      <h1
+        class="text-white"
+        testid="header"
+      >
+        Orders
+      </h1>
+      <div
+        class="text-center justify-content-center p-0 pt-2 pb-5 row"
+      >
+        <button
+          class="btn-danger p-2 w-50 mt-3 btn btn-primary btn-lg"
+          type="button"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+    at Object.getElementError (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:90:38
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:62:17
+    at getByText (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:111:19)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js:8:26)
+    at Object.asyncJestTest (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:43:12
+    at new Promise (<anonymous>)
+    at mapper (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:73:41
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    </testCase>
+  </file>
 </testExecutions>

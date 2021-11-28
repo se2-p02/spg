@@ -89,7 +89,7 @@ exports[`tests GET /api/products 2`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Animal Products",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -102,7 +102,7 @@ exports[`tests GET /api/products 3`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -115,7 +115,7 @@ exports[`tests GET /api/products 4`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -128,7 +128,7 @@ exports[`tests GET /api/products 5`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -141,7 +141,7 @@ exports[`tests GET /api/products 6`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -154,7 +154,7 @@ exports[`tests GET /api/products 7`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
@@ -167,7 +167,33 @@ exports[`tests GET /api/products 8`] = `
 Object {
   "farmer": Any<Number>,
   "farmerName": Any<String>,
-  "filter": "Dairy",
+  "filter": "Dairy and Eggs",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 9`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Fish",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests GET /api/products 10`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Home and Garden",
   "id": Any<Number>,
   "name": Any<String>,
   "price": Any<Number>,
