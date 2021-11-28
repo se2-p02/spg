@@ -108,7 +108,7 @@ function MyLogin(props) {
                                         onChange={(ev) => { setUsername(ev.target.value); checkValid(ev.target.value, password) }}
                                         value={username}
                                     />
-                                    <Form.Control.Feedback type="invalid" id="error">
+                                    <Form.Control.Feedback type="invalid" id="erroru">
                                         {errorMessageUsername}
                                     </Form.Control.Feedback>
                                     <Form.Text className="text-muted"></Form.Text>

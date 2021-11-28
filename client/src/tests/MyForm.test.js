@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MyForm from '../components/MyForm';
+import React from 'react'
 
 
 test('renders sigup page', () => {

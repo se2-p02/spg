@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MyClientProfile from '../components/MyClientProfile'
+import React from 'react'
 
 test('renders the client profile', () => {
     render(<MyClientProfile />);
