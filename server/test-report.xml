@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="499"/>
-    <testCase name="tests GET /api/clients" duration="342"/>
-    <testCase name="tests GET /api/clients/:id" duration="432"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="384"/>
-    <testCase name="tests POST /api/addNewUser" duration="1182"/>
-    <testCase name="tests error POST /api/addNewUser" duration="323"/>
-    <testCase name="tests delete /api/sessions/current" duration="427"/>
-    <testCase name="tests get /api/sessions/current" duration="418"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="292"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer" duration="322"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="429"/>
-    <testCase name="tests post /api/sesion" duration="492"/>
-    <testCase name="tests post /api/sesion error" duration="363"/>
+  <file path="D:\spg\spg\server\tests\apis.spec.js">
+    <testCase name="tests GET /api/products" duration="536"/>
+    <testCase name="tests GET /api/clients" duration="299"/>
+    <testCase name="tests GET /api/clients/:id" duration="290"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="291"/>
+    <testCase name="tests POST /api/addNewUser" duration="960"/>
+    <testCase name="tests error POST /api/addNewUser" duration="312"/>
+    <testCase name="tests delete /api/sessions/current" duration="288"/>
+    <testCase name="tests get /api/sessions/current" duration="277"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="279"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer" duration="445"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="323"/>
+    <testCase name="tests post /api/sesion" duration="388"/>
+    <testCase name="tests post /api/sesion error" duration="375"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="301"/>
+    <testCase name="tests GET /api/wallet/:id" duration="286">
+      <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
+    at Object.<anonymous> (D:\spg\spg\server\tests\apis.spec.js:267:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    </testCase>
+    <testCase name="tests GET /api/wallet/:id" duration="274">
+      <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
+    at Object.<anonymous> (D:\spg\spg\server\tests\apis.spec.js:276:19)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    </testCase>
   </file>
 </testExecutions>
