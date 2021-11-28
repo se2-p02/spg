@@ -23,8 +23,8 @@ function MyClientPage(props) {
         <ModalWindow
           show={props.showModal}
           onHide={props.onHide}
-          text="your credit is insufficient,Please top up your wallet"
-          header="insufficient Wallet Balance!"
+          text="Please top up your wallet"
+          header="Insufficient balance!"
         ></ModalWindow>
       ) : (
         ""

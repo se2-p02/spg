@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import ModalWindow from '../components/ModalWindow';
 const puppeteer = require('puppeteer');
 
-describe("MyNavBar.js tests", () => {
+describe("modal window.js tests", () => {
     let browser;
     let page;
   
