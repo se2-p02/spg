@@ -1,6 +1,10 @@
 # se2021-02--SPG
 
 ## Installation Guide
+ To run it with docker:
+ * git clone https://github.com/se2-p02/spg.git
+ * docker-compose up
+
  In a window terminal
  
  * git clone https://github.com/se2-p02/spg.git
@@ -25,6 +29,15 @@
 - Route `/employee/products`: display the list of available products
 - Route `/employee/orders`: display the list of all orders
 - Route `/employee/form` : shows the form used by the employee to register the users
+- Route `/farmer/` : display the possible actions available for a farmer
+- Route `/farmer/profile`: display the informations of the farmer
+- Route `/farmer/products`: display the list of available products
+- Route `/employee/myProducts`: display the list of next week's products of the farmer
+- Route `/client/` : display the possible actions available for a client
+- Route `/client/profile`: display the informations of the client
+- Route `/client/products`: display the list of available products
+- Route `/client/orders`: display the list of all orders of a client
+
   
 ## Database Tables
 
@@ -32,6 +45,7 @@
 - Table `products` - contains **id name quantity unit farmer confirmed delivered price**
 - Table `orders` - contains **id userID products address date time amount confPreparation**
 - Table `farmers` - contains **id name confirmed**
+- Table `clock` - contains **serverTime**
 
 ## API Server
 
@@ -262,3 +276,46 @@
         "availability": "2021-12-15"
     }
   ]
+
+- POST `/api/products`
+  - Request parameter: None.
+  - Request body: An object representing the product (Content-Type: `application/json`).
+  ``` 
+  {
+    name: "Sticks",
+    quantity: "4",
+    unit: "pcs", 
+    price: "2",
+    filter: "Home and Garden"
+  }
+  ```
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: true or false.
+
+- PUT `/api/products/:id`
+  - Request parameter: the id of the product to modify.
+  - Request body: An object representing the product (Content-Type: `application/json`).
+  ``` 
+  {
+    product: {
+      name: "Sticks",
+      quantity: "4",
+      unit: "pcs", 
+      price: "2",
+      filter: "Home and Garden"
+    },
+    action: {
+      update: "true"
+    }
+  }
+
+  ```
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: true or false.
+
+  
+- DELETE `/api/products/:id`
+  - Request parameter: the id of the product to delete.
+  - Request body: None.
+  - Response: `200 OK` (success).
+  - Response body: None.  
