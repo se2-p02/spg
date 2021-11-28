@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js">
-    <testCase name="Test login form Test login form appearance" duration="116">
+    <testCase name="Test login form Test login form appearance" duration="100">
       <failure message="Error: useNavigate() may be used only in the context of a &lt;Router&gt; component."><![CDATA[Error: useNavigate() may be used only in the context of a <Router> component.
     at invariant (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:19:20)
     at useNavigate (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:457:3)
@@ -42,7 +42,7 @@
     </testCase>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientProfile.test.js">
-    <testCase name="renders the client profile" duration="82">
+    <testCase name="renders the client profile" duration="109">
       <failure message="TestingLibraryElementError: Unable to find an element with the text: Surname. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible."><![CDATA[TestingLibraryElementError: Unable to find an element with the text: Surname. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 <body>
@@ -291,22 +291,22 @@
     </testCase>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js">
-    <testCase name="renders the info of a client from employee page" duration="180"/>
+    <testCase name="renders the info of a client from employee page" duration="204"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\App.test.js">
-    <testCase name="renders app homepage" duration="182"/>
-  </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
-    <testCase name="renders app form" duration="10"/>
-  </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
-    <testCase name="renders sigup page" duration="59"/>
+    <testCase name="renders app homepage" duration="165"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyFarmer.test.js">
-    <testCase name="renders the farmer starting page" duration="12"/>
+    <testCase name="renders the farmer starting page" duration="9"/>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
+    <testCase name="renders sigup page" duration="72"/>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
+    <testCase name="renders app form" duration="13"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js">
-    <testCase name="MyLogin.js tests tests error messages" duration="4537">
+    <testCase name="MyLogin.js tests tests error messages" duration="4465">
       <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
     at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -315,7 +315,7 @@
     at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
     at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js:13:5)]]></failure>
     </testCase>
-    <testCase name="MyLogin.js tests tests successful login" duration="243">
+    <testCase name="MyLogin.js tests tests successful login" duration="284">
       <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
     at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -326,7 +326,7 @@
     </testCase>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js">
-    <testCase name="MyNavBar.js tests tests logout" duration="4170">
+    <testCase name="MyNavBar.js tests tests logout" duration="4511">
       <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
     at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -335,7 +335,7 @@
     at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
     at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:13:5)]]></failure>
     </testCase>
-    <testCase name="MyNavBar.js tests tests cart presence" duration="548">
+    <testCase name="MyNavBar.js tests tests cart presence" duration="387">
       <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
     at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -346,7 +346,7 @@
     </testCase>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js">
-    <testCase name="modal window.js tests renders modal window for alert" duration="4311">
+    <testCase name="modal window.js tests renders modal window for alert" duration="4237">
       <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client
     at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
