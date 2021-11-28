@@ -116,7 +116,7 @@ async function deleteProduct(id) {
         });
     if (response.ok) {
         return true;
-    } else return { 'error': 'Failed to store data on server' }
+    } else return { 'error': 'Failed to delete data from the server' }
 }
 
 async function login(user) {

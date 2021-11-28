@@ -31,7 +31,7 @@ function MyNavBar(props) {
 
     const updateClock = (value) => {
         API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => dayjs(value));
+            if (response.error === undefined) props.setClock(() => moment(value));
         });
     };
 

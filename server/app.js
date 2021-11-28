@@ -96,12 +96,96 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+// POST /api/products/
+//new product
+app.post('/api/products', async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+    res.status(500).end('New products cannot be inserted in this timeslot.');
+    return;
+  }
+
+  const product = req.body;
+  try {
+    if (req.user.role !== "farmer") {
+      res.status(500).json({ error: `User cannot insert new products` });
+      return;
+    }
+    const result = await spgDao.addProduct(product, req.user, datetime);
+    if (result.err)
+      res.status(404).json(result);
+    else {
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+
+});
+
+// PUT /api/products/
+//new product
+app.put('/api/products/:id', async (req, res) => {
+
+  const product = req.body;
+
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (product.action.update && !(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+    res.status(500).end('Products cannot be modified in this timeslot.');
+    return;
+  }
+  if (product.action.confirm && !(datetime.day() === 1 && datetime.hour() < 9)) {
+    res.status(500).end('Products cannot be confirmed in this timeslot.');
+    return;
+  }
+
+  try {
+    if (req.user.role !== "farmer") {
+      res.status(500).json({ error: `User cannot update products` });
+      return;
+    }
+    if (parseInt(req.params.id) !== parseInt(product.product.id)) {
+      res.status(500).json({ error: `User cannot update products with different id than in URL` });
+      return;
+    }
+    const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
+    if (result.err)
+      res.status(404).json(result);
+    else {
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+
+});
+
+// DELETE user
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const clock = await spgDao.getClock();
+    const datetime = moment(clock.serverTime);
+    if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+      res.status(500).end('Products cannot be deleted in this timeslot.');
+      return;
+    }
+    const result = await spgDao.deleteProduct(req.params.id);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).end();
+  }
+});
+
 // GET nextProducts
 app.get('/api/nextProducts', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
     const datetime = moment(clock.serverTime);
-    console.log("req.user = "+req.isAuthenticated())
+    console.log("req.user = " + req.isAuthenticated())
     if (!req.isAuthenticated()) res.status(401).end();
     else {
       const products = await spgDao.getNextProducts(req.query.role, req.user, datetime, req.query.week);
@@ -113,7 +197,6 @@ app.get('/api/nextProducts', async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err)
     res.status(500).end();
   }
 });
@@ -158,13 +241,13 @@ app.get('/api/wallet/:id', async (req, res) => {
       res.status(404).json(wallet);
     }
     else {
-      if(wallet[0].wallet >0){
+      if (wallet[0].wallet > 0) {
         res.json(true);
-      }else{
+      } else {
         res.json(false);
       }
-      
-      
+
+
     }
   } catch (err) {
     console.log(err)
