@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import './MyNavBar.css';
 import API from "./API";
+import moment from "moment";
 
 
 function MyMyProducts(props) {
@@ -20,7 +21,7 @@ function MyMyProducts(props) {
 
     useEffect(() => {
         if (props.clock && props.user && (reqUpdate || props.cart)) {
-            if (props.clock.day < 5 && props.clock.day > 0) {
+            if (props.clock.day() < 5 && props.clock.day() > 0) {
                 API.loadNextProducts(props.user.role, 'current').then((p) => {
                     if (p.error === undefined) {
                         p.forEach((prod) => {
@@ -143,40 +144,44 @@ function MyModal(props) {
     const [name, setName] = useState();
     const [quantity, setQuantity] = useState();
     const [unit, setUnit] = useState();
+    const [category, setCategory] = useState("All-purpose");
 
     useEffect(() => {
         if (props.modal === 'modify') {
             setName(props.product && props.product.name);
             setQuantity(props.product && props.product.quantity);
             setUnit(props.product && props.product.unit);
+            setCategory(props.product && props.product.filter);
         }
-    }, [props.modal, props.product]);
+    }, [props.modal, props.product, props.show]);
 
     const handleClose = () => {
         props.setProduct();
+        setCategory("All-purpose");
         props.setShow(false);
     }
 
     const handleSubmit = () => {
         if (props.modal === 'modify') {
-            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, unit: unit }, { confirm: true }).then((r) => {
+            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, unit: unit, filter: category }, { confirm: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
+                handleClose();
             }).catch((err) => {
                 console.log(err);
             });
         }
         else {
-            API.createProduct({ name: name, quantity: quantity, unit: unit }).then((r) => {
+            API.createProduct({ name: name, quantity: quantity, unit: unit, filter: category }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
+                handleClose();
             }).catch((err) => {
                 console.log(err);
             });
         }
-        props.setShow(false);
     }
 
     const handleDelete = () => {
@@ -184,6 +189,7 @@ function MyModal(props) {
             if (p.error === undefined) {
                 props.setReqUpdate(true);
             }
+            handleClose();
         }).catch((err) => {
             console.log(err);
         });
@@ -244,17 +250,37 @@ function MyModal(props) {
                         <Col>
                             <Form.Group controlId="unit">
                                 <Form.Label className="text-info w-100"><h5>Unit</h5></Form.Label>
-                                <Form.Control
-                                    className="w-100 p-3"
-                                    type="text"
-                                    placeholder="Unit"
-                                    required
-                                    onChange={(ev) => { setUnit(ev.target.value); }}
-                                    value={unit ? unit : ""}
-                                />
-                                <Form.Text className="text-muted"></Form.Text>
+                                <Form.Select style={{
+                                    backgroundColor: "unset",
+                                    marginTop: "unset"
+                                }} className="w-100 p-3" onChange={(ev) => { setUnit(ev.target.value); }}>
+                                    <option key="kg">kg</option>
+                                    <option key="g">g</option>
+                                    <option key="pcs">pcs</option>
+                                    <option key="l">l</option>
+                                </Form.Select>
                             </Form.Group>
                         </Col>
+                    </Row>
+                    <Row>
+                        <Form.Group controlId="category">
+                            <Form.Label className="text-info w-100 mt-2"><h5>Category</h5></Form.Label>
+                            <Form.Select style={{
+                                backgroundColor: "unset",
+                                marginTop: "unset"
+                            }} className="w-100 p-3" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
+                                <option key="All-purpose">All-purpose</option>
+                                <option key="Fish">Fish</option>
+                                <option key="Dairy and Eggs">Dairy and Eggs</option>
+                                <option key="Meat">Meat</option>
+                                <option key="Vegetables">Vegetables</option>
+                                <option key="Beverages">Beverages</option>
+                                <option key="Fruit">Fruit</option>
+                                <option key="Gastronomy">Gastronomy</option>
+                                <option key="Fruit">Fruit</option>
+                                <option key="Home and Garden">Home and Garden</option>
+                            </Form.Select>
+                        </Form.Group>
                     </Row>
                 </Form>
             </Modal.Body>
@@ -265,7 +291,7 @@ function MyModal(props) {
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
                 <Button variant="success" onClick={handleSubmit}>Submit</Button>
             </Modal.Footer>
-        </Modal>
+        </Modal >
     );
 }
 
