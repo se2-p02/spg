@@ -46,12 +46,16 @@ exports.getNextProducts = (role, user, time, week) => {
             sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
+        console.log(params)
 
         db.all(sql, params, (err, rows) => {
             if (err) {
+                console.log("1")
                 reject(err);
                 return;
             }
+            console.log(rows)
+
             const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, filter: p.filter, farmer: p.farmer, farmerName: p.farmerName, price: p.price, availability: p.availability }));
             resolve(products);
         });

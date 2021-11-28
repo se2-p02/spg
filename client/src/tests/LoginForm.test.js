@@ -10,11 +10,13 @@ describe('Test login form', () => {
     const passwordField = screen.getByPlaceholderText('Password');
     const loginButton = screen.getByText('Login');
     const homeButton = screen.getByText('Back');
+    const signupLink = screen.getByText("Sign up");
 
     expect(usernameField).toBeInTheDocument();
     expect(passwordField).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
     expect(homeButton).toBeInTheDocument();
+    expect(signupLink).toBeInTheDocument();
   });
 
 });
