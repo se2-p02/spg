@@ -20,6 +20,8 @@ function MyNavBar(props) {
         props.setCart((c) => c.filter((old) => old !== p));
     }
 
+    console.log(props.user)
+
     const handleLogout = () => {
         API.logout().then((response) => {
             if (response.error === undefined) {
@@ -102,7 +104,7 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                 </ListGroup> : <></>}
             {props.cart.length !== 0 &&
-                <MyModal cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                <MyModal user = {props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -117,6 +119,8 @@ function MyModal(props) {
     const [datetime, setDatetime] = useState();
     const [errorMsg, setErrorMsg] = useState('');
 
+    console.log(props.user)
+
     const handleClose = () => {
         setSuccessful(false);
         setOrderMethod('store');
@@ -128,12 +132,28 @@ function MyModal(props) {
     const handleSubmit = async () => {
         let order;
         let products = {};
+        let u = props.user
+        let info = undefined
+        let wallet = 0
+        let paid = 0
+        if (u.role !== "employee"){
+            u = props.user.id
+            info = await API.loadClient(u)
+            wallet = info.wallet
+        }
+        else{
+            u = null;
+        }
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
             amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
-            address: undefined
+            address: undefined,
+            user : u,
+            paid : (wallet-order.amount>0)?1:0
         }
+
+
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
         }

@@ -46,9 +46,11 @@ exports.getNextProducts = (role, user, time, week) => {
             sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability, p.confirmed FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
+        console.log(params)
 
         db.all(sql, params, (err, rows) => {
             if (err) {
+                console.log("1")
                 reject(err);
                 return;
             }
@@ -160,7 +162,7 @@ exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, null, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
+            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
@@ -314,6 +316,7 @@ exports.getClock = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT serverTime FROM clock';
         db.all(sql, (err, rows) => {
+            
             if (err) {
                 reject(err);
                 return;

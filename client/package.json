@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.16.0",
     "@testing-library/jest-dom": "^5.15.0"
   }
 }
