@@ -37,7 +37,7 @@ function MyClientProfile(props) {
             <Row>
                 <Col sm="6" className=" m-0 p-0">
                 <Row className="m-0 p-4 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Name: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="profileName">Name: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.name}</h3>
                     </Col>
