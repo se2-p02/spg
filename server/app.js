@@ -101,12 +101,16 @@ app.get('/api/nextProducts', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
     const datetime = moment(clock.serverTime);
-    const products = await spgDao.getNextProducts(req.query.role, req.user, datetime, req.query.week);
-    if (products.error) {
-      res.status(404).json(products);
-    }
+    console.log("req.user = "+req.isAuthenticated())
+    if (!req.isAuthenticated()) res.status(401).end();
     else {
-      res.json(products);
+      const products = await spgDao.getNextProducts(req.query.role, req.user, datetime, req.query.week);
+      if (products.error) {
+        res.status(404).json(products);
+      }
+      else {
+        res.json(products);
+      }
     }
   } catch (err) {
     console.log(err)
