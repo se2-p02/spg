@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638123176126" clover="3.2.0">
-  <project timestamp="1638123176126" name="All files">
-    <metrics statements="639" coveredstatements="109" conditionals="423" coveredconditionals="42" methods="259" coveredmethods="25" elements="1321" coveredelements="176" complexity="0" loc="639" ncloc="639" packages="3" files="20" classes="20"/>
+<coverage generated="1638125056788" clover="3.2.0">
+  <project timestamp="1638125056788" name="All files">
+    <metrics statements="639" coveredstatements="108" conditionals="423" coveredconditionals="42" methods="259" coveredmethods="24" elements="1321" coveredelements="174" complexity="0" loc="639" ncloc="639" packages="3" files="20" classes="20"/>
     <package name="src">
       <metrics statements="11" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="1"/>
       <file name="App.js" path="C:\Users\fabia\Desktop\SE2\spg\client\src\App.js">
@@ -26,7 +26,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="624" coveredstatements="108" conditionals="419" coveredconditionals="42" methods="255" coveredmethods="24"/>
+      <metrics statements="624" coveredstatements="107" conditionals="419" coveredconditionals="42" methods="255" coveredmethods="23"/>
       <file name="API.js" path="C:\Users\fabia\Desktop\SE2\spg\client\src\components\API.js">
         <metrics statements="91" coveredstatements="7" conditionals="44" coveredconditionals="0" methods="18" coveredmethods="3"/>
         <line num="1" count="5" type="stmt"/>
@@ -122,9 +122,9 @@
         <line num="227" count="5" type="stmt"/>
       </file>
       <file name="ModalWindow.js" path="C:\Users\fabia\Desktop\SE2\spg\client\src\components\ModalWindow.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="6" count="3" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
       </file>
       <file name="MyClientPage.js" path="C:\Users\fabia\Desktop\SE2\spg\client\src\components\MyClientPage.js">
         <metrics statements="11" coveredstatements="5" conditionals="8" coveredconditionals="4" methods="4" coveredmethods="1"/>

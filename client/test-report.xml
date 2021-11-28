@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js">
+    <testCase name="Test login form Test login form appearance" duration="100">
+      <failure message="Error: useNavigate() may be used only in the context of a &lt;Router&gt; component."><![CDATA[Error: useNavigate() may be used only in the context of a <Router> component.
+    at invariant (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:19:20)
+    at useNavigate (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:457:3)
+    at MyLogin (C:\Users\fabia\Desktop\SE2\spg\client\src\components\MyLogin.js:18:22)
+    at renderWithHooks (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:14985:18)
+    at mountIndeterminateComponent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:17811:13)
+    at beginWork (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:19049:16)
+    at HTMLUnknownElement.callCallback (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+    at invokeEventListeners (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:193:27)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:119:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:82:17)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\nodes\HTMLElement-impl.js:30:27)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:157:21)
+    at Object.invokeGuardedCallbackDev (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+    at invokeGuardedCallback (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+    at beginWork$1 (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+    at performUnitOfWork (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+    at workLoopSync (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+    at renderRootSync (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+    at performSyncWorkOnRoot (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+    at scheduleUpdateOnFiber (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+    at updateContainer (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+    at unbatchedUpdates (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+    at legacyRenderSubtreeIntoContainer (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+    at Object.render (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\dist\pure.js:101:25
+    at batchedUpdates$1 (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+    at act (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+    at render (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\dist\pure.js:97:26)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js:8:5)
+    at Object.asyncJestTest (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:43:12
+    at new Promise (<anonymous>)
+    at mapper (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
+    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:73:41
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    </testCase>
+  </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientProfile.test.js">
-    <testCase name="renders the client profile" duration="134">
+    <testCase name="renders the client profile" duration="109">
       <failure message="TestingLibraryElementError: Unable to find an element with the text: Surname. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible."><![CDATA[TestingLibraryElementError: Unable to find an element with the text: Surname. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 <body>
@@ -249,88 +290,70 @@
     at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
     </testCase>
   </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js">
-    <testCase name="Test login form Test login form appearance" duration="156">
-      <failure message="Error: useNavigate() may be used only in the context of a &lt;Router&gt; component."><![CDATA[Error: useNavigate() may be used only in the context of a <Router> component.
-    at invariant (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:19:20)
-    at useNavigate (C:\Users\fabia\Desktop\SE2\spg\packages\react-router\index.tsx:457:3)
-    at MyLogin (C:\Users\fabia\Desktop\SE2\spg\client\src\components\MyLogin.js:18:22)
-    at renderWithHooks (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:14985:18)
-    at mountIndeterminateComponent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:17811:13)
-    at beginWork (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:19049:16)
-    at HTMLUnknownElement.callCallback (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
-    at invokeEventListeners (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:193:27)
-    at HTMLUnknownElementImpl._dispatch (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:119:9)
-    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:82:17)
-    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\nodes\HTMLElement-impl.js:30:27)
-    at HTMLUnknownElement.dispatchEvent (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:157:21)
-    at Object.invokeGuardedCallbackDev (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
-    at invokeGuardedCallback (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
-    at beginWork$1 (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
-    at performUnitOfWork (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
-    at workLoopSync (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
-    at renderRootSync (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
-    at performSyncWorkOnRoot (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
-    at scheduleUpdateOnFiber (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
-    at updateContainer (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
-    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
-    at unbatchedUpdates (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
-    at legacyRenderSubtreeIntoContainer (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
-    at Object.render (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
-    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\dist\pure.js:101:25
-    at batchedUpdates$1 (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
-    at act (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
-    at render (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\@testing-library\react\dist\pure.js:97:26)
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js:8:5)
-    at Object.asyncJestTest (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
-    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:43:12
-    at new Promise (<anonymous>)
-    at mapper (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
-    at C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:73:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
-    </testCase>
-  </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js">
-    <testCase name="renders the info of a client from employee page" duration="188"/>
+    <testCase name="renders the info of a client from employee page" duration="204"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\App.test.js">
-    <testCase name="renders app homepage" duration="239"/>
-  </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js">
-    <testCase name="MyNavBar.js tests tests logout" duration="1710">
-      <failure message="TypeError: Cannot read property &apos;click&apos; of null"><![CDATA[TypeError: Cannot read property 'click' of null
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:16:20)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
-    </testCase>
-    <testCase name="MyNavBar.js tests tests cart presence" duration="409">
-      <failure message="TypeError: Cannot read property &apos;click&apos; of null"><![CDATA[TypeError: Cannot read property 'click' of null
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:27:16)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
-    </testCase>
+    <testCase name="renders app homepage" duration="165"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyFarmer.test.js">
-    <testCase name="renders the farmer starting page" duration="29"/>
-  </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
-    <testCase name="renders app form" duration="59"/>
+    <testCase name="renders the farmer starting page" duration="9"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
-    <testCase name="renders sigup page" duration="100"/>
+    <testCase name="renders sigup page" duration="72"/>
   </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js">
-    <testCase name="modal window.js tests renders modal window for alert" duration="1029">
-      <failure message="Error: expect(received).toBeInTheDocument()"><![CDATA[Error: expect(received).toBeInTheDocument()
-
-received value must be an HTMLElement or an SVGElement.
-Received has type:  object
-Received has value: {}
-    at Object.toBeInTheDocument (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\react-scripts\node_modules\expect\build\index.js:342:33)
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js:20:29)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
-    </testCase>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
+    <testCase name="renders app form" duration="13"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js">
-    <testCase name="MyLogin.js tests tests error messages" duration="2553"/>
-    <testCase name="MyLogin.js tests tests successful login" duration="475"/>
+    <testCase name="MyLogin.js tests tests error messages" duration="4465">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js:13:5)]]></failure>
+    </testCase>
+    <testCase name="MyLogin.js tests tests successful login" duration="284">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js:38:5)]]></failure>
+    </testCase>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js">
+    <testCase name="MyNavBar.js tests tests logout" duration="4511">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:13:5)]]></failure>
+    </testCase>
+    <testCase name="MyNavBar.js tests tests cart presence" duration="387">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:24:5)]]></failure>
+    </testCase>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js">
+    <testCase name="modal window.js tests renders modal window for alert" duration="4237">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js:16:9)]]></failure>
+    </testCase>
   </file>
 </testExecutions>

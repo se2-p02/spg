@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638126655439" clover="3.2.0">
-  <project timestamp="1638126655439" name="All files">
-    <metrics statements="540" coveredstatements="207" conditionals="188" coveredconditionals="33" methods="115" coveredmethods="54" elements="843" coveredelements="294" complexity="0" loc="540" ncloc="540" packages="1" files="4" classes="4"/>
-    <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
-      <metrics statements="266" coveredstatements="104" conditionals="110" coveredconditionals="14" methods="33" coveredmethods="17"/>
+<coverage generated="1638124713308" clover="3.2.0">
+  <project timestamp="1638124713308" name="All files">
+    <metrics statements="540" coveredstatements="216" conditionals="188" coveredconditionals="35" methods="115" coveredmethods="58" elements="843" coveredelements="309" complexity="0" loc="540" ncloc="540" packages="1" files="4" classes="4"/>
+    <file name="app.js" path="C:\Users\fabia\Desktop\SE2\spg\server\app.js">
+      <metrics statements="266" coveredstatements="108" conditionals="110" coveredconditionals="15" methods="33" coveredmethods="18"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
