@@ -30,8 +30,8 @@
     <testCase name="tests PUT /api/clients/basket/:id" duration="19"/>
     <testCase name="tests GET /api/wallet/:id" duration="6">
       <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:291:19)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:312:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
   </file>
 </testExecutions>
