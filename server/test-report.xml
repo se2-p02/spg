@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="46"/>
-    <testCase name="tests GET /api/clients" duration="10"/>
-    <testCase name="tests GET /api/clients/:id" duration="7"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="37"/>
-    <testCase name="tests POST /api/addNewUser" duration="251"/>
-    <testCase name="tests error POST /api/addNewUser" duration="11"/>
-    <testCase name="tests delete /api/sessions/current" duration="4"/>
-    <testCase name="tests get /api/sessions/current" duration="5"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="45"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="86">
-      <failure message="Error: expected 200 &quot;OK&quot;, got 401 &quot;Unauthorized&quot;"><![CDATA[Error: expected 200 "OK", got 401 "Unauthorized"
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:180:61)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\fabia\Desktop\SE2\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\fabia\Desktop\SE2\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\fabia\Desktop\SE2\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\fabia\Desktop\SE2\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\fabia\Desktop\SE2\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:421:28)
-    at Server.emit (events.js:315:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:79:21)]]></failure>
-    </testCase>
-    <testCase name="tests post /api/sesion" duration="70"/>
-    <testCase name="tests post /api/sesion error" duration="67"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="6"/>
-    <testCase name="tests GET /api/wallet/:id" duration="5">
+  <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
+    <testCase name="tests GET /api/products" duration="47"/>
+    <testCase name="tests GET /api/clients" duration="14"/>
+    <testCase name="tests GET /api/clients/:id" duration="10"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="51"/>
+    <testCase name="tests POST /api/addNewUser" duration="278"/>
+    <testCase name="tests error POST /api/addNewUser" duration="16"/>
+    <testCase name="tests delete /api/sessions/current" duration="7"/>
+    <testCase name="tests get /api/sessions/current" duration="8"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="58"/>
+    <testCase name="tests post /api/sesion" duration="86"/>
+    <testCase name="tests post /api/sesion error" duration="78"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="8"/>
+    <testCase name="tests GET /api/wallet/:id" duration="7">
       <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:291:19)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:312:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
   </file>
 </testExecutions>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638121258907" clover="3.2.0">
-  <project timestamp="1638121258907" name="All files">
-    <metrics statements="540" coveredstatements="216" conditionals="188" coveredconditionals="35" methods="115" coveredmethods="58" elements="843" coveredelements="309" complexity="0" loc="540" ncloc="540" packages="1" files="4" classes="4"/>
-    <file name="app.js" path="C:\Users\fabia\Desktop\SE2\spg\server\app.js">
-      <metrics statements="266" coveredstatements="108" conditionals="110" coveredconditionals="15" methods="33" coveredmethods="18"/>
+<coverage generated="1638126655439" clover="3.2.0">
+  <project timestamp="1638126655439" name="All files">
+    <metrics statements="540" coveredstatements="207" conditionals="188" coveredconditionals="33" methods="115" coveredmethods="54" elements="843" coveredelements="294" complexity="0" loc="540" ncloc="540" packages="1" files="4" classes="4"/>
+    <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
+      <metrics statements="266" coveredstatements="104" conditionals="110" coveredconditionals="14" methods="33" coveredmethods="17"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -18,12 +18,12 @@
       <line num="15" count="1" type="stmt"/>
       <line num="16" count="1" type="stmt"/>
       <line num="22" count="1" type="stmt"/>
-      <line num="24" count="3" type="stmt"/>
-      <line num="25" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="24" count="2" type="stmt"/>
+      <line num="25" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="26" count="1" type="stmt"/>
-      <line num="28" count="2" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
       <line num="35" count="1" type="stmt"/>
-      <line num="36" count="2" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
       <line num="40" count="1" type="stmt"/>
       <line num="41" count="0" type="stmt"/>
       <line num="43" count="0" type="stmt"/>
@@ -99,11 +99,11 @@
       <line num="177" count="0" type="stmt"/>
       <line num="179" count="0" type="stmt"/>
       <line num="184" count="1" type="stmt"/>
-      <line num="185" count="2" type="stmt"/>
-      <line num="186" count="2" type="stmt"/>
-      <line num="187" count="2" type="stmt"/>
-      <line num="188" count="2" type="stmt"/>
-      <line num="189" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="185" count="1" type="stmt"/>
+      <line num="186" count="1" type="stmt"/>
+      <line num="187" count="1" type="stmt"/>
+      <line num="188" count="1" type="stmt"/>
+      <line num="189" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="191" count="0" type="stmt"/>
       <line num="192" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="193" count="0" type="stmt"/>
@@ -232,23 +232,23 @@
       <line num="426" count="0" type="stmt"/>
       <line num="427" count="0" type="stmt"/>
       <line num="432" count="1" type="stmt"/>
-      <line num="433" count="1" type="stmt"/>
-      <line num="434" count="1" type="stmt"/>
-      <line num="435" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="433" count="0" type="stmt"/>
+      <line num="434" count="0" type="stmt"/>
+      <line num="435" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="436" count="0" type="stmt"/>
-      <line num="438" count="1" type="stmt"/>
+      <line num="438" count="0" type="stmt"/>
       <line num="441" count="0" type="stmt"/>
       <line num="442" count="0" type="stmt"/>
       <line num="450" count="1" type="stmt"/>
-      <line num="451" count="3" type="stmt"/>
-      <line num="452" count="3" type="cond" truecount="1" falsecount="1"/>
+      <line num="451" count="2" type="stmt"/>
+      <line num="452" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="453" count="0" type="stmt"/>
-      <line num="454" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="454" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="457" count="1" type="stmt"/>
-      <line num="460" count="2" type="stmt"/>
-      <line num="461" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="460" count="1" type="stmt"/>
+      <line num="461" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="462" count="0" type="stmt"/>
-      <line num="466" count="2" type="stmt"/>
+      <line num="466" count="1" type="stmt"/>
       <line num="473" count="1" type="stmt"/>
       <line num="474" count="3" type="stmt"/>
       <line num="475" count="3" type="stmt"/>
@@ -271,15 +271,15 @@
       <line num="510" count="1" type="stmt"/>
       <line num="513" count="1" type="stmt"/>
     </file>
-    <file name="db.js" path="C:\Users\fabia\Desktop\SE2\spg\server\db.js">
+    <file name="db.js" path="C:\Users\Mattia\Desktop\spg\server\db.js">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="3" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
       <line num="7" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="10" count="1" type="stmt"/>
     </file>
-    <file name="spgDao.js" path="C:\Users\fabia\Desktop\SE2\spg\server\spgDao.js">
-      <metrics statements="214" coveredstatements="65" conditionals="56" coveredconditionals="8" methods="66" coveredmethods="27"/>
+    <file name="spgDao.js" path="C:\Users\Mattia\Desktop\spg\server\spgDao.js">
+      <metrics statements="214" coveredstatements="60" conditionals="56" coveredconditionals="7" methods="66" coveredmethods="24"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
@@ -462,21 +462,21 @@
       <line num="307" count="0" type="stmt"/>
       <line num="311" count="0" type="stmt"/>
       <line num="315" count="1" type="stmt"/>
-      <line num="316" count="2" type="stmt"/>
-      <line num="317" count="2" type="stmt"/>
-      <line num="318" count="2" type="stmt"/>
-      <line num="320" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="316" count="1" type="stmt"/>
+      <line num="317" count="1" type="stmt"/>
+      <line num="318" count="1" type="stmt"/>
+      <line num="320" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="321" count="0" type="stmt"/>
       <line num="322" count="0" type="stmt"/>
-      <line num="324" count="2" type="stmt"/>
+      <line num="324" count="1" type="stmt"/>
       <line num="329" count="1" type="stmt"/>
-      <line num="330" count="1" type="stmt"/>
-      <line num="331" count="1" type="stmt"/>
-      <line num="332" count="1" type="stmt"/>
-      <line num="333" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="330" count="0" type="stmt"/>
+      <line num="331" count="0" type="stmt"/>
+      <line num="332" count="0" type="stmt"/>
+      <line num="333" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="334" count="0" type="stmt"/>
       <line num="335" count="0" type="stmt"/>
-      <line num="337" count="1" type="stmt"/>
+      <line num="337" count="0" type="stmt"/>
       <line num="344" count="1" type="stmt"/>
       <line num="345" count="1" type="stmt"/>
       <line num="346" count="1" type="stmt"/>
@@ -495,7 +495,7 @@
       <line num="366" count="1" type="stmt"/>
       <line num="367" count="1" type="stmt"/>
     </file>
-    <file name="userDao.js" path="C:\Users\fabia\Desktop\SE2\spg\server\userDao.js">
+    <file name="userDao.js" path="C:\Users\Mattia\Desktop\spg\server\userDao.js">
       <metrics statements="56" coveredstatements="39" conditionals="20" coveredconditionals="11" methods="15" coveredmethods="12"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -510,17 +510,17 @@
       <line num="17" count="0" type="stmt"/>
       <line num="18" count="0" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
-      <line num="25" count="3" type="stmt"/>
-      <line num="26" count="3" type="stmt"/>
-      <line num="27" count="3" type="stmt"/>
-      <line num="28" count="3" type="cond" truecount="1" falsecount="1"/>
+      <line num="25" count="2" type="stmt"/>
+      <line num="26" count="2" type="stmt"/>
+      <line num="27" count="2" type="stmt"/>
+      <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="29" count="0" type="stmt"/>
-      <line num="30" count="3" type="cond" truecount="1" falsecount="1"/>
+      <line num="30" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="31" count="0" type="stmt"/>
-      <line num="34" count="3" type="stmt"/>
-      <line num="37" count="3" type="stmt"/>
-      <line num="38" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="39" count="2" type="stmt"/>
+      <line num="34" count="2" type="stmt"/>
+      <line num="37" count="2" type="stmt"/>
+      <line num="38" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="39" count="1" type="stmt"/>
       <line num="41" count="1" type="stmt"/>
       <line num="48" count="1" type="stmt"/>
       <line num="49" count="3" type="stmt"/>
