@@ -104,7 +104,7 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                 </ListGroup> : <></>}
             {props.cart.length !== 0 &&
-                <MyModal user = {props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                <MyModal user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -117,15 +117,18 @@ function MyModal(props) {
     const [orderMethod, setOrderMethod] = useState('store');
     const [address, setAddress] = useState('');
     const [datetime, setDatetime] = useState();
+    const [client, setClient] = useState();
     const [errorMsg, setErrorMsg] = useState('');
-
-    console.log(props.user)
+    const [showAddressForm, setShowAddressForm] = useState(true);
 
     const handleClose = () => {
         setSuccessful(false);
         setOrderMethod('store');
+        setAddress('');
         setDatetime(null);
+        setClient();
         setErrorMsg('');
+        setShowAddressForm(true);
         props.setShow(false);
     }
 
@@ -136,12 +139,12 @@ function MyModal(props) {
         let info = undefined
         let wallet = 0
         let paid = 0
-        if (u.role !== "employee"){
+        if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
             wallet = info.wallet
         }
-        else{
+        else {
             u = null;
         }
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
@@ -149,10 +152,9 @@ function MyModal(props) {
             products: products,
             amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
             address: undefined,
-            user : u,
-            paid : (wallet-order.amount>0)?1:0
+            user: u
         }
-
+        order.paid = (wallet - order.amount > 0) ? 1 : 0
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -166,7 +168,8 @@ function MyModal(props) {
         API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
-                props.setCart([])
+                props.setCart([]);
+                props.setShow(false);
             }
         });
     }
@@ -211,22 +214,44 @@ function MyModal(props) {
                                 name="ordergroup"
                                 id="checkstore"
                                 label="Pickup in store"
-                                onChange={() => setOrderMethod(() => 'store')} />
+                                onClick={() => setOrderMethod(() => 'store')} />
                             <Form.Check inline
                                 type="radio"
                                 name="ordergroup"
                                 id="checkdelivery"
-                                onChange={() => setOrderMethod(() => 'address')}
-                                label="Deliver at address" />
+                                label="Deliver to address"
+                                onClick={() => {
+                                    if (!client) API.loadClient(props.user.id).then((c) => { if (c.error === undefined) setClient(c); });
+                                    setOrderMethod(() => 'address');
+                                }} />
                         </Form>
                     </ListGroup.Item>
                     {orderMethod === 'address' &&
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                             <Form>
-                                <Form.Label>Your complete address:</Form.Label>
-                                <Form.Control className="w-100" as="textarea" cols={100} rows={3}
-                                    placeholder="Please include street, city, postal code and country."
-                                    onChange={(e) => setAddress(() => e.target.value)} />
+                                <Form.Check defaultChecked
+                                    type="radio"
+                                    name="ordergroup"
+                                    id="checkspec"
+                                    label="Specify an address"
+                                    onClick={() => {
+                                        setAddress(() => '');
+                                        setShowAddressForm(() => true);
+                                    }} />
+                                <Form.Check
+                                    type="radio"
+                                    name="ordergroup"
+                                    id="checkdefadd"
+                                    disabled={client ? client.address ? false : true : true}
+                                    label="Deliver to registered address"
+                                    onClick={() => {
+                                        setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
+                                        setShowAddressForm(() => false);
+                                    }} />
+                                {showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
+                                    <Form.Control className="w-100" as="textarea" cols={100} rows={3}
+                                        placeholder="Please include street, number, city and country."
+                                        onChange={(e) => setAddress(() => e.target.value)} /></>}
 
                                 <Form.Label className="mt-3">Select a date and a time for the delivery:</Form.Label>
                                 <DateTimePicker className="mb-2"
