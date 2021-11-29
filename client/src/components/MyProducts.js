@@ -26,7 +26,7 @@ function MyProducts(props) {
                             prod.quantity = prod.quantity - find.quantity;
                         }
                     });
-                    setProducts(p.filter((prod) => prod.quantity !== 0));
+                    setProducts(p.filter((prod) => prod.quantity > 0));
                 }
             }).catch((err) => {
                 console.log(err)
