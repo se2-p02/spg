@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="46"/>
+    <testCase name="tests GET /api/products" duration="48"/>
     <testCase name="tests GET /api/clients" duration="9"/>
     <testCase name="tests GET /api/clients/:id" duration="6"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="34"/>
-    <testCase name="tests POST /api/addNewUser" duration="237"/>
-    <testCase name="tests error POST /api/addNewUser" duration="24"/>
-    <testCase name="login" duration="73"/>
-    <testCase name="tests POST /api/products" duration="52"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="37"/>
+    <testCase name="tests POST /api/addNewUser" duration="227"/>
+    <testCase name="tests error POST /api/addNewUser" duration="9"/>
+    <testCase name="login" duration="67"/>
+    <testCase name="tests POST /api/products" duration="54"/>
+    <testCase name="tests PUT /api/products/:id" duration="103"/>
     <testCase name="logout" duration="5"/>
-    <testCase name="tests delete /api/sessions/current" duration="4"/>
+    <testCase name="tests delete /api/sessions/current" duration="5"/>
     <testCase name="tests get /api/sessions/current" duration="6"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="10"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="12"/>
     <testCase name="login" duration="64"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="93"/>
-    <testCase name="tests post /api/session" duration="71"/>
-    <testCase name="tests post /api/session error" duration="65"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="101"/>
+    <testCase name="tests post /api/session" duration="81"/>
+    <testCase name="tests post /api/session error" duration="64"/>
     <testCase name="tests PUT /api/clients/basket/:id" duration="5"/>
-    <testCase name="tests GET /api/wallet/:id" duration="6">
+    <testCase name="tests GET /api/wallet/:id" duration="5">
       <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
-    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:377:19)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:445:19)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
     </testCase>
   </file>

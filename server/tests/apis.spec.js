@@ -181,8 +181,8 @@ describe("Farmers test", () => {
   it('login', loginUser());
 
   it("tests POST /api/products", async () => {
-    const clock = await spgDao.getClock();
-    const datetime = moment(clock.serverTime);
+    await spgDao.setClock("2021-11-27 08:55");
+    const datetime = moment("2021-11-27 08:55");
     if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
       await server
         .post("/api/products")
@@ -191,8 +191,7 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs",
-          user: { id: 7, role: "farmer", username: "farmer@farmer.farmer" }
+          filter: "Dairy and Eggs"
         })
         .expect(500);
 
@@ -206,8 +205,7 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs",
-          user: { id: 7, role: "farmer", username: "farmer@farmer.farmer" }
+          filter: "Dairy and Eggs"
         })
         .expect(200);
 
@@ -217,8 +215,78 @@ describe("Farmers test", () => {
         .delete(`/api/products/${maxId}`)
         .expect(200);
     }
+  });
+
+  it("tests PUT /api/products/:id", async () => {
+    const clock = await spgDao.getClock();
+    await spgDao.setClock("2021-11-27 08:55");
+    const datetime = moment("2021-11-27 08:55");
+    if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+      await server
+        .post("/api/products")
+        .send({
+          name: "Milk",
+          quantity: 7,
+          unit: "l",
+          price: 1.5,
+          filter: "Dairy and Eggs"
+        })
+        .expect(500);
+
+      console.log("Insertion of product not permitted")
+    }
+    else {
+      await server
+        .post("/api/products")
+        .send({
+          name: "Milk",
+          quantity: 7,
+          unit: "l",
+          price: 1.5,
+          filter: "Dairy and Eggs"
+        })
+        .expect(200);
+
+      const maxId = await spgDao.getMaxProdId();
 
 
+      await server
+        .put(`/api/products/${maxId}`)
+        .send({
+          product: {
+            id: maxId,
+            name: "Milk",
+            quantity: 7,
+            unit: "l",
+            price: 1.5,
+            filter: "Dairy and Eggs"
+          },
+          action: {
+            update: true
+          }
+        })
+        .expect(200);
+
+      await spgDao.setClock("2021-11-29 08:55");
+
+      await server
+        .put(`/api/products/${maxId}`)
+        .send({
+          product: {
+            id: maxId
+          },
+          action: {
+            confirm: true
+          }
+        })
+        .expect(200);
+
+      await spgDao.setClock(clock.serverTime);
+
+      await server
+        .delete(`/api/products/${maxId}`)
+        .expect(200);
+    }
   });
 
 
