@@ -151,7 +151,7 @@ function MyModal(props) {
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
-            amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
+            amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
             user: u
         }
@@ -204,7 +204,7 @@ function MyModal(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-start align-items-center">Grand total:</ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-end align-items-center">
                         {props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
-                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price) + " €"}</ListGroup.Item>
+                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2) + " €"}</ListGroup.Item>
                 </ListGroup>
                 <ListGroup key={"placeOrder"} className="mx-3">
                     {ordersClosed && <p className={ordersClosed ? 'ordersClosed mt-3' : ' '}>Orders can't be placed from Sunday 23:00 to Monday 09:00.</p>}
