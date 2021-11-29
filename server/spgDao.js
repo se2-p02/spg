@@ -368,3 +368,17 @@ exports.getWallet = (id) => {
         });
     });
 };
+
+// get max id of products
+exports.getMaxProdId = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT MAX(id) as maxId FROM products';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows[0].maxId);
+        });
+    });
+};

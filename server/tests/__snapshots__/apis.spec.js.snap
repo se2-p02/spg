@@ -201,3 +201,16 @@ Object {
   "unit": Any<String>,
 }
 `;
+
+exports[`tests GET /api/products 11`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy and Eggs",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;

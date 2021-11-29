@@ -1,7 +1,39 @@
 const { describe } = require("jest-circus");
 const request = require("supertest");
 const app = require("../app");
-var dayjs = require('dayjs')
+var server = request.agent(app);
+var dayjs = require('dayjs');
+const spgDao = require("../spgDao");
+const moment = require('moment')
+
+function loginUser() {
+  return function (done) {
+    server
+      .post("/api/sessions")
+      .send({ username: "farmer@farmer.farmer", password: "farmer" })
+      .expect(200)
+      .end(onResponse);
+
+    function onResponse(err, res) {
+      if (err) return done(err);
+      return done();
+    }
+  };
+};
+
+function logoutUser() {
+  return function (done) {
+    server
+      .delete("/api/sessions/current")
+      .expect(200)
+      .end(onResponse);
+
+    function onResponse(err, res) {
+      if (err) return done(err);
+      return done();
+    }
+  };
+};
 
 describe("Products test", () => {
   it("tests GET /api/products", async () => {
@@ -145,6 +177,54 @@ describe("Users test", () => {
   });
 });
 
+describe("Farmers test", () => {
+  it('login', loginUser());
+
+  it("tests POST /api/products", async () => {
+    const clock = await spgDao.getClock();
+    const datetime = moment(clock.serverTime);
+    if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+      await server
+        .post("/api/products")
+        .send({
+          name: "Milk",
+          quantity: 7,
+          unit: "l",
+          price: 1.5,
+          filter: "Dairy and Eggs",
+          user: { id: 7, role: "farmer", username: "farmer@farmer.farmer" }
+        })
+        .expect(500);
+
+      console.log("Insertion of product not permitted")
+    }
+    else {
+      await server
+        .post("/api/products")
+        .send({
+          name: "Milk",
+          quantity: 7,
+          unit: "l",
+          price: 1.5,
+          filter: "Dairy and Eggs",
+          user: { id: 7, role: "farmer", username: "farmer@farmer.farmer" }
+        })
+        .expect(200);
+
+
+      const maxId = await spgDao.getMaxProdId();
+      await server
+        .delete(`/api/products/${maxId}`)
+        .expect(200);
+    }
+
+
+  });
+
+
+  it('logout', logoutUser());
+});
+
 describe("Session test", () => {
   it("tests delete /api/sessions/current", async () => {
     const deleteRes = await request(app)
@@ -167,19 +247,22 @@ describe('Next week test', () => {
 });
 
 describe('Next week test not on sunday', () => {
+
+  it('login', loginUser());
+
   it('tests get /api/nextProducts after the login as a customer not on sunday', async () => {
-    var today = dayjs();
+    var today = dayjs("2021-11-27 8:55");
     if (today.day() == 0) {
       today = today.add(1, 'day');
     }
     // set the clock
-    const res_clock = await request(app).put("/api/clock").send({serverTime: toString(today)}).expect(200);
+    const res_clock = await request(app).put("/api/clock").send({ serverTime: today.format('YYYY-MM-DD hh:mm') }).expect(200);
     // login
     const res_login = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
     console.log(res_login.body)
-    console.log ("LOGIN----------------"+res_login.body.id)
-    const res = await request(app).get("/api/nextProducts").expect(200);
-  
+    console.log("LOGIN----------------" + res_login.body.id)
+    await server.get("/api/nextProducts").expect(200);
+
     /*res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
@@ -257,11 +340,11 @@ describe('Next week test farmer', () => {
 });
 */
 describe('login test', () => {
-  it('tests post /api/sesion', async () => {
+  it('tests post /api/session', async () => {
     const response = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
     const deleteRes = await request(app).delete("/api/sessions/current").expect(200);
   });
-  it("tests post /api/sesion error", async () => {
+  it("tests post /api/session error", async () => {
     const response = await request(app)
       .post("/api/sessions")
       .send({ username: "gigi@libero.it", password: "cagl" })
@@ -298,5 +381,5 @@ describe("get wallet test", () => {
     });
   });
 
- 
+
 });

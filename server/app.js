@@ -106,7 +106,7 @@ app.post('/api/products', async (req, res) => {
     return;
   }
 
-  const product = req.body;
+  const product = req.body; 
   try {
     if (req.user.role !== "farmer") {
       res.status(500).json({ error: `User cannot insert new products` });
@@ -164,7 +164,7 @@ app.put('/api/products/:id', async (req, res) => {
 
 });
 
-// DELETE user
+// DELETE product
 app.delete('/api/products/:id', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
