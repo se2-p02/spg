@@ -30,8 +30,9 @@ function MyOrders(props) {
   };
 
   useEffect(() => {
-    if (reqUpdate) {
-      API.loadOrders(props.id)
+    if (reqUpdate && props.user) {
+      const id = props.user.role === 'client' && props.user.id;
+      API.loadOrders(id)
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => b.id - a.id);
@@ -43,7 +44,7 @@ function MyOrders(props) {
         })
         .catch((err) => { console.log(err) });
     }
-  }, [reqUpdate, props.id]);
+  }, [reqUpdate, props.user]);
 
   if (goBack) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
@@ -109,7 +110,7 @@ function MyOrders(props) {
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
-            <b>fulfilled</b>
+            <b>{props.user && props.user.role === 'employee' ? 'fulfilled' : 'paid'}</b>
           </ListGroup.Item>
         </ListGroup>
         {orders && (
@@ -183,7 +184,19 @@ function MyOrders(props) {
                     variant={b}
                     className="d-flex w-50 justify-content-center"
                   >
-                    {c.fulfilled === 0 ? (
+                    {props.user.role === 'client' ?
+                    c.paid === 0 ? (
+                      <Button
+                        onClick={() => alert('Fake button')}
+                        className="btn-success"
+                      >
+                        Pay
+                      </Button>
+                    ) : (
+                      <p>Paid</p>
+                    )
+                    : props.user.role === 'employee' &&
+                    c.fulfilled === 0 ? (
                       <Button
                         onClick={() => {
                           updateHandler(c.id);

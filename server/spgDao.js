@@ -161,8 +161,8 @@ exports.orderPrep = async (product) => {
 exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0], function (err) {
+            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0, 0], function (err) {
                 if (err) {
                     reject(500);
                     return;
@@ -312,11 +312,38 @@ exports.updateOrderFulfilled = async (id) => {
     }
 };
 
+exports.updateOrderPaid = async (order) => {
+    try {
+        const wallet = await this.getWallet(order.user);
+        if (order.amount > wallet[0].wallet) return { err: 'Not enough money in wallet.' };
+        else return new Promise((resolve, reject) => {
+            const sql = 'UPDATE users SET wallet=? WHERE id=?';
+            db.run(sql, [wallet[0].wallet - order.amount, order.user], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                const sql_1 = 'UPDATE orders SET paid=1 WHERE id=?';
+                db.run(sql_1, [order.id], function (err) {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve({ info: 'Order paid.' });
+                });
+            });
+        });
+    } catch (err) {
+        console.log(err);
+        return;
+    }
+};
+
 exports.getClock = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT serverTime FROM clock';
         db.all(sql, (err, rows) => {
-            
+
             if (err) {
                 reject(err);
                 return;

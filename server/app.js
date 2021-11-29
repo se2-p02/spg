@@ -330,7 +330,7 @@ app.post('/api/orders', async (req, res) => {
       res.status(404).json(result);
     else {
       if (order.test) await spgDao.deleteTestOrder();
-      res.status(200).json(result);
+      res.status(200).json(order);
     }
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
@@ -385,6 +385,19 @@ app.put("/api/updateOrder/:id", async (req, res) => {
       if (result.err) res.status(404).json(result);
       else res.json(result);
     }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
+//pay order
+app.put("/api/orders/pay", async (req, res) => {
+  const order = req.body;
+  try {
+    const result = await spgDao.updateOrderPaid(order);
+    if (result.err) res.status(401).json(result);
+    else res.json(result);
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;

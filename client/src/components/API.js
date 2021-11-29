@@ -44,7 +44,7 @@ async function sendOrder(order) {
             body: JSON.stringify(order),
         });
     if (response.ok) {
-        return true;
+        return response.json();
     } else return { 'error': 'Failed to store data on server' }
 }
 
@@ -57,6 +57,20 @@ async function updateOrder(id) {
             },
             body: JSON.stringify({ fulfilled: true }),
 
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
+async function payOrder(order) {
+    const response = await fetch(URL + `/api/orders/pay`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(order),
         });
     if (response.ok) {
         return true;
@@ -224,5 +238,5 @@ async function loadWallet(id) {
     } else return { 'error': 'Failed to load client from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet };
 export default API;

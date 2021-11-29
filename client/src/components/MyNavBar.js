@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './solidarity.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
@@ -120,6 +120,7 @@ function MyModal(props) {
     const [client, setClient] = useState();
     const [errorMsg, setErrorMsg] = useState('');
     const [showAddressForm, setShowAddressForm] = useState(true);
+    const [payMethod, setPayMethod] = useState('now');
 
     const handleClose = () => {
         setSuccessful(false);
@@ -129,6 +130,7 @@ function MyModal(props) {
         setClient();
         setErrorMsg('');
         setShowAddressForm(true);
+        setPayMethod('now');
         props.setShow(false);
     }
 
@@ -138,7 +140,6 @@ function MyModal(props) {
         let u = props.user
         let info = undefined
         let wallet = 0
-        let paid = 0
         if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
@@ -154,7 +155,6 @@ function MyModal(props) {
             address: undefined,
             user: u
         }
-        order.paid = (wallet - order.amount > 0) ? 1 : 0
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -165,9 +165,10 @@ function MyModal(props) {
             order.address = { address: address.replace(/\n/g, " "), deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
         }
         setErrorMsg(() => '');
-        API.sendOrder(order).then((response) => {
+        await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
+                if(payMethod === 'now') API.payOrder(response).then((response) => { if(response.error) alert('Your last order was not payed due to insufficient balance. Please check your orders.'); });
                 props.setCart([]);
                 props.setShow(false);
             }
@@ -231,7 +232,7 @@ function MyModal(props) {
                             <Form>
                                 <Form.Check defaultChecked
                                     type="radio"
-                                    name="ordergroup"
+                                    name="addressgroup"
                                     id="checkspec"
                                     label="Specify an address"
                                     onClick={() => {
@@ -240,7 +241,7 @@ function MyModal(props) {
                                     }} />
                                 <Form.Check
                                     type="radio"
-                                    name="ordergroup"
+                                    name="addressgroup"
                                     id="checkdefadd"
                                     disabled={client ? client.address ? false : true : true}
                                     label="Deliver to registered address"
@@ -265,6 +266,25 @@ function MyModal(props) {
                             </Form>
                         </ListGroup.Item>}
                     {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
+                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                        <Form>
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'client'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaynow"
+                                label="Pay now"
+                                disabled={props.user && props.user.role === 'employee'}
+                                onClick={() => setPayMethod(() => 'now')} />
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'employee'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaylater"
+                                label="Pay later"
+                                onClick={() => setPayMethod(() => 'later')} />
+                        </Form>
+                        <p className="pay-method">{payMethod === 'now' ? 'If you don\'t have the required amount, you can pay it later in your orders page.' :
+                            payMethod === 'later' && 'The order will be placed but you will need to pay it manually in your orders page.'}</p>
+                    </ListGroup.Item>
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                         <Button disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
                     </ListGroup.Item>
