@@ -1,1 +1,2 @@
-{}
+{"/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/ModalWindow.js": {"path":"/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/ModalWindow.js","statementMap":{"0":{"start":{"line":6,"column":20},"end":{"line":43,"column":1}},"1":{"start":{"line":7,"column":2},"end":{"line":42,"column":4}}},"fnMap":{"0":{"name":"(anonymous_0)","decl":{"start":{"line":6,"column":20},"end":{"line":6,"column":21}},"loc":{"start":{"line":6,"column":31},"end":{"line":43,"column":1}},"line":6}},"branchMap":{},"s":{"0":1,"1":0},"f":{"0":0},"b":{},"_coverageSchema":"43e27e138ebf9cfc5966b082cf9a028302ed4184","hash":"6ce5c7d2cc0f5bf7cee76655c950b92032a382d6"}
+}
