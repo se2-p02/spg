@@ -12,7 +12,7 @@ import MyOrders from "./MyOrders";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import MyClientPage from "./MyClientPage";
-import dayjs from 'dayjs';
+import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 
 function MyContainer(props) {
@@ -26,7 +26,7 @@ function MyContainer(props) {
   useEffect(() => {
     API.getClock().then((c) => {
       if (c.error === undefined) {
-        setClock(() => dayjs(c.serverTime));
+        setClock(() => moment(c.serverTime) || moment());
       }
     }).catch((err) => {
       console.log(err)

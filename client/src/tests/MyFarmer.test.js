@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MyFarmer from '../components/MyFarmer'
+import React from 'react'
 
 test('renders the farmer starting page', () => {
     render(<MyFarmer />);

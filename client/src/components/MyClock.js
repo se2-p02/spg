@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
 import { CheckLg, XLg } from 'react-bootstrap-icons';
-import dayjs from 'dayjs';
+import moment from 'moment';
 import './MyClock.css';
 
 function MyClock(props) {
@@ -34,7 +34,7 @@ function MyClock(props) {
           </Col>
           <Col>
 
-            <div style={{ display: 'inline', visibility: dayjs(value).format('YYYY-MM-DD HH:mm') !== props.clock.format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
+            <div style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== props.clock.format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
               <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
               <Button variant="danger" onClick={() => setValue(() => new Date(props.clock))}><XLg size="27" /></Button>
             </div>

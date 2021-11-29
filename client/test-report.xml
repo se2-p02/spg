@@ -1,3 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyFarmer.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientProfile.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\App.test.js">
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js">
+    <testCase name="MyLogin.js tests tests error messages" duration="4131">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js:13:5)]]></failure>
+    </testCase>
+    <testCase name="MyLogin.js tests tests successful login" duration="234">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js:38:5)]]></failure>
+    </testCase>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js">
+    <testCase name="MyNavBar.js tests tests logout" duration="4150">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:13:5)]]></failure>
+    </testCase>
+    <testCase name="MyNavBar.js tests tests cart presence" duration="169">
+      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
+    at navigate (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at FrameManager.navigateFrame (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
+    at Frame.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
+    at Page.goto (C:\Users\fabia\Desktop\SE2\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js:24:5)]]></failure>
+    </testCase>
+  </file>
 </testExecutions>

@@ -176,8 +176,10 @@ describe('Next week test not on sunday', () => {
     const res_clock = await request(app).put("/api/clock").send({serverTime: toString(today)}).expect(200);
     // login
     const res_login = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
+    console.log(res_login.body)
     console.log ("LOGIN----------------"+res_login.body.id)
     const res = await request(app).get("/api/nextProducts").expect(200);
+  
     /*res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
@@ -193,6 +195,7 @@ describe('Next week test not on sunday', () => {
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   });
 });
+
 /*
 describe('Next week test on sunday', () => {
   beforeEach(() => {

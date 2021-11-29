@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import LoginForm from '../components/MyLogin';
+import React from 'react'
 
 
 describe('Test login form', () => {

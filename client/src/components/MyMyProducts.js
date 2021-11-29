@@ -20,7 +20,7 @@ function MyMyProducts(props) {
 
     useEffect(() => {
         if (props.clock && props.user && (reqUpdate || props.cart)) {
-            if (props.clock.day < 5 && props.clock.day > 0) {
+            if (props.clock.day() < 5 && props.clock.day() > 0) {
                 API.loadNextProducts(props.user.role, 'current').then((p) => {
                     if (p.error === undefined) {
                         p.forEach((prod) => {
@@ -64,9 +64,14 @@ function MyMyProducts(props) {
         handleShow();
     }
 
-    const handleConfirm = (id) => {
-        setProduct(products.find((prod) => prod.id === id));
-        handleShow();
+    const handleConfirm = async (id) => {
+        API.updateProduct({ id: id }, { confirm: true }).then((r) => {
+            if (r.error === undefined) {
+                setReqUpdate(true);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
 
@@ -82,7 +87,7 @@ function MyMyProducts(props) {
                         <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
                     </Col>
                     <Col>
-                        {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                        {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
                             <Button size="lg" className="btn-info p-2 w-100 mt-3" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
                             :
                             <Button size="lg" className="btn-light p-2 w-100 mt-3">Add new product</Button>
@@ -110,17 +115,22 @@ function MyMyProducts(props) {
                                         <ListGroup.Item as={Link} to={"/employee/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 justify-content-center">{p.farmerName}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                            {p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
                                                 <Button variant="warning" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
                                                 :
                                                 <Button variant="light" ><PencilSquare /></Button>
                                             }
                                         </ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            {(props.clock && !((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() >= 2 && props.clock.day() <= 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
-                                                :
-                                                <Button variant="light" ><CheckSquare /></Button>
+                                            {p.confirmed === 0 && (
+                                                (props.clock && ((props.clock.day() === 1 && props.clock.hour() < 9))) ?
+                                                    <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
+                                                    :
+                                                    <Button variant="light" ><CheckSquare /></Button>
+                                            )
+                                            }
+                                            {p.confirmed !== 0 &&
+                                                <p>Confirmed</p>
                                             }
                                         </ListGroup.Item>
                                     </ListGroup>
@@ -140,43 +150,64 @@ function MyMyProducts(props) {
 
 function MyModal(props) {
 
-    const [name, setName] = useState();
-    const [quantity, setQuantity] = useState();
-    const [unit, setUnit] = useState();
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState("0");
+    const [unit, setUnit] = useState("kg");
+    const [price, setPrice] = useState("0");
+    const [category, setCategory] = useState("All-purpose");
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         if (props.modal === 'modify') {
             setName(props.product && props.product.name);
             setQuantity(props.product && props.product.quantity);
+            setPrice(props.product && props.product.price);
             setUnit(props.product && props.product.unit);
+            setCategory(props.product && props.product.filter);
         }
-    }, [props.modal, props.product]);
+    }, [props.modal, props.product, props.show]);
+
+    useEffect(() => {
+        setMessage("");
+        if (name === "") setMessage("Name shouldn't be empty.");
+        if (quantity === "0") setMessage((old) => old.concat(" Quantity should be greater than 0."));
+        if (price === "0") setMessage((old) => old.concat(" Price should be greater than 0."));
+    }, [quantity, name, price]);
 
     const handleClose = () => {
         props.setProduct();
+        setMessage("");
+        setName("");
+        setCategory("All-purpose");
+        setPrice("0");
+        setUnit("kg");
         props.setShow(false);
     }
 
     const handleSubmit = () => {
+        if (quantity === "0" || price === "0" || name === "") {
+            return;
+        }
         if (props.modal === 'modify') {
-            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, unit: unit }, { confirm: true }).then((r) => {
+            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category }, { update: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
+                handleClose();
             }).catch((err) => {
                 console.log(err);
             });
         }
         else {
-            API.createProduct({ name: name, quantity: quantity, unit: unit }).then((r) => {
+            API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
+                handleClose();
             }).catch((err) => {
                 console.log(err);
             });
         }
-        props.setShow(false);
     }
 
     const handleDelete = () => {
@@ -184,6 +215,7 @@ function MyModal(props) {
             if (p.error === undefined) {
                 props.setReqUpdate(true);
             }
+            handleClose();
         }).catch((err) => {
             console.log(err);
         });
@@ -244,17 +276,56 @@ function MyModal(props) {
                         <Col>
                             <Form.Group controlId="unit">
                                 <Form.Label className="text-info w-100"><h5>Unit</h5></Form.Label>
+                                <Form.Select style={{
+                                    backgroundColor: "unset",
+                                    marginTop: "unset"
+                                }} className="w-100 p-3" onChange={(ev) => { setUnit(ev.target.value); }}>
+                                    <option key="kg">kg</option>
+                                    <option key="g">g</option>
+                                    <option key="pcs">pcs</option>
+                                    <option key="l">l</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={4}>
+                            <Form.Group controlId="price">
+                                <Form.Label className="text-info w-100 mt-2"><h5>Price (€)</h5></Form.Label>
                                 <Form.Control
                                     className="w-100 p-3"
-                                    type="text"
-                                    placeholder="Unit"
+                                    type="number"
+                                    placeholder="0"
+                                    min={0}
                                     required
-                                    onChange={(ev) => { setUnit(ev.target.value); }}
-                                    value={unit ? unit : ""}
+                                    onChange={(ev) => { setPrice(ev.target.value); }}
+                                    value={price ? price : ""}
                                 />
                                 <Form.Text className="text-muted"></Form.Text>
                             </Form.Group>
                         </Col>
+                        <Col>
+                            <Form.Group controlId="category">
+                                <Form.Label className="text-info w-100 mt-2"><h5>Category</h5></Form.Label>
+                                <Form.Select style={{
+                                    backgroundColor: "unset",
+                                    marginTop: "unset"
+                                }} className="w-100 p-3" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
+                                    <option key="All-purpose">All-purpose</option>
+                                    <option key="Fish">Fish</option>
+                                    <option key="Dairy and Eggs">Dairy and Eggs</option>
+                                    <option key="Meat">Meat</option>
+                                    <option key="Vegetables">Vegetables</option>
+                                    <option key="Beverages">Beverages</option>
+                                    <option key="Fruit">Fruit</option>
+                                    <option key="Gastronomy">Gastronomy</option>
+                                    <option key="Home and Garden">Home and Garden</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <p className="text-danger mt-3">{message}</p>
                     </Row>
                 </Form>
             </Modal.Body>
@@ -263,9 +334,9 @@ function MyModal(props) {
                     <Button variant="danger" onClick={handleDelete}>Delete</Button>
                 }
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="success" onClick={handleSubmit}>Submit</Button>
+                <Button variant="success" onClick={() => { handleSubmit(); }}>Submit</Button>
             </Modal.Footer>
-        </Modal>
+        </Modal >
     );
 }
 

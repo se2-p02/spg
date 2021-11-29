@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import MyClientProfile from '../components/MyClientProfile'
+import React from 'react'
 
 test('renders the client profile', () => {
     render(<MyClientProfile />);
-    var element = screen.getByText("Name")
+    var element = screen.getByTestId("profileName")
     expect(element).toBeInTheDocument();
     
     var element = screen.getByText("Surname")
