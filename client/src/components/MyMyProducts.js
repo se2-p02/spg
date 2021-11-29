@@ -88,9 +88,9 @@ function MyMyProducts(props) {
                     </Col>
                     <Col>
                         {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                            <Button size="lg" className="btn-info p-2 w-100 mt-3" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
+                            <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
                             :
-                            <Button size="lg" className="btn-light p-2 w-100 mt-3">Add new product</Button>
+                            <Button size="lg" data-testId="apbnw" className="btn-light p-2 w-100 mt-3">Add new product</Button>
                         }
                     </Col>
                 </Row>
@@ -334,7 +334,7 @@ function MyModal(props) {
                     <Button variant="danger" onClick={handleDelete}>Delete</Button>
                 }
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="success" onClick={() => { handleSubmit(); }}>Submit</Button>
+                <Button variant="success" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
             </Modal.Footer>
         </Modal >
     );

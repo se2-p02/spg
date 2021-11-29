@@ -106,7 +106,7 @@ app.post('/api/products', async (req, res) => {
     return;
   }
 
-  const product = req.body;
+  const product = req.body; 
   try {
     if (req.user.role !== "farmer") {
       res.status(500).json({ error: `User cannot insert new products` });
@@ -164,7 +164,7 @@ app.put('/api/products/:id', async (req, res) => {
 
 });
 
-// DELETE user
+// DELETE product
 app.delete('/api/products/:id', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
@@ -330,7 +330,7 @@ app.post('/api/orders', async (req, res) => {
       res.status(404).json(result);
     else {
       if (order.test) await spgDao.deleteTestOrder();
-      res.status(200).json(result);
+      res.status(200).json(order);
     }
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
@@ -385,6 +385,19 @@ app.put("/api/updateOrder/:id", async (req, res) => {
       if (result.err) res.status(404).json(result);
       else res.json(result);
     }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
+//pay order
+app.put("/api/orders/pay", async (req, res) => {
+  const order = req.body;
+  try {
+    const result = await spgDao.updateOrderPaid(order);
+    if (result.err) res.status(401).json(result);
+    else res.json(result);
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './solidarity.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
@@ -118,15 +118,20 @@ function MyModal(props) {
     const [orderMethod, setOrderMethod] = useState('store');
     const [address, setAddress] = useState('');
     const [datetime, setDatetime] = useState();
+    const [client, setClient] = useState();
     const [errorMsg, setErrorMsg] = useState('');
-
-    console.log(props.user)
+    const [showAddressForm, setShowAddressForm] = useState(true);
+    const [payMethod, setPayMethod] = useState('now');
 
     const handleClose = () => {
         setSuccessful(false);
         setOrderMethod('store');
+        setAddress('');
         setDatetime(null);
+        setClient();
         setErrorMsg('');
+        setShowAddressForm(true);
+        setPayMethod('now');
         props.setShow(false);
     }
 
@@ -136,7 +141,10 @@ function MyModal(props) {
         let u = props.user
         let info = undefined
         let wallet = 0
+<<<<<<< HEAD
         let paid = 0
+=======
+>>>>>>> 261a0ee1cdaf3182db7f75b0ee8a9884ceea92ec
         if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
@@ -148,12 +156,15 @@ function MyModal(props) {
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
-            amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
+            amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
+<<<<<<< HEAD
             user: u,
             paid: (wallet - order.amount > 0) ? 1 : 0
+=======
+            user: u
+>>>>>>> 261a0ee1cdaf3182db7f75b0ee8a9884ceea92ec
         }
-
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -164,10 +175,12 @@ function MyModal(props) {
             order.address = { address: address.replace(/\n/g, " "), deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
         }
         setErrorMsg(() => '');
-        API.sendOrder(order).then((response) => {
+        await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
-                props.setCart([])
+                if(payMethod === 'now') API.payOrder(response).then((response) => { if(response.error) alert('Your last order was not payed due to insufficient balance. Please check your orders.'); });
+                props.setCart([]);
+                props.setShow(false);
             }
         });
     }
@@ -201,7 +214,7 @@ function MyModal(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-start align-items-center">Grand total:</ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-end align-items-center">
                         {props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
-                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price) + " €"}</ListGroup.Item>
+                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2) + " €"}</ListGroup.Item>
                 </ListGroup>
                 <ListGroup key={"placeOrder"} className="mx-3">
                     {ordersClosed && <p className={ordersClosed ? 'ordersClosed mt-3' : ' '}>Orders can't be placed from Sunday 23:00 to Monday 09:00.</p>}
@@ -212,22 +225,44 @@ function MyModal(props) {
                                 name="ordergroup"
                                 id="checkstore"
                                 label="Pickup in store"
-                                onChange={() => setOrderMethod(() => 'store')} />
+                                onClick={() => setOrderMethod(() => 'store')} />
                             <Form.Check inline
                                 type="radio"
                                 name="ordergroup"
                                 id="checkdelivery"
-                                onChange={() => setOrderMethod(() => 'address')}
-                                label="Deliver at address" />
+                                label="Deliver to address"
+                                onClick={() => {
+                                    if (!client) API.loadClient(props.user.id).then((c) => { if (c.error === undefined) setClient(c); });
+                                    setOrderMethod(() => 'address');
+                                }} />
                         </Form>
                     </ListGroup.Item>
                     {orderMethod === 'address' &&
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                             <Form>
-                                <Form.Label>Your complete address:</Form.Label>
-                                <Form.Control className="w-100" as="textarea" cols={100} rows={3}
-                                    placeholder="Please include street, city, postal code and country."
-                                    onChange={(e) => setAddress(() => e.target.value)} />
+                                <Form.Check defaultChecked
+                                    type="radio"
+                                    name="addressgroup"
+                                    id="checkspec"
+                                    label="Specify an address"
+                                    onClick={() => {
+                                        setAddress(() => '');
+                                        setShowAddressForm(() => true);
+                                    }} />
+                                <Form.Check
+                                    type="radio"
+                                    name="addressgroup"
+                                    id="checkdefadd"
+                                    disabled={client ? client.address ? false : true : true}
+                                    label="Deliver to registered address"
+                                    onClick={() => {
+                                        setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
+                                        setShowAddressForm(() => false);
+                                    }} />
+                                {showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
+                                    <Form.Control className="w-100" as="textarea" cols={100} rows={3}
+                                        placeholder="Please include street, number, city and country."
+                                        onChange={(e) => setAddress(() => e.target.value)} /></>}
 
                                 <Form.Label className="mt-3">Select a date and a time for the delivery:</Form.Label>
                                 <DateTimePicker className="mb-2"
@@ -241,6 +276,25 @@ function MyModal(props) {
                             </Form>
                         </ListGroup.Item>}
                     {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
+                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                        <Form>
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'client'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaynow"
+                                label="Pay now"
+                                disabled={props.user && props.user.role === 'employee'}
+                                onClick={() => setPayMethod(() => 'now')} />
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'employee'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaylater"
+                                label="Pay later"
+                                onClick={() => setPayMethod(() => 'later')} />
+                        </Form>
+                        <p className="pay-method">{payMethod === 'now' ? 'If you don\'t have the required amount, you can pay it later in your orders page.' :
+                            payMethod === 'later' && 'The order will be placed but you will need to pay it manually in your orders page.'}</p>
+                    </ListGroup.Item>
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                         <Button disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
                     </ListGroup.Item>
