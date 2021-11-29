@@ -10,24 +10,25 @@ describe("MyNavBar.js tests", () => {
   });
 
   it("tests logout", async () => {
-    await page.goto("http://localhost:3000/employee");
+    await page.goto("http://localhost:3000/employee",{ waitUntil: "networkidle2"});
+    let item5 = await page.$('#lll');
+    console.log(item5)
+    item5 = await page.$('#cazzo');
+    console.log("---------------------")
+    console.log(item5)
+    item5 = await page.$('#puttana');
+    console.log("---------------------")
+    console.log(item5)
+    
 
-    const dropdown = await page.$('#dropdown');
-    await dropdown.click();
-    const logout = await page.$('#logout');
-    await logout.click();
-    await page.waitForNavigation();
-    expect(page.url()).toContain('http://localhost:3000/login');
+
+
+
+
+
+    
   });
 
-  it("tests cart presence", async () => {
-    await page.goto("http://localhost:3000/employee");
-
-    const cart = await page.$('#cart');
-    await cart.click();
-    let cartpresence = await page.$eval('#cartpresence', e => e ? true : false);
-    expect(cartpresence).toBe(true);
-  });
 
   afterAll(() => browser.close());
 });

@@ -41,8 +41,7 @@ function MyNavBar(props) {
 
         <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top justify-content-between" expand="lg">
             {/*<Navbar.Toggle aria-controls="CollapseLeft" /> */}
-
-            <Navbar.Brand >
+            <Navbar.Brand id="lll">
                 <Container className="d-flex align-items-center">
                     <img
                         alt=""
@@ -54,12 +53,14 @@ function MyNavBar(props) {
                     <div className="navTitle"><h2>Social Purchasing Group</h2></div>
                 </Container>
             </Navbar.Brand>
+            <div data-testid="clock">
             <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
+            </div>
             {
-                props.showCart ? <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
-                    <ListGroup.Item key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
+                props.showCart ? <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
+                    <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
-                            <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
+                            <Dropdown.Toggle data-testid="cartIcon"  key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
                                 <div className="fw-bold mx-2">Cart</div>
                                 <Badge variant="primary" pill>
                                     {props.cart.length}
@@ -91,20 +92,20 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                     <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
-                            <Dropdown.Toggle variant="dark" className="d-flex p-2" id="dropdown">
+                            <Dropdown.Toggle variant="dark" className="d-flex p-2" data-testid="logout">
                                 <PersonCircle className="mx-2"></PersonCircle>
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu align="end">
+                            <Dropdown.Menu align="end" id="logout">
                                 <Dropdown.Item>
-                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" id="logout" onClick={() => handleLogout()}>Logout</ListGroup.Item>
+                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </ListGroup.Item>
                 </ListGroup> : <></>}
             {props.cart.length !== 0 &&
-                <MyModal user = {props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                <MyModal user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -136,12 +137,12 @@ function MyModal(props) {
         let info = undefined
         let wallet = 0
         let paid = 0
-        if (u.role !== "employee"){
+        if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
             wallet = info.wallet
         }
-        else{
+        else {
             u = null;
         }
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
@@ -149,8 +150,8 @@ function MyModal(props) {
             products: products,
             amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
             address: undefined,
-            user : u,
-            paid : (wallet-order.amount>0)?1:0
+            user: u,
+            paid: (wallet - order.amount > 0) ? 1 : 0
         }
 
 

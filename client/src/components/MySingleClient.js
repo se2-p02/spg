@@ -75,12 +75,12 @@ function MySingleClient(props) {
                     </Col>
                     <Col sm="2" className="m-0 p-0" fluid="true">
                         <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
-                            <Image testId="plus" src={plus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
+                            <Image testid="plus" src={plus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
                     <Col sm="2" className="m-0 p-0" fluid="true">
                         <Button className="bg-transparent border border-dark p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
-                            <Image testId="minus" src={minus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
+                            <Image testid="minus" src={minus} className="w-50 m-0 mt-0 mb-0 p-1 pb-0 pt-0" />
                         </Button>
                     </Col>
                 </Row>
@@ -119,7 +119,7 @@ function MySingleClient(props) {
                 border: '0',
                 borderTop: '2px solid rgba(0, 0, 0, 0.1)'
             }} />
-            <h1 testId="header" className="text-white">Orders</h1>
+            <h1 testid="header" className="text-white">Orders</h1>
             {!reqUpdate && <MyOrders  setUser={props.setUser} id={client.id} />}
             <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
             <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
