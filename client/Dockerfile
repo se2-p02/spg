@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:14.18.1-alpine
+FROM node:lts
 
 # set working directory
 WORKDIR /
@@ -11,7 +11,7 @@ ENV PATH /node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
+RUN npm install react-scripts -g --silent
 
 # add app
 COPY . ./
@@ -19,4 +19,4 @@ COPY . ./
 EXPOSE 3000
 
 # start app
-CMD ["npm", "start"]
+CMD ["npm", "run", "startClient"]

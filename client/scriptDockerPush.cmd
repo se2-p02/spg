@@ -1,1 +1,1 @@
-docker push s290168/oqm-client:first
+docker push s290168/se02-spg-client:release1
