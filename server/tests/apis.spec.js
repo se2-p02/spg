@@ -98,10 +98,11 @@ describe("Clients test", () => {
       .expect(200);
   });
 });
-/*
+
 describe('Orders test', () => {
+  
   it('tests GET /api/orders', async () => {
-    const response = await request(app).get("/api/orders");
+    const response = await request(app).get("/api/orders")//.expect(200);
     response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
         id: expect.any(Number),
@@ -137,7 +138,7 @@ describe('Orders test', () => {
     const response = await request(app).post("/api/orders").send({ test }).expect(200);
   });
 });
-*/
+
 describe("Users test", () => {
   it("tests POST /api/addNewUser", async () => {
     const response = await request(app)
@@ -389,7 +390,7 @@ describe('Next week test farmer', () => {
   it('login', loginUser());
 
   it('tests get /api/nextProducts after the login as a farmer', async () => {
-    const res = await server.get("/api/nextProducts");
+    const res = await server.get("/api/nextProducts").send({role: "farmer"});
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
