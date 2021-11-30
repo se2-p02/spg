@@ -21,6 +21,21 @@ function loginUser() {
   };
 };
 
+function loginClient() {
+  return function (done) {
+    server
+      .post("/api/sessions")
+      .send({ username: "gigi@libero.it", password: "cagliari" })
+      .expect(200)
+      .end(onResponse);
+
+    function onResponse(err, res) {
+      if (err) return done(err);
+      return done();
+    }
+  };
+};
+
 function logoutUser() {
   return function (done) {
     server
@@ -316,7 +331,7 @@ describe('Next week test', () => {
 
 describe('Next week test not on sunday', () => {
 
-  it('login', loginUser());
+  it('login', loginClient());
 
   it('tests get /api/nextProducts after the login as a customer not on sunday', async () => {
     var today = dayjs("2021-11-27 8:55");
@@ -329,9 +344,9 @@ describe('Next week test not on sunday', () => {
     const res_login = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
     console.log(res_login.body)
     console.log("LOGIN----------------" + res_login.body.id)
-    await server.get("/api/nextProducts").expect(200);
+    const res = await server.get("/api/nextProducts").expect(200);
 
-    /*res.body.forEach((product) => {
+    res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
         name: expect.any(String),
@@ -342,19 +357,16 @@ describe('Next week test not on sunday', () => {
         availability: expect.any(String),
         filter: expect.any(String)
       });
-    });*/
+    });
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   });
 });
 
-/*
+
 describe('Next week test on sunday', () => {
-  beforeEach(() => {
-    return request(app)
-      .post("/api/sessions")
-      .send({ username: "gigi@libero.it", password: "cagliari" })
-      .expect(200);
-  });
+
+  it('login', loginUser());
+
   it('tests get /api/nextProducts after the login as a customer on sunday', async () => {
     // compute the day of the sunday of the week
     const today = dayjs();
@@ -366,7 +378,18 @@ describe('Next week test on sunday', () => {
     // set the clock
     const res_clock = await request(app).put("/api/clock").send({serverTime: toString(next_week)}).expect(200);
 
-    const res = await request(app).get("/api/nextProducts");
+    await server.get("/api/nextProducts").expect(200);
+    
+    const logout = await request(app).delete("/api/sessions/current").expect(200);
+  });
+});
+
+describe('Next week test farmer', () => {
+
+  it('login', loginUser());
+
+  it('tests get /api/nextProducts after the login as a farmer', async () => {
+    const res = await server.get("/api/nextProducts");
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
@@ -385,28 +408,6 @@ describe('Next week test on sunday', () => {
   });
 });
 
-describe('Next week test farmer', () => {
-  it('tests get /api/nextProducts after the login as a farmer', async () => {
-    const res_login = request(app).post("/api/sessions").send({ username: "farmer@farmer.farmer", password: "farmer" }).expect(200);
-    const res = await request(app).get("/api/nextProducts");
-    res.body.forEach((product) => {
-      expect(product).toMatchSnapshot({
-        id: expect.any(Number),
-        name: expect.any(String),
-        quantity: expect.any(Number),
-        unit: expect.any(String),
-        farmer: expect.any(Number),
-        price: expect.any(Number),
-        availability: expect.any(String),
-        filter: expect.any(String),
-      });
-    });
-  });
-  afterEach(() => {
-    return request(app).delete("/api/sessions/current").expect(200);
-  });
-});
-*/
 describe('login test', () => {
   it('tests post /api/session', async () => {
     const response = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
