@@ -185,10 +185,9 @@ app.get('/api/nextProducts', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
     const datetime = moment(clock.serverTime);
-    console.log("req.user = " + req.isAuthenticated())
     if (!req.isAuthenticated()) res.status(401).end();
     else {
-      const products = await spgDao.getNextProducts(req.query.role, req.user, datetime, req.query.week);
+      const products = await spgDao.getNextProducts(req.user.role, req.user, datetime, req.query.week);
       if (products.error) {
         res.status(404).json(products);
       }
@@ -197,6 +196,7 @@ app.get('/api/nextProducts', async (req, res) => {
       }
     }
   } catch (err) {
+    console.log(err);
     res.status(500).end();
   }
 });

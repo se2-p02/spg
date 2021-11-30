@@ -1,31 +1,559 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="132"/>
+    <testCase name="tests GET /api/products" duration="214"/>
     <testCase name="tests GET /api/clients" duration="37"/>
-    <testCase name="tests GET /api/clients/:id" duration="29"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="74"/>
-    <testCase name="tests POST /api/addNewUser" duration="593"/>
-    <testCase name="tests error POST /api/addNewUser" duration="59"/>
-    <testCase name="login" duration="160"/>
-    <testCase name="tests POST /api/products" duration="89"/>
-    <testCase name="tests PUT /api/products/:id" duration="135"/>
-    <testCase name="logout" duration="26"/>
+    <testCase name="tests GET /api/clients/:id" duration="30"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="64"/>
+    <testCase name="tests GET /api/orders" duration="50">
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 1`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 12,
++   "conf": 1,
++   "date": "2021-01-12",
++   "fulfilled": 1,
++   "id": 1,
++   "products": "{\"milk\":2,\"eggs\":1}",
++   "time": "08:12",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 2`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 9,
++   "conf": 0,
++   "date": "2021-09-01",
++   "fulfilled": 0,
++   "id": 2,
++   "products": "{\"Cheese\":0.3 }",
++   "time": "09:44",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 3`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 20.5,
++   "conf": 0,
++   "date": "2021-11-09",
++   "fulfilled": 0,
++   "id": 3,
++   "products": "{\"Eggs\":1,\"Flour\":3}",
++   "time": "01:07",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 4`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 2.4,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 0,
++   "id": 4,
++   "products": "{\"Milk\":2}",
++   "time": "09:53",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 5`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 4.5,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 1,
++   "id": 5,
++   "products": "{\"Flour\":1}",
++   "time": "18:36",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 6`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 23,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 1,
++   "id": 6,
++   "products": "{\"Flour\":2,\"Eggs\":2}",
++   "time": "18:36",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 7`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 11.5,
++   "conf": 0,
++   "date": "2021-11-30",
++   "fulfilled": 0,
++   "id": 14,
++   "products": "{\"Flour\":1,\"Eggs\":1}",
++   "time": "22:32",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 8`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 9,
++   "conf": 0,
++   "date": "2021-12-02",
++   "fulfilled": 0,
++   "id": 15,
++   "products": "{\"Flour\":2}",
++   "time": "22:32",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 9`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": null,
++   "amount": 12.3,
++   "conf": 0,
++   "date": "2021-11-25",
++   "fulfilled": 0,
++   "id": 16,
++   "products": "{\"Cheese\":1,\"Sticks\":1}",
++   "time": "09:55",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders 10`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": null,
++   "amount": 9,
++   "conf": 0,
++   "date": "2021-11-25",
++   "fulfilled": 0,
++   "id": 17,
++   "products": "{\"Sticks\":1,\"Eggs\":1}",
++   "time": "09:55",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:107:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+    </testCase>
+    <testCase name="tests GET /api/orders/:id" duration="44">
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 1`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 12,
++   "conf": 1,
++   "date": "2021-01-12",
++   "fulfilled": 1,
++   "id": 1,
++   "products": "{\"milk\":2,\"eggs\":1}",
++   "time": "08:12",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 2`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 9,
++   "conf": 0,
++   "date": "2021-09-01",
++   "fulfilled": 0,
++   "id": 2,
++   "products": "{\"Cheese\":0.3 }",
++   "time": "09:44",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 3`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 20.5,
++   "conf": 0,
++   "date": "2021-11-09",
++   "fulfilled": 0,
++   "id": 3,
++   "products": "{\"Eggs\":1,\"Flour\":3}",
++   "time": "01:07",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 4`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 2.4,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 0,
++   "id": 4,
++   "products": "{\"Milk\":2}",
++   "time": "09:53",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 5`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 4.5,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 1,
++   "id": 5,
++   "products": "{\"Flour\":1}",
++   "time": "18:36",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 6`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 23,
++   "conf": 0,
++   "date": "2021-11-13",
++   "fulfilled": 1,
++   "id": 6,
++   "products": "{\"Flour\":2,\"Eggs\":2}",
++   "time": "18:36",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 7`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 11.5,
++   "conf": 0,
++   "date": "2021-11-30",
++   "fulfilled": 0,
++   "id": 14,
++   "products": "{\"Flour\":1,\"Eggs\":1}",
++   "time": "22:32",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
+
+Snapshot name: `tests GET /api/orders/:id 8`
+
+- Expected properties  - 8
++ Received value       + 8
+
+  Object {
+-   "address": Any<Object>,
+-   "amount": Any<Number>,
+-   "conf": Any<Boolean>,
+-   "date": Any<String>,
+-   "fulfilled": Any<Boolean>,
+-   "id": Any<Number>,
+-   "products": Any<Object>,
+-   "time": Any<String>,
++   "address": "{\"address\":\"Via Millio, 23 Torino (TO) 10129\",\"deliveryOn\":\"2021-12-07 11:30\"}",
++   "amount": 9,
++   "conf": 0,
++   "date": "2021-12-02",
++   "fulfilled": 0,
++   "id": 15,
++   "products": "{\"Flour\":2}",
++   "time": "22:32",
+  }
+    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:123:21)
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+    </testCase>
+    <testCase name="tests POST /api/orders" duration="286"/>
+    <testCase name="tests POST /api/addNewUser" duration="427"/>
+    <testCase name="tests error POST /api/addNewUser" duration="66"/>
+    <testCase name="login" duration="200"/>
+    <testCase name="tests POST /api/products" duration="119"/>
+    <testCase name="tests PUT /api/products/:id" duration="164"/>
+    <testCase name="logout" duration="34"/>
     <testCase name="tests delete /api/sessions/current" duration="31"/>
-    <testCase name="tests get /api/sessions/current" duration="30"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="46"/>
-    <testCase name="login" duration="150"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="417"/>
-    <testCase name="login" duration="274"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="233"/>
-    <testCase name="login" duration="144"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="38"/>
-    <testCase name="tests post /api/session" duration="161"/>
-    <testCase name="tests post /api/session error" duration="122"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="21"/>
-    <testCase name="tests GET /api/wallet/:id" duration="32">
+    <testCase name="tests get /api/sessions/current" duration="43"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="49"/>
+    <testCase name="login" duration="190"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="241"/>
+    <testCase name="login" duration="126"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="68"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="46"/>
+    <testCase name="login" duration="128"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="30"/>
+    <testCase name="tests post /api/session" duration="188"/>
+    <testCase name="tests post /api/session error" duration="138"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="24"/>
+    <testCase name="tests GET /api/wallet/:id" duration="25">
       <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:446:19)
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:452:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
   </file>
