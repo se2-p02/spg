@@ -106,7 +106,7 @@ app.post('/api/products', async (req, res) => {
     return;
   }
 
-  const product = req.body;
+  const product = req.body; 
   try {
     if (req.user.role !== "farmer") {
       res.status(500).json({ error: `User cannot insert new products` });
@@ -164,7 +164,7 @@ app.put('/api/products/:id', async (req, res) => {
 
 });
 
-// DELETE user
+// DELETE product
 app.delete('/api/products/:id', async (req, res) => {
   try {
     const clock = await spgDao.getClock();
@@ -295,15 +295,17 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 // POST /api/orders/
 //new order
 app.post('/api/orders', async (req, res) => {
+  
   const clock = await spgDao.getClock();
   const datetime = moment(clock.serverTime);
   if ((datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8))) {
-    res.status(500).end('New orders are not permitted in this timeslot.');
+    res.status(507).end('New orders are not permitted in this timeslot.');
     return;
   }
 
   const order = req.body;
   try {
+    console.log(order)
     if (order.test) {
       // just to test, after the call is set to -1
       order.id = await spgDao.getNextNumber();
@@ -312,6 +314,7 @@ app.post('/api/orders', async (req, res) => {
       order.amount = 0.0;
     }
     else {
+      console.log("aa-a-aa-a")
       let flag = false;
       Object.entries(order.products).forEach(async (prod) => {
         const res_prod = await spgDao.orderPrep(prod);
@@ -330,9 +333,10 @@ app.post('/api/orders', async (req, res) => {
       res.status(404).json(result);
     else {
       if (order.test) await spgDao.deleteTestOrder();
-      res.status(200).json(result);
+      res.status(200).json(order);
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: `${err}.` });
     return;
   }
@@ -385,6 +389,19 @@ app.put("/api/updateOrder/:id", async (req, res) => {
       if (result.err) res.status(404).json(result);
       else res.json(result);
     }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
+//pay order
+app.put("/api/orders/pay", async (req, res) => {
+  const order = req.body;
+  try {
+    const result = await spgDao.updateOrderPaid(order);
+    if (result.err) res.status(401).json(result);
+    else res.json(result);
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;

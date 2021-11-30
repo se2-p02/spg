@@ -133,8 +133,9 @@ function MyLogin(props) {
                                 {error.length !== 0 && (
                                     <div
                                         className="alert alert-danger alert-float-static fade show"
-                                        id="errors"
+                                        id="error"
                                         role="alert"
+                                        data-testid="error"
                                     >
                                         {error}
                                     </div>

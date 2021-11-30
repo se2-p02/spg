@@ -156,6 +156,27 @@ function MyContainer(props) {
           }
         />
         <Route
+          path="/client/orders"
+          element={
+            <>
+              <MyNavBar
+                user={user}
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={true}
+              ></MyNavBar>
+              <MyOrders
+                clock={clock}
+                setClock={setClock}
+                user={user}
+              ></MyOrders>
+            </>
+          }
+        />
+        <Route
           path="/farmer"
           exact
           element={
@@ -256,10 +277,8 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-
+            {console.log(clock)}
               <MyLogin
-                clock={clock}
-                setClock={setClock}
                 user={user}
                 setUser={setUser}
               />

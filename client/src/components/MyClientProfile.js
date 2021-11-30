@@ -43,25 +43,25 @@ function MyClientProfile(props) {
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Surname: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="surname">Surname: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.surname}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Email: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="email">Email: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.email}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Role: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="role">Role: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.role}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Wallet: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="wallet">Wallet: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white m-0 p-0">{client.wallet + " €"}</h3>
                     </Col>
@@ -69,25 +69,25 @@ function MyClientProfile(props) {
                 </Col>
                 <Col sm="6" className=" m-0 p-0">
                 <Row className="m-0 p-4 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Phone: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="phone">Phone: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.phone===null?"NaN":client.phone}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Address: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="address">Address: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.address}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>City: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="city">City: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.city}</h3>
                     </Col>
                 </Row>
                 <Row className="m-0 p-4 pt-0 pb-2">
-                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b>Country: </b></h3>
+                    <Col sm="4" className="m-0 p-0"><h3 className="text-white"><b data-testid="country">Country: </b></h3>
                     </Col>
                     <Col sm="8" className="m-0 p-0"><h3 className="text-white">{client.country}</h3>
                     </Col>
@@ -97,7 +97,7 @@ function MyClientProfile(props) {
             </Row>
 
 
-                <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
+                <Row className="text-center justify-content-center p-0 pt-2 pb-5"><Button testId="back" size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button></Row>
             </Container>
 
         </>

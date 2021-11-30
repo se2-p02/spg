@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './solidarity.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
@@ -41,8 +41,7 @@ function MyNavBar(props) {
 
         <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top justify-content-between" expand="lg">
             {/*<Navbar.Toggle aria-controls="CollapseLeft" /> */}
-
-            <Navbar.Brand >
+            <Navbar.Brand id="lll">
                 <Container className="d-flex align-items-center">
                     <img
                         alt=""
@@ -54,12 +53,14 @@ function MyNavBar(props) {
                     <div className="navTitle"><h2>Social Purchasing Group</h2></div>
                 </Container>
             </Navbar.Brand>
+            <div data-testid="clock">
             <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
+            </div>
             {
-                props.showCart ? <ListGroup key={"cart+logout"} horizontal className="p-4 pt-0 pb-0">
-                    <ListGroup.Item key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
+                props.showCart ? <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
+                    <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
-                            <Dropdown.Toggle key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
+                            <Dropdown.Toggle data-testid="cartIcon"  key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
                                 <div className="fw-bold mx-2">Cart</div>
                                 <Badge variant="primary" pill>
                                     {props.cart.length}
@@ -91,13 +92,13 @@ function MyNavBar(props) {
                     </ListGroup.Item>
                     <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
-                            <Dropdown.Toggle variant="dark" className="d-flex p-2" id="dropdown">
+                            <Dropdown.Toggle variant="dark" className="d-flex p-2" data-testid="logout">
                                 <PersonCircle className="mx-2"></PersonCircle>
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu align="end">
+                            <Dropdown.Menu align="end" id="logout">
                                 <Dropdown.Item>
-                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" id="logout" onClick={() => handleLogout()}>Logout</ListGroup.Item>
+                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -120,6 +121,7 @@ function MyModal(props) {
     const [client, setClient] = useState();
     const [errorMsg, setErrorMsg] = useState('');
     const [showAddressForm, setShowAddressForm] = useState(true);
+    const [payMethod, setPayMethod] = useState('now');
 
     const handleClose = () => {
         setSuccessful(false);
@@ -129,6 +131,7 @@ function MyModal(props) {
         setClient();
         setErrorMsg('');
         setShowAddressForm(true);
+        setPayMethod('now');
         props.setShow(false);
     }
 
@@ -138,7 +141,6 @@ function MyModal(props) {
         let u = props.user
         let info = undefined
         let wallet = 0
-        let paid = 0
         if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
@@ -147,14 +149,24 @@ function MyModal(props) {
         else {
             u = null;
         }
+
+
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
-            amount: props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price),
+            amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
-            user: u
+            user: u,
+            paid : 0
         }
-        order.paid = (wallet - order.amount > 0) ? 1 : 0
+
+        if (wallet - order.amount >= 0){
+            order.paid = 1
+        }
+        else{
+            order.paid = 0
+        }
+
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -165,13 +177,15 @@ function MyModal(props) {
             order.address = { address: address.replace(/\n/g, " "), deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
         }
         setErrorMsg(() => '');
-        API.sendOrder(order).then((response) => {
+        
+        await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
+                if(payMethod === 'now') API.payOrder(response).then((response) => { if(response.error) alert('Your last order was not payed due to insufficient balance. Please check your orders.'); });
                 props.setCart([]);
                 props.setShow(false);
             }
-        });
+        }).catch((response) =>{ console.log(response)});
     }
 
     useEffect(() => {
@@ -203,7 +217,7 @@ function MyModal(props) {
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-start align-items-center">Grand total:</ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-end align-items-center">
                         {props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
-                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a.quantity * a.price + b.quantity * b.price) + " €"}</ListGroup.Item>
+                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2) + " €"}</ListGroup.Item>
                 </ListGroup>
                 <ListGroup key={"placeOrder"} className="mx-3">
                     {ordersClosed && <p className={ordersClosed ? 'ordersClosed mt-3' : ' '}>Orders can't be placed from Sunday 23:00 to Monday 09:00.</p>}
@@ -231,7 +245,7 @@ function MyModal(props) {
                             <Form>
                                 <Form.Check defaultChecked
                                     type="radio"
-                                    name="ordergroup"
+                                    name="addressgroup"
                                     id="checkspec"
                                     label="Specify an address"
                                     onClick={() => {
@@ -240,7 +254,7 @@ function MyModal(props) {
                                     }} />
                                 <Form.Check
                                     type="radio"
-                                    name="ordergroup"
+                                    name="addressgroup"
                                     id="checkdefadd"
                                     disabled={client ? client.address ? false : true : true}
                                     label="Deliver to registered address"
@@ -265,6 +279,25 @@ function MyModal(props) {
                             </Form>
                         </ListGroup.Item>}
                     {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
+                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                        <Form>
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'client'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaynow"
+                                label="Pay now"
+                                disabled={props.user && props.user.role === 'employee'}
+                                onClick={() => setPayMethod(() => 'now')} />
+                            <Form.Check inline defaultChecked={props.user && props.user.role === 'employee'}
+                                type="radio"
+                                name="paygroup"
+                                id="checkpaylater"
+                                label="Pay later"
+                                onClick={() => setPayMethod(() => 'later')} />
+                        </Form>
+                        <p className="pay-method">{payMethod === 'now' ? 'If you don\'t have the required amount, you can pay it later in your orders page.' :
+                            payMethod === 'later' && 'The order will be placed but you will need to pay it manually in your orders page.'}</p>
+                    </ListGroup.Item>
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                         <Button disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
                     </ListGroup.Item>
