@@ -141,10 +141,6 @@ function MyModal(props) {
         let u = props.user
         let info = undefined
         let wallet = 0
-<<<<<<< HEAD
-        let paid = 0
-=======
->>>>>>> 261a0ee1cdaf3182db7f75b0ee8a9884ceea92ec
         if (u.role !== "employee") {
             u = props.user.id
             info = await API.loadClient(u)
@@ -153,18 +149,24 @@ function MyModal(props) {
         else {
             u = null;
         }
+
+
         props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
         order = {
             products: products,
             amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
-<<<<<<< HEAD
             user: u,
-            paid: (wallet - order.amount > 0) ? 1 : 0
-=======
-            user: u
->>>>>>> 261a0ee1cdaf3182db7f75b0ee8a9884ceea92ec
+            paid : 0
         }
+
+        if (wallet - order.amount >= 0){
+            order.paid = 1
+        }
+        else{
+            order.paid = 0
+        }
+
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -175,6 +177,7 @@ function MyModal(props) {
             order.address = { address: address.replace(/\n/g, " "), deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
         }
         setErrorMsg(() => '');
+        
         await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
@@ -182,7 +185,7 @@ function MyModal(props) {
                 props.setCart([]);
                 props.setShow(false);
             }
-        });
+        }).catch((response) =>{ console.log(response)});
     }
 
     useEffect(() => {

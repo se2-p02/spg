@@ -120,7 +120,7 @@ function MyOrders(props) {
               let list = Object.keys(j).map((key) => [key, j[key]])
               let b = "primary"
               //console.log(c.paid)
-              if (!c.fulfilled){
+              if (c.paid===0){
                   b = "danger"
               }
 

@@ -35,6 +35,7 @@ async function loadClient(id) {
 }
 
 async function sendOrder(order) {
+    console.log("qui2")
     const response = await fetch(URL + "/api/orders/",
         {
             method: "POST",
@@ -43,6 +44,7 @@ async function sendOrder(order) {
             },
             body: JSON.stringify(order),
         });
+    console.log(response)
     if (response.ok) {
         return response.json();
     } else return { 'error': 'Failed to store data on server' }

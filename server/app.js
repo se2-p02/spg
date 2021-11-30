@@ -295,15 +295,17 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 // POST /api/orders/
 //new order
 app.post('/api/orders', async (req, res) => {
+  
   const clock = await spgDao.getClock();
   const datetime = moment(clock.serverTime);
   if ((datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8))) {
-    res.status(500).end('New orders are not permitted in this timeslot.');
+    res.status(507).end('New orders are not permitted in this timeslot.');
     return;
   }
 
   const order = req.body;
   try {
+    console.log(order)
     if (order.test) {
       // just to test, after the call is set to -1
       order.id = await spgDao.getNextNumber();
@@ -312,6 +314,7 @@ app.post('/api/orders', async (req, res) => {
       order.amount = 0.0;
     }
     else {
+      console.log("aa-a-aa-a")
       let flag = false;
       Object.entries(order.products).forEach(async (prod) => {
         const res_prod = await spgDao.orderPrep(prod);
@@ -333,6 +336,7 @@ app.post('/api/orders', async (req, res) => {
       res.status(200).json(order);
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: `${err}.` });
     return;
   }

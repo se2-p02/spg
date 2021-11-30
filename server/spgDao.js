@@ -126,6 +126,7 @@ exports.getNextNumber = async () => {
         const sql = 'SELECT max (id) as id FROM orders';
         db.all(sql, function (err, rows) {
             if (err) {
+
                 reject(err);
                 return;
             }
@@ -134,6 +135,7 @@ exports.getNextNumber = async () => {
                 resolve(number);
             }
             else {
+
                 resolve(1);
             }
         });
@@ -162,7 +164,7 @@ exports.addOrder = async (order) => {
     try {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0, 0], function (err) {
+            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0, order.paid], function (err) {
                 if (err) {
                     reject(500);
                     return;
