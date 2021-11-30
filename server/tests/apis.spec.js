@@ -383,6 +383,11 @@ describe('Next week test on sunday', () => {
     
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   });
+
+  it('tests fet /api/nextProducts in the current week', async () => {
+    await server.get("/api/nextProducts").send({week: "current"}).expect(200);
+    const logout = await request(app).delete("/api/sessions/current").expect(200);
+  })
 });
 
 describe('Next week test farmer', () => {
