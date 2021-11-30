@@ -22,7 +22,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "PORT=3000 npm-run-all --parallel startClient startServer",
+    "start": "npm-run-all --parallel startClient startServer",
     "startClient": "react-scripts start",
     "startServer": "cd ../server && node ./server.js",
     "build": "react-scripts build",
