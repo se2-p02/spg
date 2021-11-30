@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="148"/>
-    <testCase name="tests GET /api/clients" duration="52"/>
-    <testCase name="tests GET /api/clients/:id" duration="38"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="75"/>
-    <testCase name="tests GET /api/orders" duration="42">
+    <testCase name="tests GET /api/products" duration="159"/>
+    <testCase name="tests GET /api/clients" duration="31"/>
+    <testCase name="tests GET /api/clients/:id" duration="23"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="52"/>
+    <testCase name="tests GET /api/orders" duration="49">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders 1`
@@ -297,7 +297,7 @@ Snapshot name: `tests GET /api/orders 10`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:106:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests GET /api/orders/:id" duration="39">
+    <testCase name="tests GET /api/orders/:id" duration="38">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests GET /api/orders/:id 1`
@@ -531,27 +531,27 @@ Snapshot name: `tests GET /api/orders/:id 8`
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:122:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests POST /api/orders" duration="234"/>
-    <testCase name="tests POST /api/addNewUser" duration="402"/>
-    <testCase name="tests error POST /api/addNewUser" duration="49"/>
-    <testCase name="login" duration="161"/>
-    <testCase name="tests POST /api/products" duration="92"/>
-    <testCase name="tests PUT /api/products/:id" duration="135"/>
+    <testCase name="tests POST /api/orders" duration="230"/>
+    <testCase name="tests POST /api/addNewUser" duration="412"/>
+    <testCase name="tests error POST /api/addNewUser" duration="39"/>
+    <testCase name="login" duration="146"/>
+    <testCase name="tests POST /api/products" duration="90"/>
+    <testCase name="tests PUT /api/products/:id" duration="128"/>
     <testCase name="logout" duration="26"/>
-    <testCase name="tests delete /api/sessions/current" duration="29"/>
-    <testCase name="tests get /api/sessions/current" duration="63"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="97"/>
-    <testCase name="login" duration="179"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="235"/>
-    <testCase name="login" duration="145"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="65"/>
-    <testCase name="tests fet /api/nextProducts in the current week" duration="45"/>
-    <testCase name="login" duration="147"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="49"/>
-    <testCase name="tests post /api/session" duration="185"/>
-    <testCase name="tests post /api/session error" duration="121"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="23"/>
-    <testCase name="tests GET /api/wallet/:id" duration="24">
+    <testCase name="tests delete /api/sessions/current" duration="25"/>
+    <testCase name="tests get /api/sessions/current" duration="35"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="48"/>
+    <testCase name="login" duration="246"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="210"/>
+    <testCase name="login" duration="153"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="62"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="42"/>
+    <testCase name="login" duration="127"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="27"/>
+    <testCase name="tests post /api/session" duration="136"/>
+    <testCase name="tests post /api/session error" duration="150"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="31"/>
+    <testCase name="tests GET /api/wallet/:id" duration="33">
       <failure message="TypeError: response.body.forEach is not a function"><![CDATA[TypeError: response.body.forEach is not a function
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:452:19)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>

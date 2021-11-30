@@ -373,7 +373,7 @@ describe('Next week test on sunday', () => {
     const today = dayjs();
     let difference_from_sunday = 0;
     if (today.day() != 0) {
-        difference_from_sunday = 7 - today.day();
+        difference_from_sunday = 7 - today.day()+1;
     }
     const next_week = today.add(difference_from_sunday, 'day');
     // set the clock
@@ -395,7 +395,7 @@ describe('Next week test farmer', () => {
   it('login', loginUser());
 
   it('tests get /api/nextProducts after the login as a farmer', async () => {
-    const res = await server.get("/api/nextProducts").send({role: "farmer"});
+    const res = await server.get("/api/nextProducts").query({role: "farmer"});
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
