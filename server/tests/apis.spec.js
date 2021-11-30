@@ -385,7 +385,7 @@ describe('Next week test on sunday', () => {
   });
 
   it('tests fet /api/nextProducts in the current week', async () => {
-    await server.get("/api/nextProducts").send({week: "current"}).expect(200);
+    await server.get("/api/nextProducts").query({week: "current"}).expect(200);
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   })
 });
