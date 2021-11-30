@@ -46,11 +46,9 @@ exports.getNextProducts = (role, user, time, week) => {
             sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability, p.confirmed FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
-        console.log(params)
 
         db.all(sql, params, (err, rows) => {
             if (err) {
-                console.log("1")
                 reject(err);
                 return;
             }
