@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyEmployee.test.js">
-    <testCase name="Test Employee page renders the employee starting page" duration="36"/>
-    <testCase name="Test Employee page e2e test employee" duration="1"/>
+    <testCase name="Test employee renders the employee starting page" duration="443"/>
+    <testCase name="Test employee test employee e2e" duration="45"/>
   </file>
 </testExecutions>

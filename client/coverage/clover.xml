@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638265958879" clover="3.2.0">
-  <project timestamp="1638265958880" name="All files">
+<coverage generated="1638268142023" clover="3.2.0">
+  <project timestamp="1638268142023" name="All files">
     <metrics statements="664" coveredstatements="5" conditionals="463" coveredconditionals="3" methods="274" coveredmethods="1" elements="1401" coveredelements="9" complexity="0" loc="664" ncloc="664" packages="3" files="20" classes="20"/>
     <package name="src">
       <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
@@ -241,14 +241,14 @@
       </file>
       <file name="MyEmployee.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/MyEmployee.js">
         <metrics statements="11" coveredstatements="5" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
