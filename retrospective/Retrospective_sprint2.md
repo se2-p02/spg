@@ -16,6 +16,8 @@ sections:
 - Story Points → Committed: 27 vs Done: 27
 
 - Hours → Planned: 83 hours 45 minutes vs Spent: 76 hours 55 minutes
+
+### Definition of Done:
  
 - Unit Tests passing
 - Code review completed
