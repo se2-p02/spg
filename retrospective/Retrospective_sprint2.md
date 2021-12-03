@@ -79,9 +79,7 @@ In this sprint, we had a better estimation with respect to the first one. We lea
 
 
 - What lessons did you learn (both positive and negative) in this sprint?<br/>
-We learned that tests (especially E2E) have a very variable time for their development. Some components can be tested really quickly while others can require hours before making everything run correctly. We also learned that sonarcloud still needs to be fully configured to recognize all our client tests.
-
-On the other hand, we have found a definite way to do the E2E tests (avoiding puppeteer and using the react testing library) and this will make our job much easier in the future.
+We learned that tests (especially E2E) have a very variable time for their development. Some components can be tested really quickly while others can require hours before making everything run correctly. We also learned that sonarcloud still needs to be fully configured to recognize all our client tests. On the other hand, we have found a definite way to do the E2E tests (avoiding puppeteer and using the react testing library) and this will make our job much easier in the future.
 
 
 - Which improvement goals set in the previous retrospective were you able to achieve? <br/>
