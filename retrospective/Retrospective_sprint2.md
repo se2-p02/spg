@@ -59,10 +59,10 @@ sections:
   - Total hours estimated (called merge code): 2h
   - Total hours spent: 3h
 - Technical Debt management:
-  - Total hours estimated: 2h 30m
+  - Total hours estimated: 4h
   - Total hours spent: 1h 20m
-  - Hours estimated for remediation by SonarQube: 1h 19m
-  - Hours spent on remediation: 3h 35m 
+  - Hours estimated for remediation by SonarQube: -
+  - Hours spent on remediation: 1h 20m
   - debt ratio (as reported by SonarQube under "Measures-Maintainability"): 0.3%
   - rating for each quality characteristic reported in SonarQube under "Measures":
      - reliability: A
