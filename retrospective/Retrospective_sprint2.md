@@ -56,8 +56,8 @@ sections:
   - Total hours estimated: 12h
   - Total hours spent: 9h 55m
 - Code review 
-  - Total hours estimated: 5h
-  - Total hours spent: --
+  - Total hours estimated (called merge code): 2h
+  - Total hours spent: 3h
 - Technical Debt management:
   - Total hours estimated: 2h 30m
   - Total hours spent: 1h 20m
