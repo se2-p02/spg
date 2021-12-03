@@ -41,8 +41,8 @@ sections:
 > NOTE: technical tasks corresponds to story `#0`
 
 
-- Hours per task → Average: 2h 20m Standard Deviation: 3h 09m
-- Total task estimation error ratio: 1.11
+- Hours per task → Average: 1h 42m Standard Deviation: 2h 2m
+- Total task estimation error ratio: 1.09
 
   
 ## QUALITY MEASURES 
