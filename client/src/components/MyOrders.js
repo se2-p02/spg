@@ -60,13 +60,13 @@ function MyOrders(props) {
         <ListGroup className="my-3 mx-5" horizontal>
           <ListGroup.Item
             variant="warning"
-            className="d-flex w-50 justify-content-center"
+            className="d-flex w-100 justify-content-center"
           >
             <b>id</b>
           </ListGroup.Item>
           <ListGroup.Item
             variant="warning"
-            className="d-flex w-50 justify-content-center"
+            className="d-flex w-100 justify-content-center"
           >
             <b>userID</b>
           </ListGroup.Item>
@@ -117,7 +117,6 @@ function MyOrders(props) {
           <>
             {orders.map((c) => {
               let j = JSON.parse(c.products)
-              let list = Object.keys(j).map((key) => [key, j[key]])
               let b = "primary"
               //console.log(c.paid)
               if (c.paid===0){
@@ -134,13 +133,13 @@ function MyOrders(props) {
                     
                   <ListGroup.Item
                     variant={b}
-                    className="d-flex w-50 justify-content-center"
+                    className="d-flex w-100 justify-content-center"
                   >
                     {c.id}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
-                    className="d-flex w-50 justify-content-center"
+                    className="d-flex w-100 justify-content-center"
                   >
                     {c.userID}
                   </ListGroup.Item>
@@ -148,7 +147,7 @@ function MyOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    <ul>{list.map((x) => { return (<li>{x[0] + ":" + x[1]}</li>) })}</ul>
+                    <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
@@ -170,19 +169,19 @@ function MyOrders(props) {
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
-                    className="d-flex w-50 justify-content-center"
+                    className="d-flex w-100 justify-content-center"
                   >
                     {c.amount}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
-                    className="d-flex w-50 justify-content-center"
+                    className="d-flex w-100 justify-content-center"
                   >
                     {c.conf}
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
-                    className="d-flex w-50 justify-content-center"
+                    className="d-flex w-100 justify-content-center"
                   >
                     {props.user.role === 'client' ?
                     c.paid === 0 ? (

@@ -106,7 +106,7 @@ app.post('/api/products', async (req, res) => {
     return;
   }
 
-  const product = req.body; 
+  const product = req.body;
   try {
     if (req.user.role !== "farmer") {
       res.status(500).json({ error: `User cannot insert new products` });
@@ -241,7 +241,7 @@ app.get('/api/wallet/:id', async (req, res) => {
       res.status(404).json(wallet);
     }
     else {
-      orders.forEach(o => { if(o.paid === 0 && o.amount > wallet[0].wallet) res.json(true); });
+      orders.forEach(o => { if (o.paid === 0 && o.amount > wallet[0].wallet) res.json(true); });
       res.json(false);
     }
   } catch (err) {
@@ -290,7 +290,7 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 // POST /api/orders/
 //new order
 app.post('/api/orders', async (req, res) => {
-  
+
   const clock = await spgDao.getClock();
   const datetime = moment(clock.serverTime);
   if ((datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8))) {
@@ -384,6 +384,30 @@ app.put("/api/updateOrder/:id", async (req, res) => {
       if (result.err) res.status(404).json(result);
       else res.json(result);
     }
+  } catch (err) {
+    res.status(500).json({ error: `${err}.` });
+    return;
+  }
+});
+
+//update products status of a given order
+app.put("/api/orders/:orderId/confirmProducts/", async (req, res) => {
+  const clock = await spgDao.getClock();
+  const datetime = moment(clock.serverTime);
+  if (!((datetime.day() === 3 && datetime.hour() >= 8) || datetime.day() === 4 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19)))) {
+    res.status(500).end('Confirmation out is not permitted in this timeslot.');
+    return;
+  }
+
+  const orderId = req.params.orderId;
+  const orderInfo = req.body.elem
+
+
+  try {
+    const result = await spgDao.confirmProductsOrder(orderId, orderInfo)
+    if (result.err) res.status(404).json(result);
+    else res.json(true);
+
   } catch (err) {
     res.status(500).json({ error: `${err}.` });
     return;

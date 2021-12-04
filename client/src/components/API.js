@@ -1,5 +1,21 @@
 const URL = "http://localhost:3000"
 
+async function confirmOrder(order){
+    console.log(order)
+    let myURL = "/api/orders/"+order.id+"/confirmProducts/"
+    const response = await fetch(myURL,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({elem:order})
+        });
+    if (response.ok){
+        return true
+    }
+    else return { 'error': 'Failed to update Products status of an order' }
+}
 
 async function loadProducts() {
     let myURL = URL + "/api/products";
@@ -77,6 +93,8 @@ async function payOrder(order) {
         return true;
     } else return { 'error': 'Failed to store data on server' }
 }
+
+
 
 async function updateBasket(id, items) {
     const response = await fetch(URL + `/api/clients/basket/${id}`,
@@ -239,5 +257,5 @@ async function loadWallet(id) {
     } else return { 'error': 'Failed to load client from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder };
 export default API;

@@ -20,7 +20,6 @@ function MyNavBar(props) {
         props.setCart((c) => c.filter((old) => old !== p));
     }
 
-    console.log(props.user)
 
     const handleLogout = () => {
         API.logout().then((response) => {
@@ -137,7 +136,7 @@ function MyModal(props) {
 
     const handleSubmit = async () => {
         let order;
-        let products = {};
+        let products = [];
         let u = props.user
         let info = undefined
         let wallet = 0
@@ -151,7 +150,20 @@ function MyModal(props) {
         }
 
 
-        props.cart.forEach((prod) => products = { ...products, [prod.name]: prod.quantity });
+
+        props.cart.forEach((prod) => {
+            let p = {
+                id : prod.id,
+                quantity : prod.quantity,
+                farmer : prod.farmer,
+                status : 0,
+                name : prod.name
+
+            }
+
+            products.push(p)
+        });
+
         order = {
             products: products,
             amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
