@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-<<<<<<< HEAD
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyEmployee.test.js">
-    <testCase name="Test employee renders the employee starting page" duration="443"/>
-    <testCase name="Test employee test employee e2e" duration="45"/>
-=======
   <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyForm.test.js">
     <testCase name="renders sigup page" duration="251"/>
   </file>
@@ -377,6 +372,5 @@
     at Page.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
     at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\ModalWindow.test.js:16:9)]]></failure>
     </testCase>
->>>>>>> 8b94ba0ceaf9e0a4286deff0283023a5f3bff112
   </file>
 </testExecutions>
