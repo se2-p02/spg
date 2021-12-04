@@ -241,9 +241,7 @@ app.get('/api/wallet/:id', async (req, res) => {
       res.status(404).json(wallet);
     }
     else {
-      orders.forEach(x => {if (x.paid === 0 && x.amount > wallet[0].wallet){
-        res.json(true);
-      }})
+      orders.forEach(o => { if(o.paid === 0 && o.amount > wallet[0].wallet) res.json(true); });
       res.json(false);
     }
   } catch (err) {

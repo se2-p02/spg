@@ -57,10 +57,8 @@ function MyContainer(props) {
     if (user) {
       API.loadWallet(user.id)
         .then((c) => {
-          if (c.error === undefined) {
-            console.log(c);
-            setShowModal(c)
-          }
+          if (c.error === undefined) 
+            setShowModal(c);
         })
         .catch((err) => {
           console.log(err);
