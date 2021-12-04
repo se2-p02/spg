@@ -1,10 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import MyNavBar from '../components/MyNavBar';
-import { MemoryRouter} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { BrowserRouter } from "react-router-dom";
 import 'jest-canvas-mock'
-
 
 const moment = require('moment');
 
@@ -15,25 +14,25 @@ let date = moment("2021-11-28 15:55");
 
 describe('Test navbar unit', () => {
     test('Test login form appearance', async () => {
-      render(<BrowserRouter><MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]}/></BrowserRouter>);
-  
-      const title = screen.getByText('Social Purchasing Group');
-      const clock = screen.queryByTestId('clock')
-      const field = screen.queryByTestId('dropdown')
-      const iconPerson = screen.queryByTestId('logout')
-      const cart = screen.queryByTestId('cart')
-      const cartIcon = screen.queryByTestId('cartIcon')
+        render(<BrowserRouter><MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]} /></BrowserRouter>);
 
-      expect(title).toBeInTheDocument();
-      expect(clock).toBeInTheDocument();
-      expect(field).toBeInTheDocument();
-      expect(iconPerson).toBeInTheDocument();
-      expect(cart).toBeInTheDocument();
-      expect(cartIcon).toBeInTheDocument();
+        const title = screen.getByText('Social Purchasing Group');
+        const clock = screen.queryByTestId('clock')
+        const field = screen.queryByTestId('dropdown')
+        const iconPerson = screen.queryByTestId('logout')
+        const cart = screen.queryByTestId('cart')
+        const cartIcon = screen.queryByTestId('cartIcon')
+
+        expect(title).toBeInTheDocument();
+        expect(clock).toBeInTheDocument();
+        expect(field).toBeInTheDocument();
+        expect(iconPerson).toBeInTheDocument();
+        expect(cart).toBeInTheDocument();
+        expect(cartIcon).toBeInTheDocument();
 
     });
-  
-  });
+
+});
 
 
 
@@ -46,7 +45,7 @@ describe('Test navbar e2e', () => {
 
         render(
             <MemoryRouter history={history}>
-                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]}/>
+                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]} />
             </MemoryRouter>
         );
 
@@ -63,7 +62,7 @@ describe('Test navbar e2e', () => {
 
         render(
             <MemoryRouter history={history}>
-                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]}/>
+                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]} />
             </MemoryRouter>
         );
 
@@ -80,7 +79,7 @@ describe('Test navbar e2e', () => {
 
         render(
             <MemoryRouter history={history}>
-                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]}/>
+                <MyNavBar user={undefined} setUser={() => jest.fn()} setClock={() => jest.fn()} clock={date} showCart={true} setCart={() => jest.fn()} cart={[]} />
             </MemoryRouter>
         );
 

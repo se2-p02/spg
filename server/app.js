@@ -236,17 +236,15 @@ app.get('/api/clients/:id', async (req, res) => {
 app.get('/api/wallet/:id', async (req, res) => {
   try {
     const wallet = await spgDao.getWallet(req.params.id);
+    const orders = await spgDao.getOrders(req.params.id);
     if (wallet.error) {
       res.status(404).json(wallet);
     }
     else {
-      if (wallet[0].wallet > 0) {
+      orders.forEach(x => {if (x.paid === 0 && x.amount > wallet[0].wallet){
         res.json(true);
-      } else {
-        res.json(false);
-      }
-
-
+      }})
+      res.json(false);
     }
   } catch (err) {
     console.log(err)

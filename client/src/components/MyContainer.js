@@ -59,9 +59,7 @@ function MyContainer(props) {
         .then((c) => {
           if (c.error === undefined) {
             console.log(c);
-            if (c === false) {
-              setShowModal(true);
-            }
+            setShowModal(c)
           }
         })
         .catch((err) => {

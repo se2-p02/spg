@@ -41,10 +41,12 @@ describe('Test employee', () => {
       </MemoryRouter>
     );
 
-    //TODO --> Error on infinte update
+    act(() => {
+      fireEvent.click(screen.getByText("Clients"));
+    });
+    expect(window.location.pathname==="/employee/clients");
+    
 
-    
-    
 
   });
 })
