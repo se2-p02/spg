@@ -30,11 +30,17 @@
 }
 
 .form-floating {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .pay-method {
   color: gray;
   font-size: small;
+}
+
+.search-form {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }

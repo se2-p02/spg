@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './solidarity.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
 import MyClock from "./MyClock";
 import moment from "moment";
-import dayjs from "dayjs";
 import DateTimePicker from 'react-datetime-picker';
 
 function MyNavBar(props) {
@@ -135,17 +134,8 @@ function MyModal(props) {
     const handleSubmit = async () => {
         let order;
         let products = [];
-        let u = props.user
-        let info = undefined
-        let wallet = 0
-        if (u.role !== "employee") {
-            u = props.user.id
-            info = await API.loadClient(u)
-            wallet = info.wallet
-        }
-        else {
-            u = null;
-        }
+        let u = undefined;
+        if (u.role !== "employee")  u = props.user.id;
 
         props.cart.forEach((prod) => {
             let p = {
@@ -156,7 +146,6 @@ function MyModal(props) {
                 name: prod.name
 
             }
-
             products.push(p)
         });
         order = {
@@ -166,13 +155,6 @@ function MyModal(props) {
             user: u,
             paid: 0
         }
-
-        /*if (wallet - order.amount >= 0){
-            order.paid = 1
-        }
-        else{
-            order.paid = 0
-        }*/
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
@@ -186,13 +168,13 @@ function MyModal(props) {
 
         setErrorMsg(() => '');
 
-        /*await API.sendOrder(order).then((response) => {
+        await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
                 props.setCart([]);
                 props.setShow(false);
             }
-        }).catch((response) =>{ console.log(response)});*/
+        }).catch((response) =>{ console.log(response)});
         console.log(order);
     }
 

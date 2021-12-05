@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Form, Button, Container, Col, Row, InputGroup } from "react-bootstrap";
 import { useNavigate, Navigate } from "react-router-dom";
+import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import API from "./API";
 import './MyNavBar.css';
 
@@ -10,6 +11,7 @@ import './MyNavBar.css';
 function MyLogin(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [errorMessageUsername, setErrorMessageUsername] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
@@ -116,17 +118,20 @@ function MyLogin(props) {
 
                                 <Form.Group className={errorMessageUsername ? "pt-1" : "pt-3"}>
                                     <Form.Label className="text-info"><h5>Password</h5></Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        id="password"
-                                        className="w-100 p-4"
-                                        placeholder="Password"
-                                        required
-                                        isInvalid={errorMessagePassword}
-                                        onChange={(ev) => { setPassword(ev.target.value); checkValid(username, ev.target.value); }}
-                                        value={password}
-                                        onKeyDown={(ev) => {if(ev.key === 'Enter') handleSubmit(ev);}}
-                                    />
+                                    <InputGroup>
+                                        <Form.Control
+                                            type={showPassword ? "text" : "password"}
+                                            id="password"
+                                            className="p-4"
+                                            placeholder="Password"
+                                            required
+                                            isInvalid={errorMessagePassword}
+                                            onChange={(ev) => { setPassword(ev.target.value); checkValid(username, ev.target.value); }}
+                                            value={password}
+                                            onKeyDown={(ev) => { if (ev.key === 'Enter') handleSubmit(ev); }}
+                                        />
+                                        <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="30" /> : <EyeFill size="30" />}</Button>
+                                    </InputGroup>
                                     <Form.Control.Feedback type="invalid" id="errorp">
                                         {errorMessagePassword}
                                     </Form.Control.Feedback>

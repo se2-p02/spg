@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
+import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import { Navigate } from 'react-router-dom';
 import API from "./API";
 import './MyNavBar.css';
@@ -10,6 +11,7 @@ function MyForm(props) {
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [repeat, setRepeat] = useState("");
 
     const [errorMessageEmail, setErrorMessageEmail] = useState("");
@@ -17,7 +19,7 @@ function MyForm(props) {
     const [errorMessageFields, setErrorMessageFields] = useState("");
     const [goBack, setGoBack] = useState(false);
     const [registered, setRegistered] = useState(false);
-    
+
     const [phoneNumber, setPhoneNumber] = useState("");
     const [errorNumber, setErrorNumber] = useState("");
     const [city, setCity] = useState("");
@@ -30,10 +32,10 @@ function MyForm(props) {
     }
 
     if (goBack) {
-        if (props.user === undefined){
+        if (props.user === undefined) {
             return (<Navigate to={"/login"}></Navigate>)
         }
-        return (<Navigate to={"/"+ props.user.name}></Navigate>)
+        return (<Navigate to={"/" + props.user.name}></Navigate>)
     }
 
     function handleSubmit(ev) {
@@ -60,7 +62,7 @@ function MyForm(props) {
 
     function checkNumber() {
         if (phoneNumber.length !== 10 || isNaN(phoneNumber)) {
-            setErrorNumber("Insert a valid phone number"); 
+            setErrorNumber("Insert a valid phone number");
             return false;
         }
         else {
@@ -224,14 +226,17 @@ function MyForm(props) {
                                 <Col>
                                     <Form.Group controlId="Password">
                                         <Form.Label className="text-info"><h5>Password</h5></Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            className="w-100 p-3"
-                                            placeholder="Password"
-                                            required
-                                            onChange={(ev) => { setPassword(ev.target.value); }}
-                                            value={password}
-                                        />
+                                        <InputGroup>
+                                            <Form.Control
+                                                type={showPassword ? "text" : "password"}
+                                                className="p-3"
+                                                placeholder="Password"
+                                                required
+                                                onChange={(ev) => { setPassword(ev.target.value); }}
+                                                value={password}
+                                            />
+                                            <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="27" /> : <EyeFill size="27" />}</Button>
+                                        </InputGroup>
                                     </Form.Group>
                                     {errorMessagePassword.length !== 0 && (
                                         <div
@@ -245,14 +250,17 @@ function MyForm(props) {
                                 <Col>
                                     <Form.Group controlId="repeatPassword">
                                         <Form.Label className="text-info"><h5>Repeat Password</h5></Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            className="w-100 p-3"
-                                            placeholder="Repeat Password"
-                                            required
-                                            onChange={(ev) => { setRepeat(ev.target.value) }}
-                                            value={repeat}
-                                        />
+                                        <InputGroup>
+                                            <Form.Control
+                                                type={showPassword ? "text" : "password"}
+                                                className="p-3"
+                                                placeholder="Repeat Password"
+                                                required
+                                                onChange={(ev) => { setRepeat(ev.target.value) }}
+                                                value={repeat}
+                                            />
+                                            <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="27" /> : <EyeFill size="27" />}</Button>
+                                        </InputGroup>
                                     </Form.Group>
                                     {errorMessagePassword.length !== 0 && (
                                         <div
@@ -282,13 +290,13 @@ function MyForm(props) {
                                         />
                                     </Form.Group>
                                     {errorNumber.length !== 0 && (
-                                            <div
-                                                className="alert alert-danger alert-float-static fade show"
-                                                role="alert"
-                                            >
-                                                {errorNumber}
-                                            </div>
-                                        )}
+                                        <div
+                                            className="alert alert-danger alert-float-static fade show"
+                                            role="alert"
+                                        >
+                                            {errorNumber}
+                                        </div>
+                                    )}
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="country">
@@ -335,7 +343,7 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                             </Row>
                         </Form>
-                        
+
                         <Row className="m-0 mt-3">
                             <Col lg={2}></Col>
                             <Col>

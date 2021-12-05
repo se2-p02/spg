@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row } from "react-bootstrap";
+import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup } from "react-bootstrap";
 import { Link, Navigate } from 'react-router-dom';
+import { XCircleFill } from "react-bootstrap-icons";
 import Card from 'react-bootstrap/Card';
 import './MyNavBar.css';
 import API from "./API";
@@ -11,6 +12,7 @@ function MyProducts(props) {
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(0);
     const [filter, setFilter] = useState('All');
+    const [wordFilter, setWordFilter] = useState('');
     const [filters, setFilters] = useState(['All']);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -45,8 +47,8 @@ function MyProducts(props) {
     }, [products]);
 
     useEffect(() => {
-        if (products.length !== 0) setFilteredProducts(() => products.filter(p => filter === 'All' || p.filter === filter));
-    }, [products, filter]);
+        if (products.length !== 0) setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));
+    }, [products, filter, wordFilter]);
 
     if (goBack) {
         return (<Navigate to={"/" + props.user.role}></Navigate>)
@@ -81,6 +83,14 @@ function MyProducts(props) {
                         {filters.map((f, i) => <option key={'f' + i} value={f}>{f}</option>)}
                     </Form.Select>
                 </FloatingLabel>
+                <InputGroup className="mt-3 d-flex search-form">
+                    <Form.Control
+                        type="text"
+                        placeholder="Search for a product"
+                        value={wordFilter}
+                        onChange={(e) => setWordFilter(() => e.target.value)} />
+                    <Button variant="secondary" size="lg" onClick={() => setWordFilter(() => '')}><XCircleFill size="33" /></Button>
+                </InputGroup>
                 {filteredProducts &&
                     <>
                         <Row className="justify-content-center align-items-start">
@@ -92,7 +102,7 @@ function MyProducts(props) {
                                             <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
                                                 <Card key={p.id} className="bg-dark" border="light">
                                                     <Card.Title className="text-truncate text-center">
-                                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
+                                                        <ListGroup.Item variant="primary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
                                                     </Card.Title>
                                                     <Card.Body className="">
                                                         <ListGroup className="">
