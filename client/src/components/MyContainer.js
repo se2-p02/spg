@@ -15,6 +15,7 @@ import MyClientPage from "./MyClientPage";
 import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
+import MyAvailableOrders from "./MyAvailableOrders";
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -448,6 +449,24 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <MyForm clock={clock} setClock={setClock} user={user} />
+            </>
+          }
+        />
+      { /* TEST */}
+      <Route
+          path="/availableProd"
+          element={
+            <>
+              <MyNavBar
+                user={user}
+                clock={clock}
+                setClock={setClock}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+                setUser={setUser}
+              ></MyNavBar>
+              <MyAvailableOrders clock={clock} setClock={setClock} user={user} />
             </>
           }
         />
