@@ -53,13 +53,13 @@ function MyNavBar(props) {
                 </Container>
             </Navbar.Brand>
             <div data-testid="clock">
-            <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
+                <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
             </div>
             {
                 props.showCart ? <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
                     <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
                         <Dropdown>
-                            <Dropdown.Toggle data-testid="cartIcon"  key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
+                            <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
                                 <div className="fw-bold mx-2">Cart</div>
                                 <Badge variant="primary" pill>
                                     {props.cart.length}
@@ -120,7 +120,6 @@ function MyModal(props) {
     const [client, setClient] = useState();
     const [errorMsg, setErrorMsg] = useState('');
     const [showAddressForm, setShowAddressForm] = useState(true);
-    const [payMethod, setPayMethod] = useState('now');
 
     const handleClose = () => {
         setSuccessful(false);
@@ -130,7 +129,6 @@ function MyModal(props) {
         setClient();
         setErrorMsg('');
         setShowAddressForm(true);
-        setPayMethod('now');
         props.setShow(false);
     }
 
@@ -149,55 +147,53 @@ function MyModal(props) {
             u = null;
         }
 
-
-
         props.cart.forEach((prod) => {
             let p = {
-                id : prod.id,
-                quantity : prod.quantity,
-                farmer : prod.farmer,
-                status : 0,
-                name : prod.name
+                id: prod.id,
+                quantity: prod.quantity,
+                farmer: prod.farmer,
+                status: 0,
+                name: prod.name
 
             }
 
             products.push(p)
         });
-
         order = {
             products: products,
             amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
             user: u,
-            paid : 0
+            paid: 0
         }
 
-        if (wallet - order.amount >= 0){
+        /*if (wallet - order.amount >= 0){
             order.paid = 1
         }
         else{
             order.paid = 0
-        }
-
+        }*/
 
         if (props.cart.length === 1) {
             order.amount = props.cart[0].quantity * props.cart[0].price;
         }
+        if (!datetime || moment(datetime).isBefore(props.clock)) return setErrorMsg(() => 'You must insert a valid date and time for the delivery.');
         if (orderMethod === 'address') {
             if (!address) return setErrorMsg(() => 'You must insert an address.');
-            if (!datetime || moment(datetime).isBefore(props.clock)) return setErrorMsg(() => 'You must insert a valid date and time for the delivery.');
             order.address = { address: address.replace(/\n/g, " "), deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
         }
+        else if (orderMethod === 'store') order.address = { address: 'STORE PICKUP', deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
+
         setErrorMsg(() => '');
-        
-        await API.sendOrder(order).then((response) => {
+
+        /*await API.sendOrder(order).then((response) => {
             if (response.error === undefined) {
                 setSuccessful(true);
-                if(payMethod === 'now') API.payOrder(response).then((response) => { if(response.error) alert('Your last order was not payed due to insufficient balance. Please check your orders.'); });
                 props.setCart([]);
                 props.setShow(false);
             }
-        }).catch((response) =>{ console.log(response)});
+        }).catch((response) =>{ console.log(response)});*/
+        console.log(order);
     }
 
     useEffect(() => {
@@ -252,18 +248,18 @@ function MyModal(props) {
                                 }} />
                         </Form>
                     </ListGroup.Item>
-                    {orderMethod === 'address' &&
-                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                            <Form>
-                                <Form.Check defaultChecked
-                                    type="radio"
-                                    name="addressgroup"
-                                    id="checkspec"
-                                    label="Specify an address"
-                                    onClick={() => {
-                                        setAddress(() => '');
-                                        setShowAddressForm(() => true);
-                                    }} />
+
+                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                        <Form>
+                            {orderMethod === 'address' && <><Form.Check defaultChecked
+                                type="radio"
+                                name="addressgroup"
+                                id="checkspec"
+                                label="Specify an address"
+                                onClick={() => {
+                                    setAddress(() => '');
+                                    setShowAddressForm(() => true);
+                                }} />
                                 <Form.Check
                                     type="radio"
                                     name="addressgroup"
@@ -273,43 +269,24 @@ function MyModal(props) {
                                     onClick={() => {
                                         setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
                                         setShowAddressForm(() => false);
-                                    }} />
-                                {showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
-                                    <Form.Control className="w-100" as="textarea" cols={100} rows={3}
-                                        placeholder="Please include street, number, city and country."
-                                        onChange={(e) => setAddress(() => e.target.value)} /></>}
+                                    }} /> </>}
+                            {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
+                                <Form.Control className="w-100" as="textarea" cols={100} rows={3}
+                                    placeholder="Please include street, number, city and country."
+                                    onChange={(e) => setAddress(() => e.target.value)} /></>}
 
-                                <Form.Label className="mt-3">Select a date and a time for the delivery:</Form.Label>
-                                <DateTimePicker className="mb-2"
-                                    onChange={setDatetime}
-                                    value={datetime}
-                                    format='yyyy-MM-dd HH:mm'
-                                    required={true}
-                                    clearIcon={null}
-                                    locale='en-us'
-                                />
-                            </Form>
-                        </ListGroup.Item>}
-                    {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
-                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                        <Form>
-                            <Form.Check inline defaultChecked={props.user && props.user.role === 'client'}
-                                type="radio"
-                                name="paygroup"
-                                id="checkpaynow"
-                                label="Pay now"
-                                disabled={props.user && props.user.role === 'employee'}
-                                onClick={() => setPayMethod(() => 'now')} />
-                            <Form.Check inline defaultChecked={props.user && props.user.role === 'employee'}
-                                type="radio"
-                                name="paygroup"
-                                id="checkpaylater"
-                                label="Pay later"
-                                onClick={() => setPayMethod(() => 'later')} />
+                            <Form.Label className={orderMethod === 'store' ? 'mt-0' : 'mt-3'}>Select a date and a time for the delivery:</Form.Label>
+                            <DateTimePicker className="mb-2"
+                                onChange={setDatetime}
+                                value={datetime}
+                                format='yyyy-MM-dd HH:mm'
+                                required={true}
+                                clearIcon={null}
+                                locale='en-us'
+                            />
                         </Form>
-                        <p className="pay-method">{payMethod === 'now' ? 'If you don\'t have the required amount, you can pay it later in your orders page.' :
-                            payMethod === 'later' && 'The order will be placed but you will need to pay it manually in your orders page.'}</p>
                     </ListGroup.Item>
+                    {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
                         <Button disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
                     </ListGroup.Item>

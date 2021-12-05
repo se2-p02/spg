@@ -303,7 +303,7 @@ exports.getOrders = (id) => {
                     reject(err);
                     return;
                 }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
                 resolve(orders);
             });
         });
@@ -330,11 +330,11 @@ exports.updateOrderFulfilled = async (id) => {
 
 exports.updateOrderPaid = async (order) => {
     try {
-        const wallet = await this.getWallet(order.user);
+        const wallet = await this.getWallet(order.userID);
         if (order.amount > wallet[0].wallet) return { err: 'Not enough money in wallet.' };
         else return new Promise((resolve, reject) => {
             const sql = 'UPDATE users SET wallet=? WHERE id=?';
-            db.run(sql, [wallet[0].wallet - order.amount, order.user], function (err) {
+            db.run(sql, [wallet[0].wallet - order.amount, order.userID], function (err) {
                 if (err) {
                     reject(err);
                     return;

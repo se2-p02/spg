@@ -1,48 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, Alert } from "react-bootstrap";
-import { CheckSquare } from "react-bootstrap-icons";
+import { Button, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Handbag, CheckSquare } from "react-bootstrap-icons";
 
 import Container from "react-bootstrap/Container";
 import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
-import moment from "moment";
 
 function MyFarmerOrders(props) {
     const [goBack, setGoBack] = useState(false);
     const [orders, setOrders] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
-    const [handouts, setHandouts] = useState(true);
-    const [mydisabled, setDisabled] = useState([])
+    const [mydisabled, setDisabled] = useState([]);
 
-    const updateHandler = async (id) => {
-        const response = await API.getClock();
-        const datetime = moment(response.serverTime);
-        const permitted = (datetime.day() === 3 && datetime.hour() >= 8) || datetime.day() === 4 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19));
-        setHandouts(() => permitted);
-        if (permitted)
-            API.updateOrder(id)
-                .then((c) => {
-                    if (c.error === undefined) {
-                        setReqUpdate(true);
-                    } else {
-                        console.log(c.error)
-                    }
-                })
-                .catch((err) => { console.log(err) });
-    };
-
-    const handleUpdate = async (order, i) => {
-        order.products.map((x)=>{
-            if(x.farmer===props.user.id){
-                x.status = 1
-            }
-            return x
+    const handleUpdate = async (order, newStatus) => {
+        let doPayment = order.paid ? false : true;
+        order.products.map((x) => {
+            if (x.farmer === props.user.id) x.status = newStatus;
+            if(x.status < 1) doPayment = false;
+            return x;
         })
-
-        API.confirmOrder({...order, products: JSON.stringify(order.products)})
-            .then(()=>{
-                setReqUpdate(true)
+        API.confirmOrder({ ...order, products: JSON.stringify(order.products) })
+            .then(() => {
+                if(doPayment) API.payOrder(order).then((res) => {
+                    if(res.error) alert('All the products were confirmed but the user had not enough money.');
+                    else alert('All products were confirmed and the order was paid successfully.');
+                    setReqUpdate(true);
+                });
+                setReqUpdate(true);
             })
             .catch((err) => { console.log(err) })
     }
@@ -54,22 +39,18 @@ function MyFarmerOrders(props) {
                 .then((c) => {
                     if (c.error === undefined) {
                         c.sort((a, b) => b.id - a.id);
+                        const disOrders = [];
                         for (let elem of c) {
-                            elem.products = JSON.parse(elem.products)
-                            let c = []
-                            let found = false
-                            for (let p of elem.products){
-                                if(props.user.id === p.farmer && p.status === 1){
-                                    found = true
-                                }
-                            }
-                            if(found===true){
-                                c.push(true)
-                            }
-                            else{c.push(false)}
-                            setDisabled(c)
+                            elem.products = JSON.parse(elem.products);
+                            for (let p of elem.products)
+                                if (props.user.id === p.farmer && p.status === 1)
+                                    disOrders.push(2);
+                                else if (props.user.id === p.farmer && p.status === 0)
+                                    disOrders.push(1);
+                                else disOrders.push(0);
                         }
                         setOrders(c);
+                        setDisabled(disOrders);
                         setReqUpdate(false);
                     } else {
                         console.log(c.error)
@@ -82,14 +63,12 @@ function MyFarmerOrders(props) {
     if (goBack) {
         return <Navigate to={"/" + props.user.role}></Navigate>;
     }
-    let i = -1;
     return (
         <>
             <Container
                 className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
                 fluid
             >
-                {!handouts && <Alert variant="danger">You can hand out products from Wednesday 8:00 to Friday 19:00.</Alert>}
                 <ListGroup className="my-3 mx-5" horizontal>
 
                     <ListGroup.Item
@@ -100,7 +79,7 @@ function MyFarmerOrders(props) {
                     </ListGroup.Item>
                     <ListGroup.Item
                         variant="warning"
-                        className="d-flex w-100 justify-content-center"
+                        className="d-flex w-50 justify-content-center"
                     >
                         <b>products</b>
                     </ListGroup.Item>
@@ -112,33 +91,31 @@ function MyFarmerOrders(props) {
                     </ListGroup.Item>
                     <ListGroup.Item
                         variant="warning"
-                        className="d-flex w-100 justify-content-center"
+                        className="d-flex w-50 justify-content-center"
                     >
                         <b>date</b>
                     </ListGroup.Item>
                     <ListGroup.Item
                         variant="warning"
-                        className="d-flex w-100 justify-content-center"
+                        className="d-flex w-50 justify-content-center"
                     >
                         <b>time</b>
                     </ListGroup.Item>
                     <ListGroup.Item
                         variant="warning"
-                        className="d-flex w-100 justify-content-center"
+                        className="d-flex w-50 justify-content-center"
                     >
                         <b>confirm</b>
                     </ListGroup.Item>
 
-                
+
                 </ListGroup>
                 {orders && (
                     <>
-                        {orders.map((c) => {
-                            let pos = i++;
+                        {orders.map((c, i) => {
                             let j = c.products
-                            
-                            j = j.filter(x=>props.user.id === x.farmer)
-                            
+                            j = j.filter(x => props.user.id === x.farmer)
+
                             let b = "primary"
                             //console.log(c.paid)
                             if (c.paid === 0) {
@@ -154,42 +131,55 @@ function MyFarmerOrders(props) {
 
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-50 justify-content-center"
+                                        className="d-flex w-50 align-items-center justify-content-center"
                                     >
                                         {c.userID}
                                     </ListGroup.Item>
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-100 justify-content-center"
-                                    >   
+                                        className="d-flex w-50 align-items-center justify-content-center"
+                                    >
                                         <ul>{j.map((x) => { return (<li>{x.name + ": " + x.quantity}</li>) })}</ul>
                                     </ListGroup.Item>
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-100 justify-content-center"
+                                        className="d-flex w-100 align-items-center justify-content-center"
                                     >
-                                        {c.address ? c.address : "Shop"}
+                                        <b>Address:</b>&nbsp;{c.address.address}&emsp;
+                                        <b>Date of Delivery:</b>&ensp;{c.address.deliveryOn}
                                     </ListGroup.Item>
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-100 justify-content-center"
+                                        className="d-flex w-50 align-items-center justify-content-center"
                                     >
                                         {c.date}
                                     </ListGroup.Item>
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-100 justify-content-center"
+                                        className="d-flex w-50 align-items-center justify-content-center"
                                     >
                                         {c.time}
                                     </ListGroup.Item>
                                     <ListGroup.Item
                                         variant={b}
-                                        className="d-flex w-100 justify-content-center"
+                                        className="d-flex w-50 align-items-center justify-content-center"
                                     >
-                                        <Button variant="light" disabled={mydisabled[i]} onClick={() => handleUpdate(c,i)}><CheckSquare /></Button>
+                                        {mydisabled[i] === 1 &&
+                                            <OverlayTrigger
+                                                placement='bottom'
+                                                overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}
+                                            >
+                                                <Button variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
+                                            </OverlayTrigger>}
+                                        {mydisabled[i] === 2 &&
+                                            <OverlayTrigger
+                                                placement='bottom'
+                                                overlay={<Tooltip>Confirm <strong>preparation</strong> of the order.</Tooltip>}
+                                            >
+                                                <Button variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
+                                            </OverlayTrigger>}
+                                        {mydisabled[i] === 0 && <h5>Confirmed</h5>}
                                     </ListGroup.Item>
-
-
                                 </ListGroup>
                             );
                         })}

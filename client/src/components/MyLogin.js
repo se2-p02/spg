@@ -125,6 +125,7 @@ function MyLogin(props) {
                                         isInvalid={errorMessagePassword}
                                         onChange={(ev) => { setPassword(ev.target.value); checkValid(username, ev.target.value); }}
                                         value={password}
+                                        onKeyDown={(ev) => {if(ev.key === 'Enter') handleSubmit(ev);}}
                                     />
                                     <Form.Control.Feedback type="invalid" id="errorp">
                                         {errorMessagePassword}
