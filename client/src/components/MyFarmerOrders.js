@@ -42,12 +42,16 @@ function MyFarmerOrders(props) {
                         const disOrders = [];
                         for (let elem of c) {
                             elem.products = JSON.parse(elem.products);
-                            for (let p of elem.products)
-                                if (props.user.id === p.farmer && p.status === 1)
-                                    disOrders.push(2);
+                            let disable = 0;
+                            for (let p of elem.products) {
+                                if (props.user.id === p.farmer && p.status === 2)
+                                    disable = 3;
+                                else if (props.user.id === p.farmer && p.status === 1)
+                                    disable = 2;
                                 else if (props.user.id === p.farmer && p.status === 0)
-                                    disOrders.push(1);
-                                else disOrders.push(0);
+                                    disable = 1;
+                            }
+                            disOrders.push(disable);
                         }
                         setOrders(c);
                         setDisabled(disOrders);
@@ -123,7 +127,7 @@ function MyFarmerOrders(props) {
                             }
 
                             return (
-                                <ListGroup
+                                mydisabled[i] !== 0 && <ListGroup
                                     key={c.id}
                                     style={{ textDecoration: "none" }}
                                     className="my-2 mx-5"
@@ -178,7 +182,7 @@ function MyFarmerOrders(props) {
                                             >
                                                 <Button variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
                                             </OverlayTrigger>}
-                                        {mydisabled[i] === 0 && <h5>Confirmed</h5>}
+                                        {mydisabled[i] === 3 && <h5>Confirmed</h5>}
                                     </ListGroup.Item>
                                 </ListGroup>
                             );

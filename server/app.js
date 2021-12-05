@@ -309,9 +309,8 @@ app.post('/api/orders', async (req, res) => {
       order.amount = 0.0;
     }
     else {
-      console.log("aa-a-aa-a")
       let flag = false;
-      Object.entries(order.products).forEach(async (prod) => {
+      order.products.forEach(async (prod) => {
         const res_prod = await spgDao.orderPrep(prod);
         if (res_prod.error) flag = true;
       })

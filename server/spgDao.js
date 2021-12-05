@@ -159,8 +159,9 @@ exports.getNextNumber = async () => {
 exports.orderPrep = async (product) => {
     try {
         return new Promise((resolve, reject) => {
+            console.log(product);
             const sql = 'UPDATE products SET quantity = quantity - ? WHERE name = ? ';
-            db.run(sql, [product[1], product[0]], function (err) {
+            db.run(sql, [product.quantity, product.name], function (err) {
                 if (err) {
                     reject(err);
                     return;

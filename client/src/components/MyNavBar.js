@@ -135,7 +135,7 @@ function MyModal(props) {
         let order;
         let products = [];
         let u = undefined;
-        if (u.role !== "employee")  u = props.user.id;
+        if (props.user.role !== "employee")  u = props.user.id;
 
         props.cart.forEach((prod) => {
             let p = {
