@@ -316,7 +316,7 @@ exports.getOrders = (id) => {
 exports.getOrdersByStatus = (status) => {
     return new Promise((resolve, reject) => {
         var sql;
-        props = [];
+        var props = [];
         if (status == "not_available") {
             sql = 'SELECT * FROM orders WHERE NOT status = ?';
             props.push("available")
@@ -325,12 +325,12 @@ exports.getOrdersByStatus = (status) => {
             sql = 'SELECT * FROM orders WHERE status = ?';
             props.push(status)
         }
-        db.all(sql, props, (err, rows) => {
-            if (err) {
-                reject(err);
+        db.all(sql, props, (error, row) => {
+            if (error) {
+                reject(error);
                 return;
             }
-            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            const orders = row.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
             resolve(orders);
         });
     });
