@@ -16,6 +16,7 @@ import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
+import MyNotAvailableOrders from "./MyNotAvailableOrders";
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -467,6 +468,7 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <MyAvailableOrders clock={clock} setClock={setClock} user={user} />
+              {/*<MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />*/}
             </>
           }
         />

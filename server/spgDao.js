@@ -315,8 +315,17 @@ exports.getOrders = (id) => {
 // get all orders with a certain status
 exports.getOrdersByStatus = (status) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM orders WHERE status = ?';
-        db.all(sql, [status], (err, rows) => {
+        var sql;
+        props = [];
+        if (status == "not_available") {
+            sql = 'SELECT * FROM orders WHERE NOT status = ?';
+            props.push("available")
+        }
+        else {
+            sql = 'SELECT * FROM orders WHERE status = ?';
+            props.push(status)
+        }
+        db.all(sql, props, (err, rows) => {
             if (err) {
                 reject(err);
                 return;

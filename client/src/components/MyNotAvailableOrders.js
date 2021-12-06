@@ -5,14 +5,14 @@ import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 
-function MyAvailableOrders(props) {
+function MyNotAvailableOrders(props) {
   const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
 
   useEffect(() => {
     if (reqUpdate && props.user) {
-      API.loadAvailableOrders("available")
+      API.loadAvailableOrders("not_available")  
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => b.id - a.id);
@@ -30,6 +30,10 @@ function MyAvailableOrders(props) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
+  const handleConfirmation = (id) => {
+      // API to call to set the order as available
+  }
+
   return (
     <>
       <Container
@@ -37,7 +41,7 @@ function MyAvailableOrders(props) {
         fluid
       >
         <br/>
-        <h1 className="text-white">Orders ready to be picked up</h1>
+        <h1 className="text-white">Confirm the orders that are ready to be picked up</h1>
         <ListGroup className="my-3 mx-5" horizontal>
           <ListGroup.Item
             variant="warning"
@@ -57,13 +61,12 @@ function MyAvailableOrders(props) {
           >
             <b>Products</b>
           </ListGroup.Item>
-          {/*<ListGroup.Item
+          <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
             <b>Address</b>
           </ListGroup.Item>
-          */} {/* if we have just one store we don't need that */}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -82,17 +85,18 @@ function MyAvailableOrders(props) {
           >
             <b>Amount</b>
           </ListGroup.Item>
+          <ListGroup.Item
+            variant="warning"
+            className="d-flex w-100 justify-content-center"
+          >
+            <b>Confirm availablility</b>
+          </ListGroup.Item>
         </ListGroup>
         {orders && (
           <>
             {orders.map((c) => {
               let j = JSON.parse(c.products)
               let b = "primary"
-              //console.log(c.paid)
-              if (c.paid===0){
-                  b = "danger"
-              }
-
               return (
                 <ListGroup
                   key={c.id}
@@ -119,12 +123,12 @@ function MyAvailableOrders(props) {
                   >
                     <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
-                  {/*<ListGroup.Item
+                  <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {JSON.parse(c.address).address}
-                  </ListGroup.Item>*/}
+                  </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
@@ -143,7 +147,21 @@ function MyAvailableOrders(props) {
                   >
                     {c.amount}
                   </ListGroup.Item>
-                  
+                  <ListGroup.Item
+                    variant={b}
+                    className="d-flex w-100 justify-content-center"
+                  >
+                    {c.paid?  // check in the F_delivery table that the products are received
+                        (<Button
+                        onClick={() => handleConfirmation(c.id)}
+                        className="btn-success"
+                        >
+                        Confirm
+                        </Button>)
+                        :
+                        (<p>The order cannot be confirmed</p>)
+                    }
+                  </ListGroup.Item>
                 </ListGroup>
               );
             })}
@@ -162,4 +180,4 @@ function MyAvailableOrders(props) {
   );
 }
 
-export default MyAvailableOrders;
+export default MyNotAvailableOrders;
