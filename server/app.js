@@ -426,6 +426,20 @@ app.put("/api/orders/pay", async (req, res) => {
   }
 });
 
+app.get("/api/orderswithstatus/:status", async (req, res) => {
+  try {
+    const orders = await spgDao.getOrdersByStatus(req.params.status);
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      res.json(orders);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 //update product confirm
 app.put("/api/updateProduct/:id", async (req, res) => {
   const clock = await spgDao.getClock();

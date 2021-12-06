@@ -257,5 +257,13 @@ async function loadWallet(id) {
     } else return { 'error': 'Failed to load client from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder };
+async function loadAvailableOrders(status) {
+    let myURL = URL + "/api/orderswithstatus/"+status;
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json();
+    } else return { 'error': 'Failed to load Orders from server' }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders };
 export default API;

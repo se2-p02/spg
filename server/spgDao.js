@@ -312,6 +312,21 @@ exports.getOrders = (id) => {
 
 };
 
+// get all orders with a certain status
+exports.getOrdersByStatus = (status) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM orders WHERE status = ?';
+        db.all(sql, [status], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            resolve(orders);
+        });
+    });
+};
+
 exports.updateOrderFulfilled = async (id) => {
     try {
         return new Promise((resolve, reject) => {

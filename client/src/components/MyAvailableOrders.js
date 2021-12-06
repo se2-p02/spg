@@ -12,8 +12,7 @@ function MyAvailableOrders(props) {
 
   useEffect(() => {
     if (reqUpdate && props.user) {
-      const id = props.user.role === 'client' && props.user.id;     // To update with the proper role
-      API.loadOrders(id)
+      API.loadAvailableOrders("available")
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => b.id - a.id);
@@ -37,6 +36,8 @@ function MyAvailableOrders(props) {
         className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
         fluid
       >
+        <br/>
+        <h1 className="text-white">Orders ready to be picked up</h1>
         <ListGroup className="my-3 mx-5" horizontal>
           <ListGroup.Item
             variant="warning"
