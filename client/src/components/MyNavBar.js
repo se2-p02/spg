@@ -54,54 +54,54 @@ function MyNavBar(props) {
             <div data-testid="clock">
                 <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
             </div>
-            {
-                props.showCart ? <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
-                    <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
-                        <Dropdown>
-                            <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
-                                <div className="fw-bold mx-2">Cart</div>
-                                <Badge variant="primary" pill>
-                                    {props.cart.length}
-                                </Badge>
-                            </Dropdown.Toggle>
+            <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
+                {props.showCart && <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
+                    <Dropdown>
+                        <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
+                            <div className="fw-bold mx-2">Cart</div>
+                            <Badge variant="primary" pill>
+                                {props.cart.length}
+                            </Badge>
+                        </Dropdown.Toggle>
 
-                            <Dropdown.Menu align="end">
-                                {props.cart.length !== 0 &&
-                                    props.cart.map((c) => (
-                                        <Dropdown.Item key={c.id + "d"}>
-                                            <ListGroup key={c.id + "a"} horizontal>
-                                                <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
-                                                <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                                <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
-                                            </ListGroup>
-                                        </Dropdown.Item>
-                                    ))
-                                }
-                                {props.cart.length !== 0 &&
-                                    <ListGroup className="mx-3">
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
-                                    </ListGroup>
-                                }
-                                {props.cart.length === 0 &&
-                                    <span className="mx-3" id="cartpresence">No products here</span>
-                                }
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </ListGroup.Item>
-                    <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
-                        <Dropdown>
-                            <Dropdown.Toggle variant="dark" className="d-flex p-2" data-testid="logout">
-                                <PersonCircle className="mx-2"></PersonCircle>
-                            </Dropdown.Toggle>
+                        <Dropdown.Menu align="end">
+                            {props.cart.length !== 0 &&
+                                props.cart.map((c) => (
+                                    <Dropdown.Item key={c.id + "d"}>
+                                        <ListGroup key={c.id + "a"} horizontal>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                        </ListGroup>
+                                    </Dropdown.Item>
+                                ))
+                            }
+                            {props.cart.length !== 0 &&
+                                <ListGroup className="mx-3">
+                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
+                                </ListGroup>
+                            }
+                            {props.cart.length === 0 &&
+                                <span className="mx-3" id="cartpresence">No products here</span>
+                            }
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ListGroup.Item>
+                }
+                <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
+                    <Dropdown>
+                        <Dropdown.Toggle variant="dark" className="d-flex p-2" data-testid="logout">
+                            <PersonCircle className="mx-2"></PersonCircle>
+                        </Dropdown.Toggle>
 
-                            <Dropdown.Menu align="end" id="logout">
-                                <Dropdown.Item>
-                                    <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </ListGroup.Item>
-                </ListGroup> : <></>}
+                        <Dropdown.Menu align="end" id="logout">
+                            <Dropdown.Item>
+                                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ListGroup.Item>
+            </ListGroup>
             {props.cart.length !== 0 &&
                 <MyModal user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
@@ -135,7 +135,7 @@ function MyModal(props) {
         let order;
         let products = [];
         let u = undefined;
-        if (props.user.role !== "employee")  u = props.user.id;
+        if (props.user.role !== "employee") u = props.user.id;
 
         props.cart.forEach((prod) => {
             let p = {
@@ -174,7 +174,7 @@ function MyModal(props) {
                 props.setCart([]);
                 props.setShow(false);
             }
-        }).catch((response) =>{ console.log(response)});
+        }).catch((response) => { console.log(response) });
         console.log(order);
     }
 
