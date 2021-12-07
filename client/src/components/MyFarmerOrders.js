@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Handbag, CheckSquare } from "react-bootstrap-icons";
-
 import Container from "react-bootstrap/Container";
 import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";

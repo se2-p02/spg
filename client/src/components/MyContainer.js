@@ -16,6 +16,9 @@ import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
+import MyNotAvailableOrders from "./MyNotAvailableOrders";
+import MyWManager from "./MyWManager";
+import MyDeliveries from "./MyDeliveries";
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -186,7 +189,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
-                showCart={true}
+                showCart={false}
               ></MyNavBar>
               <MyFarmer clock={clock} setClock={setClock} user={user} />
             </>
@@ -232,7 +235,6 @@ function MyContainer(props) {
                 user={user}
                 cart={cart}
                 setCart={setCart}
-                showCart={true}
               />
             </>
           }
@@ -248,7 +250,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
-                showCart={true}
+                showCart={false}
               ></MyNavBar>
               <MyMyProducts
                 clock={clock}
@@ -257,6 +259,48 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+              />
+            </>
+          }
+        />
+        <Route
+          path="/wmanager"
+          exact
+          element={
+            <>
+              <MyNavBar
+                user={user}
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+              ></MyNavBar>
+              <MyWManager clock={clock} setClock={setClock} user={user} />
+            </>
+          }
+        />
+        <Route
+          path="/wmanager/deliveries"
+          element={
+            <>
+              <MyNavBar
+                user={user}
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+              ></MyNavBar>
+              <MyDeliveries
+                clock={clock}
+                setClock={setClock}
+                user={user}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
               />
             </>
           }
@@ -467,6 +511,7 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <MyAvailableOrders clock={clock} setClock={setClock} user={user} />
+              {/*<MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />*/}
             </>
           }
         />

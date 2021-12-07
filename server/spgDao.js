@@ -17,11 +17,11 @@ exports.getProducts = () => {
     });
 }
 
-exports.confirmProductsOrder = (orderId, orderInfo) =>{
+exports.confirmProductsOrder = (orderId, orderInfo) => {
     console.log("HERE")
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
         const sql = 'UPDATE orders SET products=? WHERE id = ?';
-        db.all(sql,[orderInfo.products, orderId] ,(err, rows) => {
+        db.all(sql, [orderInfo.products, orderId], (err, rows) => {
             if (err) {
                 reject(err);
                 return;
@@ -283,49 +283,52 @@ exports.deleteTestOrder = () => {
 
 // get all orders
 exports.getOrders = (id) => {
+    let sql;
+    let params = [];
     if (id) {
-        return new Promise((resolve, reject) => {
-            const sql = 'SELECT * FROM orders WHERE userID = ?';
-            db.all(sql, [id], (err, rows) => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
-                resolve(orders);
-            });
-        });
+        sql = 'SELECT * FROM orders WHERE userID = ?';
+        params.push(id);
     }
     else {
-        return new Promise((resolve, reject) => {
-            const sql = 'SELECT * FROM orders';
-            db.all(sql, (err, rows) => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
-                resolve(orders);
-            });
-        });
+        sql = 'SELECT * FROM orders';
     }
+    return new Promise((resolve, reject) => {
+        db.all(sql, params, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: JSON.parse(c.products), address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            resolve(orders);
+        });
+    });
 
 };
 
 // get all orders with a certain status
 exports.getOrdersByStatus = (status) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM orders WHERE status = ?';
-        db.all(sql, [status], (err, rows) => {
-            if (err) {
-                reject(err);
+        var sql;
+        var props = [];
+        if (status == "not_available") {
+            sql = 'SELECT * FROM orders WHERE NOT status = ?';
+            props.push("available")
+        }
+        else {
+            sql = 'SELECT * FROM orders WHERE status = ?';
+            props.push(status)
+        }
+        db.all(sql, props, (error, row) => {
+            if (error) {
+                reject(error);
                 return;
             }
-            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            const orders = row.map((c) => ({ id: c.id, userID: c.userID, products: c.products, address: c.address, date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
             resolve(orders);
         });
     });
 };
+
 
 exports.updateOrderFulfilled = async (id) => {
     try {
@@ -438,6 +441,51 @@ exports.getMaxProdId = () => {
                 return;
             }
             resolve(rows[0].maxId);
+        });
+    });
+};
+
+// get all deliveries
+exports.getDeliveries = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM F_deliveries';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const deliveries = rows.map((c) => ({ id: c.id, product: c.productId, farmer: c.farmerId, quantity: c.quantity }));
+            resolve(deliveries);
+        });
+    });
+};
+
+// get single product
+exports.getProduct = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM products WHERE id = ?';
+        db.all(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const product = rows.map((c) => ({ id: c.id, name: c.name, farmer: c.farmer }));
+            resolve(product[0]);
+        });
+    });
+};
+
+// get single farmer
+exports.getFarmer = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM farmer WHERE id = ?';
+        db.all(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const farmer = rows.map((c) => ({ id: c.id, name: c.name }));
+            resolve(farmer[0]);
         });
     });
 };
