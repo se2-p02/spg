@@ -134,6 +134,8 @@ function MyModal(props) {
     const [trigger, setTrigger] = useState(false)
     const [error, setError] = useState()
 
+    let notShow = props.setShow
+
     useEffect(() => {
         //insert survey with the list of questions
         const updateWallet = async () => {
@@ -169,12 +171,12 @@ function MyModal(props) {
                 updateWallet()
                 setAmount("")
                 setTrigger(false)
-                props.setShow(false)
+                notShow(false)
                 setError(undefined)
             }
 
         }
-    }, [trigger, amount, props.id, props.wallet, props.text, props.setShow]);
+    }, [trigger, amount, props.id, props.wallet, props.text, notShow]);
 
     const handleAmount = (event) => { setAmount(event.target.value); };
 

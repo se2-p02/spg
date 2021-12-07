@@ -16,7 +16,6 @@ import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
-import MyNotAvailableOrders from "./MyNotAvailableOrders";
 import MyWManager from "./MyWManager";
 import MyDeliveries from "./MyDeliveries";
 

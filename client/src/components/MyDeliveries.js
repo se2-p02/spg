@@ -5,21 +5,15 @@ import { Navigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import API from "./API";
-import moment from "moment";
 
 function MyDeliveries(props) {
     const [goBack, setGoBack] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
-    const [handins, setHandins] = useState(true);
+    const [handins] = useState(true);
     const [show, setShow] = useState(false);
 
-    const updateHandler = async (id) => {
-        const response = await API.getClock();
-        const datetime = moment(response.serverTime);
-        const permitted = (datetime.day() === 1 && datetime.hour() >= 9) || (datetime.day() === 2);
-        setHandins(() => permitted);
-    };
+
 
     useEffect(() => {
         if (reqUpdate && props.user) {

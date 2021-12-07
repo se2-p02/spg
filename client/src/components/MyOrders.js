@@ -39,6 +39,7 @@ function MyOrders(props) {
             console.log(c)
             c.map((x)=>{
               x.address = JSON.stringify(x.address)
+              return x
             })
             setOrders(c);
             setReqUpdate(false);
