@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyFarmer.test.js">
-    <testCase name="renders the farmer starting page" duration="76"/>
+    <testCase name="renders the farmer starting page" duration="107"/>
   </file>
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyLogin.test.js">
-    <testCase name="Test login form unit Test login form appearance" duration="178"/>
-    <testCase name="Test login form e2e Test filling out login form" duration="88"/>
+    <testCase name="Test login form unit Test login form appearance" duration="98"/>
+    <testCase name="Test login form e2e Test filling out login form" duration="76"/>
   </file>
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyNavBar.test.js">
-    <testCase name="Test navbar renders all components" duration="462"/>
-    <testCase name="Test navbar test logout" duration="233"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/ModalWindow.test.js">
-    <testCase name="modal window.js tests renders modal window for alert" duration="227"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyMyProducts.test.js">
-    <testCase name="Test MyMyproducts tests error messages" duration="526"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/LoginForm.test.js">
-    <testCase name="Test login form Test login form appearance" duration="112"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyEmployee.test.js">
-    <testCase name="Test employee renders the employee starting page" duration="21"/>
-    <testCase name="Test employee test employee e2e" duration="18"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyForm.test.js">
-    <testCase name="renders sigup page" duration="58"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientProfile.test.js">
-    <testCase name="renders the client profile" duration="65"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/App.test.js">
-    <testCase name="renders app homepage" duration="190"/>
-  </file>
-  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientPage.test.js">
-    <testCase name="renders app form" duration="28"/>
+    <testCase name="Test navbar renders all components" duration="251"/>
+    <testCase name="Test navbar test logout" duration="130"/>
   </file>
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MySingleClient.test.js">
-    <testCase name="renders the info of a client from employee page" duration="23"/>
+    <testCase name="renders the info of a client from employee page" duration="64"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/App.test.js">
+    <testCase name="renders app homepage" duration="108"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/ModalWindow.test.js">
+    <testCase name="modal window.js tests renders modal window for alert" duration="94"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyMyProducts.test.js">
+    <testCase name="Test MyMyproducts tests error messages" duration="228"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/LoginForm.test.js">
+    <testCase name="Test login form Test login form appearance" duration="38"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyEmployee.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="15"/>
+    <testCase name="Test employee test employee e2e" duration="8"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyForm.test.js">
+    <testCase name="renders sigup page" duration="82"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientProfile.test.js">
+    <testCase name="renders the client profile" duration="30"/>
+  </file>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientPage.test.js">
+    <testCase name="renders app form" duration="9"/>
   </file>
 </testExecutions>
