@@ -9,6 +9,7 @@ function MyNotAvailableOrders(props) {
   const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
+  const [availableProducts, setProducts] = useState([]);
 
   useEffect(() => {
     if (reqUpdate && props.user) {
@@ -23,6 +24,14 @@ function MyNotAvailableOrders(props) {
           }
         })
         .catch((err) => { console.log(err) });
+      
+        API.loadDeliveries()
+          .then((p) => {
+            if (p.error === undefined) {
+              setProducts(p);
+            }
+          })
+          .catch((err) => console.log(err));
     }
   }, [reqUpdate, props.user]);
 
@@ -33,6 +42,17 @@ function MyNotAvailableOrders(props) {
   const handleConfirmation = (id) => {
       // API to call to set the order as available
   }
+
+  const isConfirmable = (products) => {
+    var flag = true;
+    products.forEach(element => {
+      flag &= availableProducts.map(it => it.product.id).includes(element.id); //1. the element must be available
+      if (flag == true) {
+        flag &= !(availableProducts.filter(elem => elem.product.id == element.id)[0].quantity < element.quantity)   //2. the quantity must be enough
+      } 
+    });
+    return flag;
+}
 
   return (
     <>
@@ -121,7 +141,7 @@ function MyNotAvailableOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
+                    <ul>{j.map((x) => {return (<li>{x.id+":"+x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
                   <ListGroup.Item
                     variant={b}
@@ -151,7 +171,7 @@ function MyNotAvailableOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    {c.paid?  // check in the F_delivery table that the products are received
+                    {(c.paid && isConfirmable(j))?  // check in the F_delivery table that the products are received
                         (<Button
                         onClick={() => handleConfirmation(c.id)}
                         className="btn-success"
@@ -174,6 +194,13 @@ function MyNotAvailableOrders(props) {
         >
           Back
         </Button>
+        }
+        {availableProducts!==[] &&<> <p className ="text-white">
+          {JSON.stringify(availableProducts)}
+        </p>
+        <br/>
+        <p className="text-white">{
+          JSON.stringify(availableProducts.filter(elem => elem.product.id == 2)[0])}</p></>
         }
       </Container>
     </>
