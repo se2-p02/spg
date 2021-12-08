@@ -141,6 +141,8 @@ function MyModal(props) {
             let p = {
                 id: prod.id,
                 quantity: prod.quantity,
+                unit:prod.unit,
+                price: prod.price,
                 farmer: prod.farmer,
                 status: 0,
                 name: prod.name
