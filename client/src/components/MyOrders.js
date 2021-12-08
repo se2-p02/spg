@@ -63,7 +63,7 @@ function MyOrders(props) {
   const modifyHandler = (id,products)=>{
     console.log('the order id is: '+id)
     console.log(props.cart)
-    const newProducts = JSON.parse(products)
+    const newProducts = [{id:3,quantity:2,farmer:6,status:1,name:"Eggs",price:3,unit:"kg"}]
     console.log(newProducts)
     props.setCart(newProducts)
   }
@@ -188,7 +188,7 @@ function MyOrders(props) {
                     className="d-flex w-100 justify-content-center"
                   >
                     <ul>
-                      {j.map((x) => {
+                      {c.products.map((x) => {
                         return <li>{x.name + ":" + x.quantity}</li>;
                       })}
                     </ul>
