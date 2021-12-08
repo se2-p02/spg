@@ -60,13 +60,13 @@ function MyDeliveries(props) {
                 {!handins && <Alert variant="danger">You can accept deliveries from Monday 9:00 to Tuesday 23:59.</Alert>}
                 <Row className="mx-5">
                     <ListGroup className="my-3" horizontal>
-                        <ListGroup.Item as={Col} sm={2}
+                        <ListGroup.Item as={Col} sm={1}
                             variant="warning"
                             className="d-flex justify-content-center"
                         >
                             <b>Delivery id</b>
                         </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
+                        <ListGroup.Item as={Col} sm={1}
                             variant="warning"
                             className="d-flex justify-content-center"
                         >
@@ -96,6 +96,12 @@ function MyDeliveries(props) {
                         >
                             <b>Quantity</b>
                         </ListGroup.Item>
+                        <ListGroup.Item as={Col} sm={2}
+                            variant="warning"
+                            className="d-flex  justify-content-center"
+                        >
+                            <b>Order id</b>
+                        </ListGroup.Item>
                     </ListGroup>
                 </Row>
                 {deliveries && (
@@ -112,13 +118,13 @@ function MyDeliveries(props) {
                                         horizontal>
 
 
-                                        <ListGroup.Item as={Col} sm={2}
+                                        <ListGroup.Item as={Col} sm={1}
                                             variant={b}
                                             className="d-flex  justify-content-center"
                                         >
                                             {c.id}
                                         </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
+                                        <ListGroup.Item as={Col} sm={1}
                                             variant={b}
                                             className="d-flex  justify-content-center"
                                         >
@@ -147,6 +153,12 @@ function MyDeliveries(props) {
                                             className="d-flex  justify-content-center"
                                         >
                                             {c.quantity}
+                                        </ListGroup.Item>
+                                        <ListGroup.Item as={Col} sm={2}
+                                            variant={b}
+                                            className="d-flex  justify-content-center"
+                                        >
+                                            {c.orderId}
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Row>
@@ -283,6 +295,7 @@ function MyModal(props) {
                         </Col>
                     </Row>
                 </Form>
+                {!farmer && <p className="text-danger">No product available for delivery</p>}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Close</Button>

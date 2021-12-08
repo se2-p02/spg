@@ -319,3 +319,73 @@
   - Request body: None.
   - Response: `200 OK` (success).
   - Response body: None.  
+
+- GET `/api/deliverableProducts`
+  - Request parameter: None.
+  - Request body: None.
+  - Response: `200 OK` (success).
+  - Response body: deliverable products list.
+  ```
+  {
+    "TerraGrossa": [
+        {
+            "id": 2,
+            "quantity": 2,
+            "farmer": 3,
+            "status": 2,
+            "name": "Eggs",
+            "orderId": 1
+        }
+    ],
+    "FattoriaBella": [
+        {
+            "id": 7,
+            "quantity": 1,
+            "farmer": 7,
+            "status": 2,
+            "name": "Cheese",
+            "orderId": 1
+        }
+    ]
+  }
+  ```
+- GET `/api/deliveries`
+  - Request parameter: None.
+  - Request body: None.
+  - Response: `200 OK` (success).
+  - Response body: deliveries list.
+  ```
+  [
+    {
+        "id": 5,
+        "product": {
+            "id": 2,
+            "name": "Eggs",
+            "farmer": 7
+        },
+        "farmer": {
+            "id": 3,
+            "name": "TerraGrossa"
+        },
+        "quantity": 2,
+        "orderId": 1
+    },
+    ...
+  ]
+  ```
+
+- POST `/api/deliveries`
+  - Request parameter: None.
+  - Request body: An object representing the delivery (Content-Type: `application/json`).
+  ``` 
+  { 
+    id: 2,
+    quantity: 2,
+    farmer: 3,
+    status: 2,
+    name: 'Eggs',
+    orderId: 1
+  }
+  ```
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: true or false.
