@@ -195,13 +195,6 @@ function MyNotAvailableOrders(props) {
           Back
         </Button>
         }
-        {availableProducts!==[] &&<> <p className ="text-white">
-          {JSON.stringify(availableProducts)}
-        </p>
-        <br/>
-        <p className="text-white">{
-          JSON.stringify(availableProducts.filter(elem => elem.product.id == 2)[0])}</p></>
-        }
       </Container>
     </>
   );
