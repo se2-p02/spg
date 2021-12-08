@@ -56,6 +56,14 @@ Object {
 }
 `;
 
+exports[`tests GET /api/clients 8`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
 exports[`tests GET /api/clients/:id 1`] = `
 Object {
   "address": null,
@@ -202,6 +210,129 @@ Object {
 }
 `;
 
+exports[`tests GET /api/products 11`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "All-purpose",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 1`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 2`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 3`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 4`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 5`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 6`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 7`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 8`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 9`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 10`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
+exports[`tests get /api/deliveries after the login as a wmanager 11`] = `
+Object {
+  "farmer": Any<Object>,
+  "id": Any<Number>,
+  "orderId": Any<Number>,
+  "product": Any<Object>,
+  "quantity": Any<Number>,
+}
+`;
+
 exports[`tests get /api/nextProducts after the login as a customer not on sunday 1`] = `
 Object {
   "availability": Any<String>,
@@ -326,6 +457,21 @@ exports[`tests get /api/nextProducts after the login as a customer not on sunday
 Object {
   "availability": Any<String>,
   "confirmed": 0,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer not on sunday 10`] = `
+Object {
+  "availability": Any<String>,
+  "confirmed": 1,
   "farmer": Any<Number>,
   "farmerName": "FattoriaBella",
   "filter": Any<String>,

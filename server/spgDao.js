@@ -282,12 +282,16 @@ exports.deleteTestOrder = () => {
 };
 
 // get all orders
-exports.getOrders = (id) => {
+exports.getOrders = (id, orderId) => {
     let sql;
     let params = [];
     if (id) {
         sql = 'SELECT * FROM orders WHERE userID = ?';
         params.push(id);
+    }
+    else if (orderId) {
+        sql = 'SELECT * FROM orders WHERE id = ?';
+        params.push(orderId);
     }
     else {
         sql = 'SELECT * FROM orders';
@@ -454,10 +458,42 @@ exports.getDeliveries = () => {
                 reject(err);
                 return;
             }
-            const deliveries = rows.map((c) => ({ id: c.id, product: c.productId, farmer: c.farmerId, quantity: c.quantity }));
+            const deliveries = rows.map((c) => ({ id: c.id, product: c.productId, farmer: c.farmerId, quantity: c.quantity, orderId: c.orderId }));
             resolve(deliveries);
         });
     });
+};
+
+// delete delivery
+exports.deleteDeliveries = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM F_deliveries WHERE id=?';
+        db.run(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        });
+    });
+};
+
+// insert a new delivery
+exports.createDelivery = async (delivery) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'INSERT INTO F_deliveries (productId, farmerId, quantity, orderId) VALUES (?, ?, ?, ?)';
+            db.run(sql, [delivery.id, delivery.farmer, delivery.quantity, delivery.orderId], function (err) {
+                if (err) {
+                    reject(500);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
 };
 
 // get single product

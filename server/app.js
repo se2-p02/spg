@@ -440,37 +440,6 @@ app.get("/api/orderswithstatus/:status", async (req, res) => {
   }
 });
 
-app.get("/api/deliverableProducts", async (req, res) => {
-  try {
-    const orders = await spgDao.getOrders();
-    const products = {};
-    const farmers = [];
-
-    if (orders.error) {
-      res.status(404).json(orders);
-    } else {
-      const promProd = await Promise.all(orders.map(async (o) => {
-        await Promise.all(o.products.map(async (p) => {
-          if (!farmers.includes(p.farmer)) {
-            farmers.push(p.farmer);
-            let tempF = await spgDao.getFarmer(p.farmer);
-            products[tempF.name] = [{...p, orderId: o.id}];
-          }
-          else {
-            let tempF = await spgDao.getFarmer(p.farmer);
-            products[tempF.name].push({...p, orderId: o.id});
-          }
-        }));
-        return products;
-      }));
-      res.json(promProd[0]);
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).end();
-  }
-});
-
 //update product confirm
 app.put("/api/updateProduct/:id", async (req, res) => {
   const clock = await spgDao.getClock();
@@ -523,6 +492,40 @@ app.put("/api/clock", async (req, res) => {
   }
 });
 
+// GET deliverable products
+app.get("/api/deliverableProducts", async (req, res) => {
+  try {
+    const orders = await spgDao.getOrders();
+    const products = {};
+    const farmers = [];
+
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      const promProd = await Promise.all(orders.map(async (o) => {
+        await Promise.all(o.products.map(async (p) => {
+          //return if product is not in state 2 = confirmed preparation
+          if (parseInt(p.status) !== 2) return;
+          if (!farmers.includes(p.farmer)) {
+            farmers.push(p.farmer);
+            let tempF = await spgDao.getFarmer(p.farmer);
+            products[tempF.name] = [{ ...p, orderId: o.id }];
+          }
+          else {
+            let tempF = await spgDao.getFarmer(p.farmer);
+            products[tempF.name].push({ ...p, orderId: o.id });
+          }
+        }));
+        return products;
+      }));
+      res.json(promProd[0] || []);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 // GET deliveries
 app.get("/api/deliveries", async (req, res) => {
   try {
@@ -535,10 +538,48 @@ app.get("/api/deliveries", async (req, res) => {
           id: d.id,
           product: await spgDao.getProduct(d.product),
           farmer: await spgDao.getFarmer(d.farmer),
-          quantity: d.quantity
+          quantity: d.quantity,
+          orderId: d.orderId
         }
       }));
       res.json(promDel);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+// POST deliveries
+app.post("/api/deliveries", async (req, res) => {
+  try {
+    const clock = await spgDao.getClock();
+    const datetime = moment(clock.serverTime);
+    if (!((datetime.day() === 1 && datetime.hour() >= 9) || (datetime.day() === 2))) {
+      res.status(500).end('Delivery is not permitted in this timeslot.');
+      return;
+    }
+    
+    const delivery = req.body;
+    const order = await spgDao.getOrders(undefined, delivery.orderId);
+    if (order.error) {
+      res.status(404).json(order);
+    }
+    order[0].products.forEach((p)=> {
+      if(p.id === delivery.id){
+        p.status = 3;
+      }
+    });
+    order[0].products = JSON.stringify(order[0].products);
+    const result = await spgDao.confirmProductsOrder(delivery.orderId, order[0]);
+    if (result.error) {
+      res.status(404).json(result);
+    }
+    const resultD = await spgDao.createDelivery(delivery);
+    if (resultD.error) {
+      res.status(404).json(resultD);
+    } else {
+      res.json(resultD);
     }
   } catch (err) {
     console.log(err);
