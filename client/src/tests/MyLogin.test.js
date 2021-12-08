@@ -1,48 +1,91 @@
-const puppeteer = require('puppeteer');
+import { render, screen, fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import MyLogin from '../components/MyLogin';
+import { MemoryRouter} from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 
-describe("MyLogin.js tests", () => {
-  let browser;
-  let page;
+import { createMemoryHistory } from 'history';
+import React from 'react';
 
-  beforeAll(async () => {
-    browser = await puppeteer.launch();
-    page = await browser.newPage();
+describe('Test login form unit', () => {
+    test('Test login form appearance', async () => {
+      render(<BrowserRouter>
+                <MyLogin user={undefined} setUser={() => jest.fn()} />
+            </BrowserRouter>);
+  
+      const usernameField = screen.getByPlaceholderText('Enter username');
+      const passwordField = screen.getByPlaceholderText('Password');
+      const loginButton = screen.getByText('Login');
+      const homeButton = screen.getByText('Back');
+      const signupLink = screen.getByText("Sign up");
+  
+      expect(usernameField).toBeInTheDocument();
+      expect(passwordField).toBeInTheDocument();
+      expect(loginButton).toBeInTheDocument();
+      expect(homeButton).toBeInTheDocument();
+      expect(signupLink).toBeInTheDocument();
+    });
+  
   });
 
-  it("tests error messages", async () => {
-    await page.goto("http://localhost:3000/login");
 
-    await page.type('#password', 'thisisnotapassword');
-    const inputp = await page.$('#password');
-    await inputp.click({ clickCount: 3 });
-    await page.keyboard.press('Backspace');
-    const errorp = await page.$eval('#errorp', e => e.textContent);
-    expect(errorp).toContain('Should have some characters');
 
-    await page.type('#username', 'thisisnotausername');
-    const inputu = await page.$('#username');
-    await inputu.click({ clickCount: 3 });
-    await page.keyboard.press('Backspace');
-    const erroru = await page.$eval('#erroru', e => e.textContent);
-    expect(erroru).toContain('Should have some characters');
+describe('Test login form e2e', () => {
 
-    await inputp.type('thisisnotapassword');
-    await inputu.type('thisisnotausername');
-    await page.click('#submit');
-    await page.waitForSelector('#errors');
-    const errors = await page.$eval('#errors', e => e.textContent);
-    expect(errors).toContain('Failed to login: invalid username/password');
-  });
+    test('Test filling out login form', () => {
+        const history = createMemoryHistory();
 
-  it("tests successful login", async () => {
-    await page.goto("http://localhost:3000/login");
+        // mock push function
+        history.push = jest.fn();
 
-    await page.type('#username', 'nino@gmail.com');
-    await page.type('#password', 'password');
-    await page.click('#submit');
-    await page.waitForNavigation();
-    expect(page.url()).toContain('http://localhost:3000/employee');
-  });
+        render(
+            <MemoryRouter history={history}>
+                <MyLogin setUser={() => jest.fn()} user={undefined} />
+            </MemoryRouter>
+        );
 
-  afterAll(() => browser.close());
-});
+        
+        // insert a password shorter than 8 characters
+        act(() => {
+            fireEvent.change(screen.getByPlaceholderText('Password'), {
+                target: { value: 'p' },
+            });
+        });
+        // Check for error message
+        expect(screen.getByText('Should have some characters'));
+
+        //Wrong user/password
+        act(() => {
+            fireEvent.change(screen.getByPlaceholderText('Enter username'), {
+                target: { value: 'nino2@gmail.com' },
+            });
+        });
+        act(() => {
+            fireEvent.change(screen.getByPlaceholderText('Password'), {
+                target: { value: 'password2' },
+            });
+        });
+        act(() => {
+            fireEvent.click(screen.getByText('Login'));
+        });
+        // Check for error message
+        expect(screen.queryByTestId("error"));
+
+
+        // Fill out fields
+        act(() => {
+            fireEvent.change(screen.getByPlaceholderText('Enter username'), {
+                target: { value: 'nino@gmail.com' },
+            });
+        });
+        act(() => {
+            fireEvent.change(screen.getByPlaceholderText('Password'), {
+                target: { value: 'password' },
+            });
+        });
+        //Click on the "Login" button after filling out fields
+        act(() => {
+            fireEvent.click(screen.getByText('Login'));
+        });
+    });
+})
