@@ -48,7 +48,7 @@ function MyNavBar(props) {
                         height="50"
                         className="d-inline-block align-top"
                     />&emsp;
-                    <div className="navTitle"><h2>Social Purchasing Group</h2></div>
+                    <div className="navTitle" data-testid="name"><h2>Social Purchasing Group</h2></div>
                 </Container>
             </Navbar.Brand>
             <div data-testid="clock">
@@ -89,9 +89,9 @@ function MyNavBar(props) {
                 </ListGroup.Item>
                 }
                 <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="dark" className="d-flex p-2" data-testid="logout">
-                            <PersonCircle className="mx-2"></PersonCircle>
+                    <Dropdown >
+                        <Dropdown.Toggle variant="dark" className="d-flex p-2" >
+                            <PersonCircle className="mx-2" data-testid="my_logout"></PersonCircle>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu align="end" id="logout">

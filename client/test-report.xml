@@ -1,376 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyForm.test.js">
-    <testCase name="renders sigup page" duration="251"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyFarmer.test.js">
+    <testCase name="renders the farmer starting page" duration="106"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\prova.test.js">
-    <testCase name="Test login form unit Test login form appearance" duration="200"/>
-    <testCase name="Test login form e2e Test filling out login form" duration="145"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyLogin.test.js">
+    <testCase name="Test login form unit Test login form appearance" duration="237"/>
+    <testCase name="Test login form e2e Test filling out login form" duration="234"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyClientProfile.test.js">
-    <testCase name="renders the client profile" duration="407">
-      <failure message="TestingLibraryElementError: Unable to find an element by: [data-testid=&quot;back&quot;]"><![CDATA[TestingLibraryElementError: Unable to find an element by: [data-testid="back"]
-
-<body>
-  <div>
-    <div
-      class="bg-dark min-height-100 justify-content-center align-items-center below-nav mt-3 container-fluid"
-    >
-      <div
-        class="row"
-      >
-        <div
-          class=" m-0 p-0 col-sm-6"
-        >
-          <div
-            class="m-0 p-4 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="profileName"
-                >
-                  Name: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="surname"
-                >
-                  Surname: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="email"
-                >
-                  Email: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="role"
-                >
-                  Role: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="wallet"
-                >
-                  Wallet: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white m-0 p-0"
-              >
-                undefined €
-              </h3>
-            </div>
-          </div>
-        </div>
-        <div
-          class=" m-0 p-0 col-sm-6"
-        >
-          <div
-            class="m-0 p-4 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="phone"
-                >
-                  Phone: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="address"
-                >
-                  Address: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="city"
-                >
-                  City: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-          <div
-            class="m-0 p-4 pt-0 pb-2 row"
-          >
-            <div
-              class="m-0 p-0 col-sm-4"
-            >
-              <h3
-                class="text-white"
-              >
-                <b
-                  data-testid="country"
-                >
-                  Country: 
-                </b>
-              </h3>
-            </div>
-            <div
-              class="m-0 p-0 col-sm-8"
-            >
-              <h3
-                class="text-white"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="text-center justify-content-center p-0 pt-2 pb-5 row"
-      >
-        <button
-          class="btn-danger p-2 w-50 mt-3 btn btn-primary btn-lg"
-          testid="back"
-          type="button"
-        >
-          Back
-        </button>
-      </div>
-    </div>
-  </div>
-</body>
-    at Object.getElementError (C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\config.js:37:19)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:90:38
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:62:17
-    at getByTestId (C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\node_modules\@testing-library\dom\dist\query-helpers.js:111:19)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\MyClientProfile.test.js:34:26)
-    at Object.asyncJestTest (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:43:12
-    at new Promise (<anonymous>)
-    at mapper (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:73:41
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyNavBar.test.js">
+    <testCase name="Test navbar renders all components" duration="473"/>
+    <testCase name="Test navbar test logout" duration="172"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MySingleClient.test.js">
-    <testCase name="renders the info of a client from employee page" duration="306"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/ModalWindow.test.js">
+    <testCase name="modal window.js tests renders modal window for alert" duration="121"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\prova2.test.js">
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/App.test.js">
+    <testCase name="renders app homepage" duration="129"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyMyProducts.test.js">
-    <testCase name="Test MyMyproducts tests error messages" duration="829"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/LoginForm.test.js">
+    <testCase name="Test login form Test login form appearance" duration="50"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\LoginForm.test.js">
-    <testCase name="Test login form Test login form appearance" duration="358">
-      <failure message="Error: useNavigate() may be used only in the context of a &lt;Router&gt; component."><![CDATA[Error: useNavigate() may be used only in the context of a <Router> component.
-    at invariant (C:\Users\Mattia\Desktop\spg\packages\react-router\index.tsx:19:20)
-    at useNavigate (C:\Users\Mattia\Desktop\spg\packages\react-router\index.tsx:457:3)
-    at MyLogin (C:\Users\Mattia\Desktop\spg\client\src\components\MyLogin.js:18:22)
-    at renderWithHooks (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:14985:18)
-    at mountIndeterminateComponent (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:17811:13)
-    at beginWork (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:19049:16)
-    at HTMLUnknownElement.callCallback (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
-    at invokeEventListeners (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:193:27)
-    at HTMLUnknownElementImpl._dispatch (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:119:9)
-    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:82:17)
-    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\nodes\HTMLElement-impl.js:30:27)
-    at HTMLUnknownElement.dispatchEvent (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:157:21)
-    at Object.invokeGuardedCallbackDev (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
-    at invokeGuardedCallback (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
-    at beginWork$1 (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
-    at performUnitOfWork (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
-    at workLoopSync (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
-    at renderRootSync (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
-    at performSyncWorkOnRoot (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
-    at scheduleUpdateOnFiber (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
-    at updateContainer (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
-    at unbatchedUpdates (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
-    at legacyRenderSubtreeIntoContainer (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
-    at Object.render (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\dist\pure.js:101:25
-    at batchedUpdates$1 (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
-    at act (C:\Users\Mattia\Desktop\spg\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
-    at render (C:\Users\Mattia\Desktop\spg\client\node_modules\@testing-library\react\dist\pure.js:97:26)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\LoginForm.test.js:8:5)
-    at Object.asyncJestTest (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:102:37)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:43:12
-    at new Promise (<anonymous>)
-    at mapper (C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:26:19)
-    at C:\Users\Mattia\Desktop\spg\client\node_modules\react-scripts\node_modules\jest-jasmine2\build\queueRunner.js:73:41
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyForm.test.js">
+    <testCase name="renders sigup page" duration="91"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyLogin.test.js">
-    <testCase name="MyLogin.js tests tests error messages" duration="4895">
-      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
-    at navigate (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at FrameManager.navigateFrame (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
-    at Frame.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
-    at Page.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\MyLogin.test.js:13:5)]]></failure>
-    </testCase>
-    <testCase name="MyLogin.js tests tests successful login" duration="328">
-      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login
-    at navigate (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at FrameManager.navigateFrame (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
-    at Frame.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
-    at Page.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\MyLogin.test.js:38:5)]]></failure>
-    </testCase>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientProfile.test.js">
+    <testCase name="renders the client profile" duration="58"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyFarmer.test.js">
-    <testCase name="renders the farmer starting page" duration="42"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyClientPage.test.js">
+    <testCase name="renders app form" duration="35"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyClientPage.test.js">
-    <testCase name="renders app form" duration="139"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyEmployee.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="19"/>
+    <testCase name="Test employee test employee e2e" duration="11"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\App.test.js">
-    <testCase name="renders app homepage" duration="449"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MySingleClient.test.js">
+    <testCase name="renders the info of a client from employee page" duration="62"/>
   </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\MyNavBar.test.js">
-    <testCase name="MyNavBar.js tests tests logout" duration="4465">
-      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/employee
-    at navigate (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at FrameManager.navigateFrame (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
-    at Frame.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
-    at Page.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\MyNavBar.test.js:13:5)]]></failure>
-    </testCase>
-  </file>
-  <file path="C:\Users\Mattia\Desktop\spg\client\src\tests\ModalWindow.test.js">
-    <testCase name="modal window.js tests renders modal window for alert" duration="4455">
-      <failure message="Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client"><![CDATA[Error: net::ERR_CONNECTION_REFUSED at http://localhost:3000/client
-    at navigate (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:218:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at FrameManager.navigateFrame (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:188:17)
-    at Frame.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\FrameManager.ts:756:12)
-    at Page.goto (C:\Users\Mattia\Desktop\spg\client\node_modules\puppeteer\src\common\Page.ts:1766:12)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\client\src\tests\ModalWindow.test.js:16:9)]]></failure>
-    </testCase>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/tests/MyMyProducts.test.js">
+    <testCase name="Test MyMyproducts tests error messages" duration="215"/>
   </file>
 </testExecutions>

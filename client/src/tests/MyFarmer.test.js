@@ -4,10 +4,9 @@ import React from 'react'
 
 test('renders the farmer starting page', () => {
     render(<MyFarmer />);
-    var element = screen.getByText("Profile")
-    expect(element).toBeInTheDocument();
+
     
-    var element = screen.getByText("Products")
+    var element = screen.getByText("My orders")
     expect(element).toBeInTheDocument();
   
     element = screen.getByText("My products");
