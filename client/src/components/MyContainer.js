@@ -170,6 +170,8 @@ function MyContainer(props) {
                 clock={clock}
                 setClock={setClock}
                 user={user}
+                cart={cart}
+                setCart={setCart}
               ></MyOrders>
             </>
           }
