@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638962218526" clover="3.2.0">
-  <project timestamp="1638962218526" name="All files">
-    <metrics statements="836" coveredstatements="170" conditionals="601" coveredconditionals="98" methods="341" coveredmethods="45" elements="1778" coveredelements="313" complexity="0" loc="836" ncloc="836" packages="3" files="25" classes="25"/>
+<coverage generated="1638962286451" clover="3.2.0">
+  <project timestamp="1638962286451" name="All files">
+    <metrics statements="843" coveredstatements="170" conditionals="603" coveredconditionals="98" methods="343" coveredmethods="45" elements="1789" coveredelements="313" complexity="0" loc="843" ncloc="843" packages="3" files="25" classes="25"/>
     <package name="src">
       <metrics statements="11" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="1"/>
       <file name="App.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/App.js">
@@ -26,7 +26,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="821" coveredstatements="169" conditionals="597" coveredconditionals="98" methods="337" coveredmethods="44"/>
+      <metrics statements="828" coveredstatements="169" conditionals="599" coveredconditionals="98" methods="339" coveredmethods="44"/>
       <file name="API.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/API.js">
         <metrics statements="116" coveredstatements="13" conditionals="54" coveredconditionals="4" methods="23" coveredmethods="5"/>
         <line num="1" count="8" type="stmt"/>
@@ -753,7 +753,7 @@
         <line num="173" count="0" type="stmt"/>
       </file>
       <file name="MyOrders.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/MyOrders.js">
-        <metrics statements="41" coveredstatements="0" conditionals="42" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <metrics statements="48" coveredstatements="0" conditionals="44" coveredconditionals="0" methods="17" coveredmethods="0"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -761,40 +761,47 @@
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="6"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="127" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="194" count="0" type="stmt"/>
-        <line num="206" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="163" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+        <line num="244" count="0" type="stmt"/>
+        <line num="263" count="0" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
       </file>
       <file name="MyProducts.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/MyProducts.js">
         <metrics statements="53" coveredstatements="0" conditionals="28" coveredconditionals="0" methods="42" coveredmethods="0"/>
