@@ -426,6 +426,51 @@ app.put("/api/orders/pay", async (req, res) => {
   }
 });
 
+app.get("/api/orderswithstatus/:status", async (req, res) => {
+  try {
+    const orders = await spgDao.getOrdersByStatus(req.params.status);
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      res.json(orders);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+app.get("/api/deliverableProducts", async (req, res) => {
+  try {
+    const orders = await spgDao.getOrders();
+    const products = {};
+    const farmers = [];
+
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      const promProd = await Promise.all(orders.map(async (o) => {
+        await Promise.all(o.products.map(async (p) => {
+          if (!farmers.includes(p.farmer)) {
+            farmers.push(p.farmer);
+            let tempF = await spgDao.getFarmer(p.farmer);
+            products[tempF.name] = [{...p, orderId: o.id}];
+          }
+          else {
+            let tempF = await spgDao.getFarmer(p.farmer);
+            products[tempF.name].push({...p, orderId: o.id});
+          }
+        }));
+        return products;
+      }));
+      res.json(promProd[0]);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 //update product confirm
 app.put("/api/updateProduct/:id", async (req, res) => {
   const clock = await spgDao.getClock();
@@ -471,6 +516,29 @@ app.put("/api/clock", async (req, res) => {
       res.status(404).json(clock);
     } else {
       res.json(clock);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
+// GET deliveries
+app.get("/api/deliveries", async (req, res) => {
+  try {
+    const deliveries = await spgDao.getDeliveries();
+    if (deliveries.error) {
+      res.status(404).json(deliveries);
+    } else {
+      const promDel = await Promise.all(deliveries.map(async (d) => {
+        return {
+          id: d.id,
+          product: await spgDao.getProduct(d.product),
+          farmer: await spgDao.getFarmer(d.farmer),
+          quantity: d.quantity
+        }
+      }));
+      res.json(promDel);
     }
   } catch (err) {
     console.log(err);

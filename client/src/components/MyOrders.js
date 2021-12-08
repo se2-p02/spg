@@ -41,6 +41,11 @@ function MyOrders(props) {
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => b.id - a.id);
+            console.log(c)
+            c.map((x)=>{
+              x.address = JSON.stringify(x.address)
+              return x
+            })
             setOrders(c);
             setReqUpdate(false);
           } else {
@@ -152,8 +157,8 @@ function MyOrders(props) {
         {orders && (
           <>
             {orders.map((c) => {
-              let j = JSON.parse(c.products);
-              let b = "primary";
+              let j = []
+              let b = "primary"
               //console.log(c.paid)
               if (c.paid === 0) {
                 b = "danger";

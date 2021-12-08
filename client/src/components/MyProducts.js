@@ -44,7 +44,7 @@ function MyProducts(props) {
             });
             setFilters(() => t_filters);
         }
-    }, [products]);
+    }, [products, filters]);
 
     useEffect(() => {
         if (products.length !== 0) setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));

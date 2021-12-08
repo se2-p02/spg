@@ -82,7 +82,7 @@ function MyMyProducts(props) {
                     &&
                     <Alert className="mt-3" variant="danger">You can add new products from Friday to Saturday 9:00 and confirm products on Monday by 9:00.</Alert>)
                 }
-                
+
                 <ListGroup className="my-3 mx-5 pt-3" horizontal>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
                     <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
@@ -126,21 +126,21 @@ function MyMyProducts(props) {
                                 );
                             })
                         }
-
+                        <Row className=" mt-2">
+                            <Col>
+                                <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                            </Col>
+                            <Col>
+                                {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                    <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
+                                    :
+                                    <Button size="lg" data-testId="apbnw" className="btn-light p-2 w-100 mt-3">Add new product</Button>
+                                }
+                            </Col>
+                        </Row>
                     </>
                 }
-                <Row>
-                    <Col>
-                        <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
-                    </Col>
-                    <Col>
-                        {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                            <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
-                            :
-                            <Button size="lg" data-testId="apbnw" className="btn-light p-2 w-100 mt-3">Add new product</Button>
-                        }
-                    </Col>
-                </Row>
+
 
                 <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} />
             </Container>

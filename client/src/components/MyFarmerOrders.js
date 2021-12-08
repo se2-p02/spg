@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Handbag, CheckSquare } from "react-bootstrap-icons";
-
 import Container from "react-bootstrap/Container";
 import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
@@ -37,11 +36,12 @@ function MyFarmerOrders(props) {
             const id = props.user.role === 'client' && props.user.id;
             API.loadOrders(id)
                 .then((c) => {
+                    console.log(c)
+                    console.log(props.user.id)
                     if (c.error === undefined) {
                         c.sort((a, b) => b.id - a.id);
                         const disOrders = [];
                         for (let elem of c) {
-                            elem.products = JSON.parse(elem.products);
                             let disable = 0;
                             for (let p of elem.products) {
                                 if (props.user.id === p.farmer && p.status === 2)
