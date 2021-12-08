@@ -301,5 +301,26 @@ async function createDelivery(product) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery };
+async function confirmOrderForPickUp(order) {
+    try {
+        const response = await fetch(URL + "/api/confirmOrderForPickup",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(order),
+            });
+        if (response.ok) {
+            return response.json();
+        } else {
+            return { 'error': 'Failed to store data on server' };
+        }
+    }
+    catch (err) {
+        return { 'error': 'Failed' };
+    }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp };
 export default API;

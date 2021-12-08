@@ -39,8 +39,11 @@ function MyNotAvailableOrders(props) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
-  const handleConfirmation = (id) => {
+  const handleConfirmation = (order) => {
       // API to call to set the order as available
+      API.confirmOrderForPickUp(order)
+        .then(setReqUpdate(true))
+        .catch((err) => {console.log(err)})
   }
 
   const isConfirmable = (products) => {
@@ -81,12 +84,12 @@ function MyNotAvailableOrders(props) {
           >
             <b>Products</b>
           </ListGroup.Item>
-          <ListGroup.Item
+          {/* <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
             <b>Address</b>
-          </ListGroup.Item>
+          </ListGroup.Item> */ /* with a single warehouse we don't need this*/}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -141,14 +144,14 @@ function MyNotAvailableOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    <ul>{j.map((x) => {return (<li>{x.id+":"+x.name + ":" + x.quantity}</li>) })}</ul>
+                    <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
-                  <ListGroup.Item
+                  {/*<ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {JSON.parse(c.address).address}
-                  </ListGroup.Item>
+                  </ListGroup.Item>*/}
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
@@ -173,7 +176,7 @@ function MyNotAvailableOrders(props) {
                   >
                     {(c.paid && isConfirmable(j))?  // check in the F_delivery table that the products are received
                         (<Button
-                        onClick={() => handleConfirmation(c.id)}
+                        onClick={() => handleConfirmation(c)}
                         className="btn-success"
                         >
                         Confirm

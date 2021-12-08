@@ -587,6 +587,31 @@ app.post("/api/deliveries", async (req, res) => {
   }
 });
 
+app.post("/api/confirmOrderForPickup", async (req, res) => {
+  try {
+    const order = req.body;
+    const products = JSON.parse(order.products)
+    var result;
+    products.forEach(async(p) => {
+      result = await spgDao.subtractQuantities(p.quantity, p.id);
+      if (result.error) {
+        res.status(500).json(result);
+      }
+
+    })
+    result = await spgDao.setOrderStatus("available", order.id);
+    if (result.error) {
+      res.status(500).json(result);
+    }
+    res.status(200)
+
+  }
+  catch (error) {
+    console.log(error);
+    res.status(500).end();
+  }
+})
+
 /*** User APIs ***/
 
 // POST sessions 

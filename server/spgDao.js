@@ -525,3 +525,29 @@ exports.getFarmer = (id) => {
         });
     });
 };
+
+exports.subtractQuantities = (quantity, id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE F_deliveries SET quantity = quantity - ? where productId = ?'
+        db.run(sql, [quantity, id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+        })
+        resolve(true)
+    })
+}
+
+exports.setOrderStatus = (status, id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE orders SET status = ? where id = ?'
+        db.run(sql, [status, id], (err, row) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+        })
+        resolve(true);
+    })
+}
