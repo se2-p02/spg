@@ -60,9 +60,6 @@ function MyOrders(props) {
 
   //handle the modify button
   const modifyHandler = (id, products) => {
-    console.log("the order id is: " + id);
-    console.log(products)
-    console.log(props.cart);
     const newProducts = products;
     console.log(newProducts);
     props.setOrderId(id);
