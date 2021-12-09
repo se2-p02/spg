@@ -103,7 +103,7 @@ function MyNavBar(props) {
                 </ListGroup.Item>
             </ListGroup>
             {props.cart.length !== 0 &&
-                <MyModal user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
         </Navbar>
     );
@@ -169,15 +169,29 @@ function MyModal(props) {
         else if (orderMethod === 'store') order.address = { address: 'STORE PICKUP', deliveryOn: moment(datetime).format('YYYY-MM-DD HH:mm') };
 
         setErrorMsg(() => '');
+        console.log(props.modify)
+        if(props.modify){
+            await API.modifyOrder(props.orderId,order.products).then((response) => {
+                if (response.error === undefined) {
+                    setSuccessful(true);
+                    props.setCart([]);
+                    props.setShow(false);
+                    props.setModify(false)
+                }
+            }).catch((response) => { console.log(response) });
+            console.log(order);
+        }else{
+            await API.sendOrder(order).then((response) => {
+                if (response.error === undefined) {
+                    setSuccessful(true);
+                    props.setCart([]);
+                    props.setShow(false);
+                }
+            }).catch((response) => { console.log(response) });
+            console.log(order);
+        }
 
-        await API.sendOrder(order).then((response) => {
-            if (response.error === undefined) {
-                setSuccessful(true);
-                props.setCart([]);
-                props.setShow(false);
-            }
-        }).catch((response) => { console.log(response) });
-        console.log(order);
+        
     }
 
     useEffect(() => {
