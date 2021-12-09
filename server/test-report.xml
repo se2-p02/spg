@@ -1,131 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="236"/>
-    <testCase name="tests GET /api/clients" duration="106"/>
-    <testCase name="tests GET /api/clients/:id" duration="92"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="186"/>
-    <testCase name="tests GET /api/orders" duration="201"/>
-    <testCase name="tests GET /api/orders/:id" duration="200"/>
-    <testCase name="tests POST /api/orders" duration="402"/>
-    <testCase name="tests POST /api/addNewUser" duration="586"/>
-    <testCase name="tests error POST /api/addNewUser" duration="147"/>
-    <testCase name="login" duration="299"/>
-    <testCase name="tests POST /api/products" duration="170"/>
-    <testCase name="tests PUT /api/products/:id" duration="235"/>
-    <testCase name="logout" duration="145"/>
-    <testCase name="tests delete /api/sessions/current" duration="173"/>
-    <testCase name="tests get /api/sessions/current" duration="152"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="177"/>
-    <testCase name="login" duration="249"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="244"/>
-    <testCase name="login" duration="290"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="169"/>
-    <testCase name="tests fet /api/nextProducts in the current week" duration="120"/>
-    <testCase name="login" duration="229"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="88"/>
-    <testCase name="tests post /api/session" duration="190"/>
-    <testCase name="tests post /api/session error" duration="238"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="128"/>
-    <testCase name="tests GET /api/wallet/:id" duration="85"/>
-    <testCase name="login" duration="278"/>
-    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="98"/>
-    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="105">
+  <file path="C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js">
+    <testCase name="tests GET /api/products" duration="82"/>
+    <testCase name="tests GET /api/clients" duration="17"/>
+    <testCase name="tests GET /api/clients/:id" duration="16"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="27"/>
+    <testCase name="tests GET /api/orders" duration="14"/>
+    <testCase name="tests GET /api/orders/:id" duration="13"/>
+    <testCase name="tests POST /api/orders" duration="90"/>
+    <testCase name="tests POST /api/addNewUser" duration="201"/>
+    <testCase name="tests error POST /api/addNewUser" duration="18"/>
+    <testCase name="login" duration="81"/>
+    <testCase name="tests POST /api/products" duration="69"/>
+    <testCase name="tests PUT /api/products/:id" duration="114"/>
+    <testCase name="logout" duration="15"/>
+    <testCase name="tests delete /api/sessions/current" duration="14"/>
+    <testCase name="tests get /api/sessions/current" duration="12"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="21"/>
+    <testCase name="login" duration="71"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="96"/>
+    <testCase name="login" duration="74"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="37"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="24"/>
+    <testCase name="login" duration="75"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="13"/>
+    <testCase name="tests post /api/session" duration="78"/>
+    <testCase name="tests post /api/session error" duration="74"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="19"/>
+    <testCase name="tests GET /api/wallet/:id" duration="14"/>
+    <testCase name="login" duration="72"/>
+    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="15"/>
+    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="21">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests get /api/deliveries after the login as a wmanager 1`
 
-- Expected properties  - 4
+- Expected properties  - 3
 + Received value       + 2
 
   Object {
     "farmer": Any<Object>,
 -   "id": Any<Number>,
 -   "orderId": Any<Number>,
--   "product": Any<Object>,
--   "quantity": Any<Number>,
 +   "id": 1,
+    "product": Any<Object>,
+-   "quantity": Any<Number>,
 +   "quantity": 1,
   }
-    at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:508:24)
+    at forEach (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:509:24)
     at Array.forEach (<anonymous>)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:507:28)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:508:28)
     at runMicrotasks (<anonymous>)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
     </testCase>
-    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="95">
+    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="30">
       <failure message="TypeError: Cannot read property &apos;0&apos; of undefined"><![CDATA[TypeError: Cannot read property '0' of undefined
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:524:30)
+    at Object.<anonymous> (C:\Users\fabia\Desktop\SE2\spg\server\tests\apis.spec.js:525:30)
     at runMicrotasks (<anonymous>)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:482:28)
-    at Server.emit (events.js:376:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
     </testCase>
-    <testCase name="login" duration="182">
-      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:482:28)
-    at Server.emit (events.js:376:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
-    </testCase>
-    <testCase name="tests GET /api/orderswithstatus/:status" duration="47">
-      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:482:28)
-    at Server.emit (events.js:376:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
-    </testCase>
-    <testCase name="login" duration="148">
-      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:482:28)
-    at Server.emit (events.js:376:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
-    </testCase>
-    <testCase name="tests POST /api/confirmOrderForPickup" duration="103">
-      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:574:8)
-----
-    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
-    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
-    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
-    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
-    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
-    at Object.onceWrapper (events.js:482:28)
-    at Server.emit (events.js:376:20)
-    at emitCloseNT (net.js:1659:8)
-    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
-    </testCase>
+    <testCase name="login" duration="72"/>
+    <testCase name="tests GET /api/orderswithstatus/:status" duration="13"/>
   </file>
 </testExecutions>
