@@ -295,6 +295,24 @@ exports.deleteTestOrder = () => {
     }
 };
 
+// delete a specific order
+exports.deleteOrder = (id) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'DELETE FROM orders WHERE id = ?';
+            db.run(sql, [id], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
+
 // get all orders
 exports.getOrders = (id, orderId) => {
     let sql;
@@ -453,6 +471,20 @@ exports.getWallet = (id) => {
 exports.getMaxProdId = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT MAX(id) as maxId FROM products';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows[0].maxId);
+        });
+    });
+};
+
+// get max id of orders
+exports.getMaxOrderId = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT MAX(id) as maxId FROM orders';
         db.all(sql, [], (err, rows) => {
             if (err) {
                 reject(err);
