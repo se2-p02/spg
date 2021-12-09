@@ -481,6 +481,20 @@ exports.getMaxProdId = () => {
     });
 };
 
+// get max id of orders
+exports.getMaxOrderId = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT MAX(id) as maxId FROM orders';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows[0].maxId);
+        });
+    });
+};
+
 // get all deliveries
 exports.getDeliveries = () => {
     return new Promise((resolve, reject) => {

@@ -1,104 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="154"/>
-    <testCase name="tests GET /api/clients" duration="56"/>
-    <testCase name="tests GET /api/clients/:id" duration="48"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="69"/>
-    <testCase name="tests GET /api/orders" duration="5058">
-      <failure message="SyntaxError: Unexpected token i in JSON at position 2"><![CDATA[SyntaxError: Unexpected token i in JSON at position 2
-    at JSON.parse (<anonymous>)
-    at map (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:90)
-    at Array.map (<anonymous>)
-    at Statement.<anonymous> (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:33)]]></failure>
-      <failure message="Error: thrown: &quot;Exceeded timeout of 5000 ms for a test."><![CDATA[Error: thrown: "Exceeded timeout of 5000 ms for a test.
-Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
-    at C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:134:3
-    at _dispatchDescribe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:97:26)
-    at describe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:60:5)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:132:1)
-    at Runtime._execModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1646:24)
-    at Runtime._loadModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1185:12)
-    at Runtime.requireModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1009:12)
-    at jestAdapter (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at runTestInternal (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runner\build\runTest.js:389:16)]]></failure>
-    </testCase>
-    <testCase name="tests GET /api/orders/:id" duration="33"/>
-    <testCase name="tests POST /api/orders" duration="173"/>
-    <testCase name="tests POST /api/addNewUser" duration="481"/>
-    <testCase name="tests error POST /api/addNewUser" duration="46"/>
-    <testCase name="login" duration="150"/>
-    <testCase name="tests POST /api/products" duration="93"/>
-    <testCase name="tests PUT /api/products/:id" duration="155"/>
-    <testCase name="logout" duration="48"/>
-    <testCase name="tests delete /api/sessions/current" duration="44"/>
-    <testCase name="tests get /api/sessions/current" duration="44"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="58"/>
-    <testCase name="login" duration="159"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="253"/>
-    <testCase name="login" duration="161"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="96"/>
-    <testCase name="tests fet /api/nextProducts in the current week" duration="79"/>
-    <testCase name="login" duration="213"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="48"/>
-    <testCase name="tests post /api/session" duration="168"/>
-    <testCase name="tests post /api/session error" duration="198"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="42"/>
-    <testCase name="tests GET /api/wallet/:id" duration="5054">
-      <failure message="SyntaxError: Unexpected token i in JSON at position 2"><![CDATA[SyntaxError: Unexpected token i in JSON at position 2
-    at JSON.parse (<anonymous>)
-    at map (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:90)
-    at Array.map (<anonymous>)
-    at Statement.<anonymous> (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:33)]]></failure>
-      <failure message="Error: thrown: &quot;Exceeded timeout of 5000 ms for a test."><![CDATA[Error: thrown: "Exceeded timeout of 5000 ms for a test.
-Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
-    at C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:480:3
-    at _dispatchDescribe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:97:26)
-    at describe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:60:5)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:479:1)
-    at Runtime._execModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1646:24)
-    at Runtime._loadModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1185:12)
-    at Runtime.requireModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1009:12)
-    at jestAdapter (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at runTestInternal (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runner\build\runTest.js:389:16)]]></failure>
-    </testCase>
-    <testCase name="login" duration="227"/>
-    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="5044">
-      <failure message="SyntaxError: Unexpected token i in JSON at position 2"><![CDATA[SyntaxError: Unexpected token i in JSON at position 2
-    at JSON.parse (<anonymous>)
-    at map (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:90)
-    at Array.map (<anonymous>)
-    at Statement.<anonymous> (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:33)]]></failure>
-      <failure message="Error: thrown: &quot;Exceeded timeout of 5000 ms for a test."><![CDATA[Error: thrown: "Exceeded timeout of 5000 ms for a test.
-Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
-    at C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:496:3
-    at _dispatchDescribe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:97:26)
-    at describe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:60:5)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:488:1)
-    at Runtime._execModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1646:24)
-    at Runtime._loadModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1185:12)
-    at Runtime.requireModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1009:12)
-    at jestAdapter (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at runTestInternal (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runner\build\runTest.js:389:16)]]></failure>
-    </testCase>
-    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="106">
+    <testCase name="tests GET /api/products" duration="236"/>
+    <testCase name="tests GET /api/clients" duration="106"/>
+    <testCase name="tests GET /api/clients/:id" duration="92"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="186"/>
+    <testCase name="tests GET /api/orders" duration="201"/>
+    <testCase name="tests GET /api/orders/:id" duration="200"/>
+    <testCase name="tests POST /api/orders" duration="402"/>
+    <testCase name="tests POST /api/addNewUser" duration="586"/>
+    <testCase name="tests error POST /api/addNewUser" duration="147"/>
+    <testCase name="login" duration="299"/>
+    <testCase name="tests POST /api/products" duration="170"/>
+    <testCase name="tests PUT /api/products/:id" duration="235"/>
+    <testCase name="logout" duration="145"/>
+    <testCase name="tests delete /api/sessions/current" duration="173"/>
+    <testCase name="tests get /api/sessions/current" duration="152"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="177"/>
+    <testCase name="login" duration="249"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="244"/>
+    <testCase name="login" duration="290"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="169"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="120"/>
+    <testCase name="login" duration="229"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="88"/>
+    <testCase name="tests post /api/session" duration="190"/>
+    <testCase name="tests post /api/session error" duration="238"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="128"/>
+    <testCase name="tests GET /api/wallet/:id" duration="85"/>
+    <testCase name="login" duration="278"/>
+    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="98"/>
+    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="105">
       <failure message="Error: expect(received).toMatchSnapshot(properties)"><![CDATA[Error: expect(received).toMatchSnapshot(properties)
 
 Snapshot name: `tests get /api/deliveries after the login as a wmanager 1`
 
-- Expected properties  - 3
+- Expected properties  - 4
 + Received value       + 2
 
   Object {
     "farmer": Any<Object>,
 -   "id": Any<Number>,
 -   "orderId": Any<Number>,
-+   "id": 1,
-    "product": Any<Object>,
+-   "product": Any<Object>,
 -   "quantity": Any<Number>,
++   "id": 1,
 +   "quantity": 1,
   }
     at forEach (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:508:24)
@@ -107,26 +53,79 @@ Snapshot name: `tests get /api/deliveries after the login as a wmanager 1`
     at runMicrotasks (<anonymous>)
     at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testCase>
-    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="5061">
-      <failure message="SyntaxError: Unexpected token i in JSON at position 2"><![CDATA[SyntaxError: Unexpected token i in JSON at position 2
-    at JSON.parse (<anonymous>)
-    at map (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:90)
-    at Array.map (<anonymous>)
-    at Statement.<anonymous> (C:\Users\Mattia\Desktop\spg\server\spgDao.js:337:33)]]></failure>
-      <failure message="Error: thrown: &quot;Exceeded timeout of 5000 ms for a test."><![CDATA[Error: thrown: "Exceeded timeout of 5000 ms for a test.
-Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
-    at C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:518:3
-    at _dispatchDescribe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:97:26)
-    at describe (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\index.js:60:5)
-    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:488:1)
-    at Runtime._execModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1646:24)
-    at Runtime._loadModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1185:12)
-    at Runtime.requireModule (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runtime\build\index.js:1009:12)
-    at jestAdapter (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at runTestInternal (C:\Users\Mattia\Desktop\spg\server\node_modules\jest-runner\build\runTest.js:389:16)]]></failure>
+    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="95">
+      <failure message="TypeError: Cannot read property &apos;0&apos; of undefined"><![CDATA[TypeError: Cannot read property '0' of undefined
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:524:30)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
     </testCase>
-    <testCase name="login" duration="191"/>
-    <testCase name="tests GET /api/orderswithstatus/:status" duration="32"/>
+    <testCase name="login" duration="182">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    </testCase>
+    <testCase name="tests GET /api/orderswithstatus/:status" duration="47">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    </testCase>
+    <testCase name="login" duration="148">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:606:8)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    </testCase>
+    <testCase name="tests POST /api/confirmOrderForPickup" duration="103">
+      <failure message="Error: expected 200 &quot;OK&quot;, got 500 &quot;Internal Server Error&quot;"><![CDATA[Error: expected 200 "OK", got 500 "Internal Server Error"
+    at Object.<anonymous> (C:\Users\Mattia\Desktop\spg\server\tests\apis.spec.js:574:8)
+----
+    at Test.Object.<anonymous>.Test._assertStatus (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:304:12)
+    at C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:80:15
+    at Test.Object.<anonymous>.Test._assertFunction (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:338:11)
+    at Test.Object.<anonymous>.Test.assert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:209:21)
+    at Server.localAssert (C:\Users\Mattia\Desktop\spg\server\node_modules\supertest\lib\test.js:167:12)
+    at Object.onceWrapper (events.js:482:28)
+    at Server.emit (events.js:376:20)
+    at emitCloseNT (net.js:1659:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21)]]></failure>
+    </testCase>
   </file>
 </testExecutions>

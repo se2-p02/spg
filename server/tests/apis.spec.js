@@ -554,8 +554,8 @@ describe("get orders by status", () => {
     const res = await server.get("/api/orderswithstatus/available").expect(200);
   })
 })
-
-/* describe("confirm order test", () => {
+/*
+ describe("confirm order test", () => {
   it('login', loginFarmer());
   it("tests POST /api/confirmOrderForPickup", async () => {
     // 1. create a product
@@ -592,22 +592,10 @@ describe("get orders by status", () => {
       user: 2,
       paid: 0
     }).expect(200);
-
+    await request(app).delete("/api/sessions/current").expect(200);
+    loginWManager()
     // 3. there are no products, the order can be set as available
-    const response = await request(app).post("/api/confirmOrderForPickup").send({ 
-      products: [{
-        id: maxId,
-        name: "MilkTest",
-        quantity: 7,
-        unit: "l",
-        price: 1.5,
-        filter: "Dairy and Eggs"
-      }],
-      amount: 2,
-      address: "undefined",
-      user: 2,
-      paid: 0
-    }).expect(200);
+    const response = await request(app).post("/api/confirmOrderForPickup").send(order.body).expect(200);
 
     // 4. rollback
     // order
@@ -617,7 +605,7 @@ describe("get orders by status", () => {
       .delete(`/api/products/${maxId}`)
       .expect(200);
     
-      await request(app).delete("/api/sessions/current").expect(200);
+    await request(app).delete("/api/sessions/current").expect(200);
   });
 
 }) */
