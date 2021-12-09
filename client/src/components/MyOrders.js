@@ -63,9 +63,10 @@ function MyOrders(props) {
   const modifyHandler = (id,products)=>{
     console.log('the order id is: '+id)
     console.log(props.cart)
-    const newProducts = [{id:3,quantity:2,farmer:6,status:1,name:"Eggs",price:3,unit:"kg"}]
+    const newProducts = products
     console.log(newProducts)
     props.setCart(newProducts)
+    props.setModify(true)
   }
 
   if (goBack) {

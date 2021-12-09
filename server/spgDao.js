@@ -192,6 +192,20 @@ exports.addOrder = async (order) => {
     }
 };
 
+//modify the order
+exports.modifyOrder = (items, id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE orders SET products=? WHERE id = ?';
+        db.run(sql, [items, id], function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(id);
+        });
+    });
+};
+
 // insert a new product
 exports.addProduct = async (product, farmer, time) => {
     try {

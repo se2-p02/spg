@@ -280,5 +280,21 @@ async function loadDeliveries() {
     } else return { 'error': 'Failed to load Deliveries from server' }
 }
 
+// //modify order
+// async function modifyOrder(id, items) {
+//     const response = await fetch(URL + /api/orders/modify/${id},
+//         {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(items),
+
+//         });
+//     if (response.ok) {
+//         return true;
+//     } else return { 'error': 'Failed to store data on server' }
+// }
+
 const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts };
 export default API;

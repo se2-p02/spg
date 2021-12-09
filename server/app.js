@@ -284,6 +284,20 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 
   //return;
 });
+//PUT modify order
+app.put("/api/orders/modify/:id", async (req, res) => {
+  //console.log(req.body)
+  const items = JSON.stringify(req.body);
+  console.log(items)
+  try {
+    await spgDao.modifyOrder(items, req.params.id);
+    res.status(200).end();
+  } catch {
+    res.status(500).json({ error: "cannot update basket" });
+  }
+
+  return;
+});
 
 
 
@@ -425,6 +439,8 @@ app.put("/api/orders/pay", async (req, res) => {
     return;
   }
 });
+
+
 
 app.get("/api/orderswithstatus/:status", async (req, res) => {
   try {
