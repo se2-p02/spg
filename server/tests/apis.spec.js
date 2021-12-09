@@ -504,7 +504,6 @@ describe('Delivery tests', () => {
 
   it('tests get /api/deliveries after the login as a wmanager', async () => {
     const res = await server.get("/api/deliveries");
-    console.log(res.body)
     if (res.body) res.body.forEach((delivery) => {
       expect(delivery).toMatchSnapshot({
         id: expect.any(Number),
