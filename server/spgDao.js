@@ -295,6 +295,24 @@ exports.deleteTestOrder = () => {
     }
 };
 
+// delete a specific order
+exports.deleteOrder = (id) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const sql = 'DELETE FROM orders WHERE id = ?';
+            db.run(sql, [id], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
+
 // get all orders
 exports.getOrders = (id, orderId) => {
     let sql;

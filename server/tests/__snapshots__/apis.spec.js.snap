@@ -223,6 +223,19 @@ Object {
 }
 `;
 
+exports[`tests GET /api/products 12`] = `
+Object {
+  "farmer": Any<Number>,
+  "farmerName": Any<String>,
+  "filter": "Dairy and Eggs",
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
 exports[`tests get /api/deliveries after the login as a wmanager 1`] = `
 Object {
   "farmer": Any<Object>,
@@ -472,6 +485,21 @@ exports[`tests get /api/nextProducts after the login as a customer not on sunday
 Object {
   "availability": Any<String>,
   "confirmed": 1,
+  "farmer": Any<Number>,
+  "farmerName": "FattoriaBella",
+  "filter": Any<String>,
+  "id": Any<Number>,
+  "name": Any<String>,
+  "price": Any<Number>,
+  "quantity": Any<Number>,
+  "unit": Any<String>,
+}
+`;
+
+exports[`tests get /api/nextProducts after the login as a customer not on sunday 11`] = `
+Object {
+  "availability": Any<String>,
+  "confirmed": 0,
   "farmer": Any<Number>,
   "farmerName": "FattoriaBella",
   "filter": Any<String>,

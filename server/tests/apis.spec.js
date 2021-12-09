@@ -547,3 +547,77 @@ describe('Delivery tests', () => {
     await spgDao.setClock(clock.serverTime);
   });
 });
+
+describe("get orders by status", () => {
+  it('login', loginWManager());
+  it("tests GET /api/orderswithstatus/:status", async () => {
+    const res = await server.get("/api/orderswithstatus/available").expect(200);
+  })
+})
+
+/* describe("confirm order test", () => {
+  it('login', loginFarmer());
+  it("tests POST /api/confirmOrderForPickup", async () => {
+    // 1. create a product
+    // 1.a. set the clock
+    await spgDao.setClock("2021-11-27 08:55");
+    // 1.b. create the product
+    await server
+      .post("/api/products")
+      .send({
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      })
+      .expect(200);
+
+    // 1.c. take the id to cancel the product
+    const maxId = await spgDao.getMaxProdId();
+
+
+    // 2. create a fake order
+    const order = await request(app).post("/api/orders").send({ 
+      products: [{
+        id: maxId,
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      }],
+      amount: 2,
+      address: "undefined",
+      user: 2,
+      paid: 0
+    }).expect(200);
+
+    // 3. there are no products, the order can be set as available
+    const response = await request(app).post("/api/confirmOrderForPickup").send({ 
+      products: [{
+        id: maxId,
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      }],
+      amount: 2,
+      address: "undefined",
+      user: 2,
+      paid: 0
+    }).expect(200);
+
+    // 4. rollback
+    // order
+    const delete_order = await request(app).delete("/api/order/"+order.body.id).expect(200)
+    // product
+    await server
+      .delete(`/api/products/${maxId}`)
+      .expect(200);
+    
+      await request(app).delete("/api/sessions/current").expect(200);
+  });
+
+}) */

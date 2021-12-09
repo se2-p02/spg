@@ -366,6 +366,12 @@ app.get("/api/orders", async (req, res) => {
   }
 });
 
+// DELETE order
+app.delete("/api/order/:id", async (req, res) => {
+  const result = await spgDao.deleteOrder(req.params.id);
+  res.status(200).json(result);
+});
+
 // GET orders of specific client
 app.get("/api/orders/:id", async (req, res) => {
   try {
