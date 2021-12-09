@@ -6,11 +6,11 @@ var dayjs = require('dayjs');
 const spgDao = require("../spgDao");
 const moment = require('moment')
 
-function loginUser() {
+function loginAdmin() {
   return function (done) {
     server
       .post("/api/sessions")
-      .send({ username: "farmer@farmer.farmer", password: "farmer" })
+      .send({ username: "admin@admin.admin", password: "admin" })
       .expect(200)
       .end(onResponse);
 
@@ -25,7 +25,37 @@ function loginClient() {
   return function (done) {
     server
       .post("/api/sessions")
-      .send({ username: "gigi@libero.it", password: "cagliari" })
+      .send({ username: "client@client.client", password: "client" })
+      .expect(200)
+      .end(onResponse);
+
+    function onResponse(err, res) {
+      if (err) return done(err);
+      return done();
+    }
+  };
+};
+
+function loginFarmer() {
+  return function (done) {
+    server
+      .post("/api/sessions")
+      .send({ username: "farmer@farmer.farmer", password: "farmer" })
+      .expect(200)
+      .end(onResponse);
+
+    function onResponse(err, res) {
+      if (err) return done(err);
+      return done();
+    }
+  };
+};
+
+function loginWManager() {
+  return function (done) {
+    server
+      .post("/api/sessions")
+      .send({ username: "wmanager@wmanager.wmanager", password: "wmanager" })
       .expect(200)
       .end(onResponse);
 
@@ -100,7 +130,7 @@ describe("Clients test", () => {
 });
 
 describe('Orders test', () => {
-  
+
   it('tests GET /api/orders', async () => {
     const response = await request(app).get("/api/orders").expect(200);
     /*response.body.forEach((order) => {
@@ -194,7 +224,7 @@ describe("Users test", () => {
 });
 
 describe("Farmers test", () => {
-  it('login', loginUser());
+  it('login', loginFarmer());
 
   it("tests POST /api/products", async () => {
     await spgDao.setClock("2021-11-27 08:55");
@@ -342,7 +372,7 @@ describe('Next week test not on sunday', () => {
     // set the clock
     const res_clock = await request(app).put("/api/clock").send({ serverTime: today.format('YYYY-MM-DD hh:mm') }).expect(200);
     // login
-    const res_login = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
+    const res_login = await request(app).post("/api/sessions").send({ username: "admin@admin.admin", password: "admin" }).expect(200);
     console.log(res_login.body)
     console.log("LOGIN----------------" + res_login.body.id)
     const res = await server.get("/api/nextProducts").expect(200);
@@ -366,36 +396,36 @@ describe('Next week test not on sunday', () => {
 
 describe('Next week test on sunday', () => {
 
-  it('login', loginUser());
+  it('login', loginClient());
 
   it('tests get /api/nextProducts after the login as a customer on sunday', async () => {
     // compute the day of the sunday of the week
     const today = dayjs();
     let difference_from_sunday = 0;
     if (today.day() != 0) {
-        difference_from_sunday = 7 - today.day()-1;
+      difference_from_sunday = 7 - today.day() - 1;
     }
     const next_week = today.add(difference_from_sunday, 'day');
     // set the clock
-    const res_clock = await request(app).put("/api/clock").send({serverTime: toString(next_week)}).expect(200);
+    const res_clock = await request(app).put("/api/clock").send({ serverTime: next_week.format('YYYY-MM-DD hh:mm') }).expect(200);
 
     await server.get("/api/nextProducts").expect(200);
-    
+
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   });
 
   it('tests fet /api/nextProducts in the current week', async () => {
-    await server.get("/api/nextProducts").query({week: "current"}).expect(200);
+    await server.get("/api/nextProducts").query({ week: "current" }).expect(200);
     const logout = await request(app).delete("/api/sessions/current").expect(200);
   })
 });
 
 describe('Next week test farmer', () => {
 
-  it('login', loginUser());
+  it('login', loginFarmer());
 
   it('tests get /api/nextProducts after the login as a farmer', async () => {
-    const res = await server.get("/api/nextProducts").query({role: "farmer"});
+    const res = await server.get("/api/nextProducts").query({ role: "farmer" });
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
         id: expect.any(Number),
@@ -416,13 +446,13 @@ describe('Next week test farmer', () => {
 
 describe('login test', () => {
   it('tests post /api/session', async () => {
-    const response = await request(app).post("/api/sessions").send({ username: "gigi@libero.it", password: "cagliari" }).expect(200);
+    const response = await request(app).post("/api/sessions").send({ username: "admin@admin.admin", password: "admin" }).expect(200);
     const deleteRes = await request(app).delete("/api/sessions/current").expect(200);
   });
   it("tests post /api/session error", async () => {
     const response = await request(app)
       .post("/api/sessions")
-      .send({ username: "gigi@libero.it", password: "cagl" })
+      .send({ username: "admin@admin.admin", password: "admi" })
       .expect(401);
   });
 });
@@ -449,8 +479,71 @@ describe("update basket test", () => {
 describe("get wallet test", () => {
   it("tests GET /api/wallet/:id", async () => {
     const response = await request(app).get("/api/wallet/2");
-    expect(response.body).toBeTruthy();
+    expect(200);
   });
 
 
+});
+
+describe('Delivery tests', () => {
+
+  it('login', loginWManager());
+
+  afterEach(() => {
+    return request(app).delete("/api/sessions/current").expect(200);
+  });
+
+  it('tests get /api/deliverableProducts after the login as a wmanager', async () => {
+    const res = await server.get("/api/deliverableProducts");
+    if (res.boby) res.body.forEach((product) => {
+      expect(product).toMatchSnapshot({
+        farmer: expect.any(Object),
+      });
+    });
+  });
+
+  it('tests get /api/deliveries after the login as a wmanager', async () => {
+    const res = await server.get("/api/deliveries");
+    if (res.body) res.body.forEach((delivery) => {
+      expect(delivery).toMatchSnapshot({
+        id: expect.any(Number),
+        product: expect.any(Object),
+        farmer: expect.any(Object),
+        quantity: expect.any(Number),
+        orderId: expect.any(Number),
+      });
+    });
+  });
+
+  it('tests post /api/deliveries after the login as a wmanager', async () => {
+    const clock = await spgDao.getClock();
+    console.log(clock)
+    await spgDao.setClock("2021-11-23 09:55");
+
+    const res = await server.get("/api/deliverableProducts");
+    const productToDeliver = res.body[Object.keys(res.body)[0]][0];
+    console.log(productToDeliver)
+    const delivery = await server.post("/api/deliveries")
+      .send(productToDeliver)
+      .expect(200);
+
+    //rollback changes
+    const order = await spgDao.getOrders(undefined, productToDeliver.orderId);
+    order[0].products.forEach((p) => {
+      if (p.id === productToDeliver.id) {
+        p.status = 2;
+      }
+    });
+    order[0].products = JSON.stringify(order[0].products);
+    const result = await spgDao.confirmProductsOrder(productToDeliver.orderId, order[0]);
+
+    const deliveries = await server.get("/api/deliveries");
+    let max = 1;
+    deliveries.body.forEach(d => {
+      if (d.id > max) max = d.id;
+    })
+    await spgDao.deleteDeliveries(max);
+
+    await spgDao.setClock(clock.serverTime);
+  });
 });

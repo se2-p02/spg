@@ -280,21 +280,47 @@ async function loadDeliveries() {
     } else return { 'error': 'Failed to load Deliveries from server' }
 }
 
-// //modify order
-// async function modifyOrder(id, items) {
-//     const response = await fetch(URL + /api/orders/modify/${id},
-//         {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(items),
+async function createDelivery(product) {
+    try {
+        const response = await fetch(URL + "/api/deliveries",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(product),
+            });
+        if (response.ok) {
+            return response.json();
+        } else {
+            return { 'error': 'Failed to store data on server' };
+        }
+    }
+    catch (err) {
+        return { 'error': 'Failed' };
+    }
+}
 
-//         });
-//     if (response.ok) {
-//         return true;
-//     } else return { 'error': 'Failed to store data on server' }
-// }
+async function confirmOrderForPickUp(order) {
+    try {
+        const response = await fetch(URL + "/api/confirmOrderForPickup",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(order),
+            });
+        if (response.ok) {
+            return response.json();
+        } else {
+            return { 'error': 'Failed to store data on server' };
+        }
+    }
+    catch (err) {
+        return { 'error': 'Failed' };
+    }
+}
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp };
 export default API;

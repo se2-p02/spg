@@ -15,7 +15,7 @@ import MyClientPage from "./MyClientPage";
 import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
-import MyAvailableOrders from "./MyAvailableOrders";
+import MyNotAvailableOrders from "./MyNotAvailableOrders";
 import MyWManager from "./MyWManager";
 import MyDeliveries from "./MyDeliveries";
 
@@ -532,8 +532,8 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              <MyAvailableOrders clock={clock} setClock={setClock} user={user} />
-              {/*<MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />*/}
+              {/*<MyAvailableOrders clock={clock} setClock={setClock} user={user} />*/}
+              <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
             </>
           }
         />

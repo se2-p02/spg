@@ -9,6 +9,7 @@ function MyNotAvailableOrders(props) {
   const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
+  const [availableProducts, setProducts] = useState([]);
 
   useEffect(() => {
     if (reqUpdate && props.user) {
@@ -23,6 +24,14 @@ function MyNotAvailableOrders(props) {
           }
         })
         .catch((err) => { console.log(err) });
+      
+        API.loadDeliveries()
+          .then((p) => {
+            if (p.error === undefined) {
+              setProducts(p);
+            }
+          })
+          .catch((err) => console.log(err));
     }
   }, [reqUpdate, props.user]);
 
@@ -30,9 +39,23 @@ function MyNotAvailableOrders(props) {
     return <Navigate to={"/"+props.user.role}></Navigate>;
   }
 
-  const handleConfirmation = (id) => {
+  const handleConfirmation = (order) => {
       // API to call to set the order as available
+      API.confirmOrderForPickUp(order)
+        .then(setReqUpdate(true))
+        .catch((err) => {console.log(err)})
   }
+
+  const isConfirmable = (products) => {
+    var flag = true;
+    products.forEach(element => {
+      flag &= availableProducts.map(it => it.product.id).includes(element.id); //1. the element must be available
+      if (flag == true) {
+        flag &= !(availableProducts.filter(elem => elem.product.id == element.id)[0].quantity < element.quantity)   //2. the quantity must be enough
+      } 
+    });
+    return flag;
+}
 
   return (
     <>
@@ -61,12 +84,12 @@ function MyNotAvailableOrders(props) {
           >
             <b>Products</b>
           </ListGroup.Item>
-          <ListGroup.Item
+          {/* <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
             <b>Address</b>
-          </ListGroup.Item>
+          </ListGroup.Item> */ /* with a single warehouse we don't need this*/}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -123,12 +146,12 @@ function MyNotAvailableOrders(props) {
                   >
                     <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
-                  <ListGroup.Item
+                  {/*<ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {JSON.parse(c.address).address}
-                  </ListGroup.Item>
+                  </ListGroup.Item>*/}
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
@@ -151,9 +174,9 @@ function MyNotAvailableOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    {c.paid?  // check in the F_delivery table that the products are received
+                    {(c.paid && isConfirmable(j))?  // check in the F_delivery table that the products are received
                         (<Button
-                        onClick={() => handleConfirmation(c.id)}
+                        onClick={() => handleConfirmation(c)}
                         className="btn-success"
                         >
                         Confirm

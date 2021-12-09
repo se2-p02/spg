@@ -63,7 +63,7 @@ function MyAvailableOrders(props) {
           >
             <b>Address</b>
           </ListGroup.Item>
-          */} {/* if we have just one store we don't need that */}
+          */} {/* if we have just one store we don't need this */}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -88,10 +88,6 @@ function MyAvailableOrders(props) {
             {orders.map((c) => {
               let j = JSON.parse(c.products)
               let b = "primary"
-              //console.log(c.paid)
-              if (c.paid===0){
-                  b = "danger"
-              }
 
               return (
                 <ListGroup
