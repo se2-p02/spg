@@ -22,7 +22,7 @@ jobs:
 
       - run: npm ci
         working-directory: client
-      - run: npm test:cov
+      - run: npm run test:cov
         working-directory: client
 
       - name: Build Coverage Backend
@@ -32,7 +32,7 @@ jobs:
 
       - run: npm ci
         working-directory: server
-      - run: npm test:cov
+      - run: npm run test:cov
         working-directory: server
 
       - name: SonarCloud Scan
