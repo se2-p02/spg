@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-      - run: npm test
+      - run: npm run test:cov
 
   test-backend:
     name: Test Backend
@@ -51,4 +51,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-      - run: npm test
+      - run: npm run test:cov
