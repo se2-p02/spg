@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyFarmer.test.js">
-    <testCase name="renders the farmer starting page" duration="53"/>
-  </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyWManager.test.js">
-    <testCase name="renders the wmanager profile" duration="147"/>
+    <testCase name="renders the wmanager profile" duration="149"/>
   </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
-    <testCase name="renders sigup page" duration="104"/>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyFarmer.test.js">
+    <testCase name="renders the farmer starting page" duration="55"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyLogin.test.js">
-    <testCase name="Test login form unit Test login form appearance" duration="90"/>
-    <testCase name="Test login form e2e Test filling out login form" duration="51"/>
+    <testCase name="Test login form unit Test login form appearance" duration="96"/>
+    <testCase name="Test login form e2e Test filling out login form" duration="58"/>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyForm.test.js">
+    <testCase name="renders sigup page" duration="123"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyMyProducts.test.js">
-    <testCase name="Test MyMyproducts tests error messages" duration="295"/>
+    <testCase name="Test MyMyproducts tests error messages" duration="300"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\App.test.js">
-    <testCase name="renders app homepage" duration="175"/>
+    <testCase name="renders app homepage" duration="157"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyNavBar.test.js">
-    <testCase name="Test navbar renders all components" duration="237"/>
-    <testCase name="Test navbar test logout" duration="112"/>
+    <testCase name="Test navbar renders all components" duration="219"/>
+    <testCase name="Test navbar test logout" duration="111"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\ModalWindow.test.js">
-    <testCase name="modal window.js tests renders modal window for alert" duration="80"/>
+    <testCase name="modal window.js tests renders modal window for alert" duration="90"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MySingleClient.test.js">
-    <testCase name="renders the info of a client from employee page" duration="66"/>
-  </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyEmployee.test.js">
-    <testCase name="Test employee renders the employee starting page" duration="14"/>
-    <testCase name="Test employee test employee e2e" duration="11"/>
+    <testCase name="renders the info of a client from employee page" duration="58"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\LoginForm.test.js">
-    <testCase name="Test login form Test login form appearance" duration="31"/>
+    <testCase name="Test login form Test login form appearance" duration="33"/>
   </file>
-  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientProfile.test.js">
-    <testCase name="renders the client profile" duration="22"/>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyEmployee.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="10"/>
+    <testCase name="Test employee test employee e2e" duration="16"/>
   </file>
   <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientPage.test.js">
-    <testCase name="renders app form" duration="11"/>
+    <testCase name="renders app form" duration="14"/>
+  </file>
+  <file path="C:\Users\fabia\Desktop\SE2\spg\client\src\tests\MyClientProfile.test.js">
+    <testCase name="renders the client profile" duration="18"/>
   </file>
 </testExecutions>

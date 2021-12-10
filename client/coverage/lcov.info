@@ -1,5 +1,5 @@
 TN:
-SF:src/App.js
+SF:C:\Users\fabia\Desktop\SE2\spg\client\src\App.js
 FN:7,App
 FNF:1
 FNH:1
@@ -47,7 +47,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/components/API.js
+SF:C:\Users\fabia\Desktop\SE2\spg\client\src\components\API.js
 FN:3,confirmOrder
 FN:20,loadProducts
 FN:28,loadClients
@@ -1364,7 +1364,7 @@ BRF:30
 BRH:13
 end_of_record
 TN:
-SF:src/components/MyMyProducts.js
+SF:C:\Users\fabia\Desktop\SE2\spg\client\src\components\MyMyProducts.js
 FN:11,MyMyProducts
 FN:19,(anonymous_1)
 FN:21,(anonymous_2)
