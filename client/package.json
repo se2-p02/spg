@@ -26,7 +26,7 @@
     "start": "npm-run-all --parallel startClient startServer",
     "startClient": "react-scripts start",
     "startServer": "cd ../server && node ./server.js",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test --silent",
     "test:cov": "react-scripts test --coverage --silent  --testResultsProcessor=jest-sonar-reporter",
     "eject": "react-scripts eject"
