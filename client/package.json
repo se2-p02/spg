@@ -27,8 +27,9 @@
     "startClient": "react-scripts start",
     "startServer": "cd ../server && node ./server.js",
     "build": "CI=false && react-scripts build",
-    "test": "react-scripts test --silent",
-    "test:cov": "react-scripts test --coverage --silent --watchAll --testResultsProcessor=jest-sonar-reporter",
+    "test": "react-scripts test --silent --watchAll",
+    "test:cov": "react-scripts test --coverage --silent --testResultsProcessor=jest-sonar-reporter",    
+    "test:covLocal": "react-scripts test --coverage --silent --watchAll --testResultsProcessor=jest-sonar-reporter",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
