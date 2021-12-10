@@ -1,5 +1,5 @@
 TN:
-SF:/src/App.js
+SF:src/App.js
 FN:7,App
 FNF:1
 FNH:1
@@ -47,7 +47,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/API.js
+SF:src/components/API.js
 FN:3,confirmOrder
 FN:20,loadProducts
 FN:28,loadClients
@@ -1318,7 +1318,7 @@ BRF:30
 BRH:13
 end_of_record
 TN:
-SF:/Users/pietromacori/Documents/git/SoftEng2/SPG/client/src/components/MyMyProducts.js
+SF:src/components/MyMyProducts.js
 FN:11,MyMyProducts
 FN:19,(anonymous_1)
 FN:21,(anonymous_2)
