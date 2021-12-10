@@ -314,7 +314,6 @@ app.post('/api/orders', async (req, res) => {
 
   const order = req.body;
   try {
-    console.log(order)
     if (order.test) {
       // just to test, after the call is set to -1
       order.id = await spgDao.getNextNumber();
@@ -411,6 +410,7 @@ app.put("/api/updateOrder/:id", async (req, res) => {
 
 //update products status of a given order
 app.put("/api/orders/:orderId/confirmProducts/", async (req, res) => {
+
   const clock = await spgDao.getClock();
   const datetime = moment(clock.serverTime);
   if (!((datetime.day() === 3 && datetime.hour() >= 8) || datetime.day() === 4 || (datetime.day() === 5 && (datetime.hour() >= 0 && datetime.hour() <= 19)))) {
@@ -422,7 +422,9 @@ app.put("/api/orders/:orderId/confirmProducts/", async (req, res) => {
   const orderInfo = req.body.elem
 
 
+
   try {
+    console.log("11111")
     const result = await spgDao.confirmProductsOrder(orderId, orderInfo)
     if (result.err) res.status(404).json(result);
     else res.json(true);

@@ -22,6 +22,7 @@ function MyFarmerOrders(props) {
         API.confirmOrder({ ...order, products: JSON.stringify(order.products) })
             .then(() => {
                 if(doPayment) API.payOrder(order).then((res) => {
+                    console.log(res)
                     if(res.error) alert('All the products were confirmed but the user had not enough money.');
                     else alert('All products were confirmed and the order was paid successfully.');
                     setReqUpdate(true);

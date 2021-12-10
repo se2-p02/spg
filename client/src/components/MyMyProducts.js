@@ -65,6 +65,7 @@ function MyMyProducts(props) {
     }
 
     const handleConfirm = async (id) => {
+
         API.updateProduct({ id: id }, { confirm: true }).then((r) => {
             if (r.error === undefined) {
                 setReqUpdate(true);
