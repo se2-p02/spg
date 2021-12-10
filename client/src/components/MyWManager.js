@@ -16,7 +16,7 @@ function MyWManager(props) {
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5 mt-5 pt-5">
                     <Col className=" m-0 p-0" sm={6}>
-                        <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("myDeliveries") }}><h3>Deliveries</h3></Button>
+                        <Button size="lg" data-testid="myDeliveries" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("myDeliveries") }}><h3>Deliveries</h3></Button>
                     </Col>
                 </Row>
             </Container>
