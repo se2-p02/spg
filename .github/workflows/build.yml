@@ -22,10 +22,8 @@ jobs:
 
       - run: npm ci
         working-directory: client
-      - run: CI=true npm test
+      - run: npm test:cov
         working-directory: client
-        env:
-          CI: true
 
       - name: Build Coverage Backend
         uses: actions/setup-node@v2
@@ -34,10 +32,8 @@ jobs:
 
       - run: npm ci
         working-directory: server
-      - run: CI=true npm test
+      - run: npm test:cov
         working-directory: server
-        env:
-          CI: true
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
