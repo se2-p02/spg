@@ -284,9 +284,10 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 
   //return;
 });
+
 //PUT modify order
 app.put("/api/orders/modify/:id", async (req, res) => {
-  //console.log(req.body)
+  console.log(req.body)
   const items = JSON.stringify(req.body);
   console.log(items)
   try {

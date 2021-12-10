@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 import moment from "moment";
@@ -41,11 +41,11 @@ function MyOrders(props) {
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => b.id - a.id);
-            console.log(c)
-            c.map((x)=>{
-              x.address = JSON.stringify(x.address)
-              return x
-            })
+            console.log(c);
+            c.map((x) => {
+              x.address = JSON.stringify(x.address);
+              return x;
+            });
             setOrders(c);
             setReqUpdate(false);
           } else {
@@ -58,16 +58,14 @@ function MyOrders(props) {
     }
   }, [reqUpdate, props.user]);
 
-
   //handle the modify button
-  const modifyHandler = (id,products)=>{
-    console.log('the order id is: '+id)
-    console.log(props.cart)
-    const newProducts = products
-    console.log(newProducts)
-    props.setCart(newProducts)
-    props.setModify(true)
-  }
+  const modifyHandler = (id, products) => {
+    const newProducts = products;
+    console.log(newProducts);
+    props.setOrderId(id);
+    props.setCart(newProducts);
+    props.setModify(true);
+  };
 
   if (goBack) {
     return <Navigate to={"/" + props.user.role}></Navigate>;
@@ -158,8 +156,8 @@ function MyOrders(props) {
         {orders && (
           <>
             {orders.map((c) => {
-              let j = []
-              let b = "primary"
+              let j = [];
+              let b = "primary";
               //console.log(c.paid)
               if (c.paid === 0) {
                 b = "danger";
@@ -261,7 +259,16 @@ function MyOrders(props) {
                         Modify
                       </Button>
                     ) : (
-                      <Button onClick={()=>{modifyHandler(c.id,c.products)}}>Modify</Button>
+                      <>
+                      
+                        <Button
+                          onClick={() => {
+                            modifyHandler(c.id, c.products);
+                          }}
+                        >
+                          Modify
+                        </Button>
+                      </>
                     )}
                   </ListGroup.Item>
                 </ListGroup>

@@ -11,19 +11,19 @@ function MyFarmerOrders(props) {
     const [orders, setOrders] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
     const [mydisabled, setDisabled] = useState([]);
+    const [butDisable, setButDisable] = useState(false);
 
     const handleUpdate = async (order, newStatus) => {
         let doPayment = order.paid ? false : true;
         order.products.map((x) => {
             if (x.farmer === props.user.id) x.status = newStatus;
-            if(x.status < 1) doPayment = false;
+            if (x.status < 1) doPayment = false;
             return x;
         })
         API.confirmOrder({ ...order, products: JSON.stringify(order.products) })
             .then(() => {
-                if(doPayment) API.payOrder(order).then((res) => {
-                    console.log(res)
-                    if(res.error) alert('All the products were confirmed but the user had not enough money.');
+                if (doPayment) API.payOrder(order).then((res) => {
+                    if (res.error) alert('All the products were confirmed but the user had not enough money.');
                     else alert('All products were confirmed and the order was paid successfully.');
                     setReqUpdate(true);
                 });
@@ -33,6 +33,11 @@ function MyFarmerOrders(props) {
     }
 
     useEffect(() => {
+        if ( props.clock && !((props.clock.day() === 3 && props.clock.hour() >= 8) || props.clock.day() === 4 || (props.clock.day() === 5 && (props.clock.hour() >= 0 && props.clock.hour() <= 19)))) {
+            setButDisable(true);
+        } else {
+            setButDisable(false);
+        }
         if (reqUpdate && props.user) {
             const id = props.user.role === 'client' && props.user.id;
             API.loadOrders(id)
@@ -63,7 +68,7 @@ function MyFarmerOrders(props) {
                 })
                 .catch((err) => { console.log(err) });
         }
-    }, [reqUpdate, props.user]);
+    }, [reqUpdate, props.user, props.clock]);
 
     if (goBack) {
         return <Navigate to={"/" + props.user.role}></Navigate>;
@@ -174,14 +179,24 @@ function MyFarmerOrders(props) {
                                                 placement='bottom'
                                                 overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}
                                             >
-                                                <Button variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
+                                                {
+                                                    butDisable ?
+                                                        <Button variant='success' disabled ><CheckSquare /></Button>
+                                                        :
+                                                        <Button variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
+                                                }
                                             </OverlayTrigger>}
                                         {mydisabled[i] === 2 &&
                                             <OverlayTrigger
                                                 placement='bottom'
                                                 overlay={<Tooltip>Confirm <strong>preparation</strong> of the order.</Tooltip>}
                                             >
-                                                <Button variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
+                                                {
+                                                    butDisable ?
+                                                        <Button variant='warning' disabled ><Handbag /></Button>
+                                                        :
+                                                        <Button variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
+                                                }
                                             </OverlayTrigger>}
                                         {mydisabled[i] === 3 && <h5>Confirmed</h5>}
                                     </ListGroup.Item>

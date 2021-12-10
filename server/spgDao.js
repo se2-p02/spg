@@ -18,7 +18,6 @@ exports.getProducts = () => {
 }
 
 exports.confirmProductsOrder = (orderId, orderInfo) => {
-    console.log("HERE")
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE orders SET products=? WHERE id = ?';
         db.all(sql, [orderInfo.products, orderId], (err, rows) => {

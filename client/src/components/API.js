@@ -110,6 +110,21 @@ async function updateBasket(id, items) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function modifyOrder(id, items) {
+    const response = await fetch(URL + `/api/orders/modify/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(items),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function updateProduct(product, action) {
     //action is something like { confirm: true }
     const response = await fetch(URL + `/api/products/${product.id}`,
@@ -321,5 +336,5 @@ async function confirmOrderForPickUp(order) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder };
 export default API;
