@@ -596,26 +596,6 @@ describe("get orders by status", () => {
    jest.setTimeout(10000);
   it('login', loginWManager());
   it("tests POST /api/confirmOrderForPickup", async () => {
-    // 1. create a product
-    // 1.a. set the clock
-    //await spgDao.setClock("2021-11-27 08:55");
-    // 1.b. create the product
-    /*await server
-      .post("/api/products")
-      .send({
-        name: "MilkTest",
-        quantity: 7,
-        unit: "l",
-        price: 1.5,
-        filter: "Dairy and Eggs"
-      })
-      .expect(200);
-
-    // 1.c. take the id to cancel the product
-    const maxId = await spgDao.getMaxProdId();
-    */
-
-    // 2. create a fake order
     const order = await request(app).post("/api/orders").send({ 
       products: [{
         id: -5,
@@ -630,9 +610,6 @@ describe("get orders by status", () => {
       user: 2,
       paid: 0
     }).expect(200);
-    //await request(app).delete("/api/sessions/current").expect(200);
-    //loginWManager()
-    // 3. the order can be set as available
     const maxId = await spgDao.getMaxOrderId();
     const response = await request(app).post("/api/confirmOrderForPickup").send({ 
       id: maxId,
@@ -650,14 +627,7 @@ describe("get orders by status", () => {
       paid: 0
     }).expect(200);
 
-    // 4. rollback
-    // order
     const delete_order = await request(app).delete("/api/order/"+maxId).expect(200)
-    // product
-    /*await server
-      .delete(`/api/products/${maxId}`)
-      .expect(200);
-    */
     await request(app).delete("/api/sessions/current").expect(200);
   });
 
