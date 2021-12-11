@@ -5,7 +5,7 @@ import './MyNavBar.css';
 
 
 function MyEmployee(props) {
-    const [goBack, setGoBack] = useState(false);
+    const [goBack, setGoBack] = useState("");
 
     if (goBack == "clients") {
         return (<Navigate to="/employee/clients"></Navigate>)

@@ -5,7 +5,7 @@ import './MyNavBar.css';
 
 
 function MyWManager(props) {
-    const [goBack, setGoBack] = useState(false);
+    const [goBack, setGoBack] = useState("");
 
     if (goBack === "myDeliveries") {
         return (<Navigate to="/wmanager/deliveries"></Navigate>)
