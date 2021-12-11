@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1639224196945" clover="3.2.0">
-  <project timestamp="1639224196945" name="All files">
-    <metrics statements="782" coveredstatements="449" conditionals="265" coveredconditionals="106" methods="174" coveredmethods="124" elements="1221" coveredelements="679" complexity="0" loc="782" ncloc="782" packages="1" files="4" classes="4"/>
+<coverage generated="1639224707937" clover="3.2.0">
+  <project timestamp="1639224707937" name="All files">
+    <metrics statements="782" coveredstatements="448" conditionals="265" coveredconditionals="107" methods="174" coveredmethods="124" elements="1221" coveredelements="679" complexity="0" loc="782" ncloc="782" packages="1" files="4" classes="4"/>
     <file name="app.js" path="D:\software2\spg\spg\server\app.js">
-      <metrics statements="377" coveredstatements="204" conditionals="153" coveredconditionals="55" methods="48" coveredmethods="34"/>
+      <metrics statements="377" coveredstatements="203" conditionals="153" coveredconditionals="56" methods="48" coveredmethods="34"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -291,17 +291,17 @@
       <line num="526" count="0" type="stmt"/>
       <line num="528" count="2" type="stmt"/>
       <line num="529" count="6" type="stmt"/>
-      <line num="531" count="10" type="cond" truecount="1" falsecount="1"/>
+      <line num="531" count="12" type="cond" truecount="1" falsecount="1"/>
       <line num="532" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="533" count="0" type="stmt"/>
       <line num="534" count="0" type="stmt"/>
       <line num="535" count="0" type="stmt"/>
       <line num="538" count="0" type="stmt"/>
       <line num="539" count="0" type="stmt"/>
-      <line num="542" count="4" type="stmt"/>
-      <line num="544" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="547" count="2" type="stmt"/>
-      <line num="548" count="2" type="stmt"/>
+      <line num="542" count="6" type="stmt"/>
+      <line num="544" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="547" count="0" type="stmt"/>
+      <line num="548" count="0" type="stmt"/>
       <line num="553" count="1" type="stmt"/>
       <line num="554" count="1" type="stmt"/>
       <line num="555" count="1" type="stmt"/>

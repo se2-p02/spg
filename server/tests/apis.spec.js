@@ -495,7 +495,7 @@ describe("modify order test", () => {
   it("tests PUT /api/orders/modify/:id", async () => {
     await request(app)
       .put("/api/orders/modify/1")
-      .send({
+      .send([{
         id: 3,
         quantity: 1,
         unit: "l",
@@ -503,7 +503,7 @@ describe("modify order test", () => {
         farmer: 7,
         status: 0,
         name: "Milk",
-      })
+      }])
       .expect(200);
   });
 });
