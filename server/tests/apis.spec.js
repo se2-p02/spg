@@ -2,9 +2,9 @@ const { describe } = require("jest-circus");
 const request = require("supertest");
 const app = require("../app");
 var server = request.agent(app);
-var dayjs = require('dayjs');
+var dayjs = require("dayjs");
 const spgDao = require("../spgDao");
-const moment = require('moment')
+const moment = require("moment");
 
 function loginAdmin() {
   return function (done) {
@@ -19,7 +19,7 @@ function loginAdmin() {
       return done();
     }
   };
-};
+}
 
 function loginClient() {
   return function (done) {
@@ -34,7 +34,7 @@ function loginClient() {
       return done();
     }
   };
-};
+}
 
 function loginFarmer() {
   return function (done) {
@@ -49,7 +49,7 @@ function loginFarmer() {
       return done();
     }
   };
-};
+}
 
 function loginWManager() {
   return function (done) {
@@ -64,21 +64,18 @@ function loginWManager() {
       return done();
     }
   };
-};
+}
 
 function logoutUser() {
   return function (done) {
-    server
-      .delete("/api/sessions/current")
-      .expect(200)
-      .end(onResponse);
+    server.delete("/api/sessions/current").expect(200).end(onResponse);
 
     function onResponse(err, res) {
       if (err) return done(err);
       return done();
     }
   };
-};
+}
 
 describe("Products test", () => {
   it("tests GET /api/products", async () => {
@@ -129,9 +126,8 @@ describe("Clients test", () => {
   });
 });
 
-describe('Orders test', () => {
-
-  it('tests GET /api/orders', async () => {
+describe("Orders test", () => {
+  it("tests GET /api/orders", async () => {
     const response = await request(app).get("/api/orders").expect(200);
     /*response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
@@ -147,7 +143,7 @@ describe('Orders test', () => {
     });*/
   });
 
-  it('tests GET /api/orders/:id', async () => {
+  it("tests GET /api/orders/:id", async () => {
     const response = await request(app).get("/api/orders/1").expect(200);
     /*response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
@@ -163,9 +159,12 @@ describe('Orders test', () => {
     });*/
   });
 
-  it('tests POST /api/orders', async () => {
-    const test = 'yes';
-    const response = await request(app).post("/api/orders").send({ test }).expect(200);
+  it("tests POST /api/orders", async () => {
+    const test = "yes";
+    const response = await request(app)
+      .post("/api/orders")
+      .send({ test })
+      .expect(200);
   });
 });
 
@@ -224,12 +223,14 @@ describe("Users test", () => {
 });
 
 describe("Farmers test", () => {
-  it('login', loginFarmer());
+  it("login", loginFarmer());
 
   it("tests POST /api/products", async () => {
     await spgDao.setClock("2021-11-27 08:55");
     const datetime = moment("2021-11-27 08:55");
-    if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+    if (
+      !(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))
+    ) {
       await server
         .post("/api/products")
         .send({
@@ -237,13 +238,12 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs"
+          filter: "Dairy and Eggs",
         })
         .expect(500);
 
-      console.log("Insertion of product not permitted")
-    }
-    else {
+      console.log("Insertion of product not permitted");
+    } else {
       await server
         .post("/api/products")
         .send({
@@ -251,15 +251,12 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs"
+          filter: "Dairy and Eggs",
         })
         .expect(200);
 
-
       const maxId = await spgDao.getMaxProdId();
-      await server
-        .delete(`/api/products/${maxId}`)
-        .expect(200);
+      await server.delete(`/api/products/${maxId}`).expect(200);
     }
   });
 
@@ -267,7 +264,9 @@ describe("Farmers test", () => {
     const clock = await spgDao.getClock();
     await spgDao.setClock("2021-11-27 08:55");
     const datetime = moment("2021-11-27 08:55");
-    if (!(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))) {
+    if (
+      !(datetime.day() === 5 || (datetime.day() === 6 && datetime.hour() < 9))
+    ) {
       await server
         .post("/api/products")
         .send({
@@ -275,13 +274,12 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs"
+          filter: "Dairy and Eggs",
         })
         .expect(500);
 
-      console.log("Insertion of product not permitted")
-    }
-    else {
+      console.log("Insertion of product not permitted");
+    } else {
       await server
         .post("/api/products")
         .send({
@@ -289,12 +287,11 @@ describe("Farmers test", () => {
           quantity: 7,
           unit: "l",
           price: 1.5,
-          filter: "Dairy and Eggs"
+          filter: "Dairy and Eggs",
         })
         .expect(200);
 
       const maxId = await spgDao.getMaxProdId();
-
 
       await server
         .put(`/api/products/${maxId}`)
@@ -305,11 +302,11 @@ describe("Farmers test", () => {
             quantity: 7,
             unit: "l",
             price: 1.5,
-            filter: "Dairy and Eggs"
+            filter: "Dairy and Eggs",
           },
           action: {
-            update: true
-          }
+            update: true,
+          },
         })
         .expect(200);
 
@@ -319,24 +316,21 @@ describe("Farmers test", () => {
         .put(`/api/products/${maxId}`)
         .send({
           product: {
-            id: maxId
+            id: maxId,
           },
           action: {
-            confirm: true
-          }
+            confirm: true,
+          },
         })
         .expect(200);
 
       await spgDao.setClock(clock.serverTime);
 
-      await server
-        .delete(`/api/products/${maxId}`)
-        .expect(200);
+      await server.delete(`/api/products/${maxId}`).expect(200);
     }
   });
 
-
-  it('logout', logoutUser());
+  it("logout", logoutUser());
 });
 
 describe("Session test", () => {
@@ -353,28 +347,35 @@ describe("Session test", () => {
   });
 });
 
-describe('Next week test', () => {
-  it('tests get /api/nextProducts without performing the login', async () => {
-    const deleteRes = await request(app).delete("/api/sessions/current").expect(200);
+describe("Next week test", () => {
+  it("tests get /api/nextProducts without performing the login", async () => {
+    const deleteRes = await request(app)
+      .delete("/api/sessions/current")
+      .expect(200);
     const res = await request(app).get("/api/nextProducts").expect(401);
   });
 });
 
-describe('Next week test not on sunday', () => {
+describe("Next week test not on sunday", () => {
+  it("login", loginClient());
 
-  it('login', loginClient());
-
-  it('tests get /api/nextProducts after the login as a customer not on sunday', async () => {
+  it("tests get /api/nextProducts after the login as a customer not on sunday", async () => {
     var today = dayjs("2021-11-27 8:55");
     if (today.day() == 0) {
-      today = today.add(1, 'day');
+      today = today.add(1, "day");
     }
     // set the clock
-    const res_clock = await request(app).put("/api/clock").send({ serverTime: today.format('YYYY-MM-DD hh:mm') }).expect(200);
+    const res_clock = await request(app)
+      .put("/api/clock")
+      .send({ serverTime: today.format("YYYY-MM-DD hh:mm") })
+      .expect(200);
     // login
-    const res_login = await request(app).post("/api/sessions").send({ username: "admin@admin.admin", password: "admin" }).expect(200);
-    console.log(res_login.body)
-    console.log("LOGIN----------------" + res_login.body.id)
+    const res_login = await request(app)
+      .post("/api/sessions")
+      .send({ username: "admin@admin.admin", password: "admin" })
+      .expect(200);
+    console.log(res_login.body);
+    console.log("LOGIN----------------" + res_login.body.id);
     const res = await server.get("/api/nextProducts").expect(200);
 
     res.body.forEach((product) => {
@@ -386,45 +387,54 @@ describe('Next week test not on sunday', () => {
         farmer: expect.any(Number),
         price: expect.any(Number),
         availability: expect.any(String),
-        filter: expect.any(String)
+        filter: expect.any(String),
       });
     });
-    const logout = await request(app).delete("/api/sessions/current").expect(200);
+    const logout = await request(app)
+      .delete("/api/sessions/current")
+      .expect(200);
   });
 });
 
+describe("Next week test on sunday", () => {
+  it("login", loginClient());
 
-describe('Next week test on sunday', () => {
-
-  it('login', loginClient());
-
-  it('tests get /api/nextProducts after the login as a customer on sunday', async () => {
+  it("tests get /api/nextProducts after the login as a customer on sunday", async () => {
     // compute the day of the sunday of the week
     const today = dayjs();
     let difference_from_sunday = 0;
     if (today.day() != 0) {
       difference_from_sunday = 7 - today.day() - 1;
     }
-    const next_week = today.add(difference_from_sunday, 'day');
+    const next_week = today.add(difference_from_sunday, "day");
     // set the clock
-    const res_clock = await request(app).put("/api/clock").send({ serverTime: next_week.format('YYYY-MM-DD hh:mm') }).expect(200);
+    const res_clock = await request(app)
+      .put("/api/clock")
+      .send({ serverTime: next_week.format("YYYY-MM-DD hh:mm") })
+      .expect(200);
 
     await server.get("/api/nextProducts").expect(200);
 
-    const logout = await request(app).delete("/api/sessions/current").expect(200);
+    const logout = await request(app)
+      .delete("/api/sessions/current")
+      .expect(200);
   });
 
-  it('tests fet /api/nextProducts in the current week', async () => {
-    await server.get("/api/nextProducts").query({ week: "current" }).expect(200);
-    const logout = await request(app).delete("/api/sessions/current").expect(200);
-  })
+  it("tests fet /api/nextProducts in the current week", async () => {
+    await server
+      .get("/api/nextProducts")
+      .query({ week: "current" })
+      .expect(200);
+    const logout = await request(app)
+      .delete("/api/sessions/current")
+      .expect(200);
+  });
 });
 
-describe('Next week test farmer', () => {
+describe("Next week test farmer", () => {
+  it("login", loginFarmer());
 
-  it('login', loginFarmer());
-
-  it('tests get /api/nextProducts after the login as a farmer', async () => {
+  it("tests get /api/nextProducts after the login as a farmer", async () => {
     const res = await server.get("/api/nextProducts").query({ role: "farmer" });
     res.body.forEach((product) => {
       expect(product).toMatchSnapshot({
@@ -444,10 +454,15 @@ describe('Next week test farmer', () => {
   });
 });
 
-describe('login test', () => {
-  it('tests post /api/session', async () => {
-    const response = await request(app).post("/api/sessions").send({ username: "admin@admin.admin", password: "admin" }).expect(200);
-    const deleteRes = await request(app).delete("/api/sessions/current").expect(200);
+describe("login test", () => {
+  it("tests post /api/session", async () => {
+    const response = await request(app)
+      .post("/api/sessions")
+      .send({ username: "admin@admin.admin", password: "admin" })
+      .expect(200);
+    const deleteRes = await request(app)
+      .delete("/api/sessions/current")
+      .expect(200);
   });
   it("tests post /api/session error", async () => {
     const response = await request(app)
@@ -476,54 +491,71 @@ describe("update basket test", () => {
   });
 });
 
+describe("modify order test", () => {
+  it("tests PUT /api/orders/modify/:id", async () => {
+    await request(app)
+      .put("/api/orders/modify/1")
+      .send([{
+        id: 3,
+        quantity: 1,
+        unit: "l",
+        price: 1.2,
+        farmer: 7,
+        status: 0,
+        name: "Milk",
+      }])
+      .expect(200);
+  });
+});
+
 describe("get wallet test", () => {
   it("tests GET /api/wallet/:id", async () => {
     const response = await request(app).get("/api/wallet/2");
     expect(200);
   });
-
-
 });
 
-describe('Delivery tests', () => {
-
-  it('login', loginWManager());
+describe("Delivery tests", () => {
+  it("login", loginWManager());
 
   afterEach(() => {
     return request(app).delete("/api/sessions/current").expect(200);
   });
 
-  it('tests get /api/deliverableProducts after the login as a wmanager', async () => {
+  it("tests get /api/deliverableProducts after the login as a wmanager", async () => {
     const res = await server.get("/api/deliverableProducts");
-    if (res.boby) res.body.forEach((product) => {
-      expect(product).toMatchSnapshot({
-        farmer: expect.any(Object),
+    if (res.boby)
+      res.body.forEach((product) => {
+        expect(product).toMatchSnapshot({
+          farmer: expect.any(Object),
+        });
       });
-    });
   });
 
-  it('tests get /api/deliveries after the login as a wmanager', async () => {
+  it("tests get /api/deliveries after the login as a wmanager", async () => {
     const res = await server.get("/api/deliveries");
-    if (res.body) res.body.forEach((delivery) => {
-      expect(delivery).toMatchSnapshot({
-        id: expect.any(Number),
-        product: expect.any(Object),
-        farmer: expect.any(Object),
-        quantity: expect.any(Number),
-        orderId: expect.any(Number),
+    if (res.body)
+      res.body.forEach((delivery) => {
+        expect(delivery).toMatchSnapshot({
+          id: expect.any(Number),
+          product: expect.any(Object),
+          farmer: expect.any(Object),
+          quantity: expect.any(Number),
+          orderId: expect.any(Number),
+        });
       });
-    });
   });
 
-  it('tests post /api/deliveries after the login as a wmanager', async () => {
+  it("tests post /api/deliveries after the login as a wmanager", async () => {
     const clock = await spgDao.getClock();
-    console.log(clock)
+    console.log(clock);
     await spgDao.setClock("2021-11-23 09:55");
 
     const res = await server.get("/api/deliverableProducts");
     const productToDeliver = res.body[Object.keys(res.body)[0]][0];
-    console.log(productToDeliver)
-    const delivery = await server.post("/api/deliveries")
+    console.log(productToDeliver);
+    const delivery = await server
+      .post("/api/deliveries")
       .send(productToDeliver)
       .expect(200);
 
@@ -535,13 +567,16 @@ describe('Delivery tests', () => {
       }
     });
     order[0].products = JSON.stringify(order[0].products);
-    const result = await spgDao.confirmProductsOrder(productToDeliver.orderId, order[0]);
+    const result = await spgDao.confirmProductsOrder(
+      productToDeliver.orderId,
+      order[0]
+    );
 
     const deliveries = await server.get("/api/deliveries");
     let max = 1;
-    deliveries.body.forEach(d => {
+    deliveries.body.forEach((d) => {
       if (d.id > max) max = d.id;
-    })
+    });
     await spgDao.deleteDeliveries(max);
 
     await spgDao.setClock(clock.serverTime);
@@ -549,11 +584,11 @@ describe('Delivery tests', () => {
 });
 
 describe("get orders by status", () => {
-  it('login', loginWManager());
+  it("login", loginWManager());
   it("tests GET /api/orderswithstatus/:status", async () => {
     const res = await server.get("/api/orderswithstatus/available").expect(200);
-  })
-})
+  });
+});
 /*
  describe("confirm order test", () => {
   it('login', loginFarmer());

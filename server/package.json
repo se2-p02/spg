@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./server.js",
-    "test": "jest -u --coverage",
+    "test": "jest",
+    "test:cov": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
