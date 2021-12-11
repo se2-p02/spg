@@ -5,7 +5,7 @@ import './MyNavBar.css';
 import ModalWindow from "./ModalWindow";
 
 function MyClientPage(props) {
-    const [goBack, setGoBack] = useState(false);
+    const [goBack, setGoBack] = useState("");
 
 
     if (goBack === "profile") {

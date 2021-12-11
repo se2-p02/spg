@@ -207,7 +207,6 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                orderId={orderId}
               ></MyNavBar>
               <MyFarmer clock={clock} setClock={setClock} user={user} />
             </>
