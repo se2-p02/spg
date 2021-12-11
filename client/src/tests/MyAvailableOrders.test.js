@@ -4,7 +4,7 @@ import React from 'react'
 
 
 describe('Test MyAvailableOrders', () => {
-  test('renders the farmer starting page', () => {
+  test('renders the page with the list of available orders', () => {
     render(<MyAvailableOrders />);
 
 
