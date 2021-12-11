@@ -425,7 +425,6 @@ app.put("/api/orders/:orderId/confirmProducts/", async (req, res) => {
 
 
   try {
-    console.log("11111")
     const result = await spgDao.confirmProductsOrder(orderId, orderInfo)
     if (result.err) res.status(404).json(result);
     else res.json(true);
@@ -523,14 +522,12 @@ app.get("/api/deliverableProducts", async (req, res) => {
     const orders = await spgDao.getOrders();
     const products = {};
     const farmers = [];
-    console.log(orders)
     if (orders.error) {
       res.status(404).json(orders);
     } else {
       const promProd = await Promise.all(orders.map(async (o) => {
         await Promise.all(o.products.map(async (p) => {
           //return if product is not in state 2 = confirmed preparation
-          console.log(p)
           if (parseInt(p.status) !== 2) return;
           if (!farmers.includes(p.farmer)) {
             farmers.push(p.farmer);
