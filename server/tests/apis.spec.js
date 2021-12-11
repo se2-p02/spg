@@ -591,15 +591,16 @@ describe("get orders by status", () => {
     const res = await server.get("/api/orderswithstatus/available").expect(200);
   });
 });
-/*
+
  describe("confirm order test", () => {
-  it('login', loginFarmer());
+   jest.setTimeout(10000);
+  it('login', loginWManager());
   it("tests POST /api/confirmOrderForPickup", async () => {
     // 1. create a product
     // 1.a. set the clock
-    await spgDao.setClock("2021-11-27 08:55");
+    //await spgDao.setClock("2021-11-27 08:55");
     // 1.b. create the product
-    await server
+    /*await server
       .post("/api/products")
       .send({
         name: "MilkTest",
@@ -612,12 +613,12 @@ describe("get orders by status", () => {
 
     // 1.c. take the id to cancel the product
     const maxId = await spgDao.getMaxProdId();
-
+    */
 
     // 2. create a fake order
     const order = await request(app).post("/api/orders").send({ 
       products: [{
-        id: maxId,
+        id: -5,
         name: "MilkTest",
         quantity: 7,
         unit: "l",
@@ -629,20 +630,35 @@ describe("get orders by status", () => {
       user: 2,
       paid: 0
     }).expect(200);
-    await request(app).delete("/api/sessions/current").expect(200);
-    loginWManager()
-    // 3. there are no products, the order can be set as available
-    const response = await request(app).post("/api/confirmOrderForPickup").send(order.body).expect(200);
+    //await request(app).delete("/api/sessions/current").expect(200);
+    //loginWManager()
+    // 3. the order can be set as available
+    const maxId = await spgDao.getMaxOrderId();
+    const response = await request(app).post("/api/confirmOrderForPickup").send({ 
+      id: maxId,
+      products: [{
+        id: -5,
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      }],
+      amount: 2,
+      address: "undefined",
+      user: 2,
+      paid: 0
+    }).expect(200);
 
     // 4. rollback
     // order
-    const delete_order = await request(app).delete("/api/order/"+order.body.id).expect(200)
+    const delete_order = await request(app).delete("/api/order/"+maxId).expect(200)
     // product
-    await server
+    /*await server
       .delete(`/api/products/${maxId}`)
       .expect(200);
-    
+    */
     await request(app).delete("/api/sessions/current").expect(200);
   });
 
-}) */
+})

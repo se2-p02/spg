@@ -613,21 +613,22 @@ app.post("/api/deliveries", async (req, res) => {
 app.post("/api/confirmOrderForPickup", async (req, res) => {
   try {
     const order = req.body;
-    const products = JSON.parse(order.products)
+    const products = JSON.parse(JSON.stringify(order.products))
+    console.log(products)
     var result;
     products.forEach(async(p) => {
-      result = await spgDao.subtractQuantities(p.quantity, p.id);
-      if (result.error) {
-        res.status(500).json(result);
-      }
-
+        result = await spgDao.subtractQuantities(p.quantity, p.id);
+        if (result.error) {
+          res.status(500).json(result);
+        }
     })
     result = await spgDao.setOrderStatus("available", order.id);
     if (result.error) {
       res.status(500).json(result);
     }
-    res.status(200)
-
+    else {
+      res.status(200).json(result)
+    }
   }
   catch (error) {
     console.log(error);
