@@ -65,6 +65,7 @@ function MyMyProducts(props) {
     }
 
     const handleConfirm = async (id) => {
+
         API.updateProduct({ id: id }, { confirm: true }).then((r) => {
             if (r.error === undefined) {
                 setReqUpdate(true);
@@ -126,9 +127,9 @@ function MyMyProducts(props) {
                                 );
                             })
                         }
-                        <Row className=" mt-2">
-                            <Col>
-                                <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                        <Row className=" mt-2" data-testid="ciao2">
+                            <Col data-testid="ciao">
+                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
                             </Col>
                             <Col>
                                 {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
@@ -229,6 +230,7 @@ function MyModal(props) {
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
+            data-testid = "product_modal"
         >
             <Modal.Header>
                 {props.modal === 'modify' &&

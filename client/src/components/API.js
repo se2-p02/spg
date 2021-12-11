@@ -1,7 +1,7 @@
 const URL = "http://localhost:3000"
 
 async function confirmOrder(order){
-    console.log(order)
+
     let myURL = "/api/orders/"+order.id+"/confirmProducts/"
     const response = await fetch(myURL,
         {
@@ -59,7 +59,6 @@ async function sendOrder(order) {
             },
             body: JSON.stringify(order),
         });
-    console.log(response)
     if (response.ok) {
         return response.json();
     } else return { 'error': 'Failed to store data on server' }

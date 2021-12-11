@@ -22,9 +22,11 @@ exports.confirmProductsOrder = (orderId, orderInfo) => {
         const sql = 'UPDATE orders SET products=? WHERE id = ?';
         db.all(sql, [orderInfo.products, orderId], (err, rows) => {
             if (err) {
+                console.log(err)
                 reject(err);
                 return;
             }
+            console.log("rows")
             resolve(true);
         });
 
@@ -83,7 +85,6 @@ exports.getClientsSummary = () => {
                 return;
             }
             const tasks = rows.map((t) => ({ id: t.id, name: t.name, surname: t.surname, wallet: t.wallet, email: t.email }));
-            console.log("jdi")
             resolve(tasks);
         });
     });
@@ -158,7 +159,6 @@ exports.getNextNumber = async () => {
 exports.orderPrep = async (product) => {
     try {
         return new Promise((resolve, reject) => {
-            console.log(product);
             const sql = 'UPDATE products SET quantity = quantity - ? WHERE name = ? ';
             db.run(sql, [product.quantity, product.name], function (err) {
                 if (err) {
@@ -566,6 +566,7 @@ exports.getFarmer = (id) => {
                 return;
             }
             const farmer = rows.map((c) => ({ id: c.id, name: c.name }));
+            console.log(farmer[0])
             resolve(farmer[0]);
         });
     });

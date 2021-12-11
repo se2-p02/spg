@@ -254,20 +254,21 @@ function MyOrders(props) {
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
-                    {c.conf ? (
+                    {c.conf || c.paid ? (
                       <Button disabled variant="light">
                         Modify
                       </Button>
                     ) : (
                       <>
-                      
-                        <Button
-                          onClick={() => {
-                            modifyHandler(c.id, c.products);
-                          }}
-                        >
-                          Modify
-                        </Button>
+                        <Link to="/client/products">
+                          <Button
+                            onClick={() => {
+                              modifyHandler(c.id, c.products);
+                            }}
+                          >
+                            Modify
+                          </Button>
+                        </Link>
                       </>
                     )}
                   </ListGroup.Item>
