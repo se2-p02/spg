@@ -241,7 +241,7 @@ function MyModal(props) {
                                     type="name"
                                     onChange={(ev) => {
                                         setFarmer(ev.target.value);
-                                        setProduct(products[farmer][0]);
+                                        if (products != null) setProduct(products[farmer][0]);
                                     }}
                                     value={farmer ? farmer : ""}
                                 >
