@@ -157,7 +157,7 @@ exports.getNextNumber = async () => {
 
 exports.orderPrep = async (product) => {
     try {
-        return new Promise((resolve, reject) => {
+        return await new Promise((resolve, reject) => {
             const sql = 'UPDATE products SET quantity = quantity - ? WHERE name = ? ';
             db.run(sql, [product.quantity, product.name], function (err) {
                 if (err) {
