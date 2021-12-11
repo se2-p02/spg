@@ -5,7 +5,7 @@ import './MyNavBar.css';
 
 
 function MyFarmer(props) {
-    const [goBack, setGoBack] = useState(false);
+    const [goBack, setGoBack] = useState("");
 
     if (goBack === "myOrders") {
         return (<Navigate to="/farmer/orders"></Navigate>)
