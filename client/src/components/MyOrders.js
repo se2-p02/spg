@@ -156,7 +156,6 @@ function MyOrders(props) {
         {orders && (
           <>
             {orders.map((c) => {
-              let j = [];
               let b = "primary";
               //console.log(c.paid)
               if (c.paid === 0) {

@@ -113,7 +113,7 @@ function MyMyProducts(props) {
                                         </ListGroup.Item>
                                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
                                             {p.confirmed === 0 && (
-                                                (props.clock && ((props.clock.day() === 1 && props.clock.hour() < 9))) ?
+                                                (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
                                                     <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
                                                     :
                                                     <Button variant="light" ><CheckSquare /></Button>

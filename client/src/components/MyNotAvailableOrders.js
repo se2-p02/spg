@@ -50,8 +50,8 @@ function MyNotAvailableOrders(props) {
     var flag = true;
     products.forEach(element => {
       flag &= availableProducts.map(it => it.product.id).includes(element.id); //1. the element must be available
-      if (flag == true) {
-        flag &= !(availableProducts.filter(elem => elem.product.id == element.id)[0].quantity < element.quantity)   //2. the quantity must be enough
+      if (flag === true) {
+        flag &= !(availableProducts.filter(elem => elem.product.id === element.id)[0].quantity < element.quantity)   //2. the quantity must be enough
       } 
     });
     return flag;
