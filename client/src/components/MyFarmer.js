@@ -7,10 +7,10 @@ import './MyNavBar.css';
 function MyFarmer(props) {
     const [goBack, setGoBack] = useState(false);
 
-    if (goBack === "myOrders") {
+    if (goBack == "myOrders") {
         return (<Navigate to="/farmer/orders"></Navigate>)
     }
-    else if (goBack === "myProducts") {
+    else if (goBack == "myProducts") {
         return (<Navigate to="/farmer/myProducts"></Navigate>)
     }
 
