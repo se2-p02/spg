@@ -566,6 +566,7 @@ exports.getFarmer = (id) => {
                 return;
             }
             const farmer = rows.map((c) => ({ id: c.id, name: c.name }));
+            console.log(farmer[0])
             resolve(farmer[0]);
         });
     });

@@ -551,9 +551,11 @@ describe("Delivery tests", () => {
     console.log(clock);
     await spgDao.setClock("2021-11-23 09:55");
 
+
+
     const res = await server.get("/api/deliverableProducts");
-    const productToDeliver = res.body[Object.keys(res.body)[0]][0];
-    console.log(productToDeliver);
+
+    /*const productToDeliver = res.body[Object.keys(res.body)[0]][0];
     const delivery = await server
       .post("/api/deliveries")
       .send(productToDeliver)
@@ -579,7 +581,7 @@ describe("Delivery tests", () => {
     });
     await spgDao.deleteDeliveries(max);
 
-    await spgDao.setClock(clock.serverTime);
+    await spgDao.setClock(clock.serverTime);*/
   });
 });
 
