@@ -174,20 +174,16 @@ exports.orderPrep = async (product) => {
 
 // insert a new order
 exports.addOrder = async (order) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0, order.paid], function (err) {
-                if (err) {
-                    reject(500);
-                    return;
-                }
-                resolve(true);
-            });
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO orders (id, userID, products, address, date, time, amount, confPreparation, fulfilled, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        db.run(sql, [order.id, order.user, order.products, order.address, order.date, order.time, order.amount, 0, 0, order.paid], function (err) {
+            if (err) {
+                reject(500);
+                return;
+            }
+            resolve(true);
         });
-    } catch (err) {
-        return;
-    }
+    }).catch(err => { return (err) });
 };
 
 //modify the order
@@ -206,109 +202,98 @@ exports.modifyOrder = (items, id) => {
 
 // insert a new product
 exports.addProduct = async (product, farmer, time) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
-            let difference_from_sunday = 0;
-            if (today.day() != 0) {
-                difference_from_sunday = 7 - today.day();
-            }
-            const next_week = today.add(difference_from_sunday, 'day').format('YYYY-MM-DD');
-            const sql = `INSERT INTO products (id, name, quantity, unit, farmer, confirmed, delivered, price, availability, filter)
+
+    return new Promise((resolve, reject) => {
+        const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
+        let difference_from_sunday = 0;
+        if (today.day() != 0) {
+            difference_from_sunday = 7 - today.day();
+        }
+        const next_week = today.add(difference_from_sunday, 'day').format('YYYY-MM-DD');
+        const sql = `INSERT INTO products (id, name, quantity, unit, farmer, confirmed, delivered, price, availability, filter)
             SELECT MAX(id) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ? 
             FROM products`;
-            db.run(sql, [product.name, product.quantity, product.unit, farmer.id, 0, 0, product.price, next_week, product.filter], function (err) {
-                if (err) {
-                    reject(500);
-                    return;
-                }
-                resolve(true);
-            });
+        db.run(sql, [product.name, product.quantity, product.unit, farmer.id, 0, 0, product.price, next_week, product.filter], function (err) {
+            if (err) {
+                reject(500);
+                return;
+            }
+            resolve(true);
         });
-    } catch (err) {
-        return;
-    }
+    }).catch(err => { return (err) });
+
 };
 
 // update a product
 exports.updateProduct = async (product, id, action) => {
-    try {
-        return new Promise((resolve, reject) => {
-            let sql;
-            let arrayParam = [];
-            if (action.update === true) {
-                sql = `UPDATE products SET name = ?, quantity = ?, unit = ?, price = ?, filter = ? WHERE id = ?`;
-                arrayParam = [...[product.name, product.quantity, product.unit, product.price, product.filter]];
+    return new Promise((resolve, reject) => {
+        let sql;
+        let arrayParam = [];
+        if (action.update === true) {
+            sql = `UPDATE products SET name = ?, quantity = ?, unit = ?, price = ?, filter = ? WHERE id = ?`;
+            arrayParam = [...[product.name, product.quantity, product.unit, product.price, product.filter]];
+        }
+        if (action.confirm === true) {
+            sql = `UPDATE products SET confirmed = 1 WHERE id = ?`;
+        }
+        arrayParam.push(id);
+        db.run(sql, arrayParam, function (err) {
+            if (err) {
+                reject({ err: "error in query" });
+                return;
             }
-            if (action.confirm === true) {
-                sql = `UPDATE products SET confirmed = 1 WHERE id = ?`;
-            }
-            arrayParam.push(id);
-            db.run(sql, arrayParam, function (err) {
-                if (err) {
-                    reject({ err: "error in query" });
-                    return;
-                }
-                resolve(true);
-            });
+            resolve(true);
         });
-    } catch (err) {
-        return { err: "error in query" };
-    }
+    }).catch(() => { return { err: "error in query" }; });
+
 };
 
 // delete a product
 exports.deleteProduct = async (id) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = `DELETE FROM products WHERE id = ?`;
-            db.run(sql, id, function (err) {
-                if (err) {
-                    reject({ err: "error in query" });
-                    return;
-                }
-                resolve(true);
-            });
+
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM products WHERE id = ?`;
+        db.run(sql, id, function (err) {
+            if (err) {
+                reject({ err: "error in query" });
+                return;
+            }
+            resolve(true);
         });
-    } catch (err) {
-        return { err: "error in query" };
-    }
-};
+    }).catch((err) => { return { err: "error in query" }; });
+}
+
+
 
 // delete test order
 exports.deleteTestOrder = () => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'DELETE FROM orders WHERE id = -1';
-            db.run(sql, function (err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(true);
-                }
-            });
+
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM orders WHERE id = -1';
+        db.run(sql, function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(true);
+            }
         });
-    } catch (err) {
-        return;
-    }
+    }).catch((err) => { return (err) });
+
 };
 
 // delete a specific order
 exports.deleteOrder = (id) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'DELETE FROM orders WHERE id = ?';
-            db.run(sql, [id], function (err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(true);
-                }
-            });
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM orders WHERE id = ?';
+        db.run(sql, [id], function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(true);
+            }
         });
-    } catch (err) {
-        return;
-    }
+    }).catch(err => { return (err) });
+
 };
 
 // get all orders
@@ -365,20 +350,17 @@ exports.getOrdersByStatus = (status) => {
 
 
 exports.updateOrderFulfilled = async (id) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'UPDATE orders SET fulfilled=1 WHERE id = ? ';
-            db.run(sql, id, function (err) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve(true);
-            });
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE orders SET fulfilled=1 WHERE id = ? ';
+        db.run(sql, id, function (err) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
         });
-    } catch (err) {
-        return;
-    }
+    }).catch(err => { return (err) });
+
 };
 
 exports.updateOrderPaid = async (order) => {
@@ -524,20 +506,17 @@ exports.deleteDeliveries = (id) => {
 
 // insert a new delivery
 exports.createDelivery = async (delivery) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO F_deliveries (productId, farmerId, quantity, orderId) VALUES (?, ?, ?, ?)';
-            db.run(sql, [delivery.id, delivery.farmer, delivery.quantity, delivery.orderId], function (err) {
-                if (err) {
-                    reject(500);
-                    return;
-                }
-                resolve(true);
-            });
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO F_deliveries (productId, farmerId, quantity, orderId) VALUES (?, ?, ?, ?)';
+        db.run(sql, [delivery.id, delivery.farmer, delivery.quantity, delivery.orderId], function (err) {
+            if (err) {
+                reject(500);
+                return;
+            }
+            resolve(true);
         });
-    } catch (err) {
-        return;
-    }
+    }).catch(err => { return (err) });
+
 };
 
 // get single product
