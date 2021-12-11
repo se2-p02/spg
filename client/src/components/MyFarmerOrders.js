@@ -181,9 +181,9 @@ function MyFarmerOrders(props) {
                                             >
                                                 {
                                                     butDisable ?
-                                                        <Button variant='success' disabled ><CheckSquare /></Button>
+                                                        <Button data-testid={"buttonGreen"+i} variant='success' disabled ><CheckSquare /></Button>
                                                         :
-                                                        <Button variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
+                                                        <Button data-testid={"buttonGreen"+i} variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
                                                 }
                                             </OverlayTrigger>}
                                         {mydisabled[i] === 2 &&
@@ -193,9 +193,9 @@ function MyFarmerOrders(props) {
                                             >
                                                 {
                                                     butDisable ?
-                                                        <Button variant='warning' disabled ><Handbag /></Button>
+                                                        <Button data-testid={"buttonYellow"+i} variant='warning' disabled ><Handbag /></Button>
                                                         :
-                                                        <Button variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
+                                                        <Button data-testid={"buttonYellow"+i} variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
                                                 }
                                             </OverlayTrigger>}
                                         {mydisabled[i] === 3 && <h5>Confirmed</h5>}

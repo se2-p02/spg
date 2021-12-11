@@ -6,9 +6,6 @@ import MyMyProducts from "../components/MyMyProducts";
 import moment from 'moment'
 
 describe('Test MyMyproducts', () => {
-    beforeAll(async () => {
-    });
-
     it("tests error messages", async () => {
         render(<MyMyProducts
             clock={moment('2021-11-27 8:55')}
@@ -29,6 +26,4 @@ describe('Test MyMyproducts', () => {
         expect(button.innerHTML).toBe("Submit");
     });
 
-    afterAll(() => {
-    });
 });
