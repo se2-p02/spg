@@ -389,3 +389,62 @@
   ```
   - Response: `200 OK` (success) or `500 Internal server error`.
   - Response body: true or false.
+  
+- POST `/api/confirmOrderForPickup`
+  - Request parameter: None.
+  - Request body: An object representing the order (Content-Type: `application/json`).
+  ``` 
+  { 
+      id: 5,
+      products: [{
+        id: 1,
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      }],
+      date: "2021-12-12",
+      confPreparation: 0,
+      fullfilled: false,
+      status: "available",
+      time: "12:12",
+      amount: 2,
+      address: "Via X",
+      userID: 2,
+      paid: 0
+    }
+  ```
+  - Response: `200 OK` (success) or `500 Internal server error`.
+  - Response body: true if the operation is successful.
+  
+- GET `/api/orderswithstatus/:status`
+  - Request parameter: status.
+  - Request body: None.
+  - Response: `200 OK` (success) or `404 Not found`.
+  - Response body: the list of orders with the passed status.
+  ```
+  [
+    { 
+      id: 5,
+      products: [{
+        id: 1,
+        name: "MilkTest",
+        quantity: 7,
+        unit: "l",
+        price: 1.5,
+        filter: "Dairy and Eggs"
+      }],
+      date: "2021-12-12",
+      confPreparation: 0,
+      fullfilled: false,
+      status: "available",    //  /api/orderswithstatus/available
+      time: "12:12",
+      amount: 2,
+      address: "Via X",
+      userID: 2,
+      paid: 0
+    }
+    ...
+  ]
+  ```
