@@ -34,10 +34,20 @@ describe('Test MyFarmerOrders', () => {
             elem = screen.getByText("Back")
             expect(elem).toBeInTheDocument()
 
-            
-
-
-        
         });
+
+        it("tests components", async () => {
+            renderWithRouter(<MyFarmerOrders
+                clock={moment('2021-11-27 7:55')}
+                setClock={jest.fn()}
+                user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
+            
+            let elem = screen.getByText("Back")
+            fireEvent.click(elem)
+            expect(window.location.pathname).toMatch('/farmer')
+
+    
+            });
+    
 
 });
