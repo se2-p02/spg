@@ -57,13 +57,6 @@ function MyAvailableOrders(props) {
           >
             <b>Products</b>
           </ListGroup.Item>
-          {/*<ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>Address</b>
-          </ListGroup.Item>
-          */} {/* if we have just one store we don't need this */}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -115,12 +108,6 @@ function MyAvailableOrders(props) {
                   >
                     <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
-                  {/*<ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {JSON.parse(c.address).address}
-                  </ListGroup.Item>*/}
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
