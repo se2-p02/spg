@@ -16,6 +16,7 @@ import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
 import MyNotAvailableOrders from "./MyNotAvailableOrders";
+import MyAvailableOrders from "./MyAvailableOrders";
 import MyWManager from "./MyWManager";
 import MyDeliveries from "./MyDeliveries";
 
@@ -555,9 +556,8 @@ function MyContainer(props) {
             </>
           }
         />
-      { /* TEST */}
       <Route
-          path="/availableProd"
+          path="/wmanager/availableOrders"
           element={
             <>
               <MyNavBar
@@ -572,8 +572,47 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              {/*<MyAvailableOrders clock={clock} setClock={setClock} user={user} />*/}
+              <MyAvailableOrders clock={clock} setClock={setClock} role="VM" />
+            </>
+          }
+        />
+      <Route
+          path="/wmanager/notAvailableOrders"
+          element={
+            <>
+              <MyNavBar
+              user={user}
+              setModify={setModify}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setClock={setClock}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+                setUser={setUser}
+              ></MyNavBar>
               <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
+            </>
+          }
+        />
+        <Route
+          path="/client/availableOrders"
+          element={
+            <>
+              <MyNavBar
+              user={user}
+              setModify={setModify}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setClock={setClock}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+                setUser={setUser}
+              ></MyNavBar>
+              <MyAvailableOrders clock={clock} setClock={setClock} role="client" />
             </>
           }
         />

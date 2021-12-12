@@ -17,6 +17,9 @@ function MyClientPage(props) {
     else if (goBack === "orders") {
         return (<Navigate to="/client/orders"></Navigate>)
     }
+    else if (goBack === "available") {
+        return (<Navigate to="/client/availableOrders"></Navigate>)
+    }
     return (
         <>
         {props.showModal === true ? (
@@ -44,6 +47,11 @@ function MyClientPage(props) {
                 <Row className="justify-content-center m-0 p-0 w-100 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
                         <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("orders") }}><h3>My Orders</h3></Button>
+                    </Col>
+                </Row>
+                <Row className="justify-content-center m-0 p-0 w-100 mb-5">
+                    <Col className=" m-0 p-0" sm={6}>
+                        <Button size="lg" data-testid="available" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("available") }}><h3>Orders available in the shop</h3></Button>
                     </Col>
                 </Row>
             </Container>

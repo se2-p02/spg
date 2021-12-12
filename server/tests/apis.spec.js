@@ -593,7 +593,6 @@ describe("get orders by status", () => {
 });
 
  describe("confirm order test", () => {
-   jest.setTimeout(10000);
   it('login', loginWManager());
   it("tests POST /api/confirmOrderForPickup", async () => {
     const order = await request(app).post("/api/orders").send({ 

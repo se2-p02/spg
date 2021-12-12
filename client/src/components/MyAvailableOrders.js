@@ -45,12 +45,13 @@ function MyAvailableOrders(props) {
           >
             <b>Order ID</b>
           </ListGroup.Item>
+          {!(props.role === "client") &&
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
             <b>User ID</b>
-          </ListGroup.Item>
+          </ListGroup.Item>}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -78,7 +79,7 @@ function MyAvailableOrders(props) {
         </ListGroup>
         {orders && (
           <>
-            {orders.map((c) => {
+            {orders.filter((elem) => {if (props.role === "client") {return elem.userID === props.user.id} else return true}).map((c) => {
               let j = JSON.parse(c.products)
               let b = "primary"
 
@@ -96,12 +97,14 @@ function MyAvailableOrders(props) {
                   >
                     {c.id}
                   </ListGroup.Item>
+                  {!(props.role === "client") &&
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
                   >
                     {c.userID}
                   </ListGroup.Item>
+                  }
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
