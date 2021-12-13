@@ -17,10 +17,10 @@ describe('Test MyAvailableOrders', () => {
     expect(element).toBeInTheDocument();
     element = screen.getByText("Products");
     expect(element).toBeInTheDocument();
-    element = screen.getByText("Date");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("Time");
-    expect(element).toBeInTheDocument();
+    //element = screen.getByText("Date");
+    //expect(element).toBeInTheDocument();
+    //element = screen.getByText("Time");
+    //expect(element).toBeInTheDocument();
     element = screen.getByText("Amount");
     expect(element).toBeInTheDocument();
     element = screen.getByText("Back");
