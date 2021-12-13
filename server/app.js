@@ -520,6 +520,8 @@ app.get("/api/deliverableProducts", async (req, res) => {
     const orders = await spgDao.getOrders();
     const products = {};
     const farmers = [];
+    console.log(orders)
+    console.log("--")
     if (orders.error) {
       res.status(404).json(orders);
     } else {
