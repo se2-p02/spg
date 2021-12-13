@@ -45,7 +45,7 @@ function MyAvailableOrders(props) {
           >
             <b>Order ID</b>
           </ListGroup.Item>
-          {!(props.role === "client") &&    // the userID is not shown if we are the user
+          {props.role !== "client" &&    // the userID is not shown if we are the user
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -97,7 +97,7 @@ function MyAvailableOrders(props) {
                   >
                     {c.id}
                   </ListGroup.Item>
-                  {!(props.role === "client") &&
+                  {props.role !== "client" &&
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
