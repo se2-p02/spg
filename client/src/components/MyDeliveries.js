@@ -242,12 +242,10 @@ function MyModal(props) {
                                     type="name"
                                     onChange={(ev) => {
                                         setFarmer(ev.target.value);
-                                        try{
+                                        if(products && products!==null && products[farmer] && products[farmer][0]){
                                             setProduct(products[farmer][0]);
                                         }
-                                        catch{
-                                            setProduct(undefined)
-                                        }
+                                        
                                     }}
                                     value={farmer ? farmer : ""}
                                 >
