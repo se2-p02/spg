@@ -24,6 +24,10 @@ jobs:
         working-directory: client
       - run: npm run test:cov
         working-directory: client
+      - run: sed -i 's/\/home\/runner\/work\/spg\/spg\//\/github\/workspace\//g' lcov.info
+        working-directory: client/coverage
+      - run: sed -i 's/\/home\/runner\/work\/spg\/spg\//\/github\/workspace\//g' test-report.xml
+        working-directory: client
 
       - name: Build Coverage Backend
         uses: actions/setup-node@v2
