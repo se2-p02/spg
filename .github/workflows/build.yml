@@ -38,6 +38,10 @@ jobs:
         working-directory: server
       - run: npm run test:cov
         working-directory: server
+      - run: sed -i 's/\/home\/runner\/work\/spg\/spg\//\/github\/workspace\//g' lcov.info
+        working-directory: server/coverage
+      - run: sed -i 's/\/home\/runner\/work\/spg\/spg\//\/github\/workspace\//g' test-report.xml
+        working-directory: server
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

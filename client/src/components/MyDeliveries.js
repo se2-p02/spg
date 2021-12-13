@@ -271,7 +271,9 @@ function MyModal(props) {
                                     className="w-100 p-3 mt-2"
                                     type="name"
                                     onChange={(ev) => {
-                                        setProduct(products[farmer].filter((p) => ((p.orderId + p.name + p.farmer) === (ev.target[ev.target.selectedIndex].id)))[0]);
+                                        if(products && products!==null && products[farmer] ){
+                                            setProduct(products[farmer].filter((p) => ((p.orderId + p.name + p.farmer) === (ev.target[ev.target.selectedIndex].id)))[0]);
+                                        }
                                     }}
                                     value={product ? product.name : ""}
                                 >
