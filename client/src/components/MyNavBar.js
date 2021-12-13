@@ -265,7 +265,9 @@ function MyModal(props) {
                                     disabled={client ? client.address ? false : true : true}
                                     label="Deliver to registered address"
                                     onClick={() => {
-                                        if (client != null) setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
+                                        if (client && client!==null && client.address && client.city && client.country){
+                                            setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
+                                        }
                                         setShowAddressForm(() => false);
                                     }} /> </>}
                             {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>

@@ -20,6 +20,7 @@ function MyDeliveries(props) {
             API.loadDeliveries()
                 .then((d) => {
                     if (d.error === undefined) {
+                        
                         d.sort((a, b) => b.id - a.id);
                         setDeliveries(d);
                         setReqUpdate(false);
@@ -241,7 +242,10 @@ function MyModal(props) {
                                     type="name"
                                     onChange={(ev) => {
                                         setFarmer(ev.target.value);
-                                        if (products !== null && products !== undefined) setProduct(products[farmer][0]);
+                                        if(products && products!==null && products[farmer] && products[farmer][0]){
+                                            setProduct(products[farmer][0]);
+                                        }
+                                        
                                     }}
                                     value={farmer ? farmer : ""}
                                 >
