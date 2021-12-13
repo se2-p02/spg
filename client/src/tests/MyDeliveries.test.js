@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
 import MyDeliveries from '../components/MyDeliveries'
 import React from 'react'
+import { act } from "react-dom/test-utils"
 import renderWithRouter from './setupTestsRouter'
 import moment from 'moment'
 
@@ -32,26 +33,29 @@ describe('Test MyDeliveries', () => {
 
   it("tests go back", async () => {
     renderWithRouter(<MyDeliveries
-        showCart={false}
-        clock={moment('2021-11-27 7:55')}
-        setClock={jest.fn()}
-        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
-    
+      showCart={false}
+      clock={moment('2021-11-27 7:55')}
+      setClock={jest.fn()}
+      user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
+
     let elem = screen.getByText("Back")
     fireEvent.click(elem)
     expect(window.location.pathname).toMatch('/wmanager')
   });
 
   it("tests go back", async () => {
-    renderWithRouter(<MyDeliveries
-        showCart={false}
-        clock={moment('2021-11-23 7:55')}
-        setClock={jest.fn()}
-        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
-    
+    act(() => {
+        renderWithRouter(<MyDeliveries
+      showCart={false}
+      clock={moment('2021-11-23 7:55')}
+      setClock={jest.fn()}
+      user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
+    });
     let elem = screen.getByTestId("apbw");
     expect(elem).toBeInTheDocument();
-    fireEvent.click(elem)
+    act(() => {
+      fireEvent.click(elem)
+    });
     elem = screen.getByTestId("modal");
     expect(elem).toBeInTheDocument();
   });
