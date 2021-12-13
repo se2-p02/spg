@@ -2,7 +2,7 @@ import { rest } from 'msw'
 
 export const handlers = [
     // Handles a GET /api/deliverableProducts
-    rest.get('/api/deliverableProducts', (req, res, ctx) => {
+    rest.get('http://localhost:3000/api/deliverableProducts', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(
@@ -32,7 +32,7 @@ export const handlers = [
         )
     }),
     // Handles a GET /api/deliveries
-    rest.get('/api/deliveries', (req, res, ctx) => {
+    rest.get('http://localhost:3000/api/deliveries', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(

@@ -54,7 +54,7 @@ describe('Test MyDeliveries', () => {
     let elem = screen.getByTestId("apbw");
     expect(elem).toBeInTheDocument();
     
-    await waitFor(() => {expect(getByText(1)).toBeInTheDocument()})
+    await waitFor(() => {expect(screen.getByText(1)).toBeInTheDocument()})
     
 
     act(() => {
@@ -62,8 +62,7 @@ describe('Test MyDeliveries', () => {
     });
     elem = screen.getByTestId("modal");
     expect(elem).toBeInTheDocument();
-    //elem = screen.getByText("TerraGrossa");
-    //expect(elem).toBeInTheDocument();
+    await waitFor(() => {expect(screen.getByText("TerraGrossa")).toBeInTheDocument()})
   });
 
 })
