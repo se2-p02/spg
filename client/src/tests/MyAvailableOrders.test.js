@@ -7,11 +7,7 @@ import moment from 'moment'
 
 describe('Test MyAvailableOrders', () => {
   test('renders the page with the list of available orders', () => {
-    render(<MyAvailableOrders 
-      clock={moment('2021-11-27 9:55')}
-      setClock={jest.fn()}
-      user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }}
-      role = "WM" />);
+    render(<MyAvailableOrders/>);
 
 
     var element = screen.getByText("Orders ready to be picked up")
@@ -39,7 +35,7 @@ it("tests go back", async () => {
   renderWithRouter(<MyAvailableOrders
       clock={moment('2021-11-27 7:55')}
       setClock={jest.fn()}
-      user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }}
+      user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }}
       role = "WM" />, "/wmanager/availableOrders");
   
   let elem = screen.getByText("Back")
@@ -53,14 +49,22 @@ it("tests go back", async () => {
   renderWithRouter(<MyAvailableOrders
       clock={moment('2021-11-27 7:55')}
       setClock={jest.fn()}
-      user={{ id: 1, role: "client", username: "admin@admin.admin" }}
-      role = "client" />, "/client/notAvailableOrders");
+      user={{ id: 1, role: "client", username: "client@client.client" }}
+      role = "client" />, "/client/availableOrders");
   
   let elem = screen.getByText("Back")
   fireEvent.click(elem)
   expect(window.location.pathname).toMatch('/client')
+  });
 
-
-});
+it("tests go back", async () => {
+  renderWithRouter(<MyAvailableOrders
+    clock={moment('2021-11-27 9:55')}
+    setClock={jest.fn()}
+    user={{ id: 2, role: "client", username: "client@client.client" }}
+    role = "client"/>, "/client/availableOrders");
+  });
+   
+   
 
 });

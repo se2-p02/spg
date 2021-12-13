@@ -37,7 +37,7 @@ describe('Test MyAvailableOrders', () => {
     renderWithRouter(<MyNotAvailableOrders
         clock={moment('2021-11-27 7:55')}
         setClock={jest.fn()}
-        user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }} />, "/wmanager/notAvailableOrders");
+        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/notAvailableOrders");
     
     let elem = screen.getByText("Back")
     fireEvent.click(elem)
