@@ -8,7 +8,7 @@ import moment from 'moment'
 describe('Test MyAvailableOrders', () => {
   test('renders the page with the list of available orders', () => {
     render(<MyAvailableOrders 
-      clock={moment('2021-11-29 8:55')}
+      clock={moment('2021-11-27 9:55')}
       setClock={jest.fn()}
       user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }}
       role = "WM" />);
