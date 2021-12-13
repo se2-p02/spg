@@ -33,6 +33,22 @@ test('renders the wmanager profile', () => {
     console.log(window.location.pathname);
     expect(consoleSpy).toHaveBeenCalledWith('hello');
     */
+});
 
+test('go to ordersNotAvailable', () => {
+    renderWithRouter(<MyWManager/>, '/wmanager' )
 
+    var element = screen.getByTestId("ordersNotAvailable")
+    expect(element).toBeInTheDocument();
+    fireEvent.click(element);
+    expect(window.location.pathname).toMatch('/wmanager/notAvailableOrders')
+});
+
+test('go to availableOrders', () => {
+    renderWithRouter(<MyWManager/>, '/wmanager' )
+
+    var element = screen.getByTestId("available")
+    expect(element).toBeInTheDocument();
+    fireEvent.click(element);
+    expect(window.location.pathname).toMatch('/wmanager/availableOrders')
 });

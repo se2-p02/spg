@@ -40,8 +40,20 @@ describe('Test MyDeliveries', () => {
     let elem = screen.getByText("Back")
     fireEvent.click(elem)
     expect(window.location.pathname).toMatch('/wmanager')
+  });
 
-
+  it("tests go back", async () => {
+    renderWithRouter(<MyDeliveries
+        showCart={false}
+        clock={moment('2021-11-23 7:55')}
+        setClock={jest.fn()}
+        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
+    
+    let elem = screen.getByTestId("apbw");
+    expect(elem).toBeInTheDocument();
+    fireEvent.click(elem)
+    elem = screen.getByTestId("modal");
+    expect(elem).toBeInTheDocument();
   });
 
 })

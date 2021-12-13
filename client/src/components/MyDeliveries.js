@@ -54,7 +54,7 @@ function MyDeliveries(props) {
                         {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() === 2))) ?
                             <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setShow(true); }}>Add new delivery</Button>
                             :
-                            <Button size="lg" data-testId="apbnw" className="btn-light p-2 w-100 mt-3">Add new delivery</Button>
+                            <Button size="lg" data-testid="apbnw" className="btn-light p-2 w-100 mt-3">Add new delivery</Button>
                         }
                     </Col>
                 </Row>
@@ -223,7 +223,7 @@ function MyModal(props) {
             keyboard={false}
         >
             <Modal.Header>
-                <Modal.Title>
+                <Modal.Title data-testid="modal">
                     Add delivery
                 </Modal.Title>
             </Modal.Header>
