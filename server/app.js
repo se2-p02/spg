@@ -296,8 +296,6 @@ app.put("/api/orders/modify/:id", async (req, res) => {
   } catch {
     res.status(500).json({ error: "cannot update basket" });
   }
-
-  return;
 });
 
 

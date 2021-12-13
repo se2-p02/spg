@@ -190,7 +190,7 @@ exports.addOrder = async (order) => {
 exports.modifyOrder = (items, id) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE orders SET products=? WHERE id = ?';
-        db.run(sql, [items, id], function (err) {
+        db.run(sql, [items, id], function (err, rows) {
             if (err) {
                 reject(err);
                 return;
@@ -285,7 +285,7 @@ exports.deleteTestOrder = () => {
 exports.deleteOrder = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM orders WHERE id = ?';
-        db.run(sql, [id], function (err) {
+        db.run(sql, [id], function (err, row) {
             if (err) {
                 reject(err);
             } else {
@@ -375,9 +375,9 @@ exports.updateOrderPaid = async (order) => {
                     return;
                 }
                 const sql_1 = 'UPDATE orders SET paid=1 WHERE id=?';
-                db.run(sql_1, [order.id], function (err) {
-                    if (err) {
-                        reject(err);
+                db.run(sql_1, [order.id], function (error) {
+                    if (error) {
+                        reject(error);
                         return;
                     }
                     resolve({ info: 'Order paid.' });
