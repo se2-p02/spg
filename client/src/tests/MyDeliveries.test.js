@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import MyDeliveries from '../components/MyDeliveries'
 import React from 'react'
 import { act } from "react-dom/test-utils"
@@ -53,11 +53,17 @@ describe('Test MyDeliveries', () => {
     });
     let elem = screen.getByTestId("apbw");
     expect(elem).toBeInTheDocument();
+    
+    await waitFor(() => {expect(getByText(1)).toBeInTheDocument()})
+    
+
     act(() => {
       fireEvent.click(elem)
     });
     elem = screen.getByTestId("modal");
     expect(elem).toBeInTheDocument();
+    //elem = screen.getByText("TerraGrossa");
+    //expect(elem).toBeInTheDocument();
   });
 
 })
