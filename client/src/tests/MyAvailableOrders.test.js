@@ -7,7 +7,11 @@ import moment from 'moment'
 
 describe('Test MyAvailableOrders', () => {
   test('renders the page with the list of available orders', () => {
-    render(<MyAvailableOrders />);
+    render(<MyAvailableOrders 
+      clock={moment('2021-11-29 8:55')}
+      setClock={jest.fn()}
+      user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }}
+      role = "WM" />);
 
 
     var element = screen.getByText("Orders ready to be picked up")
