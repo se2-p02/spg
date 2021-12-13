@@ -28,8 +28,6 @@ describe('Test MyProducts', () => {
     let elem = screen.getByText("Back")
     fireEvent.click(elem)
     expect(window.location.pathname).toMatch('/wmanager')
-
-
   });
 
 })
