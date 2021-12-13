@@ -6,7 +6,7 @@ import renderWithRouter from './setupTestsRouter'
 import moment from 'moment'
 
 
-describe('Test MyAvailableOrders', () => {
+describe('Test MyDeliveries', () => {
   test('renders the deliveries page', () => {
     render(<MyDeliveries />);
 
