@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
 import MyNotAvailableOrders from '../components/MyNotAvailableOrders'
 import React from 'react'
+import renderWithRouter from './setupTestsRouter'
+import moment from 'moment'
 
 
 describe('Test MyAvailableOrders', () => {
@@ -28,6 +30,19 @@ describe('Test MyAvailableOrders', () => {
     
     element = screen.getByText("Back");
     expect(element).toBeInTheDocument();
+
+  });
+
+  it("tests go back", async () => {
+    renderWithRouter(<MyNotAvailableOrders
+        clock={moment('2021-11-27 7:55')}
+        setClock={jest.fn()}
+        user={{ id: 1, role: "wmanager", username: "admin@admin.admin" }} />, "/wmanager/notAvailableOrders");
+    
+    let elem = screen.getByText("Back")
+    fireEvent.click(elem)
+    expect(window.location.pathname).toMatch('/wmanager')
+
 
   });
 
