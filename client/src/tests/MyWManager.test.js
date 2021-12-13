@@ -1,7 +1,7 @@
-import { render, screen, fireEvent, click } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import React from 'react'
 import MyWManager from '../components/MyWManager';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { act } from "react-dom/test-utils"
 import renderWithRouter from './setupTestsRouter'
 
 test('renders the wmanager profile', () => {
@@ -20,8 +20,8 @@ test('renders the wmanager profile', () => {
         </BrowserRouter >
     )
     */
-    
-    renderWithRouter(<MyWManager/>, '/wmanager' )
+
+    renderWithRouter(<MyWManager />, '/wmanager')
 
     var element = screen.getByTestId("myDeliveries")
     expect(element).toBeInTheDocument();
@@ -36,7 +36,9 @@ test('renders the wmanager profile', () => {
 });
 
 test('go to ordersNotAvailable', () => {
-    renderWithRouter(<MyWManager/>, '/wmanager' )
+    act(() => {
+        renderWithRouter(<MyWManager />, '/wmanager')
+    });
 
     var element = screen.getByTestId("ordersNotAvailable")
     expect(element).toBeInTheDocument();
@@ -45,10 +47,14 @@ test('go to ordersNotAvailable', () => {
 });
 
 test('go to availableOrders', () => {
-    renderWithRouter(<MyWManager/>, '/wmanager' )
+    act(() => {
+        renderWithRouter(<MyWManager />, '/wmanager')
+    });
 
     var element = screen.getByTestId("available")
     expect(element).toBeInTheDocument();
-    fireEvent.click(element);
+    act(() => {
+        fireEvent.click(element);
+    });
     expect(window.location.pathname).toMatch('/wmanager/availableOrders')
 });
