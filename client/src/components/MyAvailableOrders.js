@@ -15,7 +15,7 @@ function MyAvailableOrders(props) {
       API.loadAvailableOrders("available")
         .then((c) => {
           if (c.error === undefined) {
-            c.sort((a, b) => b.id - a.id);
+            c.sort((a, b) => a.id - b.id);
             setOrders(c);
             setReqUpdate(false);
           } else {
@@ -45,7 +45,7 @@ function MyAvailableOrders(props) {
           >
             <b>Order ID</b>
           </ListGroup.Item>
-          {!(props.role === "client") &&
+          {!(props.role === "client") &&    // the userID is not shown if we are the user
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -58,7 +58,7 @@ function MyAvailableOrders(props) {
           >
             <b>Products</b>
           </ListGroup.Item>
-          <ListGroup.Item
+          {/*<ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
           >
@@ -69,7 +69,7 @@ function MyAvailableOrders(props) {
             className="d-flex w-100 justify-content-center"
           >
             <b>Time</b>
-          </ListGroup.Item>
+          </ListGroup.Item>*/}
           <ListGroup.Item
             variant="warning"
             className="d-flex w-100 justify-content-center"
@@ -111,6 +111,7 @@ function MyAvailableOrders(props) {
                   >
                     <ul>{j.map((x) => {return (<li>{x.name + ":" + x.quantity}</li>) })}</ul>
                   </ListGroup.Item>
+                  {/*}
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"
@@ -123,6 +124,7 @@ function MyAvailableOrders(props) {
                   >
                     {c.time}
                   </ListGroup.Item>
+                */}
                   <ListGroup.Item
                     variant={b}
                     className="d-flex w-100 justify-content-center"

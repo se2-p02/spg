@@ -572,7 +572,7 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              <MyAvailableOrders clock={clock} setClock={setClock} role="VM" />
+              <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="VM" />
             </>
           }
         />
@@ -612,7 +612,7 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              <MyAvailableOrders clock={clock} setClock={setClock} role="client" />
+              <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
             </>
           }
         />

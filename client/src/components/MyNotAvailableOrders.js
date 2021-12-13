@@ -16,7 +16,7 @@ function MyNotAvailableOrders(props) {
       API.loadAvailableOrders("not_available")  
         .then((c) => {
           if (c.error === undefined) {
-            c.sort((a, b) => b.id - a.id);
+            c.sort((a, b) => a.id - b.id);
             setOrders(c);
             setReqUpdate(false);
           } else {
