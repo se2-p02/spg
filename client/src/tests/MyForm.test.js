@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import MyForm from '../components/MyForm';
 import React from 'react'
+import renderWithRouter from './setupTestsRouter'
+import moment from 'moment'
 
 
 test('renders sigup page', () => {
@@ -39,4 +41,28 @@ test('renders sigup page', () => {
     expect(element).toBeInTheDocument();
 
   
+  });
+
+  it("tests go back with undefined user", async () => {
+    renderWithRouter(<MyForm
+        clock={moment('2021-11-27 7:55')}
+        setClock={jest.fn()}
+        setUser={jest.fn()}
+        user={undefined} />, "/signup");
+    
+    let elem = screen.getByText("Back")
+    fireEvent.click(elem)
+    expect(window.location.pathname).toMatch('/login')
+  });
+
+  it("tests go back with a valid user", async () => {
+    renderWithRouter(<MyForm
+        setUser={jest.fn()}
+        clock={moment('2021-11-27 7:55')}
+        setClock={jest.fn()}
+        user={{ id: 1, role: "client", username: "client@client.client", name: "client" }} />, "/signup");
+    
+    let elem = screen.getByText("Back")
+    fireEvent.click(elem)
+    expect(window.location.pathname).toMatch('/client')
   });
