@@ -613,7 +613,7 @@ app.post("/api/deliveries", async (req, res) => {
 app.post("/api/confirmOrderForPickup", async (req, res) => {
   try {
     const order = req.body;
-    const products = JSON.parse(JSON.stringify(order.products))
+    const products = JSON.parse(order.products)
     console.log(products)
     var result;
     products.forEach(async(p) => {
