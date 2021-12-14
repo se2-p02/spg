@@ -330,7 +330,7 @@ exports.getOrdersByStatus = (status) => {
         var sql;
         var props = [];
         if (status == "not_available") {
-            sql = 'SELECT * FROM orders WHERE NOT status = ?';
+            sql = 'SELECT * FROM orders WHERE NOT status = ? OR status is NULL';
             props.push("available")
         }
         else {
