@@ -630,4 +630,27 @@ describe("get orders by status", () => {
     await request(app).delete("/api/sessions/current").expect(200);
   });
 
-})
+});
+
+describe("Pay order", () => {
+  it("tests put /api/orders/pay", async () => {
+    await server.put("/api/orders/pay").send({ id: 1, userID: 2, amount: 0.0 }).expect(200);
+  });
+});
+
+describe("Fulfill order", () => {
+  it("login", loginAdmin());
+
+  it("tests put /api/updateOrder/:id", async () => {
+    await spgDao.setClock("2021-11-21 09:55");
+    await server.put("/api/updateOrder/0").send({ fulfilled: 0 }).expect(500);
+
+    await request(app).delete("/api/sessions/current").expect(200);
+  });
+});
+
+describe("System clock", () => {
+  it("tests get /api/clock", async () => {
+    const clock = await server.get("/api/clock").expect(200);
+  });
+});

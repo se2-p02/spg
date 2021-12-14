@@ -363,7 +363,7 @@ function MyForm(props) {
                                     <Col sm={2}></Col>
                                     <br />
                                     <Col sm={5} className="text-right m-0 p-0">
-                                        <Button
+                                        <Button data-testid="formBtn"
                                             size="lg"
                                             variant="success"
                                             type="submit"

@@ -71,7 +71,7 @@ function MyNavBar(props) {
                                         <ListGroup key={c.id + "a"} horizontal>
                                             <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
                                             <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
                                         </ListGroup>
                                     </Dropdown.Item>
                                 ))
@@ -210,7 +210,7 @@ function MyModal(props) {
             <Modal.Header closeButton>
                 <Modal.Title>Place an order</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body data-testid="orderBody">
                 {props.cart.map((c) => (
                     <ListGroup key={c.id + "b"} className="my-1" horizontal>
                         <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
@@ -228,14 +228,14 @@ function MyModal(props) {
                 <ListGroup key={"placeOrder"} className="mx-3">
                     {ordersClosed && <p className={ordersClosed ? 'ordersClosed mt-3' : ' '}>Orders can't be placed from Sunday 23:00 to Monday 09:00.</p>}
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                        <Form>
+                        <Form data-testid="methodForm">
                             <Form.Check inline defaultChecked
                                 type="radio"
                                 name="ordergroup"
                                 id="checkstore"
                                 label="Pickup in store"
                                 onClick={() => setOrderMethod(() => 'store')} />
-                            <Form.Check inline
+                            <Form.Check inline data-testid="addressCheck"
                                 type="radio"
                                 name="ordergroup"
                                 id="checkdelivery"
@@ -248,7 +248,7 @@ function MyModal(props) {
                     </ListGroup.Item>
 
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                        <Form>
+                        <Form data-testid="orderForm">
                             {orderMethod === 'address' && <><Form.Check defaultChecked
                                 type="radio"
                                 name="addressgroup"
@@ -271,7 +271,7 @@ function MyModal(props) {
                                         setShowAddressForm(() => false);
                                     }} /> </>}
                             {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
-                                <Form.Control className="w-100" as="textarea" cols={100} rows={3}
+                                <Form.Control className="w-100" as="textarea" cols={100} rows={3} data-testid="addressBox"
                                     placeholder="Please include street, number, city and country."
                                     onChange={(e) => setAddress(() => e.target.value)} /></>}
 
@@ -286,9 +286,9 @@ function MyModal(props) {
                             />
                         </Form>
                     </ListGroup.Item>
-                    {errorMsg && <p className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
+                    {errorMsg && <p data-testid="errorMsg" className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
                     <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                        <Button disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
+                        <Button data-testid="orderButton" disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
                     </ListGroup.Item>
                 </ListGroup>
                 {successful &&

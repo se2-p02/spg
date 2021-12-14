@@ -30,7 +30,39 @@ describe('Test navbar', () => {
         element = screen.getByTestId("my_logout")
         expect(element).toBeInTheDocument();
 
+        element = screen.getByTestId("cartIcon")
+        expect(element).toBeInTheDocument();
+        act(() => fireEvent.click(element));
+        expect(screen.getByText('No products here'));
     });
+
+    test('renders cart', () => {
+        let user = {
+            id: 1,
+            name: "nino",
+            surname: "frassica",
+            wallet: 1300
+        }
+        let clock = moment("2021-11-28 15:55");
+
+        render(<BrowserRouter>
+            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[{id: 1, name: 'Milk', quantity: 2.0, unit: 'l'}]} />
+        </BrowserRouter>);
+        var element = screen.getByTestId("cartIcon")
+        expect(element).toBeInTheDocument();
+        act(() => fireEvent.click(element));
+        element = screen.getByText('Place order')
+        expect(element).toBeInTheDocument();
+        act(() => fireEvent.click(element));
+        expect(screen.getByTestId('orderBody')).toBeInTheDocument();
+        expect(screen.getByTestId('methodForm')).toBeInTheDocument();
+        expect(screen.getByTestId('orderForm')).toBeInTheDocument();
+        act(() => fireEvent.click(screen.getByTestId('addressCheck')));
+        expect(screen.getByTestId('addressBox')).toBeInTheDocument();
+        act(() => fireEvent.click(screen.getByTestId('orderButton')));
+        expect(screen.getByTestId('errorMsg')).toBeInTheDocument();
+    });
+
     test("test logout", () => {
         let user = {
             id: 1,

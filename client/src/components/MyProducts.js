@@ -93,7 +93,7 @@ function MyProducts(props) {
                 </InputGroup>
                 {filteredProducts &&
                     <>
-                        <Row className="justify-content-center align-items-start">
+                        <Row className="justify-content-center align-items-start" data-testid="productCards">
                             {
                                 filteredProducts.map(p => {
                                     return (
@@ -119,7 +119,7 @@ function MyProducts(props) {
                                                                     type="number"
                                                                     onChange={(ev) => { setQuantity(ev.target.value) }}
                                                                 />
-                                                                <Button variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
+                                                                <Button data-testid={'addCart'+p.id} variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
                                                             </ListGroup.Item>
                                                         </ListGroup>
                                                     </Card.Body>
