@@ -19,6 +19,15 @@
  * npm install
  * npm start
 
+## Accounts
+ | Name     | Role              | Email                      | Password |
+|----------|-------------------|----------------------------|----------|
+| Nino     | Employee          | admin@admin.admin          | admin    |
+| Gigi     | Customer          | client@client.client       | client   |
+| Paolo    | Customer          | client1@client1.client1    | client1  |
+| farmer   | Farmer            | farmer@farmer.farmer       | farmer   |
+| wmanager | Warehouse Manager | wmanager@wmanager.wmanager | wmanager |
+
 ## React Client Application Routes
 
 - Route `/`: main page with links to main page
