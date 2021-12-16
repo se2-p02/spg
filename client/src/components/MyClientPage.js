@@ -21,19 +21,19 @@ function MyClientPage(props) {
         return (<Navigate to="/client/availableOrders"></Navigate>)
     }
     return (
-        <>
-        {props.showModal === true ? (
-        <ModalWindow
-          show={props.showModal}
-          onHide={props.onHide}
-          text="One or more orders have an amount greater than your wallet. Please top it up."
-          header="Insufficient balance!"
-        ></ModalWindow>
-      ) : (
-        ""
-      )}
+        <Col sm="9">
+            {props.showModal === true ? (
+                <ModalWindow
+                    show={props.showModal}
+                    onHide={props.onHide}
+                    text="One or more orders have an amount greater than your wallet. Please top it up."
+                    header="Insufficient balance!"
+                ></ModalWindow>
+            ) : (
+                ""
+            )}
             <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
-           
+
                 <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
                     <Col className=" m-0 p-0" sm={6}>
                         <Button size="lg" className="p-4 w-50 btn-primary" onClick={() => { setGoBack("profile") }}><h3>Profile</h3></Button>
@@ -55,8 +55,8 @@ function MyClientPage(props) {
                     </Col>
                 </Row>
             </Container>
-            
-        </>
+
+        </Col>
     );
 }
 

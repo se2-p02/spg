@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
-import Logo from './solidarity.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container } from "react-bootstrap";
-import { PersonCircle } from "react-bootstrap-icons";
+import Logo from './solidarity_dark.png';
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col } from "react-bootstrap";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 import MyClock from "./MyClock";
 import moment from "moment";
 import DateTimePicker from 'react-datetime-picker';
@@ -12,6 +13,8 @@ import DateTimePicker from 'react-datetime-picker';
 function MyNavBar(props) {
 
     const [show, setShow] = useState(false);
+    let filters = ["Profile", "Products", "My Orders", "Orders in shop"];
+
 
     const navigate = useNavigate();
 
@@ -24,6 +27,7 @@ function MyNavBar(props) {
         API.logout().then((response) => {
             if (response.error === undefined) {
                 props.setUser(undefined)
+                props.setFil(undefined)
                 navigate("/login");
             }
         });
@@ -37,8 +41,13 @@ function MyNavBar(props) {
 
     return (
 
-        <Navbar className="navbar navbar-dark navbar-expand-sm bg-primary fixed-top justify-content-between" expand="lg">
+        <Navbar className="navbar navbar-expand-sm nav-color fixed-top justify-content-between" expand="lg">
             {/*<Navbar.Toggle aria-controls="CollapseLeft" /> */}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+
             <Navbar.Brand id="lll">
                 <Container className="d-flex align-items-center">
                     <img
@@ -48,60 +57,63 @@ function MyNavBar(props) {
                         height="50"
                         className="d-inline-block align-top"
                     />&emsp;
-                    <div className="navTitle" data-testid="name"><h2>Social Purchasing Group</h2></div>
+                    <div className="navTitle text-black" data-testid="name"><h2>Social Purchasing Group</h2></div>
                 </Container>
             </Navbar.Brand>
             <div data-testid="clock">
                 <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
             </div>
-            <ListGroup key={"cart+logout"} data-testid="dropdown" horizontal className="p-4 pt-0 pb-0">
-                {props.showCart && <ListGroup.Item data-testid="cart" key='cartNav' variant="primary" className="d-flex justify-content-center align-items-center">
+            <div className="d-flex m-3 mt-0 mb-0 text-center">
+                {props.showCart &&
                     <Dropdown>
-                        <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="dark" className="d-flex justify-content-between align-items-start" id="cart">
-                            <div className="fw-bold mx-2">Cart</div>
-                            <Badge variant="primary" pill>
+                        <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="white" className="bg-transparent p-0 m-0" id="cart">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-cart p-2" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                            </svg>
+                            <Badge variant="black" className="bg-dark text-white m-0" pill>
                                 {props.cart.length}
                             </Badge>
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu align="end">
+                        <Dropdown.Menu align="end" className="text-center">
                             {props.cart.length !== 0 &&
                                 props.cart.map((c) => (
                                     <Dropdown.Item key={c.id + "d"}>
                                         <ListGroup key={c.id + "a"} horizontal>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                            <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+
+                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.name}</ListGroup.Item>
+                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center"><Button className="p-2 pt-1 pb-1" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
                                         </ListGroup>
                                     </Dropdown.Item>
                                 ))
                             }
                             {props.cart.length !== 0 &&
-                                <ListGroup className="mx-3">
-                                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center"><Button variant="info" onClick={() => setShow(true)}>Place order</Button></ListGroup.Item>
-                                </ListGroup>
+
+                                <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">Place order</Button>
+
                             }
                             {props.cart.length === 0 &&
-                                <span className="mx-3" id="cartpresence">No products here</span>
+                                <span className="m-auto" id="cartpresence">No products here</span>
                             }
                         </Dropdown.Menu>
-                    </Dropdown>
-                </ListGroup.Item>
-                }
-                <ListGroup.Item key='loginNav' variant="primary" className="d-flex justify-content-center align-items-center">
-                    <Dropdown >
-                        <Dropdown.Toggle variant="dark" className="d-flex p-2" >
-                            <PersonCircle className="mx-2" data-testid="my_logout"></PersonCircle>
-                        </Dropdown.Toggle>
+                    </Dropdown>}
 
-                        <Dropdown.Menu align="end" id="logout">
-                            <Dropdown.Item>
-                                <ListGroup.Item variant="primary" className="d-flex justify-content-center align-items-center" onClick={() => handleLogout()}>Logout</ListGroup.Item>
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </ListGroup.Item>
-            </ListGroup>
+
+                <Dropdown className="no_bord">
+                    <Dropdown.Toggle className="d-flex p-2 bg-transparent no_bord" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-person-fill text-dark no_bord" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        </svg>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu align="end" id="logout" className="bg-white">
+                        <Dropdown.Item className="text-center">
+                            <Button variant="danger" className="w-100 m-0 radius_button" onClick={() => handleLogout()}>Logout</Button>
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
             {props.cart.length !== 0 &&
                 <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }
@@ -141,7 +153,7 @@ function MyModal(props) {
             let p = {
                 id: prod.id,
                 quantity: prod.quantity,
-                unit:prod.unit,
+                unit: prod.unit,
                 price: prod.price,
                 farmer: prod.farmer,
                 status: 0,
@@ -170,8 +182,8 @@ function MyModal(props) {
 
         setErrorMsg(() => '');
         console.log(props.modify)
-        if(props.modify){
-            await API.modifyOrder(props.orderId,order.products).then((response) => {
+        if (props.modify) {
+            await API.modifyOrder(props.orderId, order.products).then((response) => {
                 if (response.error === undefined) {
                     setSuccessful(true);
                     props.setCart([]);
@@ -180,7 +192,7 @@ function MyModal(props) {
                 }
             }).catch((response) => { console.log(response) });
             console.log(order);
-        }else{
+        } else {
             await API.sendOrder(order).then((response) => {
                 if (response.error === undefined) {
                     setSuccessful(true);
@@ -191,7 +203,7 @@ function MyModal(props) {
             console.log(order);
         }
 
-        
+
     }
 
     useEffect(() => {
@@ -207,27 +219,30 @@ function MyModal(props) {
             show={props.show}
             onHide={handleClose}
         >
-            <Modal.Header closeButton>
-                <Modal.Title>Place an order</Modal.Title>
-            </Modal.Header>
+
             <Modal.Body data-testid="orderBody">
-                {props.cart.map((c) => (
-                    <ListGroup key={c.id + "b"} className="my-1" horizontal>
-                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.name}</ListGroup.Item>
-                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">{c.quantity * c.price + " €"}</ListGroup.Item>
-                    </ListGroup>
-                ))
-                }
-                <ListGroup key={"total"} className="my-1" horizontal>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-start align-items-center">Grand total:</ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-end align-items-center">
-                        {props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
-                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2) + " €"}</ListGroup.Item>
+                <h4 className="text-center mt-3">Summary</h4>
+                <ListGroup className="my-1" variant="flush">
+                    {props.cart.map((c) => (
+                        <ListGroup.Item>
+                            <Row>
+                                <Col sm="4 text-center"><b>{c.name}</b></Col>
+                                <Col sm="4 text-center">{c.quantity + " " + c.unit}</Col>
+                                <Col sm="4 text-center">{c.quantity * c.price + " €"}</Col>
+                            </Row>
+                        </ListGroup.Item>
+
+                    ))
+                    }
+                    <ListGroup.Item className="text-end p-5 pt-2 pb-2"><b>{props.cart.length === 1 && props.cart[0].quantity * props.cart[0].price + " €"}
+                        {props.cart.length !== 1 && props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2) + " €"}</b></ListGroup.Item>
                 </ListGroup>
+                <br />
+                <h4 className="text-center pb-2">Delivery</h4>
+
                 <ListGroup key={"placeOrder"} className="mx-3">
                     {ordersClosed && <p className={ordersClosed ? 'ordersClosed mt-3' : ' '}>Orders can't be placed from Sunday 23:00 to Monday 09:00.</p>}
-                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                    <ListGroup.Item className="d-flex bg_login2 w-100 justify-content-center align-items-center">
                         <Form data-testid="methodForm">
                             <Form.Check inline defaultChecked
                                 type="radio"
@@ -247,7 +262,7 @@ function MyModal(props) {
                         </Form>
                     </ListGroup.Item>
 
-                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
+                    <ListGroup.Item className="d-flex w-100 bg_login2 justify-content-center align-items-center">
                         <Form data-testid="orderForm">
                             {orderMethod === 'address' && <><Form.Check defaultChecked
                                 type="radio"
@@ -265,13 +280,13 @@ function MyModal(props) {
                                     disabled={client ? client.address ? false : true : true}
                                     label="Deliver to registered address"
                                     onClick={() => {
-                                        if (client && client!==null && client.address && client.city && client.country){
+                                        if (client && client !== null && client.address && client.city && client.country) {
                                             setAddress(() => client.address + ' ' + client.city + ', ' + client.country);
                                         }
                                         setShowAddressForm(() => false);
                                     }} /> </>}
                             {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
-                                <Form.Control className="w-100" as="textarea" cols={100} rows={3} data-testid="addressBox"
+                                <Form.Control className="w-100" as="textarea" cols={100} rows={2} data-testid="addressBox" className="radius_button_small"
                                     placeholder="Please include street, number, city and country."
                                     onChange={(e) => setAddress(() => e.target.value)} /></>}
 
@@ -287,9 +302,9 @@ function MyModal(props) {
                         </Form>
                     </ListGroup.Item>
                     {errorMsg && <p data-testid="errorMsg" className={errorMsg ? 'ordersClosed mt-3' : ' '}>{errorMsg}</p>}
-                    <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center align-items-center">
-                        <Button data-testid="orderButton" disabled={ordersClosed} variant="info" onClick={handleSubmit}>Place order</Button>
-                    </ListGroup.Item>
+                    <div className="mt-3 w-100 text-center">
+                        <Button data-testid="orderButton" disabled={ordersClosed} className="add_btn w-50" onClick={handleSubmit}>Place order</Button>
+                    </div>
                 </ListGroup>
                 {successful &&
                     <ListGroup key={"orderPlaced"} className="mx-3">
@@ -299,6 +314,24 @@ function MyModal(props) {
             </Modal.Body>
         </Modal>
     );
+}
+
+
+function FilterRow(props) {
+
+    let active = false;
+    let path = ""
+
+    if (props.fil === props.filterName) {
+        active = true;
+    }
+    if (props.filterName === "My Orders") {
+        path = "orders"
+    }
+    else {
+        path = props.filterName.toLowerCase()
+    }
+    return (<ListGroup.Item as={Link} to={"/client/" + path} onClick={(e) => { props.setFil(props.filterName) }} action active={active} className="leftButton ">{props.filterName}</ListGroup.Item>);
 }
 
 export default MyNavBar;

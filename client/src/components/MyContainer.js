@@ -4,6 +4,8 @@ import MyLogin from "./MyLogin";
 import MyEmployee from "./MyEmployee";
 import API from "./API";
 import MyNavBar from "./MyNavBar";
+import Row from "react-bootstrap/Row"
+import MyFormSignUp from "./MyFormSignUp";
 import MyClients from "./MyClients";
 import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
@@ -18,7 +20,9 @@ import MyFarmerOrders from "./MyFarmerOrders";
 import MyNotAvailableOrders from "./MyNotAvailableOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
 import MyWManager from "./MyWManager";
+import LeftEmployee from "./LeftEmployee";
 import MyDeliveries from "./MyDeliveries";
+import LeftClient from "./LeftClient";
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -26,9 +30,11 @@ function MyContainer(props) {
   const [login, setLogin] = useState();
   const [clock, setClock] = useState();
   const [modify, setModify] = useState(false);
-  const[orderId,setOrderId] = useState()
+  const [orderId, setOrderId] = useState()
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
+  const [fil, setFil] = useState(undefined)
+
 
   useEffect(() => {
     API.getClock().then((c) => {
@@ -64,7 +70,7 @@ function MyContainer(props) {
     if (user) {
       API.loadWallet(user.id)
         .then((c) => {
-          if (c.error === undefined) 
+          if (c.error === undefined)
             setShowModal(c);
         })
         .catch((err) => {
@@ -121,9 +127,9 @@ function MyContainer(props) {
           path="/client"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -133,9 +139,14 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MyClientPage clock={clock} setClock={setClock}
-                showModal={showModal}
-                onHide={() => setShowModal(false)} />
+              <Row>
+                <LeftClient fil={fil} setFil={setFil}></LeftClient>
+                <MyEmployee clock={clock}
+                  setClock={setClock}
+                  user={user}
+                />
+              </Row>
+
             </>
           }
         />
@@ -143,9 +154,9 @@ function MyContainer(props) {
           path="/client/profile"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -155,12 +166,17 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MyClientProfile
-                clock={clock}
-                setClock={setClock}
-                user={user}
-                id={user ? user.id : undefined}
-              />
+              <Row>
+                <LeftClient fil={fil} setFil={setFil}></LeftClient>
+
+                <MyClientProfile
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  id={user ? user.id : undefined}
+                />
+              </Row>
+
             </>
           }
         />
@@ -168,9 +184,9 @@ function MyContainer(props) {
           path="/client/orders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -180,6 +196,9 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
+              <Row>
+              <LeftClient fil={fil} setFil={setFil}></LeftClient>
+
               <MyOrders
                 setModify={setModify}
                 clock={clock}
@@ -189,6 +208,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
               ></MyOrders>
+              </Row>
             </>
           }
         />
@@ -197,9 +217,9 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -217,9 +237,9 @@ function MyContainer(props) {
           path="/farmer/orders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -230,9 +250,9 @@ function MyContainer(props) {
                 showCart={false}
               ></MyNavBar>
               <MyFarmerOrders
-              clock={clock}
-              setClock={setClock}
-              user={user}
+                clock={clock}
+                setClock={setClock}
+                user={user}
               />
             </>
           }
@@ -241,9 +261,9 @@ function MyContainer(props) {
           path="/farmer/products"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -267,9 +287,9 @@ function MyContainer(props) {
           path="/farmer/myProducts"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -295,9 +315,9 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -315,9 +335,9 @@ function MyContainer(props) {
           path="/wmanager/deliveries"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -342,9 +362,9 @@ function MyContainer(props) {
           path="/login"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -365,9 +385,9 @@ function MyContainer(props) {
           path="/signup"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -377,7 +397,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-              <MyForm
+              <MyFormSignUp
                 clock={clock}
                 setClock={setClock}
                 user={user}
@@ -391,9 +411,9 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -403,11 +423,14 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MyEmployee
-                clock={clock}
-                setClock={setClock}
-                user={user}
-              ></MyEmployee>
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <MyEmployee
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                ></MyEmployee>
+              </Row>
             </>
           }
         />
@@ -415,9 +438,9 @@ function MyContainer(props) {
           path="/employee/clients/:id"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -427,11 +450,14 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MySingleClient
-                clock={clock}
-                setClock={setClock}
-                user={user}
-              ></MySingleClient>
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <MySingleClient
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                ></MySingleClient>
+              </Row>
             </>
           }
         />
@@ -439,9 +465,9 @@ function MyContainer(props) {
           path="/employee/orders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -451,11 +477,17 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MyOrders
-                clock={clock}
-                setClock={setClock}
-                user={user}
-              ></MyOrders>
+
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+
+                <MyOrders
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                ></MyOrders>
+              </Row>
+
             </>
           }
         />
@@ -464,9 +496,9 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -476,7 +508,10 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               ></MyNavBar>
-              <MyClients clock={clock} setClock={setClock}></MyClients>
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <MyClients clock={clock} setClock={setClock}></MyClients>
+              </Row>
             </>
           }
         />
@@ -484,9 +519,9 @@ function MyContainer(props) {
           path="/client/products"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -496,14 +531,19 @@ function MyContainer(props) {
                 showCart={true}
                 setUser={setUser}
               ></MyNavBar>
-              <MyProducts
-                clock={clock}
-                setClock={setClock}
-                user={user}
-                cart={cart}
-                setCart={setCart}
-                showCart={true}
-              ></MyProducts>
+              <Row>
+              <LeftClient fil={fil} setFil={setFil}></LeftClient>
+
+
+                <MyProducts
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  cart={cart}
+                  setCart={setCart}
+                  showCart={true}
+                ></MyProducts>
+              </Row>
             </>
           }
         />
@@ -512,9 +552,9 @@ function MyContainer(props) {
           path="/employee/products"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -524,14 +564,19 @@ function MyContainer(props) {
                 showCart={true}
                 setUser={setUser}
               ></MyNavBar>
-              <MyProducts
-                clock={clock}
-                setClock={setClock}
-                user={user}
-                cart={cart}
-                setCart={setCart}
-                showCart={true}
-              ></MyProducts>
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+
+                <MyProducts
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  cart={cart}
+                  setCart={setCart}
+                  showCart={true}
+                ></MyProducts>
+              </Row>
+
             </>
           }
         />
@@ -540,9 +585,9 @@ function MyContainer(props) {
           path="/employee/form"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -552,17 +597,22 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              <MyForm clock={clock} setClock={setClock} user={user} />
+              <Row>
+                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+
+                <MyForm clock={clock} setClock={setClock} user={user} />
+
+              </Row>
             </>
           }
         />
-      <Route
+        <Route
           path="/wmanager/availableOrders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -576,13 +626,13 @@ function MyContainer(props) {
             </>
           }
         />
-      <Route
+        <Route
           path="/wmanager/notAvailableOrders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -600,9 +650,9 @@ function MyContainer(props) {
           path="/client/availableOrders"
           element={
             <>
-              <MyNavBar
-              user={user}
-              setModify={setModify}
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -612,7 +662,11 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
+              <Row>
+              <LeftClient fil={fil} setFil={setFil}></LeftClient>
               <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
+
+              </Row>
             </>
           }
         />

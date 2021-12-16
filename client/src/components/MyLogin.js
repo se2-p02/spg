@@ -90,18 +90,18 @@ function MyLogin(props) {
 
     return (
         <>
-            <Container className="bg-dark min-height-100 justify-content-center m-0 p-0 below-nav pt-5" style={{ display: 'flex' }} fluid>
+            <Container className=" min-height-100 justify-content-center m-0 p-0 below-nav pt-5 bg_login" style={{ display: 'flex' }} fluid>
 
                 <Row className="w-100 mt-5 vheight-100 m-0 p-0">
                     <Col sm={3}></Col>
-                    <Col sm={6} className='col-5 below-nav m-0 p-0'>
-                        <Container className=" p-5 m-0 b">
+                    <Col sm={6} className='col-5 below-nav m-0 p-5 '>
+                        <Container className="radius_button p-5 m-5 mb-0 mt-4 bg-white border">
 
-                            <Form className="pt-3 p-0 m-0">
+                            <Form className="pt-0 p-0 m-0">
                                 <Form.Group className="mt-1 w-100">
-                                    <Form.Label className="text-info w-100"><h5>Username</h5></Form.Label>
+                                    <Form.Label className=" w-100"><h5>Username</h5></Form.Label>
                                     <Form.Control
-                                        className="w-100 p-4"
+                                        className="w-100 p-2"
                                         type="username"
                                         id="username"
                                         placeholder="Enter username"
@@ -117,12 +117,12 @@ function MyLogin(props) {
                                 </Form.Group>
 
                                 <Form.Group className={errorMessageUsername ? "pt-1" : "pt-3"}>
-                                    <Form.Label className="text-info"><h5>Password</h5></Form.Label>
+                                    <Form.Label className="text p-0 pt-4"><h5>Password</h5></Form.Label>
                                     <InputGroup>
                                         <Form.Control
                                             type={showPassword ? "text" : "password"}
                                             id="password"
-                                            className="p-4"
+                                            className="p-2"
                                             placeholder="Password"
                                             required
                                             isInvalid={errorMessagePassword}
@@ -130,7 +130,7 @@ function MyLogin(props) {
                                             value={password}
                                             onKeyDown={(ev) => { if (ev.key === 'Enter') handleSubmit(ev); }}
                                         />
-                                        <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="30" /> : <EyeFill size="30" />}</Button>
+                                        <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill /> : <EyeFill size="20" />}</Button>
                                     </InputGroup>
                                     <Form.Control.Feedback type="invalid" id="errorp">
                                         {errorMessagePassword}
@@ -148,7 +148,7 @@ function MyLogin(props) {
                                 )}
 
                             </Form>
-                            <p className="text-white p-0 pt-2 ">Not already registered? <a className="text-info" href="/signup">Sign up</a></p>
+                            <p className="text p-0 pt-2 ">Not registered yet? <a className="text-primary" href="/signup">Sign up</a></p>
                             <Row className="pt-4 w-100 m-0">
                                 <Col sm={5} className="text-left m-0 p-0">
 
@@ -157,7 +157,7 @@ function MyLogin(props) {
                                         variant="danger"
                                         type="submit"
                                         //className={errorMessagePassword ? "mt-1" : "mt-3 float-right mr-4"}
-                                        className="w-100 m-0"
+                                        className="w-100 m-0 radius_button"
                                         onClick={() => setGoBack(true)}
                                     >
                                         Back
@@ -171,7 +171,7 @@ function MyLogin(props) {
                                         type="submit"
                                         id="submit"
                                         //className={errorMessagePassword ? "mt-1" : "mt-3 float-right mr-4"}
-                                        className="w-100 mr-5"
+                                        className="w-100 mr-5 add_btn"
                                         onClick={(ev) => handleSubmit(ev)}
                                     >
 

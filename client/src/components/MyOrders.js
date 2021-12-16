@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, Alert } from "react-bootstrap";
+import { Button, ListGroup, Alert, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 import moment from "moment";
 
 function MyOrders(props) {
-  const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
   const [handouts, setHandouts] = useState(true);
@@ -67,226 +66,111 @@ function MyOrders(props) {
     props.setModify(true);
   };
 
-  if (goBack) {
-    return <Navigate to={"/" + props.user.role}></Navigate>;
-  }
 
   return (
-    <>
+    <Col sm="9">
       <Container
         className={
           props.id
-            ? "bg-dark justify-content-center align-items-center text-center"
-            : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"
-        }
-        fluid
-      >
+            ? " justify-content-center align-items-center text-center"
+            : " min-height-100 justify-content-center align-items-center text-center below-nav mt-3"
+        } fluid>
         {!handouts && (
           <Alert variant="danger">
             You can hand out products from Wednesday 8:00 to Friday 19:00.
           </Alert>
         )}
-        <ListGroup className="my-3 mx-5" horizontal>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>id</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>userID</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>products</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>address</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>date</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>time</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>amount</b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>confPreparation</b>
+        <ListGroup className="my-3 mx-5" variant="flush">
+          <ListGroup.Item variant="warning">
+            <Row className="p-2">
+              <Col sm="1"><b>Id</b></Col>
+              <Col sm="1"><b>userID</b></Col>
+              <Col sm="2"><b>Products</b></Col>
+              <Col sm="2"><b>Delivery</b></Col>
+              <Col sm="2"><b>Amount</b></Col>
+              <Col sm="2"><b>Fulfilled</b></Col>
+              <Col sm="2"><b>Modify</b></Col>
+            </Row>
           </ListGroup.Item>
 
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>
-              {props.user && props.user.role === "employee"
-                ? "fulfilled"
-                : "paid"}
-            </b>
-          </ListGroup.Item>
-          <ListGroup.Item
-            variant="warning"
-            className="d-flex w-100 justify-content-center"
-          >
-            <b>Modify </b>
-          </ListGroup.Item>
-        </ListGroup>
-        {orders && (
-          <>
-            {orders.map((c) => {
-              let b = "primary";
-              //console.log(c.paid)
-              if (c.paid === 0) {
-                b = "danger";
-              }
+          {orders && (
+            <>
+              {orders.map((c) => {
+                let b = "primary";
+                //console.log(c.paid)
+                if (c.paid === 0) {
+                  b = "danger";
+                }
 
-              return (
-                <ListGroup
-                  key={c.id}
-                  style={{ textDecoration: "none" }}
-                  className="my-2 mx-5"
-                  horizontal
-                >
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.id}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.userID}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    <ul>
-                      {c.products.map((x) => {
-                        return <li>{x.name + ":" + x.quantity}</li>;
-                      })}
-                    </ul>
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.address}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.date}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.time}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.amount}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.conf}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {props.user.role === "client" ? (
-                      c.paid === 0 ? (
-                        <Button
-                          onClick={() => alert("Fake button")}
-                          className="btn-success"
-                        >
-                          Pay
-                        </Button>
-                      ) : (
-                        <p>Paid</p>
-                      )
-                    ) : props.user.role === "employee" && c.fulfilled === 0 ? (
-                      <Button
-                        onClick={() => {
-                          updateHandler(c.id);
-                        }}
-                        className="btn-success"
-                      >
-                        hand out to customer
-                      </Button>
-                    ) : (
-                      <p>delivered</p>
-                    )}
-                  </ListGroup.Item>
-                  <ListGroup.Item
-                    variant={b}
-                    className="d-flex w-100 justify-content-center"
-                  >
-                    {c.conf || c.paid ? (
-                      <Button disabled variant="light">
-                        Modify
-                      </Button>
-                    ) : (
-                      <>
-                        <Link to="/client/products">
+                return (
+                  <>
+                    <ListGroup.Item>
+                      <Row className="align-items-center text-center">
+                        <Col sm="1" className="align-items-center">{c.id}</Col>
+                        <Col sm="1">{c.userID}</Col>
+                        <Col sm="2" className="">
+                          {c.products.map((x) => {
+                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                            return(elem);
+                          })}
+                        </Col>
+                        <Col sm="2">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
+                        </Col>
+                        <Col sm="2">{c.amount + " €"}</Col>
+                        <Col sm="2">{props.user.role === "client" ? (
+                          c.paid === 0 ? (
+                            <Button
+                              onClick={() => alert("Fake button")}
+                              className="btn-success radius_button_small"
+                            >
+                              Pay
+                            </Button>
+                          ) : (
+                            <p>Paid</p>
+                          )
+                        ) : props.user.role === "employee" && c.fulfilled === 0 ? (
                           <Button
                             onClick={() => {
-                              modifyHandler(c.id, c.products);
+                              updateHandler(c.id);
                             }}
+                            className="btn-success p-1 m-0 radius_button_small"
                           >
-                            Modify
+                            Hand out
                           </Button>
-                        </Link>
-                      </>
-                    )}
-                  </ListGroup.Item>
-                </ListGroup>
-              );
-            })}
-          </>
-        )}
-        {!props.id && (
-          <Button
-            size="lg"
-            className="btn-danger p-2 w-50 mt-3 mb-5"
-            onClick={() => setGoBack(true)}
-          >
-            Back
-          </Button>
-        )}
+                        ) : (
+                          <p>delivered</p>
+                        )}</Col>
+                        <Col sm="2">{c.conf || c.paid ? (
+                        <Button className="p-1 m-0 radius_button_small" disabled variant="secondary">
+                          Modify
+                        </Button>
+                      ) : (
+                        <>
+                          <Link to="/client/products">
+                            <Button
+                              className="p-1 m-0 radius_button_small"
+                              onClick={() => {
+                                modifyHandler(c.id, c.products);
+                              }}
+                            >
+                              Modify
+                            </Button>
+                          </Link>
+
+                        </>
+                      )}</Col>
+                      </Row></ListGroup.Item>
+                    </>)
+
+              })
+              }
+            </>
+          )
+          }
+
+        </ListGroup>
       </Container>
-    </>
+    </Col>
   );
 }
 
