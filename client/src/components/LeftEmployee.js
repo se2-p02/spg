@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 import './MyNavBar.css';
-import clients from './customer.png'
-import carrot from './carrot.png'
+import clients from './images/customer.png'
+import carrot from './images/carrot.png'
 
 
 function LeftEmployee(props) {

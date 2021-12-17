@@ -28,13 +28,22 @@
 }
 
 
+
 .add_btn:hover{
   background-color: #289659;
+}
+
+.btn_hand{
+  background-color: #2d70ff;
+}
+.btn_hand:hover{
+  background-color: #265aca;
 }
 
 .bg_login{
   background-color: #ebebeb80;
 }
+
 
 .bg_login2{
   background-color: #e6e6e6a2;

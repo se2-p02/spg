@@ -5,9 +5,9 @@ import { useParams } from "react-router";
 import './MyNavBar.css';
 import API from "./API";
 import MyOrders from "./MyOrders";
-import minus from './minus-circle-solid2.png';
-import plus from './minus-circle-solid.png';
-import profile from './profile.jpeg'
+import minus from './images/minus.png';
+import plus from './images/plus.png';
+import profile from './images/profile.jpeg'
 
 function MySingleClient(props) {
     const [goBack, setGoBack] = useState(false);
@@ -79,13 +79,13 @@ function MySingleClient(props) {
                                     <Col sm="3" className="m-0 p-0">{client.wallet + " €"}
                                     </Col>
                                     <Col sm="2" className="m-0 p-0" fluid="true">
-                                        <Button className="bg-transparent border-white  p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
-                                            <Image testid="plus" height={"50%"} width={"50%"} src={plus} className="m-0 mt-0 mb-0 p-1 pb-0 pt-0" fluid />
+                                        <Button className="bg-transparent border-white text-dangers  p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
+                                            <Image testid="plus" height={"50%"} width={"50%"} src={plus} className="m-0 mt-0 mb-0 p-1 pt-0 " fluid />
                                         </Button>
                                     </Col>
                                     <Col sm="2" className="m-0 p-0" fluid="true">
                                         <Button className="bg-transparent border-white   p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
-                                            <Image testid="minus" height={"50%"} width={"50%"} src={minus} className="m-0 mt-0 mb-0 p-1 pb-0 pt-0" fluid />
+                                            <Image testid="minus" height={"50%"} width={"50%"} src={minus} className="m-0 mt-0 mb-0 p-1 pt-0" fluid />
                                         </Button>
                                     </Col>
                                 </Row>
@@ -121,22 +121,21 @@ function MySingleClient(props) {
                     </Col>
                 </Row>
 
-                <hr className="text-black my-5" style={{
+                <hr className="text-black mt-5 mb-4" style={{
                     marginTop: '1rem',
                     marginBottom: '1rem',
                     border: '0',
-                    borderTop: '2px solid rgba(0, 0, 0, 0.1)'
+                    borderTop: '1px solid rgba(0, 0, 0, 0.1)'
                 }} />
-                <h1 testid="header" className="text-black">Orders</h1>
-                {!reqUpdate && <MyOrders setUser={props.setUser} id={client.id} />}
-                <Row className="text-left  p-0 pt-2 pb-5">
+                <h3 testid="header" className="text-black text-center">Orders</h3>
+
+                {!reqUpdate && <MyOrders setUser={props.setUser} user={client.id} full={1} />}
+                <Row>
                     <Col sm="4"></Col>
                     <Col sm="4">
-                        <Button size="lg" className="btn-danger p-2 w-100 mt-3 radius_button" onClick={() => setGoBack(true)}>Back</Button>
-
+                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3 radius_button mb-3" onClick={() => setGoBack(true)}>Back</Button>
                     </Col>
                     <Col sm="4"></Col>
-
                 </Row>
                 <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
             </Container>
@@ -212,6 +211,7 @@ function MyModal(props) {
                     <Col sm="5"><Button size="lg" variant="success" className="p-auto m-0 w-100 radius_button" onClick={() => { setTrigger(true); setAmount(amount); props.setUpdate(true) }}>Confirm</Button></Col>
 
                 </Row>
+                
             </Container>
         </Modal>
     );

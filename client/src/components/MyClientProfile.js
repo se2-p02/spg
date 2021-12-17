@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Modal, Form, FormControl, Container, Image, Badge } from "react-bootstrap";
-import { Navigate } from 'react-router-dom';
+import {  Col, Row, Container, Image } from "react-bootstrap";
 import { useParams } from "react-router";
 import './MyNavBar.css';
 import API from "./API";
 
-import profile from './profile.jpeg'
+import profile from './images/profile.jpeg'
 
 function MyClientProfile(props) {
-    const [goBack, setGoBack] = useState(false);
     const [client, setClient] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true)
 
@@ -18,7 +16,7 @@ function MyClientProfile(props) {
 
     useEffect(() => {
         if (reqUpdate) {
-            API.loadClient(1).then((c) => {
+            API.loadClient(props.id).then((c) => {
                 if (c.error === undefined) {
                     setClient(c);
                     setReqUpdate(false);
@@ -29,10 +27,6 @@ function MyClientProfile(props) {
             });
         }
     }, [reqUpdate, id]);
-
-    if (goBack) {
-        return (<Navigate to={"/" + props.user.role + "/clients"}></Navigate>)
-    }
 
 
 
@@ -90,7 +84,7 @@ function MyClientProfile(props) {
                             <Col sm="3"></Col>
                             <Col sm="4" className="m-0 p-0 text-start"><b>Phone: </b>
                             </Col>
-                            <Col sm="5" className="m-0 p-0 text-start">{client.phone === null ? "NaN" : client.phone}
+                            <Col sm="5" className="m-0 p-0 text-start">{client.phone}
                             </Col>
                         </Row>
                         <Row className="m-0 p-4 pt-0 pb-3">

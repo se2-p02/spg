@@ -23,6 +23,9 @@ import MyWManager from "./MyWManager";
 import LeftEmployee from "./LeftEmployee";
 import MyDeliveries from "./MyDeliveries";
 import LeftClient from "./LeftClient";
+import LeftFarmer from "./LeftFarmer";
+import LeftWManager from "./LeftWManager";
+
 
 function MyContainer(props) {
   const [user, setUser] = useState();
@@ -207,6 +210,7 @@ function MyContainer(props) {
                 setOrderId={setOrderId}
                 cart={cart}
                 setCart={setCart}
+                full={0}
               ></MyOrders>
               </Row>
             </>
@@ -229,7 +233,11 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
+              <Row>
+              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
               <MyFarmer clock={clock} setClock={setClock} user={user} />
+
+              </Row>
             </>
           }
         />
@@ -249,11 +257,16 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
+              <Row>
+              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+
               <MyFarmerOrders
                 clock={clock}
                 setClock={setClock}
                 user={user}
               />
+              </Row>
+              
             </>
           }
         />
@@ -273,6 +286,9 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
+              <Row>
+              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+
               <MyProducts
                 clock={clock}
                 setClock={setClock}
@@ -280,6 +296,8 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
               />
+              </Row>
+              
             </>
           }
         />
@@ -327,7 +345,11 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-              <MyWManager clock={clock} setClock={setClock} user={user} />
+              <Row>
+                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <MyWManager clock={clock} setClock={setClock} user={user} />
+
+              </Row>
             </>
           }
         />
@@ -347,7 +369,9 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-              <MyDeliveries
+              <Row>
+                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <MyDeliveries
                 clock={clock}
                 setClock={setClock}
                 user={user}
@@ -355,6 +379,8 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               />
+              </Row>
+              
             </>
           }
         />
@@ -485,6 +511,7 @@ function MyContainer(props) {
                   clock={clock}
                   setClock={setClock}
                   user={user}
+                  full={0}
                 ></MyOrders>
               </Row>
 
@@ -622,7 +649,11 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
+              <Row>
+                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
               <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="VM" />
+
+              </Row>
             </>
           }
         />
@@ -642,7 +673,11 @@ function MyContainer(props) {
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>
-              <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
+              <Row>
+                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
+
+              </Row>
             </>
           }
         />

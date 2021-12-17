@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
-import Logo from './solidarity_dark.png';
+import Logo from './images/solidarity_dark.png';
 import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col } from "react-bootstrap";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,6 @@ import DateTimePicker from 'react-datetime-picker';
 function MyNavBar(props) {
 
     const [show, setShow] = useState(false);
-    let filters = ["Profile", "Products", "My Orders", "Orders in shop"];
 
 
     const navigate = useNavigate();

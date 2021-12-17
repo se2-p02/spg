@@ -68,11 +68,11 @@ function MyOrders(props) {
 
 
   return (
-    <Col sm="9">
+    <Col sm={props.full?"12":"9"}>
       <Container
         className={
-          props.id
-            ? " justify-content-center align-items-center text-center"
+          props.full
+            ? " justify-content-center align-items-center text-center mt-3"
             : " min-height-100 justify-content-center align-items-center text-center below-nav mt-3"
         } fluid>
         {!handouts && (
@@ -80,16 +80,16 @@ function MyOrders(props) {
             You can hand out products from Wednesday 8:00 to Friday 19:00.
           </Alert>
         )}
-        <ListGroup className="my-3 mx-5" variant="flush">
+        <ListGroup className="my-2 mx-3" variant="flush">
           <ListGroup.Item variant="warning">
-            <Row className="p-2">
-              <Col sm="1"><b>Id</b></Col>
-              <Col sm="1"><b>userID</b></Col>
-              <Col sm="2"><b>Products</b></Col>
-              <Col sm="2"><b>Delivery</b></Col>
+            <Row className="p-3">
+              <Col sm="1"><b>Order</b></Col>
+              <Col sm="1"><b>User</b></Col>
+              {!props.full?<Col sm="2"><b>Products</b></Col>:<Col sm="3"><b>Products</b></Col>}
+              {!props.full?<Col sm="2"><b>Delivery</b></Col>:<Col sm="3"><b>Delivery</b></Col>}
               <Col sm="2"><b>Amount</b></Col>
               <Col sm="2"><b>Fulfilled</b></Col>
-              <Col sm="2"><b>Modify</b></Col>
+              {!props.full?<Col sm="2"><b>Modify</b></Col>:<></>}
             </Row>
           </ListGroup.Item>
 
@@ -105,60 +105,67 @@ function MyOrders(props) {
                 return (
                   <>
                     <ListGroup.Item>
-                      <Row className="align-items-center text-center">
-                        <Col sm="1" className="align-items-center">{c.id}</Col>
+                      <Row className="align-items-center text-center p-1 m-0">
+                        <Col  sm="1" className="align-items-center">{c.id}</Col>
                         <Col sm="1">{c.userID}</Col>
-                        <Col sm="2" className="">
+                        {!props.full?<Col sm="2" className="">
                           {c.products.map((x) => {
                             let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
                             return(elem);
                           })}
-                        </Col>
-                        <Col sm="2">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
-                        </Col>
+                        </Col>:<Col sm="3" className="">
+                          {c.products.map((x) => {
+                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                            return(elem);
+                          })}
+                        </Col>}
+                        {!props.full?<Col sm="2">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
+                        </Col>:<Col sm="3">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
+                        </Col>}
                         <Col sm="2">{c.amount + " €"}</Col>
                         <Col sm="2">{props.user.role === "client" ? (
                           c.paid === 0 ? (
                             <Button
                               onClick={() => alert("Fake button")}
-                              className="btn-success radius_button_small"
+                              className="btn_hand radius_button_small"
                             >
-                              Pay
+                              PAY
                             </Button>
                           ) : (
-                            <p>Paid</p>
+                            <h6 className="m-0 p-0">PAID</h6>
                           )
                         ) : props.user.role === "employee" && c.fulfilled === 0 ? (
                           <Button
                             onClick={() => {
                               updateHandler(c.id);
                             }}
-                            className="btn-success p-1 m-0 radius_button_small"
+                            className="btn_hand p-2 m-0 radius_button_small"
                           >
-                            Hand out
+                            HAND OUT
                           </Button>
                         ) : (
-                          <p>delivered</p>
+                          <h6>Delivered</h6>
                         )}</Col>
-                        <Col sm="2">{c.conf || c.paid ? (
-                        <Button className="p-1 m-0 radius_button_small" disabled variant="secondary">
-                          Modify
+                        {!props.full?<Col sm="2">{c.conf || c.paid ? (
+                        <Button className="p-2 m-0 radius_button_small" disabled variant="success">
+                          MODIFY
                         </Button>
                       ) : (
                         <>
                           <Link to="/client/products">
                             <Button
-                              className="p-1 m-0 radius_button_small"
+                              className="p-2 m-0 radius_button_small"
+                              variant="success"
                               onClick={() => {
                                 modifyHandler(c.id, c.products);
                               }}
                             >
-                              Modify
+                              MODIFY
                             </Button>
                           </Link>
 
                         </>
-                      )}</Col>
+                      )}</Col>:<></>}
                       </Row></ListGroup.Item>
                     </>)
 
@@ -167,6 +174,7 @@ function MyOrders(props) {
             </>
           )
           }
+
 
         </ListGroup>
       </Container>
