@@ -13,8 +13,8 @@ sections:
 
 ### Macro statistics
 
-- Number of stories → Committed: 6 vs Done: 6
-- Story Points → Committed: 15 vs Done: 15
+- Number of stories → Committed: 6 vs Done: 5
+- Story Points → Committed: 15 vs Done: 10
 
 - Hours → Planned: 81 hours 10 minutes vs Spent: 79 hours 20 minutes
 
