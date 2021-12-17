@@ -1,5 +1,5 @@
 
-TEMPLATE FOR RETROSPECTIVE (Team P-02)
+Team P-02 - Third Sprint Retrospective
 =====================================
 
 The retrospective should include _at least_ the following
@@ -59,7 +59,7 @@ sections:
 - Technical Debt management:
   - Total hours estimated: 2h 30m
   - Total hours spent: 4h 15m
-  - Hours estimated for remediation by SonarQube: -
+  - Hours estimated for remediation by SonarQube: 2h
   - Hours spent on remediation: 4h 15m
   - Debt ratio (as reported by SonarQube under "Measures-Maintainability"): 0.2%
   - Rating for each quality characteristic reported in SonarQube under "Measures":
