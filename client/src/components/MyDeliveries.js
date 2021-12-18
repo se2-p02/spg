@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import API from "./API";
+import './MyNavBar.css';
 
 function MyDeliveries(props) {
     const [goBack, setGoBack] = useState(false);
@@ -20,7 +21,7 @@ function MyDeliveries(props) {
             API.loadDeliveries()
                 .then((d) => {
                     if (d.error === undefined) {
-                        
+
                         d.sort((a, b) => b.id - a.id);
                         setDeliveries(d);
                         setReqUpdate(false);
@@ -37,140 +38,67 @@ function MyDeliveries(props) {
     }
 
     return (
-        <>
+        <Col sm="9">
             <Container
-                className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
+                className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
                 fluid
             >
                 {(props.clock && (!((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() === 2)))
                     &&
-                    <Alert className="mt-3" variant="danger">You can add new deliveries from Monday 9:00 to Tuesday 23:59.</Alert>)
+                    <Alert className="mt-1" variant="danger">{"You can add new deliveries from "}<b>Monday 9:00</b>{" to "}<b>Tuesday 23:59</b></Alert>)
                 }
-                <Row className=" mt-2">
-                    <Col>
-                        <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
-                    </Col>
-                    <Col>
-                        {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() === 2))) ?
-                            <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setShow(true); }}>Add new delivery</Button>
-                            :
-                            <Button size="lg" data-testid="apbnw" className="btn-light p-2 w-100 mt-3">Add new delivery</Button>
-                        }
-                    </Col>
-                </Row>
+
                 {!handins && <Alert variant="danger">You can accept deliveries from Monday 9:00 to Tuesday 23:59.</Alert>}
-                <Row className="mx-5">
-                    <ListGroup className="my-3" horizontal>
-                        <ListGroup.Item as={Col} sm={1}
-                            variant="warning"
-                            className="d-flex justify-content-center"
-                        >
-                            <b>Delivery id</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={1}
-                            variant="warning"
-                            className="d-flex justify-content-center"
-                        >
-                            <b>Product id</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
-                            variant="warning"
-                            className="d-flex  justify-content-center"
-                        >
-                            <b>Product name</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
-                            variant="warning"
-                            className="d-flex  justify-content-center"
-                        >
-                            <b>Farmer id</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
-                            variant="warning"
-                            className="d-flex  justify-content-center"
-                        >
-                            <b>Farmer name</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
-                            variant="warning"
-                            className="d-flex  justify-content-center"
-                        >
-                            <b>Quantity</b>
-                        </ListGroup.Item>
-                        <ListGroup.Item as={Col} sm={2}
-                            variant="warning"
-                            className="d-flex  justify-content-center"
-                        >
-                            <b>Order id</b>
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Row>
+                <ListGroup className="mt-3 mx-2" variant="flush">
+                    <ListGroup.Item variant="warning">
+                        <Row className="p-2 align-items-center">
+                            <Col sm="2"><b>Delivery ID</b></Col>
+                            <Col sm="3"><b>Product</b></Col>
+                            <Col sm="3"><b>Farmer</b></Col>
+                            <Col sm="2"><b>Quantity</b></Col>
+                            <Col sm="2"><b>Order ID</b></Col>
+                        </Row>
+                    </ListGroup.Item>
+
+                
                 {deliveries && (
                     <>
+                                                        {console.log(deliveries)}
+
                         {deliveries.map((c) => {
                             let b = "primary";
 
                             return (
-                                <Row className="mx-5">
-                                    <ListGroup
-                                        key={c.id}
-                                        style={{ textDecoration: "none" }}
-                                        className="my-2"
-                                        horizontal>
-
-
-                                        <ListGroup.Item as={Col} sm={1}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.id}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={1}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.product.id}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.product.name}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.farmer.id}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.farmer.name}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.quantity}
-                                        </ListGroup.Item>
-                                        <ListGroup.Item as={Col} sm={2}
-                                            variant={b}
-                                            className="d-flex  justify-content-center"
-                                        >
-                                            {c.orderId}
-                                        </ListGroup.Item>
-                                    </ListGroup>
+                                <ListGroup.Item>
+                                <Row className="align-items-center p-1">
+                                    <Col sm="2">{c.id}</Col>
+                                    <Col sm="3">{c.product.name}</Col>
+                                    <Col sm="3">{c.farmer.name}</Col>
+                                    <Col sm="2">{c.quantity+" "}</Col>
+                                    <Col sm="2">{c.orderId}</Col>
                                 </Row>
+                                </ListGroup.Item>
                             );
                         })}
                     </>
                 )}
+                </ListGroup>
+                <Row className=" mt-2">
+                    <Col sm="4">
+                    </Col>
+                    <Col sm="4">
+                        {(props.clock && ((props.clock.day() === 1 && props.clock.hour() >= 9) || (props.clock.day() === 2))) ?
+                            <Button variant="success" size="lg" className="add_btn p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setShow(true); }}> New Delivery</Button>
+                            :
+                            <Button variant="success" size="lg" data-testid="apbnw" className="radius_button p-2 w-100 mt-3" disabled>New Delivery</Button>
+                        }
+                    </Col>
+                    <Col sm="4"></Col>
+                </Row>
                 <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} />
 
             </Container>
-        </>
+        </Col>
     );
 }
 
@@ -242,10 +170,10 @@ function MyModal(props) {
                                     type="name"
                                     onChange={(ev) => {
                                         setFarmer(ev.target.value);
-                                        if(products && products!==null && products[farmer] && products[farmer][0]){
+                                        if (products && products !== null && products[farmer] && products[farmer][0]) {
                                             setProduct(products[farmer][0]);
                                         }
-                                        
+
                                     }}
                                     value={farmer ? farmer : ""}
                                 >
@@ -271,7 +199,7 @@ function MyModal(props) {
                                     className="w-100 p-3 mt-2"
                                     type="name"
                                     onChange={(ev) => {
-                                        if(products && products!==null && products[farmer] ){
+                                        if (products && products !== null && products[farmer]) {
                                             setProduct(products[farmer].filter((p) => ((p.orderId + p.name + p.farmer) === (ev.target[ev.target.selectedIndex].id)))[0]);
                                         }
                                     }}

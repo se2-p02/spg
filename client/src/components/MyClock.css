@@ -1,5 +1,7 @@
 .clockButton {
-  background-color: #6599FF;
-  border-color: #4068b8;
+  background-color: #f3f3f300;
   color: black;
+  border-radius: 10px;
+  padding: 0px;
+  margin: 0px;
 }

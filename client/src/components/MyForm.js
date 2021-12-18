@@ -32,10 +32,11 @@ function MyForm(props) {
     }
 
     if (goBack) {
+        console.log(props.user)
         if (props.user === undefined) {
             return (<Navigate to={"/login"}></Navigate>)
         }
-        return (<Navigate to={"/" + props.user.name}></Navigate>)
+        return (<Navigate to={"/employee/clients"}></Navigate>)
     }
 
     function handleSubmit(ev) {
@@ -120,11 +121,11 @@ function MyForm(props) {
     }
 
     return (
-        <>
-            <Container className="bg-dark min-height-100 justify-content-center p-3 m-0 pb-5" fluid>
+        <Col sm="9">
+            <Container className="bg-white min-height-100 justify-content-center align-items-center text-center p-0 pt-5" fluid>
                 {registered === true && (
                     <>
-                        <h1 className="text-info text-center mt-5 pt-5">User Registered Successfully!</h1>
+                        <h1 className="text-black text-center mt-5 pt-5">User Registered Successfully!</h1>
                         <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
                             <Col lg={1} />
                             <Col className=" m-0 p-0" sm={5} lg={3}>
@@ -132,7 +133,7 @@ function MyForm(props) {
                                     size="lg"
                                     variant="danger"
                                     type="submit"
-                                    className="w-100 m-0 p-3"
+                                    className="w-100 m-0 p-2"
                                     onClick={() => handleGoBack()}
                                 >
                                     Back
@@ -145,7 +146,7 @@ function MyForm(props) {
                                     size="lg"
                                     variant="success"
                                     type="submit"
-                                    className="w-100 m-0 p-3"
+                                    className="w-100 m-0 p-2"
                                     onClick={() => setRegistered(false)}
                                 >
                                     Register another user
@@ -164,9 +165,9 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                                 <Col>
                                     <Form.Group controlId="name">
-                                        <Form.Label className="text-info w-100"><h5>Name</h5></Form.Label>
+                                        <Form.Label className="text-black w-100"><h6>Name</h6></Form.Label>
                                         <Form.Control
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             type="name"
                                             placeholder="Name"
                                             required
@@ -178,9 +179,9 @@ function MyForm(props) {
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="surname">
-                                        <Form.Label className="text-info w-100"><h5>Surname</h5></Form.Label>
+                                        <Form.Label className="text-black w-100"><h6>Surname</h6></Form.Label>
                                         <Form.Control
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             type="name"
                                             placeholder="Surname"
                                             required
@@ -198,10 +199,10 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                                 <Col>
                                     <Form.Group controlId="email">
-                                        <Form.Label className="text-info"><h5>Email</h5></Form.Label>
+                                        <Form.Label className="text-black p-0 pt-4"><h6>Email</h6></Form.Label>
                                         <Form.Control
                                             type="email"
-                                            className="w-100 p-3"
+                                            className="w-100 p-2 m-0"
                                             placeholder="Email"
                                             required
                                             onChange={(ev) => { setEmail(ev.target.value); }}
@@ -225,11 +226,11 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                                 <Col>
                                     <Form.Group controlId="Password">
-                                        <Form.Label className="text-info"><h5>Password</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>Password</h6></Form.Label>
                                         <InputGroup>
                                             <Form.Control
                                                 type={showPassword ? "text" : "password"}
-                                                className="p-3"
+                                                className="p-2"
                                                 placeholder="Password"
                                                 required
                                                 onChange={(ev) => { setPassword(ev.target.value); }}
@@ -249,11 +250,11 @@ function MyForm(props) {
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="repeatPassword">
-                                        <Form.Label className="text-info"><h5>Repeat Password</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>Repeat Password</h6></Form.Label>
                                         <InputGroup>
                                             <Form.Control
                                                 type={showPassword ? "text" : "password"}
-                                                className="p-3"
+                                                className="p-2"
                                                 placeholder="Repeat Password"
                                                 required
                                                 onChange={(ev) => { setRepeat(ev.target.value) }}
@@ -279,10 +280,10 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                                 <Col>
                                     <Form.Group controlId="number">
-                                        <Form.Label className="text-info"><h5>Phone Number</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>Phone Number</h6></Form.Label>
                                         <Form.Control
                                             type="tel"
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             placeholder="Phone number"
                                             required
                                             onChange={(ev) => { setPhoneNumber(ev.target.value) }}
@@ -291,18 +292,19 @@ function MyForm(props) {
                                     </Form.Group>
                                     {errorNumber.length !== 0 && (
                                         <div
-                                            className="alert alert-danger alert-float-static fade show"
+                                            className="alert alert-danger alert-float-static fade show p-0"
                                             role="alert"
                                         >
                                             {errorNumber}
                                         </div>
+                                        
                                     )}
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="country">
-                                        <Form.Label className="text-info"><h5>Country</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>Country</h6></Form.Label>
                                         <Form.Control
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             placeholder="Country"
                                             required
                                             onChange={(ev) => { setCountry(ev.target.value) }}
@@ -318,9 +320,9 @@ function MyForm(props) {
                                 <Col lg={2}></Col>
                                 <Col>
                                     <Form.Group controlId="city">
-                                        <Form.Label className="text-info"><h5>City</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>City</h6></Form.Label>
                                         <Form.Control
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             placeholder="City"
                                             required
                                             onChange={(ev) => { setCity(ev.target.value) }}
@@ -330,9 +332,9 @@ function MyForm(props) {
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="address">
-                                        <Form.Label className="text-info"><h5>Address</h5></Form.Label>
+                                        <Form.Label className="text-black pt-4"><h6>Address</h6></Form.Label>
                                         <Form.Control
-                                            className="w-100 p-3"
+                                            className="w-100 p-2"
                                             placeholder="Address"
                                             required
                                             onChange={(ev) => { setAddress(ev.target.value) }}
@@ -354,7 +356,7 @@ function MyForm(props) {
                                             size="lg"
                                             variant="danger"
                                             type="submit"
-                                            className="w-100 m-0"
+                                            className="w-100 m-0 radius_button"
                                             onClick={() => setGoBack(true)}
                                         >
                                             Back
@@ -367,7 +369,7 @@ function MyForm(props) {
                                             size="lg"
                                             variant="success"
                                             type="submit"
-                                            className="w-100 mr-5"
+                                            className="w-100 mr-5 add_btn"
                                             onClick={(ev) => handleSubmit(ev)}
                                         >
                                             Register
@@ -376,7 +378,7 @@ function MyForm(props) {
                                     <br />
                                     {errorMessageFields.length !== 0 && (
                                         <div
-                                            className="alert alert-danger alert-float-static fade show mt-4"
+                                            className="alert alert-danger alert-float-static fade show mt-4 p-2"
                                             role="alert"
                                         >
                                             {errorMessageFields}
@@ -388,7 +390,7 @@ function MyForm(props) {
                         </Row>
                     </>)}
             </Container>
-        </>
+        </Col>
     );
 }
 

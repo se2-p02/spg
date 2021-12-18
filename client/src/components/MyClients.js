@@ -6,8 +6,7 @@ import API from "./API";
 
 
 function MyClients(props) {
-    
-    const [goBack, setGoBack] = useState(false);
+
     const [goNew, setGoNew] = useState(false);
     const [clients, setClients] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
@@ -26,55 +25,54 @@ function MyClients(props) {
         }
     }, [reqUpdate]);
 
-    if (goBack) {
-        return (<Navigate to="/employee"></Navigate>)
-    }
     if (goNew) {
         return (<Navigate to="/employee/form"></Navigate>)
     }
 
 
     return (
-        <>
-            <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
-
-                <ListGroup className="my-3 mx-5" horizontal>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Surname</b></ListGroup.Item>
-                </ListGroup>
+        <Col sm={9}>
+            <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {clients &&
                     <>
-                        {
-                            clients.map(c => {
-                                return (
-                                    <ListGroup as={Link} to={"/employee/clients/" + c.id} key={c.id} style={{ textDecoration: 'none' }} className="my-2 mx-5" horizontal>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.id}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.name}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{c.surname}</ListGroup.Item>
-                                    </ListGroup>
-                                );
-                            })
-                        }
+                        <ListGroup className="my-3 mx-5" variant="flush">
+                            <ListGroup.Item variant="warning" className="justify-content-center p-3">
+                                <Row>
+                                    <Col sm="4"><b>Id</b></Col>
+                                    <Col sm="4"><b>Name</b></Col>
+                                    <Col sm="4"><b>Surname</b></Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            {
+                                clients.map(c => {
+                                    return (
+                                        <ListGroup.Item className="clientButt p-2" as={Link} to={"/employee/clients/"+c.id} key={c.id} style={{textDecoration: 'none'}}>
+                                            <Row>
+                                                <Col sm="4">{c.id}</Col>
+                                                <Col sm="4">{c.name}</Col>
+                                                <Col sm="4">{c.surname}</Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    );
+                                })
+                            }
+                        </ListGroup>
+
 
                     </>
                 }
                 <Row>
-                    <Col sm="1"></Col>
-                    <Col sm="4" className="justify-content-right align-items-right m-0 p-0 text-right">
-                    <Button size="lg" className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
-                    </Col>
-                    <Col sm="2">
-                    </Col>
+                    <Col sm="4"></Col>
                     <Col sm="4" className="justify-content-left align-items-left m-0 p-0">
-                    <Button size="lg" className="btn-primary p-2 w-100 mt-3" onClick={() => setGoNew(true)}>Add Client</Button>
+                        <Button size="lg" className="add_btn p-2 w-100 mt-3 text-white mb-5" onClick={() => setGoNew(true)}>Add Client</Button>
                     </Col>
-                    <Col sm="1"></Col>
+                    <Col sm="4"></Col>
                 </Row>
 
             </Container>
 
-        </>
+        </Col>
     );
 }
 

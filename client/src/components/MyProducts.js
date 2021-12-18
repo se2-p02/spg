@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup } from "react-bootstrap";
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { XCircleFill } from "react-bootstrap-icons";
 import Card from 'react-bootstrap/Card';
 import './MyNavBar.css';
@@ -8,7 +8,6 @@ import API from "./API";
 
 
 function MyProducts(props) {
-    const [goBack, setGoBack] = useState(false);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(0);
     const [filter, setFilter] = useState('All');
@@ -50,9 +49,7 @@ function MyProducts(props) {
         if (products.length !== 0) setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));
     }, [products, filter, wordFilter]);
 
-    if (goBack) {
-        return (<Navigate to={"/" + props.user.role}></Navigate>)
-    }
+
 
     const handleAddToCart = (id, q, name, unit, price) => {
         let items = [...products];
@@ -76,20 +73,21 @@ function MyProducts(props) {
 
 
     return (
-        <>
-            <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
+        <Col sm="9">
+            <Container className="min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
                 <FloatingLabel label="Filter products:" className="pb-2">
-                    <Form.Select onChange={(e) => setFilter(() => e.target.value)}>
+                    <Form.Select className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
                         {filters.map((f, i) => <option key={'f' + i} value={f}>{f}</option>)}
                     </Form.Select>
                 </FloatingLabel>
-                <InputGroup className="mt-3 d-flex search-form">
+                <InputGroup className="mt-3 d-flex search-form" >
                     <Form.Control
+                        size="sm"
                         type="text"
                         placeholder="Search for a product"
                         value={wordFilter}
                         onChange={(e) => setWordFilter(() => e.target.value)} />
-                    <Button variant="secondary" size="lg" onClick={() => setWordFilter(() => '')}><XCircleFill size="33" /></Button>
+                    <Button variant="secondary" size="lg" onClick={() => setWordFilter(() => '')}><XCircleFill size="25" /></Button>
                 </InputGroup>
                 {filteredProducts &&
                     <>
@@ -100,16 +98,16 @@ function MyProducts(props) {
                                         <>
 
                                             <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
-                                                <Card key={p.id} className="bg-dark" border="light">
+                                                <Card key={p.id} className="bg_login2 ">
                                                     <Card.Title className="text-truncate text-center">
-                                                        <ListGroup.Item variant="primary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
+                                                        <ListGroup.Item variant="secondary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
                                                     </Card.Title>
                                                     <Card.Body className="">
                                                         <ListGroup className="">
-                                                            <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 ">Farmer: <p className="text-end w-100">{p.farmerName}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">Quantity: <p className="text-end w-100">{p.quantity + " " + p.unit}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">Price: <p className="text-end w-100">{p.price + " €/" + p.unit}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="primary" className="d-flex w-100 ">
+                                                            <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="" className="d-flex w-100 ">Farmer: <p className="text-end w-100">{p.farmerName}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="" className="d-flex w-100 ">Quantity: <p className="text-end w-100">{p.quantity + " " + p.unit}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="" className="d-flex w-100 ">Price: <p className="text-end w-100">{p.price + " €/" + p.unit}</p></ListGroup.Item>
+                                                            <ListGroup.Item variant="" className="d-flex w-100 ">
                                                                 <Form.Control id={'pQnt' + p.id}
                                                                     className="w-100 mx-1"
                                                                     placeholder={0}
@@ -119,7 +117,7 @@ function MyProducts(props) {
                                                                     type="number"
                                                                     onChange={(ev) => { setQuantity(ev.target.value) }}
                                                                 />
-                                                                <Button data-testid={'addCart'+p.id} variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
+                                                                <Button data-testid={'addCart' + p.id} variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
                                                             </ListGroup.Item>
                                                         </ListGroup>
                                                     </Card.Body>
@@ -133,10 +131,10 @@ function MyProducts(props) {
                         </Row>
                     </>
                 }
-                <Button size="lg" className="btn-danger p-2 w-50 mt-3" onClick={() => setGoBack(true)}>Back</Button>
+                
             </Container>
 
-        </>
+        </Col>
     );
 }
 

@@ -6,8 +6,83 @@
   align-self: center;
 }
 
+.leftBG{
+  background-color: #f7f7f7;
+}
+
+.leftButton.active {
+  background-color: #87f1b7!important;
+  border-color: #87f1b7!important;
+  color: #000000!important;
+}
+
+.clientButt:hover{
+  background-color: #f1f1f1;
+}
+
+.add_btn{
+  border-radius: 35px;
+  background-color: #34c475;
+  border: 1px;
+  border-color: #23804d;
+}
+
+
+
+.add_btn:hover{
+  background-color: #289659;
+}
+
+.btn_hand{
+  background-color: #2d70ff;
+}
+.btn_hand:hover{
+  background-color: #265aca;
+}
+
+.bg_login{
+  background-color: #ebebeb80;
+}
+
+
+.bg_login2{
+  background-color: #e6e6e6a2;
+}
+
+.radius_button{
+  border-radius: 35px;
+}
+
+.radius_button_half1{
+  border-radius: 35px 0px 0px 35px;
+}
+.radius_button_half2{
+  border-radius: 0px 35px 35px 0px;
+}
+.custom_space{
+  padding-left: 20%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  padding-right: 0%;
+}
+
+.radius_button_small{
+  border-radius: 10px;
+}
+
 .below-nav{
-  padding-top: 5rem;
+  padding-top: 7rem;
+}
+
+.leftButton:hover{
+  background-color: #87f1b7!important;
+  }
+
+
+.leftButton{
+  background: rgba(255, 255, 255, 0);
+  border-radius: 2px;
+
 }
 
 .ordersClosed {
@@ -15,6 +90,10 @@
   font-weight: bold;
   font-size: small;
   text-align: center;
+}
+
+.nav-color {
+  background-color: #56ce8c;
 }
 
 @media only screen and (max-width: 1060px) { 
@@ -37,6 +116,10 @@
 .pay-method {
   color: gray;
   font-size: small;
+}
+
+.no_bord{
+  border:0px;
 }
 
 .search-form {

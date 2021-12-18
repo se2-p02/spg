@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, ListGroup, OverlayTrigger, Tooltip, Col, Row } from "react-bootstrap";
 import { Handbag, CheckSquare } from "react-bootstrap-icons";
 import Container from "react-bootstrap/Container";
 import { Navigate } from "react-router-dom";
@@ -33,7 +33,7 @@ function MyFarmerOrders(props) {
     }
 
     useEffect(() => {
-        if ( props.clock && !((props.clock.day() === 3 && props.clock.hour() >= 8) || props.clock.day() === 4 || (props.clock.day() === 5 && (props.clock.hour() >= 0 && props.clock.hour() <= 19)))) {
+        if (props.clock && !((props.clock.day() === 3 && props.clock.hour() >= 8) || props.clock.day() === 4 || (props.clock.day() === 5 && (props.clock.hour() >= 0 && props.clock.hour() <= 19)))) {
             setButDisable(true);
         } else {
             setButDisable(false);
@@ -74,147 +74,84 @@ function MyFarmerOrders(props) {
         return <Navigate to={"/" + props.user.role}></Navigate>;
     }
     return (
-        <>
+        <Col sm="9">
             <Container
-                className={props.id ? "bg-dark justify-content-center align-items-center text-center" : "bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
+                className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
                 fluid
             >
-                <ListGroup className="my-3 mx-5" horizontal>
-
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-50 justify-content-center"
-                    >
-                        <b>userID</b>
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-50 justify-content-center"
-                    >
-                        <b>products</b>
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-100 justify-content-center"
-                    >
-                        <b>address</b>
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-50 justify-content-center"
-                    >
-                        <b>date</b>
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-50 justify-content-center"
-                    >
-                        <b>time</b>
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                        variant="warning"
-                        className="d-flex w-50 justify-content-center"
-                    >
-                        <b>confirm</b>
+                <ListGroup className="my-3 mx-2" variant="flush">
+                    <ListGroup.Item variant="warning" >
+                        <Row className="p-2">
+                            <Col sm="1"><b>User</b></Col>
+                            <Col sm="2"><b>Products</b></Col>
+                            <Col sm="4"><b>Address</b></Col>
+                            <Col sm="2"><b>Date</b></Col>
+                            <Col sm="1"><b>Time</b></Col>
+                        </Row>
                     </ListGroup.Item>
 
+                    {orders && (
+                        <ListGroup.Item >
 
-                </ListGroup>
-                {orders && (
-                    <>
-                        {orders.map((c, i) => {
-                            let j = c.products
-                            j = j.filter(x => props.user.id === x.farmer)
+                            {
+                                orders.map((c, i) => {
+                                    let j = c.products
+                                    j = j.filter(x => props.user.id === x.farmer)
 
-                            let b = "primary"
-                            //console.log(c.paid)
-                            if (c.paid === 0) {
-                                b = "danger"
+                                    let b = "primary"
+                                    //console.log(c.paid)
+                                    if (c.paid === 0) {
+                                        b = "danger"
+                                    }
+                                    return (
+                                        mydisabled[i] !== 0 &&
+                                        <>
+                                            <Row className="p-2 align-items-center">
+                                                <Col sm="1">{c.userID}</Col>
+                                                <Col sm="2">{j.map((x) => { return (<p className="m-0 p-1">{x.name + ": " + x.quantity}</p>) })}</Col>
+                                                <Col sm="4">{c.address.address}<br></br>
+                                                    {c.address.deliveryOn}</Col>
+                                                <Col sm="2">{c.date}</Col>
+                                                <Col sm="1">{c.time}</Col>
+                                                <Col sm="2">{mydisabled[i] === 1 &&
+                                                    <OverlayTrigger
+                                                        placement='bottom'
+                                                        overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}
+                                                    >
+                                                        {
+                                                            butDisable ?
+                                                                <Button data-testid={"buttonGreen" + i} variant='success' disabled ><CheckSquare /></Button>
+                                                                :
+                                                                <Button data-testid={"buttonGreen" + i} variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
+                                                        }
+                                                    </OverlayTrigger>}
+                                                    {mydisabled[i] === 2 &&
+                                                        <OverlayTrigger
+                                                            placement='bottom'
+                                                            overlay={<Tooltip>Confirm <strong>preparation</strong> of the order.</Tooltip>}
+                                                        >
+                                                            {
+                                                                butDisable ?
+                                                                    <Button data-testid={"buttonYellow" + i} variant='warning' disabled ><Handbag /></Button>
+                                                                    :
+                                                                    <Button data-testid={"buttonYellow" + i} variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
+                                                            }
+                                                        </OverlayTrigger>}
+                                                    {mydisabled[i] === 3 && <h5>Confirmed</h5>}</Col>
+
+                                            </Row>
+
+                                        </>
+                                    );
+                                })
                             }
+                        </ListGroup.Item>
 
-                            return (
-                                mydisabled[i] !== 0 && <ListGroup
-                                    key={c.id}
-                                    style={{ textDecoration: "none" }}
-                                    className="my-2 mx-5"
-                                    horizontal>
+                    )}
+                </ListGroup>
 
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-50 align-items-center justify-content-center"
-                                    >
-                                        {c.userID}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-50 align-items-center justify-content-center"
-                                    >
-                                        <ul>{j.map((x) => { return (<li>{x.name + ": " + x.quantity}</li>) })}</ul>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-100 align-items-center justify-content-center"
-                                    >
-                                        <b>Address:</b>&nbsp;{c.address.address}&emsp;
-                                        <b>Date of Delivery:</b>&ensp;{c.address.deliveryOn}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-50 align-items-center justify-content-center"
-                                    >
-                                        {c.date}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-50 align-items-center justify-content-center"
-                                    >
-                                        {c.time}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item
-                                        variant={b}
-                                        className="d-flex w-50 align-items-center justify-content-center"
-                                    >
-                                        {mydisabled[i] === 1 &&
-                                            <OverlayTrigger
-                                                placement='bottom'
-                                                overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}
-                                            >
-                                                {
-                                                    butDisable ?
-                                                        <Button data-testid={"buttonGreen"+i} variant='success' disabled ><CheckSquare /></Button>
-                                                        :
-                                                        <Button data-testid={"buttonGreen"+i} variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
-                                                }
-                                            </OverlayTrigger>}
-                                        {mydisabled[i] === 2 &&
-                                            <OverlayTrigger
-                                                placement='bottom'
-                                                overlay={<Tooltip>Confirm <strong>preparation</strong> of the order.</Tooltip>}
-                                            >
-                                                {
-                                                    butDisable ?
-                                                        <Button data-testid={"buttonYellow"+i} variant='warning' disabled ><Handbag /></Button>
-                                                        :
-                                                        <Button data-testid={"buttonYellow"+i} variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
-                                                }
-                                            </OverlayTrigger>}
-                                        {mydisabled[i] === 3 && <h5>Confirmed</h5>}
-                                    </ListGroup.Item>
-                                </ListGroup>
-                            );
-                        })}
-                    </>
-                )}
-                {!props.id && <Button
-                    size="lg"
-                    className="btn-danger p-2 w-50 mt-3 mb-5"
-                    onClick={() => setGoBack(true)}
-                >
-                    Back
-                </Button>
-                }
             </Container>
-        </>
+        </Col >
     );
 }
 
