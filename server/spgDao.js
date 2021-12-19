@@ -254,7 +254,7 @@ exports.updateProduct = async (product, id, action) => {
 exports.getImage = async (productId) => {
     return new Promise((resolve, reject) => {
         let sql = `SELECT image FROM products WHERE id = ?`;
-        db.all(sql, [productId], function (err,rows) {
+        db.all(sql, [productId], function (err, rows) {
             if (err) {
                 reject({ err: "error in query" });
                 return;
@@ -582,6 +582,90 @@ exports.setOrderStatus = (status, id) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE orders SET status = ? where id = ?'
         db.run(sql, [status, id], (err, row) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+        })
+        resolve(true);
+    })
+}
+
+// get telegram bot name
+exports.getTelegram = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM telegram';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const telegram = rows.map((c) => ({ name: c.name, token: c.token }));
+            resolve(telegram[0]);
+        });
+    });
+};
+
+// delete Telegram Subscriber
+exports.deleteTelegramSubscriber = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM telegramSubscribers WHERE telegramId=?';
+        db.run(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        });
+    });
+};
+
+// create Telegram Subscriber
+exports.createTelegramSubscriber = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO telegramSubscribers (telegramId) VALUES (?)';
+        db.run(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(true);
+        });
+    });
+};
+
+// get Telegram Subscribers
+exports.getTelegramSubscribers = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM telegramSubscribers';
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const telegramSubscribers = rows.map((c) => ({ telegramId: c.telegramId }));
+            resolve(telegramSubscribers);
+        });
+    });
+};
+
+exports.setTelegramId = (telegramId, action) => {
+
+    return new Promise((resolve, reject) => {
+
+        let sql;
+        let params = [];
+        params.push(telegramId);
+        if (action.telegramId) {
+            sql = 'UPDATE users SET telegramId = ? WHERE telegramId = ?'
+            params.push(action.telegramId);
+        }
+        else if (action.id) {
+            sql = 'UPDATE users SET telegramId = ? WHERE id = ?'
+            params.push(action.id);
+        } else return false;
+        
+        db.run(sql, params, (err, row) => {
             if (err) {
                 reject(err);
                 return;

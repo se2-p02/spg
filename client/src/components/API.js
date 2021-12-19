@@ -338,5 +338,13 @@ async function confirmOrderForPickUp(order) {
     }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder };
+async function getTelegram() {
+    let myURL = URL + "/api/telegram";
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json(); //fetchedTelegram
+    } else return { 'error': 'Failed to load Telegram from server' }
+}
+
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder, getTelegram };
 export default API;

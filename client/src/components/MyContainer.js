@@ -143,7 +143,7 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil}></LeftClient>
+                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
                 <MyEmployee clock={clock}
                   setClock={setClock}
                   user={user}
@@ -170,7 +170,7 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil}></LeftClient>
+                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
 
                 <MyClientProfile
                   clock={clock}
@@ -200,7 +200,7 @@ function MyContainer(props) {
                 showCart={true}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil}></LeftClient>
+              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
 
               <MyOrders
                 setModify={setModify}
@@ -562,7 +562,7 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil}></LeftClient>
+              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
 
 
                 <MyProducts
@@ -701,7 +701,7 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil}></LeftClient>
+              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
               <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
 
               </Row>

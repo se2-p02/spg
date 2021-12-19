@@ -4,6 +4,7 @@ const express = require('express');
 const morgan = require("morgan");
 const { check, query, validationResult } = require("express-validator");
 const path = require("path");
+const fetch = require('node-fetch');
 
 const spgDao = require("./spgDao");
 const passport = require('passport'); // auth middleware
@@ -15,7 +16,8 @@ const url = require('url');
 const dayjs = require('dayjs');
 const moment = require('moment');
 const fileupload = require('express-fileupload')
-const fs = require('fs')
+const fs = require('fs');
+const e = require('express');
 
 
 
@@ -55,7 +57,7 @@ const app = new express();
 app.use(morgan("dev"));
 app.use(fileupload());
 app.use(express.json()); // parse the body in JSON format => populate req.body attributes
-app.use(express.static('public')); 
+app.use(express.static('public'));
 app.use('/images', express.static('images'));
 
 // custom middleware: check if a given request is coming from an authenticated user
@@ -78,7 +80,102 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//offset for telegram updateId
+let offset = 0;
+let botToken;
 
+async function subscribe() {
+  if (botToken) {
+    let response = await fetch("https://api.telegram.org/bot5018699856:AAGu2ShunoEJogqlH_ZUovbIv6S2xytGYUE/getUpdates",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ "offset": offset, "timeout": 30 }),
+      });
+
+    if (response.status == 502) {
+      // Status 502 is a connection timeout error,
+      // may happen when the connection was pending for too long,
+      // and the remote server or a proxy closed it
+      // let's reconnect
+      await subscribe();
+    } else if (response.status != 200) {
+      // An error - let's show it
+      // Reconnect in one second
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await subscribe();
+    } else {
+      // Get and show the message
+      let message = await response.json();
+      if (!(message.result.length === 0)) {
+        offset = message.result[message.result.length - 1].update_id + 1;
+        let updates = message.result;
+        updates.forEach(u => {
+          if (u.my_chat_member) {
+            if (u.my_chat_member.new_chat_member.status === "member") {
+
+              //create entry of telegramId where user.id = /start id
+              spgDao.createTelegramSubscriber(u.my_chat_member.from.id, { id: u.my_chat_member.from.id });
+            }
+            else if (u.my_chat_member.new_chat_member.status === "kicked") {
+              //delete entry of telegramId where telegramId = from.id
+              spgDao.setTelegramId("", { telegramId: u.my_chat_member.from.id });
+              spgDao.deleteTelegramSubscriber(u.my_chat_member.from.id);
+            }
+          }
+          else if (u.message) {
+            if (u.message.text) {
+              let text = u.message.text;
+              const myArray = text.split(" ");
+              if (myArray[0] === "/start") {
+                let userId = parseInt(myArray[1]);
+                if (!isNaN(userId)) {
+                  spgDao.setTelegramId(u.message.from.id, { id: userId });
+                }
+              }
+            }
+          }
+        })
+      }
+      // Call subscribe() again to get the next message
+      await subscribe();
+    }
+  } else {
+    const tempTelegram = await spgDao.getTelegram();
+    botToken = tempTelegram.token;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    await subscribe();
+  }
+}
+
+//subscribe for long polling
+subscribe();
+
+async function sendNewProductNotification() {
+
+  try {
+    const subscribers = await spgDao.getTelegramSubscribers();
+    if (subscribers.error) {
+      return;
+    }
+    else {
+      subscribers.forEach(async (s) => {
+        let response = await fetch("https://api.telegram.org/bot" + + "/sendMessage",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ "chat_id": s.telegramId, "text": "Dear subscriber, a new product has been inserted or modified, you can find the updated list of products at http:localhost:3000/client/products" }),
+          });
+      })
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 /*** APIs ***/
 app.post('/api/farmer/image', (req, res) => {
@@ -105,7 +202,7 @@ app.post('/api/farmer/image', (req, res) => {
 
 app.delete('/api/farmer/image', (req, res) => {
   const fileName = req.body.name
-  const path = __dirname  + fileName
+  const path = __dirname + fileName
 
   try {
     fs.unlinkSync(path)
@@ -124,7 +221,23 @@ app.get('/images/solidarity.png', (req, res) => {
 
 //GET logo
 app.get('/images/:imageName', (req, res) => {
-  res.sendFile(path.join(__dirname, "./images/"+req.params.imageName,));
+  res.sendFile(path.join(__dirname, "./images/" + req.params.imageName,));
+});
+
+// GET telegram token
+app.get('/api/telegram', async (req, res) => {
+  try {
+    const telegram = await spgDao.getTelegram();
+    if (telegram.error) {
+      res.status(404).json(telegram);
+    }
+    else {
+      res.json({name: telegram.name});
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).end();
+  }
 });
 
 // GET products
@@ -163,6 +276,7 @@ app.post('/api/products', async (req, res) => {
     if (result.err)
       res.status(404).json(result);
     else {
+      sendNewProductNotification();
       res.status(200).json(result);
     }
   } catch (err) {
@@ -191,12 +305,12 @@ app.put('/api/products/:id', async (req, res) => {
   try {
     const oldImage = await spgDao.getImage(req.params.id)
     //remove from server old image
-    fs.unlinkSync("./images/"+oldImage)
+    fs.unlinkSync("./images/" + oldImage)
     const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
     if (result.err)
       res.status(404).json(result);
     else {
-
+      sendNewProductNotification();
       res.status(200).json(result);
     }
   } catch (err) {
