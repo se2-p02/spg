@@ -168,7 +168,7 @@ async function sendNewProductNotification() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ "chat_id": s.telegramId, "text": "Dear subscriber, a new product has been inserted or modified, you can find the updated list of products at http:localhost:3000/client/products" }),
+            body: JSON.stringify({ "chat_id": s.telegramId, "text": "Dear subscriber, a new product has been inserted or modified, you can find the updated list of products at http://localhost:3000/client/products" }),
           });
       })
     }
