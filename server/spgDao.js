@@ -55,11 +55,11 @@ exports.getNextProducts = (role, user, time, week) => {
 
 
         if (role === "farmer") {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, f.id as farmerId, p.availability, p.confirmed FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, f.id as farmerId, p.availability, p.confirmed, p.image FROM products p LEFT JOIN farmer f ON f.id = p.farmer WHERE p.availability >= ? AND p.availability < ? AND f.id = ?';
             params.push(user.id);
         }
         else {
-            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability, p.confirmed FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
+            sql = 'SELECT p.id, p.name, p.quantity, p.unit, p.farmer, f.name as farmerName, p.price, p.filter, p.availability, p.confirmed, p.image FROM products p LEFT JOIN farmer f WHERE f.id = p.farmer AND p.availability >= ? AND p.availability < ?';
 
         }
 
@@ -68,7 +68,7 @@ exports.getNextProducts = (role, user, time, week) => {
                 reject(err);
                 return;
             }
-            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, filter: p.filter, farmer: p.farmer, farmerName: p.farmerName, price: p.price, confirmed: p.confirmed, availability: p.availability }));
+            const products = rows.map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.unit, filter: p.filter, farmer: p.farmer, farmerName: p.farmerName, price: p.price, confirmed: p.confirmed, availability: p.availability, image: p.image }));
             resolve(products);
         });
     });
@@ -202,7 +202,7 @@ exports.modifyOrder = (items, id) => {
 
 // insert a new product
 exports.addProduct = async (product, farmer, time) => {
-
+    console.log(product)
     return new Promise((resolve, reject) => {
         const today = dayjs(time); //dayjs().day() // from 0 (Sunday) to 6 (Saturday) --> to consider real time and not the virtual clock
         let difference_from_sunday = 0;
@@ -210,10 +210,10 @@ exports.addProduct = async (product, farmer, time) => {
             difference_from_sunday = 7 - today.day();
         }
         const next_week = today.add(difference_from_sunday, 'day').format('YYYY-MM-DD');
-        const sql = `INSERT INTO products (id, name, quantity, unit, farmer, confirmed, delivered, price, availability, filter)
-            SELECT MAX(id) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ? 
+        const sql = `INSERT INTO products (id, name, quantity, unit, farmer, confirmed, delivered, price, availability, filter, image)
+            SELECT MAX(id) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?
             FROM products`;
-        db.run(sql, [product.name, product.quantity, product.unit, farmer.id, 0, 0, product.price, next_week, product.filter], function (err) {
+        db.run(sql, [product.name, product.quantity, product.unit, farmer.id, 0, 0, product.price, next_week, product.filter, product.file], function (err) {
             if (err) {
                 reject(500);
                 return;
@@ -230,13 +230,16 @@ exports.updateProduct = async (product, id, action) => {
         let sql;
         let arrayParam = [];
         if (action.update === true) {
-            sql = `UPDATE products SET name = ?, quantity = ?, unit = ?, price = ?, filter = ? WHERE id = ?`;
-            arrayParam = [...[product.name, product.quantity, product.unit, product.price, product.filter]];
+            sql = `UPDATE products SET name = ?, quantity = ?, unit = ?, price = ?, filter = ?, image = ? WHERE id = ?`;
+            arrayParam = [...[product.name, product.quantity, product.unit, product.price, product.filter, product.file]];
         }
         if (action.confirm === true) {
+
             sql = `UPDATE products SET confirmed = 1 WHERE id = ?`;
         }
         arrayParam.push(id);
+
+
         db.run(sql, arrayParam, function (err) {
             if (err) {
                 reject({ err: "error in query" });
@@ -245,7 +248,20 @@ exports.updateProduct = async (product, id, action) => {
             resolve(true);
         });
     }).catch(() => { return { err: "error in query" }; });
+};
 
+// get image
+exports.getImage = async (productId) => {
+    return new Promise((resolve, reject) => {
+        let sql = `SELECT image FROM products WHERE id = ?`;
+        db.all(sql, [productId], function (err,rows) {
+            if (err) {
+                reject({ err: "error in query" });
+                return;
+            }
+            resolve(rows[0].image);
+        });
+    }).catch(() => { return { err: "error in query" }; });
 };
 
 // delete a product
