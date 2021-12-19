@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup } from "react-bootstrap";
+import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup, Image } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { XCircleFill } from "react-bootstrap-icons";
 import Card from 'react-bootstrap/Card';
@@ -14,6 +14,7 @@ function MyProducts(props) {
     const [wordFilter, setWordFilter] = useState('');
     const [filters, setFilters] = useState(['All']);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [images, setImages]=useState([])
 
     useEffect(() => {
         if (props.cart) {
@@ -21,6 +22,7 @@ function MyProducts(props) {
                 if (p.error === undefined) {
                     setFilter('All');
                     setFilters(['All']);
+                    let i=-1;
                     p.forEach((prod) => {
                         let find = props.cart.find((c) => c.id === prod.id)
                         if (props.cart.find((c) => c.id === prod.id)) {
@@ -98,18 +100,23 @@ function MyProducts(props) {
                                         <>
 
                                             <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
-                                                <Card key={p.id} className="bg_login2 ">
+                                                <Card key={p.id} className="bg_login2 p-0">
                                                     <Card.Title className="text-truncate text-center">
-                                                        <ListGroup.Item variant="secondary" className="d-flex justify-content-center w-100 ">{p.name}</ListGroup.Item>
+                                                    <img id="loadedimage" src={"http://localhost:3000/images/"+p.image} className="img_product"/>
+
                                                     </Card.Title>
-                                                    <Card.Body className="">
-                                                        <ListGroup className="">
-                                                            <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="" className="d-flex w-100 ">Farmer: <p className="text-end w-100">{p.farmerName}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="" className="d-flex w-100 ">Quantity: <p className="text-end w-100">{p.quantity + " " + p.unit}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="" className="d-flex w-100 ">Price: <p className="text-end w-100">{p.price + " €/" + p.unit}</p></ListGroup.Item>
-                                                            <ListGroup.Item variant="" className="d-flex w-100 ">
+                                                    <Card.Body className="m-0 p-3 pt-2 ">
+                                                        <ListGroup variant="flush" className="bg-white radius_button_small border" >
+                                                            <ListGroup.Item className="d-flex w-100 bg-transparent m-0 p-2">Product: <p className="text-end w-100 m-0 p-0">{p.name}</p></ListGroup.Item>
+                                                            <ListGroup.Item as={Link} to={"/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="" className="d-flex w-100 bg-transparent m-0 p-2">Farmer: <p className="text-end w-100 m-0 p-0">{p.farmerName}</p></ListGroup.Item>
+                                                            <ListGroup.Item className="d-flex w-100 bg-transparent m-0 p-2">Quantity: <p className="text-end w-100 m-0 p-0 ">{p.quantity + " " + p.unit}</p></ListGroup.Item>
+                                                            <ListGroup.Item className="d-flex w-100 bg-transparent m-0 p-2">Price: <p className="text-end w-100 m-0 p-0">{p.price + " €/" + p.unit}</p></ListGroup.Item>
+                                                        </ListGroup>
+                                                        <Row className="p-0 m-0 mt-4">
+                                                        <Col sm="0" className="m-0 p-0"></Col>
+                                                            <Col sm="9" className="m-0 p-0">
                                                                 <Form.Control id={'pQnt' + p.id}
-                                                                    className="w-100 mx-1"
+                                                                    className="radius_button"
                                                                     placeholder={0}
                                                                     required
                                                                     min={0}
@@ -117,9 +124,10 @@ function MyProducts(props) {
                                                                     type="number"
                                                                     onChange={(ev) => { setQuantity(ev.target.value) }}
                                                                 />
-                                                                <Button data-testid={'addCart' + p.id} variant="success" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}>+</Button>
-                                                            </ListGroup.Item>
-                                                        </ListGroup>
+                                                            </Col>
+                                                            <Col sm="1" className="m-0 p-0"></Col>
+                                                            <Col sm="1" className="p-0 m-0"> <Button data-testid={'addCart' + p.id} variant="success" className="btn btn-circle btn-sm m-0 align-items-center" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}><h5>+</h5></Button></Col>
+                                                        </Row>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -131,7 +139,7 @@ function MyProducts(props) {
                         </Row>
                     </>
                 }
-                
+
             </Container>
 
         </Col>

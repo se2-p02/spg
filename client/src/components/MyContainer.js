@@ -317,7 +317,9 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
               ></MyNavBar>
-              <MyMyProducts
+              <Row>
+                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <MyMyProducts
                 clock={clock}
                 setClock={setClock}
                 user={user}
@@ -325,6 +327,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
               />
+              </Row>
             </>
           }
         />

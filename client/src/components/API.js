@@ -127,6 +127,7 @@ async function modifyOrder(id, items) {
 
 async function updateProduct(product, action) {
     //action is something like { confirm: true }
+    console.log(JSON.stringify({product: product, action: action}))
     const response = await fetch(URL + `/api/products/${product.id}`,
         {
             method: "PUT",
@@ -142,6 +143,7 @@ async function updateProduct(product, action) {
 }
 
 async function createProduct(product) {
+    console.log(product)
     const response = await fetch(URL + `/api/products`,
         {
             method: "POST",

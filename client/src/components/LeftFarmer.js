@@ -39,6 +39,7 @@ function FilterRow(props) {
     }
 
     if(props.filterName==="Products"){
+        path="myProducts"
         icon=<img
         alt=""
         src={carrot}
@@ -55,9 +56,6 @@ function FilterRow(props) {
       </svg>
     }
 
-    else{
-        path=props.filterName.toLowerCase()
-    }
     return (<ListGroup.Item as={Link} to={"/farmer/" + path} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
         {icon}
         {"  "+props.filterName}

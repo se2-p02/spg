@@ -14,6 +14,10 @@ const dao = require('./db'); // module for accessing the users in the DB
 const url = require('url');
 const dayjs = require('dayjs');
 const moment = require('moment');
+const fileupload = require('express-fileupload')
+const fs = require('fs')
+
+
 
 
 /*** Set up Passport ***/
@@ -49,7 +53,10 @@ passport.deserializeUser((id, done) => {
 // init express
 const app = new express();
 app.use(morgan("dev"));
+app.use(fileupload());
 app.use(express.json()); // parse the body in JSON format => populate req.body attributes
+app.use(express.static('public')); 
+app.use('/images', express.static('images'));
 
 // custom middleware: check if a given request is coming from an authenticated user
 const isLoggedIn = (req, res, next) => {
@@ -74,10 +81,50 @@ app.use(passport.session());
 
 
 /*** APIs ***/
+app.post('/api/farmer/image', (req, res) => {
+  const fileName = req.files.myFile.name
+  let image = req.files.myFile
+  const path = __dirname + '/images/' + fileName
+
+  image.mv(path, (error) => {
+    if (error) {
+      console.error(error)
+      res.writeHead(500, {
+        'Content-Type': 'application/json'
+      })
+      res.end(JSON.stringify({ status: 'error', message: error }))
+      return
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json'
+    })
+    res.end(JSON.stringify({ status: 'success', path: '/images/' + fileName }))
+  })
+})
+
+app.delete('/api/farmer/image', (req, res) => {
+  const fileName = req.body.name
+  const path = __dirname  + fileName
+
+  try {
+    fs.unlinkSync(path)
+    res.end(JSON.stringify({ status: 'success', path: path }))
+  }
+  catch (error) {
+    res.end(JSON.stringify({ status: 'error', message: "File doesn't exists" }))
+    return
+  }
+})
 
 //GET logo
 app.get('/images/solidarity.png', (req, res) => {
   res.sendFile(path.join(__dirname, "./images/solidarity.png"));
+});
+
+//GET logo
+app.get('/images/:imageName', (req, res) => {
+  res.sendFile(path.join(__dirname, "./images/"+req.params.imageName,));
 });
 
 // GET products
@@ -126,9 +173,8 @@ app.post('/api/products', async (req, res) => {
 });
 
 // PUT /api/products/
-//new product
+//update product
 app.put('/api/products/:id', async (req, res) => {
-
   const product = req.body;
 
   const clock = await spgDao.getClock();
@@ -143,18 +189,14 @@ app.put('/api/products/:id', async (req, res) => {
   }
 
   try {
-    if (req.user.role !== "farmer") {
-      res.status(500).json({ error: `User cannot update products` });
-      return;
-    }
-    if (parseInt(req.params.id) !== parseInt(product.product.id)) {
-      res.status(500).json({ error: `User cannot update products with different id than in URL` });
-      return;
-    }
+    const oldImage = await spgDao.getImage(req.params.id)
+    //remove from server old image
+    fs.unlinkSync("./images/"+oldImage)
     const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
     if (result.err)
       res.status(404).json(result);
     else {
+
       res.status(200).json(result);
     }
   } catch (err) {
@@ -582,14 +624,14 @@ app.post("/api/deliveries", async (req, res) => {
       res.status(500).end('Delivery is not permitted in this timeslot.');
       return;
     }
-    
+
     const delivery = req.body;
     const order = await spgDao.getOrders(undefined, delivery.orderId);
     if (order.error) {
       res.status(404).json(order);
     }
-    order[0].products.forEach((p)=> {
-      if(p.id === delivery.id){
+    order[0].products.forEach((p) => {
+      if (p.id === delivery.id) {
         p.status = 3;
       }
     });
@@ -616,11 +658,11 @@ app.post("/api/confirmOrderForPickup", async (req, res) => {
     const products = JSON.parse(order.products)
     console.log(products)
     var result;
-    products.forEach(async(p) => {
-        result = await spgDao.subtractQuantities(p.quantity, p.id);
-        if (result.error) {
-          res.status(500).json(result);
-        }
+    products.forEach(async (p) => {
+      result = await spgDao.subtractQuantities(p.quantity, p.id);
+      if (result.error) {
+        res.status(500).json(result);
+      }
     })
     result = await spgDao.setOrderStatus("available", order.id);
     if (result.error) {

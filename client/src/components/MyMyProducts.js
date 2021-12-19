@@ -64,6 +64,8 @@ function MyMyProducts(props) {
         handleShow();
     }
 
+
+
     const handleConfirm = async (id) => {
 
         API.updateProduct({ id: id }, { confirm: true }).then((r) => {
@@ -77,76 +79,77 @@ function MyMyProducts(props) {
 
 
     return (
-        <>
-            <Container className="bg-dark min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
+        <Col sm="9">
+            <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {(props.clock && (!((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9)) && !(props.clock.day() === 1 && props.clock.hour() < 9))
                     &&
-                    <Alert className="mt-3" variant="danger">You can add new products from Friday to Saturday 9:00 and confirm products on Monday by 9:00.</Alert>)
+                    <Alert className="m-0 mt-1 mx-3 radius_button_small" variant="danger">{"You can add new products from "}<b>Friday to Saturday 9:00</b>{" and confirm products on "} <b>Monday by 9:00</b></Alert>)
                 }
 
-                <ListGroup className="my-3 mx-5 pt-3" horizontal>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Id</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Name</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Quantity</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Farmer</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Price</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Modify</b></ListGroup.Item>
-                    <ListGroup.Item variant="warning" className="d-flex w-100 justify-content-center"><b>Confirm</b></ListGroup.Item>
-                </ListGroup>
-                {products &&
-                    <>
-                        {
-                            products.map(p => {
-                                return (
-                                    <ListGroup key={p.id} className="my-2 mx-5" horizontal>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.id}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.name}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.quantity + " " + p.unit}</ListGroup.Item>
-                                        <ListGroup.Item as={Link} to={"/employee/farmers/" + p.farmer} style={{ textDecoration: 'none' }} variant="primary" className="d-flex w-100 justify-content-center">{p.farmerName}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">{p.price + " €"}</ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            {p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                <Button variant="warning" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
-                                                :
-                                                <Button variant="light" ><PencilSquare /></Button>
-                                            }
-                                        </ListGroup.Item>
-                                        <ListGroup.Item variant="primary" className="d-flex w-100 justify-content-center">
-                                            {p.confirmed === 0 && (
-                                                (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
-                                                    <Button variant="success" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
-                                                    :
-                                                    <Button variant="light" ><CheckSquare /></Button>
-                                            )
-                                            }
-                                            {p.confirmed !== 0 &&
-                                                <p>Confirmed</p>
-                                            }
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                );
-                            })
-                        }
-                        <Row className=" mt-2" data-testid="ciao2">
-                            <Col data-testid="ciao">
-                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3" onClick={() => setGoBack(true)}>Back</Button>
-                            </Col>
-                            <Col>
-                                {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                    <Button size="lg" className="btn-info p-2 w-100 mt-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>Add new product</Button>
-                                    :
-                                    <Button size="lg" data-testId="apbnw" className="btn-light p-2 w-100 mt-3">Add new product</Button>
-                                }
-                            </Col>
+                <ListGroup className="my-2 mx-3 pt-1" variant="flush">
+                    <ListGroup.Item variant="warning">
+                        <Row className="p-3 align-items-center">
+                            <Col sm="1"><b>Id</b></Col>
+                            <Col sm="3"><b>Name</b></Col>
+                            <Col sm="2"><b>Quantity</b></Col>
+                            <Col sm="2"><b>Price</b></Col>
+                            <Col sm="2"><b>Modify</b></Col>
+                            <Col sm="2"><b>Confirm</b></Col>
                         </Row>
-                    </>
-                }
+                    </ListGroup.Item>
+                    {products &&
+                        <>
+                            {
+                                products.map(p => {
+                                    return (
+                                        <ListGroup.Item>
+                                            <Row className="p-2 align-items-center">
+                                                <Col sm="1">{p.id}</Col>
+                                                <Col sm="3">{p.name}</Col>
+                                                <Col sm="2">{p.quantity + " " + p.unit}</Col>
+                                                <Col sm="2">{p.price + " €"}</Col>
+                                                <Col sm="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                                    <Button variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
+                                                    :
+                                                    <Button variant="light" className="border" ><PencilSquare /></Button>
+                                                }</Col>
+                                                <Col sm="2">{p.confirmed === 0 && (
+                                                    (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
+                                                        <Button variant="success" className="border" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
+                                                        :
+                                                        <Button variant="light" className="border" ><CheckSquare /></Button>
+                                                )
+                                                }
+                                                    {p.confirmed !== 0 &&
+                                                        <h6 className="m-0 p-0">CONFIRMED</h6>
+                                                    }</Col>
+                                            </Row>
 
+                                        </ListGroup.Item>
+                                    );
+                                })
+                            }
+                        </>
+                    }
+                </ListGroup>
+                <Row className=" mt-2" data-testid="ciao2">
+                    <Col sm="4">
+                    </Col>
+                    <Col sm="4">
+                        {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 " data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>New product</Button>
+                            :
+                            <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3" disabled>New product</Button>
+                        }
+                    </Col>
+                    <Col sm="4"></Col>
 
-                <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} />
+                </Row>
+
+                <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} user={props.user} />
             </Container>
 
-        </>
+        </Col>
     );
 }
 
@@ -157,7 +160,8 @@ function MyModal(props) {
     const [unit, setUnit] = useState("kg");
     const [price, setPrice] = useState("0");
     const [category, setCategory] = useState("All-purpose");
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState([]);
+    const [img, setImg] = useState(undefined);
 
     useEffect(() => {
         if (props.modal === 'modify') {
@@ -169,29 +173,35 @@ function MyModal(props) {
         }
     }, [props.modal, props.product, props.show]);
 
-    useEffect(() => {
-        setMessage("");
-        if (name === "") setMessage("Name shouldn't be empty.");
-        if (quantity === "0") setMessage((old) => old.concat(" Quantity should be greater than 0."));
-        if (price === "0") setMessage((old) => old.concat(" Price should be greater than 0."));
-    }, [quantity, name, price]);
-
     const handleClose = () => {
         props.setProduct();
-        setMessage("");
+        setMessage([]);
         setName("");
         setCategory("All-purpose");
         setPrice("0");
         setUnit("kg");
         props.setShow(false);
+        setImg(undefined)
     }
 
+
+
     const handleSubmit = () => {
+        setMessage([]);
+        let tmp_msg = []
+
+        if (name === undefined || name === "") tmp_msg[0] = "Name cannot be empty"
+        if (quantity === undefined || quantity === "0") tmp_msg[1] = "Quantity should be greater than 0"
+        if (price === undefined || price === "0") tmp_msg[2] = "Price should be greater than 0"
+        setMessage(tmp_msg)
         if (quantity === "0" || price === "0" || name === "") {
             return;
         }
         if (props.modal === 'modify') {
-            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category }, { update: true }).then((r) => {
+            handleImageUpload()
+            const files = {...img}    
+            let fileName = files[0].name.split("\n").pop()
+            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category, file: fileName }, { update: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
@@ -201,7 +211,10 @@ function MyModal(props) {
             });
         }
         else {
-            API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category }).then((r) => {
+            handleImageUpload()
+            const files = {...img}    
+            let fileName = files[0].name.split("\n").pop()
+            API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category, file: fileName }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
@@ -211,6 +224,7 @@ function MyModal(props) {
             });
         }
     }
+
 
     const handleDelete = () => {
         API.deleteProduct(props.product.id).then((p) => {
@@ -224,34 +238,49 @@ function MyModal(props) {
         props.setShow(false);
     }
 
+    const storeValue = (event) => {
+        const files = event.target.files
+        setImg({...files})
+    }
+
+    const handleImageUpload = () => {
+        const files = {...img}    
+        
+        const formData = new FormData()
+        formData.append('myFile', files[0])
+
+        fetch('/api/farmer/image', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.path)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
+
     return (
+        <>
         <Modal
             {...props}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
-            data-testid = "product_modal"
+            data-testid="product_modal"
         >
-            <Modal.Header>
-                {props.modal === 'modify' &&
-                    <Modal.Title>
-                        Modify product {props.product ? props.product.name : ""}
-                    </Modal.Title>
-                }
-                {props.modal === 'add' &&
-                    <Modal.Title>
-                        Add product
-                    </Modal.Title>
-                }
-            </Modal.Header>
+
             <Modal.Body>
-                <Form className="">
+                <Form>
                     <Row>
                         <Col>
                             <Form.Group controlId="name">
-                                <Form.Label className="text-info w-100"><h5>Name</h5></Form.Label>
+                                <Form.Label className="w-100"><h6>Name</h6></Form.Label>
                                 <Form.Control
-                                    className="w-100 p-3"
+                                    className="w-100 p-2"
                                     type="name"
                                     placeholder="Name"
                                     required
@@ -263,9 +292,9 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="quantity">
-                                <Form.Label className="text-info w-100"><h5>Quantity</h5></Form.Label>
+                                <Form.Label className="w-100"><h6>Quantity</h6></Form.Label>
                                 <Form.Control
-                                    className="w-100 p-3"
+                                    className="w-100 p-2"
                                     type="number"
                                     placeholder="0"
                                     min={0}
@@ -278,11 +307,11 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="unit">
-                                <Form.Label className="text-info w-100"><h5>Unit</h5></Form.Label>
+                                <Form.Label className=" w-100"><h6>Unit</h6></Form.Label>
                                 <Form.Select style={{
                                     backgroundColor: "unset",
                                     marginTop: "unset"
-                                }} className="w-100 p-3" onChange={(ev) => { setUnit(ev.target.value); }}>
+                                }} className="w-100 p-2" onChange={(ev) => { setUnit(ev.target.value); }}>
                                     <option key="kg">kg</option>
                                     <option key="g">g</option>
                                     <option key="pcs">pcs</option>
@@ -294,9 +323,9 @@ function MyModal(props) {
                     <Row>
                         <Col sm={4}>
                             <Form.Group controlId="price">
-                                <Form.Label className="text-info w-100 mt-2"><h5>Price (€)</h5></Form.Label>
+                                <Form.Label className=" w-100 mt-4"><h6>Price</h6></Form.Label>
                                 <Form.Control
-                                    className="w-100 p-3"
+                                    className="w-100 p-2"
                                     type="number"
                                     placeholder="0"
                                     min={0}
@@ -309,11 +338,11 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="category">
-                                <Form.Label className="text-info w-100 mt-2"><h5>Category</h5></Form.Label>
+                                <Form.Label className=" w-100 mt-4"><h6>Category</h6></Form.Label>
                                 <Form.Select style={{
                                     backgroundColor: "unset",
                                     marginTop: "unset"
-                                }} className="w-100 p-3" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
+                                }} className="w-100 p-2" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
                                     <option key="All-purpose">All-purpose</option>
                                     <option key="Fish">Fish</option>
                                     <option key="Dairy and Eggs">Dairy and Eggs</option>
@@ -328,18 +357,37 @@ function MyModal(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <p className="text-danger mt-3">{message}</p>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label className=" w-100 mt-4"><h6>Image</h6></Form.Label>
+                            <Form.Control type="file" id="fileUpload" accept="image/*" onChange={storeValue}/>
+                            
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        {message.map((x) => {
+                            return <p className="text-danger m-0 p-1 mx-2 mt-1">{x}</p>
+                        })}
                     </Row>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                {props.modal === 'modify' &&
-                    <Button variant="danger" onClick={handleDelete}>Delete</Button>
-                }
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="success" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
+            <Modal.Footer className="m-0">
+                <Row className=" w-100">
+                    <Col sm="4">{props.modal === 'modify' &&
+                        <Button variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
+                    }</Col>
+                    <Col sm="4"><Button variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
+                    </Col>
+                    <Col sm="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
+                    </Col>
+                </Row>
+
+
             </Modal.Footer>
+            
         </Modal >
+        
+    </>
+
     );
 }
 
