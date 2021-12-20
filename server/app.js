@@ -84,9 +84,27 @@ app.use(passport.session());
 let offset = 0;
 let botToken;
 
+//used to check time related tasks as sending the notification on telegram on saturday
+async function checkTimeAndConstraints() {
+  if (botToken) {
+    const clock = await spgDao.getClock();
+    const datetime = moment(clock.serverTime);
+    if ((datetime.day() === 6 && datetime.hour() === 9 && datetime.minute() === 0)) {
+      sendNewProductNotification();
+    }
+    await new Promise(resolve => setTimeout(resolve, 59000));
+  }
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  await checkTimeAndConstraints();
+
+
+}
+
+checkTimeAndConstraints();
+
 async function subscribe() {
   if (botToken) {
-    let response = await fetch("https://api.telegram.org/bot5018699856:AAGu2ShunoEJogqlH_ZUovbIv6S2xytGYUE/getUpdates",
+    let response = await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",
       {
         method: "POST",
         headers: {
@@ -154,7 +172,6 @@ async function subscribe() {
 subscribe();
 
 async function sendNewProductNotification() {
-
   try {
     const subscribers = await spgDao.getTelegramSubscribers();
     if (subscribers.error) {
@@ -162,7 +179,7 @@ async function sendNewProductNotification() {
     }
     else {
       subscribers.forEach(async (s) => {
-        let response = await fetch("https://api.telegram.org/bot" + + "/sendMessage",
+        let response = await fetch("https://api.telegram.org/bot" + botToken + "/sendMessage",
           {
             method: "POST",
             headers: {
@@ -224,7 +241,7 @@ app.get('/images/:imageName', (req, res) => {
   res.sendFile(path.join(__dirname, "./images/" + req.params.imageName,));
 });
 
-// GET telegram token
+// GET telegram name
 app.get('/api/telegram', async (req, res) => {
   try {
     const telegram = await spgDao.getTelegram();
@@ -232,7 +249,7 @@ app.get('/api/telegram', async (req, res) => {
       res.status(404).json(telegram);
     }
     else {
-      res.json({name: telegram.name});
+      res.json({ name: telegram.name });
     }
   } catch (err) {
     console.log(err)
@@ -276,7 +293,6 @@ app.post('/api/products', async (req, res) => {
     if (result.err)
       res.status(404).json(result);
     else {
-      sendNewProductNotification();
       res.status(200).json(result);
     }
   } catch (err) {
@@ -310,7 +326,6 @@ app.put('/api/products/:id', async (req, res) => {
     if (result.err)
       res.status(404).json(result);
     else {
-      sendNewProductNotification();
       res.status(200).json(result);
     }
   } catch (err) {
