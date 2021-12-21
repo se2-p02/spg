@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server.js",
     "test": "jest --detectOpenHandles",
-    "test:cov": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
+    "test:cov": "jest --coverage --testResultsProcessor=jest-sonar-reporter --detectOpenHandles",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
