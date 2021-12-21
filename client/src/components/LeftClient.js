@@ -82,7 +82,7 @@ function FilterRow(props) {
     else {
         path = props.filterName.toLowerCase()
     }
-    return (<ListGroup.Item as={Link} to={"/client/" + path} onClick={(e) => { props.setFil(props.filterName) }} action active={active} className="leftButton ">
+    return (<ListGroup.Item as={Link} to={"/client/" + path} data-testid={path} onClick={(e) => { props.setFil(props.filterName) }} action active={active} className="leftButton ">
         {icon}
         {"  " + props.filterName}
     </ListGroup.Item>);
