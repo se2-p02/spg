@@ -30,10 +30,5 @@ test('renders the client profile', () => {
 
     var element = screen.getByTestId("country")
     expect(element).toBeInTheDocument();
-
-    var element = screen.getByTestId("back")
-    expect(element).toBeInTheDocument();
-    
-    
   
   });

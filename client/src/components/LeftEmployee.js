@@ -18,9 +18,6 @@ function LeftEmployee(props) {
             <ListGroup variant="flush" className=" p-2 m-2 mt-0 mb-0 mr-0 pt-0 pb-0">
                 {filters.map(
                     (x) => {
-
-                        
-
                         return (<FilterRow  filterName={x} fil={props.fil} setFil={props.setFil} key={x} />)
                     })
                 }
@@ -62,7 +59,7 @@ function FilterRow(props) {
         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
       </svg>
     }
-    return (<ListGroup.Item as={Link} to={"/employee/" + props.filterName.toLowerCase()} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
+    return (<ListGroup.Item as={Link} to={"/employee/" + props.filterName.toLowerCase()} data-testid={props.filterName.toLowerCase()} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
         {icon}
         {" "+props.filterName}</ListGroup.Item>);
 }

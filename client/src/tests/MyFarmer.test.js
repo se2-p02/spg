@@ -1,50 +1,45 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import MyFarmer from '../components/MyFarmer'
+import LeftFarmer from '../components/LeftFarmer'
 import React from 'react'
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './setupTestsRouter'
-const moment = require('moment');
 
 
-describe('Test navbar', () => {
-  test('renders the farmer starting page', () => {
-    render(<MyFarmer />);
 
+describe('Test employee', () => {
 
-    var element = screen.getByText("My orders")
+  test('renders the employee starting page', () => {
+    renderWithRouter(
+      <LeftFarmer fil={""} setFil={jest.fn()} />
+    );
+    var element = screen.getByTestId("orders")
     expect(element).toBeInTheDocument();
 
-    element = screen.getByText("My products");
+    element = screen.getByTestId("myProducts")
     expect(element).toBeInTheDocument();
+
+    expect(window.location.pathname === "/farmer");
+
 
   });
 
-  test('e2e test buttons', () => {
-    let user = {
-      id: 7,
-      name: "farmer",
-      surname: "farmer",
-      wallet: 0
-    }
-    
-    let date = moment("2021-11-26 06:55");
-    renderWithRouter(<MyFarmer setClock={()=>{jest.fn()}} clock={date} user={user} />, '/farmer' )
+  test('test employee buttons', () => {
 
-    let element = screen.getByText("My products");
-    fireEvent.click(element);
-    expect(window.location.pathname).toMatch('/farmer/myProducts')
+    renderWithRouter(
+      <LeftFarmer fil={""} setFil={jest.fn()} />
+    );
 
-    renderWithRouter(<MyFarmer setClock={()=>{jest.fn()}} clock={date} user={user} />, '/farmer' )
+    var element = screen.getByTestId("orders")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/farmer/orders");
 
-    element = screen.getByText("My orders");
-    fireEvent.click(element);
-    expect(window.location.pathname).toMatch('/farmer/orders')
+    renderWithRouter(
+      <LeftFarmer fil={""} setFil={jest.fn()} />
+    );
 
-
-
-
-
-
-
+    element = screen.getByTestId("myProducts")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/farmer/myProducts");
+   
 
   });
 })

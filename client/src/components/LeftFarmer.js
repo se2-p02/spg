@@ -56,7 +56,7 @@ function FilterRow(props) {
       </svg>
     }
 
-    return (<ListGroup.Item as={Link} to={"/farmer/" + path} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
+    return (<ListGroup.Item as={Link} to={"/farmer/" + path} data-testid={path} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
         {icon}
         {"  "+props.filterName}
         </ListGroup.Item>);

@@ -1,55 +1,67 @@
-import React from "react";
-import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
-import MyClients from "../components/MyClients";
-import moment from 'moment'
+import LeftClient from '../components/LeftClient'
+import React from 'react'
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './setupTestsRouter'
 
 
-describe('Test MyClients', () => {
-    it("tests components", async () => {
-        renderWithRouter(<MyClients
-            clock={moment('2021-11-27 7:55')}
-            setClock={jest.fn()}
-        />, "/employee/clients");
 
-        let elem = screen.getByText("Id")
-        expect(elem).toBeInTheDocument();
+describe('Test employee', () => {
 
-        elem = screen.getByText("Name")
-        expect(elem).toBeInTheDocument()
+  test('renders the employee starting page', () => {
+    renderWithRouter(
+      <LeftClient fil={""} setFil={jest.fn()} />
+    );
+    var element = screen.getByTestId("profile")
+    expect(element).toBeInTheDocument();
 
-        elem = screen.getByText("Surname")
-        expect(elem).toBeInTheDocument()
+    element = screen.getByTestId("products")
+    expect(element).toBeInTheDocument();
 
-        elem = screen.getByText("Add Client")
-        expect(elem).toBeInTheDocument()
+    element = screen.getByTestId("orders");
+    expect(element).toBeInTheDocument();
 
-        elem = screen.getByText("Back")
-        expect(elem).toBeInTheDocument()
+    element = screen.getByTestId("availableOrders");
+    expect(element).toBeInTheDocument();
 
-    });
+    expect(window.location.pathname === "/client");
 
-    it("tests back button", async () => {
-        renderWithRouter(<MyClients
-            clock={moment('2021-11-27 7:55')}
-            setClock={jest.fn()}
-        />, "/employee/clients");
 
-        let elem = screen.getByText("Back")
-        fireEvent.click(elem)
-        expect(window.location.pathname).toMatch('/employee')
-    });
+  });
 
-    it("tests add client button", async () => {
-        renderWithRouter(<MyClients
-            clock={moment('2021-11-27 7:55')}
-            setClock={jest.fn()}
-        />, "/employee/clients");
+  test('test employee buttons', () => {
 
-        let elem = screen.getByText("Add Client")
-        fireEvent.click(elem)
-        expect(window.location.pathname).toMatch('/employee/form')
-    });
+    renderWithRouter(
+      <LeftClient fil={""} setFil={jest.fn()} />
+    );
 
-});
+    var element = screen.getByTestId("profile")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/client/profile");
+
+    renderWithRouter(
+      <LeftClient fil={""} setFil={jest.fn()} />
+    );
+
+    element = screen.getByTestId("products")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/client/products");
+
+    renderWithRouter(
+      <LeftClient fil={""} setFil={jest.fn()} />
+    );
+
+    element = screen.getByTestId("orders")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/client/orders");
+
+    renderWithRouter(
+        <LeftClient fil={""} setFil={jest.fn()} />
+      );
+
+    element = screen.getByTestId("availableOrders")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/client/availableOrders");
+
+
+  });
+})

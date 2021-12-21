@@ -48,7 +48,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3 text-center">
                             <Col sm="2"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Surname: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="surname"><b>Surname: </b>
                             </Col>
                             <Col sm="6" className="m-0 p-0 text-start">{client.surname}
                             </Col>
@@ -56,7 +56,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3 text-center">
                             <Col sm="2"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Email: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="email"><b>Email: </b>
                             </Col>
                             <Col sm="6" className="m-0 p-0 text-start">{client.email}
                             </Col>
@@ -64,7 +64,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3 text-center">
                             <Col sm="2"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Role: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="role"><b>Role: </b>
                             </Col>
                             <Col sm="6" className="m-0 p-0 text-start">{client.role}
                             </Col>
@@ -72,7 +72,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3 text-center pb-4">
                             <Col sm="2"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Wallet: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="wallet"><b>Wallet: </b>
                             </Col>
                             <Col sm="6" className="m-0 p-0 text-start">{client.wallet + " €"}
                             </Col>
@@ -82,7 +82,7 @@ function MyClientProfile(props) {
                     <Col sm="5" className=" m-0 p-0 border-top border-bottom border-end radius_button_half2">
                         <Row className="m-0 p-4 pb-3 ">
                             <Col sm="3"></Col>
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Phone: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="phone"><b>Phone: </b>
                             </Col>
                             <Col sm="5" className="m-0 p-0 text-start">{client.phone}
                             </Col>
@@ -90,7 +90,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3">
                             <Col sm="3"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Address: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="address"><b>Address: </b>
                             </Col>
                             <Col sm="5" className="m-0 p-0 text-start">{client.address}
                             </Col>
@@ -98,7 +98,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3">
                             <Col sm="3"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start "><b>City: </b>
+                            <Col sm="4" className="m-0 p-0 text-start " data-testid="city"><b>City: </b>
                             </Col>
                             <Col sm="5" className="m-0 p-0 text-start ">{client.city}
                             </Col>
@@ -106,7 +106,7 @@ function MyClientProfile(props) {
                         <Row className="m-0 p-4 pt-0 pb-3">
                             <Col sm="3"></Col>
 
-                            <Col sm="4" className="m-0 p-0 text-start"><b>Country: </b>
+                            <Col sm="4" className="m-0 p-0 text-start" data-testid="country"><b>Country: </b>
                             </Col>
                             <Col sm="5" className="m-0 p-0 text-start ">{client.country}
                             </Col>

@@ -1,60 +1,56 @@
-import { screen, fireEvent } from '@testing-library/react';
+import LeftWManager from '../components/LeftWManager'
 import React from 'react'
-import MyWManager from '../components/MyWManager';
-import { act } from "react-dom/test-utils"
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './setupTestsRouter'
 
-test('renders the wmanager profile', () => {
-    /*window.history.replaceState({}, '', "/wmanager")
-    render(
-        <BrowserRouter >
-            <Routes>
-                <Route path="/wmanager" element={<MyWManager />}></Route>
-                <Route
-                    path="*"
-                    element={() => {
-                        return (<></>);
-                    }}
-                />
-            </Routes>
-        </BrowserRouter >
-    )
-    */
 
-    renderWithRouter(<MyWManager />, '/wmanager')
 
-    var element = screen.getByTestId("myDeliveries")
+describe('Test employee', () => {
+
+  test('renders the wmanaer left page', () => {
+    renderWithRouter(
+      <LeftWManager fil={""} setFil={jest.fn()} />
+    );
+    var element = screen.getByTestId("deliveries")
     expect(element).toBeInTheDocument();
-    fireEvent.click(element);
-    expect(window.location.pathname).toMatch('/wmanager/deliveries')
 
-    /*
-    const consoleSpy = jest.spyOn(console, 'log');
-    console.log(window.location.pathname);
-    expect(consoleSpy).toHaveBeenCalledWith('hello');
-    */
-});
-
-test('go to ordersNotAvailable', () => {
-    act(() => {
-        renderWithRouter(<MyWManager />, '/wmanager')
-    });
-
-    var element = screen.getByTestId("ordersNotAvailable")
+    element = screen.getByTestId("availableOrders")
     expect(element).toBeInTheDocument();
-    fireEvent.click(element);
-    expect(window.location.pathname).toMatch('/wmanager/notAvailableOrders')
-});
 
-test('go to availableOrders', () => {
-    act(() => {
-        renderWithRouter(<MyWManager />, '/wmanager')
-    });
-
-    var element = screen.getByTestId("available")
+    element = screen.getByTestId("notAvailableOrders");
     expect(element).toBeInTheDocument();
-    act(() => {
-        fireEvent.click(element);
-    });
-    expect(window.location.pathname).toMatch('/wmanager/availableOrders')
-});
+
+    expect(window.location.pathname === "/wmanager");
+
+
+  });
+
+  test('test wmanager buttons', () => {
+
+    renderWithRouter(
+      <LeftWManager fil={""} setFil={jest.fn()} />
+    );
+
+    var element = screen.getByTestId("deliveries")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/wmanager/deliveries");
+
+    renderWithRouter(
+      <LeftWManager fil={""} setFil={jest.fn()} />
+    );
+
+    element = screen.getByTestId("availableOrders")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/wmanager/availableOrders");
+
+    renderWithRouter(
+      <LeftWManager fil={""} setFil={jest.fn()} />
+    );
+
+    element = screen.getByTestId("notAvailableOrders")
+    fireEvent.click(element)
+    expect(window.location.pathname === "/wmanager/notAvailableOrders");
+
+
+  });
+})

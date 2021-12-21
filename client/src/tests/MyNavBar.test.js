@@ -27,8 +27,12 @@ describe('Test navbar', () => {
         element = screen.getByTestId("clock")
         expect(element).toBeInTheDocument();
 
-        element = screen.getByTestId("my_logout")
+        element = screen.getByTestId("userImg")
         expect(element).toBeInTheDocument();
+        act(() => fireEvent.click(element));
+        expect(screen.getByText('Logout'));
+
+
 
         element = screen.getByTestId("cartIcon")
         expect(element).toBeInTheDocument();
@@ -46,7 +50,7 @@ describe('Test navbar', () => {
         let clock = moment("2021-11-28 15:55");
 
         render(<BrowserRouter>
-            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[{id: 1, name: 'Milk', quantity: 2.0, unit: 'l'}]} />
+            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[{ id: 1, name: 'Milk', quantity: 2.0, unit: 'l' }]} />
         </BrowserRouter>);
         var element = screen.getByTestId("cartIcon")
         expect(element).toBeInTheDocument();
@@ -75,15 +79,14 @@ describe('Test navbar', () => {
             <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
 
-        act(() => {
-            fireEvent.click(screen.getByTestId("my_logout"));
-        });
+        var element = screen.getByTestId("userImg")
+        act(() => fireEvent.click(element));
         var button = screen.getByText("Logout");
         expect(button).toBeInTheDocument();
         act(() => {
             fireEvent.click(screen.getByText("Logout"));
         });
-        expect(window.location.pathname==="/login");
+        expect(window.location.pathname === "/login");
 
 
     })

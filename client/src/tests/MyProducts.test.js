@@ -16,24 +16,11 @@ describe('Test MyProducts', () => {
     fireEvent.click(screen.getByTestId('cartIcon'));
     fireEvent.click(screen.getByTestId('removeBtn'));
 
-    var element = screen.getByText("Back")
-    expect(element).toBeInTheDocument();
-
-    element = screen.getByPlaceholderText("Search for a product");
+    var element = screen.getByPlaceholderText("Search for a product");
     expect(element).toBeInTheDocument();
 
   });
 
-  it("tests go back", async () => {
-    renderWithRouter(<MyProducts
-        showCart={false}
-        clock={moment('2021-11-27 7:55')}
-        setClock={jest.fn()}
-        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
-    
-    let elem = screen.getByText("Back")
-    fireEvent.click(elem)
-    expect(window.location.pathname).toMatch('/wmanager')
-  });
+  
 
 })

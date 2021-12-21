@@ -16,7 +16,7 @@ describe('Test MyMyproducts', () => {
             showCart={true} />);
         var button = screen.getByTestId("apbw");
         expect(button).toBeInTheDocument();
-        expect(button.innerHTML).toBe("Add new product");
+        expect(button.innerHTML).toBe("New product");
 
         act(() => {
             fireEvent.click(screen.getByTestId("apbw"));

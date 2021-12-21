@@ -10,37 +10,18 @@ describe('Test MyDeliveries', () => {
   test('renders the deliveries page', () => {
     render(<MyDeliveries />);
 
-
-    var element = screen.getByText("Back")
+    var element = screen.getByText("Delivery ID");
     expect(element).toBeInTheDocument();
-
-    element = screen.getByText("Delivery id");
+    element = screen.getByText("Product");
     expect(element).toBeInTheDocument();
-    element = screen.getByText("Product id");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("Product name");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("Farmer id");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("Farmer name");
+    element = screen.getByText("Farmer");
     expect(element).toBeInTheDocument();
     element = screen.getByText("Quantity");
     expect(element).toBeInTheDocument();
-    element = screen.getByText("Order id");
+    element = screen.getByText("Order ID");
     expect(element).toBeInTheDocument();
 
-  });
 
-  it("tests go back", async () => {
-    renderWithRouter(<MyDeliveries
-      showCart={false}
-      clock={moment('2021-11-27 7:55')}
-      setClock={jest.fn()}
-      user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/deliveries");
-
-    let elem = screen.getByText("Back")
-    fireEvent.click(elem)
-    expect(window.location.pathname).toMatch('/wmanager')
   });
 
   it("tests go back", async () => {

@@ -9,13 +9,9 @@ describe('Test MyAvailableOrders', () => {
   test('renders the page with the list of not jet available orders', () => {
     render(<MyNotAvailableOrders />);
 
-
-    var element = screen.getByText("Confirm the orders that are ready to be picked up")
+    var element = screen.getByText("Order");
     expect(element).toBeInTheDocument();
-
-    element = screen.getByText("Order ID");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("User ID");
+    element = screen.getByText("User");
     expect(element).toBeInTheDocument();
     element = screen.getByText("Products");
     expect(element).toBeInTheDocument();
@@ -25,25 +21,11 @@ describe('Test MyAvailableOrders', () => {
     expect(element).toBeInTheDocument();
     element = screen.getByText("Amount");
     expect(element).toBeInTheDocument();
-    element = screen.getByText("Confirm availablility");
+    element = screen.getByText("Confirm");
     expect(element).toBeInTheDocument();
-    
-    element = screen.getByText("Back");
-    expect(element).toBeInTheDocument();
+
 
   });
 
-  it("tests go back", async () => {
-    renderWithRouter(<MyNotAvailableOrders
-        clock={moment('2021-11-27 7:55')}
-        setClock={jest.fn()}
-        user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }} />, "/wmanager/notAvailableOrders");
-    
-    let elem = screen.getByText("Back")
-    fireEvent.click(elem)
-    expect(window.location.pathname).toMatch('/wmanager')
-
-
-  });
 
 })

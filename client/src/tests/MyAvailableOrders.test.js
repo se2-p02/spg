@@ -9,53 +9,18 @@ describe('Test MyAvailableOrders', () => {
   test('renders the page with the list of available orders', () => {
     render(<MyAvailableOrders/>);
 
-
-    var element = screen.getByText("Orders ready to be picked up")
-    expect(element).toBeInTheDocument();
-
-    element = screen.getByText("Order ID");
-    expect(element).toBeInTheDocument();
-    element = screen.getByText("User ID");
+    var element = screen.getByText("Order ID");
     expect(element).toBeInTheDocument();
     element = screen.getByText("Products");
     expect(element).toBeInTheDocument();
-    //element = screen.getByText("Date");
-    //expect(element).toBeInTheDocument();
-    //element = screen.getByText("Time");
-    //expect(element).toBeInTheDocument();
     element = screen.getByText("Amount");
     expect(element).toBeInTheDocument();
-    element = screen.getByText("Back");
-    expect(element).toBeInTheDocument();
+
 
 
 })
 
-it("tests go back", async () => {
-  renderWithRouter(<MyAvailableOrders
-      clock={moment('2021-11-27 7:55')}
-      setClock={jest.fn()}
-      user={{ id: 1, role: "wmanager", username: "wmanager@wmanager.wmanager" }}
-      role = "WM" />, "/wmanager/availableOrders");
-  
-  let elem = screen.getByText("Back")
-  fireEvent.click(elem)
-  expect(window.location.pathname).toMatch('/wmanager')
 
-
-});
-
-it("tests go back", async () => {
-  renderWithRouter(<MyAvailableOrders
-      clock={moment('2021-11-27 7:55')}
-      setClock={jest.fn()}
-      user={{ id: 1, role: "client", username: "client@client.client" }}
-      role = "client" />, "/client/availableOrders");
-  
-  let elem = screen.getByText("Back")
-  fireEvent.click(elem)
-  expect(window.location.pathname).toMatch('/client')
-  });
 
 it("tests go back", async () => {
   renderWithRouter(<MyAvailableOrders

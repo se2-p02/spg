@@ -13,26 +13,21 @@ describe('Test MyFarmerOrders', () => {
             setClock={jest.fn()}
             user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
 
-        let elem = screen.getByText("userID")
+        let elem = screen.getByText("User")
         expect(elem).toBeInTheDocument();
 
-        elem = screen.getByText("products")
+        elem = screen.getByText("Products")
         expect(elem).toBeInTheDocument()
 
-        elem = screen.getByText("address")
+        elem = screen.getByText("Address")
         expect(elem).toBeInTheDocument()
 
-        elem = screen.getByText("date")
+        elem = screen.getByText("Date")
         expect(elem).toBeInTheDocument()
 
-        elem = screen.getByText("time")
+        elem = screen.getByText("Time")
         expect(elem).toBeInTheDocument()
 
-        elem = screen.getByText("confirm")
-        expect(elem).toBeInTheDocument()
-
-        elem = screen.getByText("Back")
-        expect(elem).toBeInTheDocument()
 
     });
 
@@ -48,8 +43,5 @@ describe('Test MyFarmerOrders', () => {
             act(() => fireEvent.click(element));
         });
 
-        let elem = screen.getByText("Back")
-        fireEvent.click(elem)
-        expect(window.location.pathname).toMatch('/farmer');
     });
 });

@@ -56,7 +56,7 @@ function FilterRow(props) {
     }
 
 
-    return (<ListGroup.Item as={Link} to={"/wmanager/" + path} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
+    return (<ListGroup.Item as={Link} to={"/wmanager/" + path} data-testid={path} onClick={(e) => {props.setFil(props.filterName)}} action active={active} className="leftButton ">
         {icon}
         {"  "+props.filterName}
         </ListGroup.Item>);

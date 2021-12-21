@@ -13,50 +13,32 @@ describe('Test MyFarmerOrders', () => {
             setClock={jest.fn()}
             user={{ id: 1, role: "employee", username: "admin@admin.admin" }} />, "/employee/orders");
         
-            let elem = screen.getByText("userID")
+            let elem = screen.getByText("Order")
             expect(elem).toBeInTheDocument();
 
-            elem = screen.getByText("id")
+            elem = screen.getByText("User")
             expect(elem).toBeInTheDocument()
 
-            elem = screen.getByText("products")
+            elem = screen.getByText("Products")
             expect(elem).toBeInTheDocument()
 
-            elem = screen.getByText("address")
+            elem = screen.getByText("Delivery")
             expect(elem).toBeInTheDocument()
 
-            elem = screen.getByText("date")
+            elem = screen.getByText("Amount")
             expect(elem).toBeInTheDocument()
 
-            elem = screen.getByText("time")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("amount")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("fulfilled")
+            elem = screen.getByText("Fulfilled")
             expect(elem).toBeInTheDocument()
 
             elem = screen.getByText("Modify")
             expect(elem).toBeInTheDocument()
 
-            elem = screen.getByText("Back")
-            expect(elem).toBeInTheDocument()
+
 
         });
 
-        it("tests components", async () => {
-            renderWithRouter(<MyOrders
-                clock={moment('2021-11-27 7:55')}
-                setClock={jest.fn()}
-                user={{ id: 1, role: "employee", username: "admin@admin.admin" }} />, "/employee/orders");
-            
-            let elem = screen.getByText("Back")
-            fireEvent.click(elem)
-            expect(window.location.pathname).toMatch('/employee')
-
-    
-            });
+        
     
 
 });

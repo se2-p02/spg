@@ -13,7 +13,7 @@ describe('Test login form unit', () => {
                 <MyLogin user={undefined} setUser={() => jest.fn()} />
             </BrowserRouter>);
   
-      const usernameField = screen.getByPlaceholderText('Enter username');
+      const usernameField = screen.getByPlaceholderText('Enter email');
       const passwordField = screen.getByPlaceholderText('Password');
       const loginButton = screen.getByText('Login');
       const homeButton = screen.getByText('Back');
@@ -51,12 +51,14 @@ describe('Test login form e2e', () => {
                 target: { value: 'p' },
             });
         });
+        fireEvent.click(screen.getByText('Login'))
+        
         // Check for error message
-        expect(screen.getByText('Should have some characters'));
+        expect(screen.getByText('Email cannot be empty'));
 
         //Wrong user/password
         act(() => {
-            fireEvent.change(screen.getByPlaceholderText('Enter username'), {
+            fireEvent.change(screen.getByPlaceholderText('Enter email'), {
                 target: { value: 'nino2@gmail.com' },
             });
         });
@@ -74,7 +76,7 @@ describe('Test login form e2e', () => {
 
         // Fill out fields
         act(() => {
-            fireEvent.change(screen.getByPlaceholderText('Enter username'), {
+            fireEvent.change(screen.getByPlaceholderText('Enter email'), {
                 target: { value: 'nino@gmail.com' },
             });
         });
