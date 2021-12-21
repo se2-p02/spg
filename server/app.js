@@ -321,11 +321,12 @@ app.put('/api/products/:id', async (req, res) => {
   try {
     const oldImage = await spgDao.getImage(req.params.id)
     //remove from server old image
-    fs.unlinkSync("./images/" + oldImage)
+    if(product.product.delete) fs.unlinkSync("./images/"+oldImage)
     const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
     if (result.err)
       res.status(404).json(result);
     else {
+
       res.status(200).json(result);
     }
   } catch (err) {

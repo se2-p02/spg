@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./server.js",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:cov": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
     "test:watch": "npm run test -- --watch"
   },

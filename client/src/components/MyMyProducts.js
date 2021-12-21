@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Container, Row, Col, Alert } from "react-bootstrap";
 import { PencilSquare, CheckSquare } from "react-bootstrap-icons";
-import { Link, Navigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import './MyNavBar.css';
@@ -9,13 +8,12 @@ import API from "./API";
 
 
 function MyMyProducts(props) {
-    const [goBack, setGoBack] = useState(false);
     const [modal, setModal] = useState();
     const [products, setProducts] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
     const [product, setProduct] = useState();
     const [show, setShow] = useState(false);
-
+    const [old_img, setOld_img] = useState(undefined)
     const handleShow = () => setShow(true);
 
     useEffect(() => {
@@ -55,9 +53,7 @@ function MyMyProducts(props) {
         }
     }, [reqUpdate, props.cart, props.user, props.clock]);
 
-    if (goBack) {
-        return (<Navigate to={"/" + props.user.role}></Navigate>)
-    }
+   
 
     const handleModify = (id) => {
         setProduct(products.find((prod) => prod.id === id));
@@ -109,7 +105,7 @@ function MyMyProducts(props) {
                                                 <Col sm="2">{p.quantity + " " + p.unit}</Col>
                                                 <Col sm="2">{p.price + " €"}</Col>
                                                 <Col sm="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                    <Button variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); }}><PencilSquare /></Button>
+                                                    <Button variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
                                                     :
                                                     <Button variant="light" className="border" ><PencilSquare /></Button>
                                                 }</Col>
@@ -137,7 +133,7 @@ function MyMyProducts(props) {
                     </Col>
                     <Col sm="4">
                         {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 " data-testid="apbw" onClick={() => { setModal('add'); handleShow(); }}>New product</Button>
+                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 " data-testid="apbw" onClick={() => { setModal('add'); handleShow();setOld_img(undefined) }}>New product</Button>
                             :
                             <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3" disabled>New product</Button>
                         }
@@ -146,7 +142,7 @@ function MyMyProducts(props) {
 
                 </Row>
 
-                <MyModal show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} user={props.user} />
+                <MyModal old_img={old_img} show={show} setReqUpdate={setReqUpdate} setShow={setShow} product={product} modal={modal} setProduct={setProduct} user={props.user} />
             </Container>
 
         </Col>
@@ -198,10 +194,27 @@ function MyModal(props) {
             return;
         }
         if (props.modal === 'modify') {
-            handleImageUpload()
-            const files = {...img}    
-            let fileName = files[0].name.split("\n").pop()
-            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category, file: fileName }, { update: true }).then((r) => {
+            const files = {...img}   
+            let fileName;
+            let del;
+            let tmp1
+            let tmp2
+            if(files[0]===undefined){
+                fileName=props.old_img
+                del = 0;
+            }
+            else{
+                handleImageUpload()
+                fileName = files[0].name.split("\n").pop()
+                del = 1;
+            }
+            if(unit===undefined || unit===null){
+                tmp1="kg"
+            }
+            if(category===undefined || category===null){
+                tmp2="All-purpose"
+            }
+            API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category, file: fileName, delete: del }, { update: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
@@ -211,10 +224,24 @@ function MyModal(props) {
             });
         }
         else {
-            handleImageUpload()
-            const files = {...img}    
-            let fileName = files[0].name.split("\n").pop()
-            API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category, file: fileName }).then((r) => {
+            const files = {...img}   
+            let fileName
+            let tmp1
+            let tmp2
+            if(files[0]===undefined){
+                fileName="no_image.png"
+            }
+            else{
+                handleImageUpload()
+                fileName = files[0].name.split("\n").pop()
+            }
+            if(unit===undefined || unit===null){
+                tmp1="kg"
+            }
+            if(category===undefined || category===null){
+                tmp2="All-purpose"
+            }
+            API.createProduct({ name: name, quantity: quantity, unit: tmp1, price: price, filter: tmp2, file: fileName }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }
