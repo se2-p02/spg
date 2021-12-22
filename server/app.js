@@ -95,10 +95,14 @@ async function checkTimeAndConstraints() {
   }
 }
 
-setInterval(checkTimeAndConstraints, 1000);
+if(process.env.NODE_ENV !== 'test') setInterval(checkTimeAndConstraints, 60000);
+
+exports.clearInt = () => {
+  clearInterval(interval);
+}
 
 async function subscribe() {
-  if (botToken) {
+  if (botToken && process.env.NODE_ENV !== 'test' ) {
     let response = await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",
       {
         method: "POST",
@@ -316,7 +320,7 @@ app.put('/api/products/:id', async (req, res) => {
   try {
     const oldImage = await spgDao.getImage(req.params.id)
     //remove from server old image
-    if(product.product.delete) fs.unlinkSync("./images/"+oldImage)
+    if (product.product.delete) fs.unlinkSync("./images/" + oldImage)
     const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
     if (result.err)
       res.status(404).json(result);
