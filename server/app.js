@@ -90,17 +90,12 @@ async function checkTimeAndConstraints() {
     const clock = await spgDao.getClock();
     const datetime = moment(clock.serverTime);
     if ((datetime.day() === 6 && datetime.hour() === 9 && datetime.minute() === 0)) {
-      sendNewProductNotification();
+      await sendNewProductNotification();
     }
-    await new Promise(resolve => setTimeout(resolve, 59000));
   }
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await checkTimeAndConstraints();
-
-
 }
 
-checkTimeAndConstraints();
+setInterval(checkTimeAndConstraints, 1000);
 
 async function subscribe() {
   if (botToken) {
