@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './images/solidarity_dark.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col, Nav, NavDropdown } from "react-bootstrap";
 import API from "./API";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-
 import MyClock from "./MyClock";
 import moment from "moment";
 import DateTimePicker from 'react-datetime-picker';
@@ -20,7 +19,6 @@ function MyNavBar(props) {
     const handleRemoveFromCart = (p) => {
         props.setCart((c) => c.filter((old) => old !== p));
     }
-
 
     const handleLogout = () => {
         API.logout().then((response) => {
@@ -40,79 +38,98 @@ function MyNavBar(props) {
 
     return (
 
-        <Navbar className="navbar navbar-expand-sm nav-color fixed-top justify-content-between" expand="lg">
+        <Navbar className="navbar navbar-expand-md nav-color fixed-top justify-content-between m-0 p-0" expand="lg">
             {/*<Navbar.Toggle aria-controls="CollapseLeft" /> */}
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
 
-            <Navbar.Brand id="lll">
-                <Container className="d-flex align-items-center">
-                    <img
-                        alt=""
-                        src={Logo}
-                        width="50"
-                        height="50"
-                        className="d-inline-block align-top"
-                    />&emsp;
-                    <div className="navTitle text-black" data-testid="name"><h2>Social Purchasing Group</h2></div>
-                </Container>
-            </Navbar.Brand>
-            <div data-testid="clock">
-                <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
-            </div>
-            <div className="d-flex m-3 mt-0 mb-0 text-center">
-                {props.showCart &&
-                    <Dropdown>
-                        <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="white" className="bg-transparent p-0 m-0" id="cart">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-cart p-2" viewBox="0 0 16 16">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                            </svg>
-                            <Badge variant="black" className="bg-dark text-white m-0" pill>
-                                {props.cart.length}
-                            </Badge>
-                        </Dropdown.Toggle>
+            <Row className="m-0 pt-3 pb-3 w-100 align-items-center">
 
-                        <Dropdown.Menu align="end" className="text-center">
-                            {props.cart.length !== 0 &&
-                                props.cart.map((c) => (
-                                    <Dropdown.Item key={c.id + "d"}>
-                                        <ListGroup key={c.id + "a"} horizontal>
+                <Col md="5" sm="2" xs="2" className="align-items-center text-black ">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" ></Navbar.Toggle>
+                    
+                    <Navbar.Brand id="lll" className="align-items-center d-none dl-sm-none d-xl-block d-lg-block d-md-block">
+                        <Container className="d-flex align-items-center pt-0">
+                            <img
+                                alt=""
+                                src={Logo}
+                                width="50"
+                                height="50"
+                                className="d-inline-block align-top d-none d-xl-block d-lg-block d-md-block "
+                            />&emsp;
+                            <div className="navTitle text-black d-none dl-sm-none d-xl-none d-lg-none d-md-block" data-testid="name"><h2>SPG</h2></div>
+                            <div className="navTitle text-black d-none d-xl-block d-lg-block d-md-none" data-testid="name"><h2>Social Purchasing Group</h2></div>
+                        </Container>
+                    </Navbar.Brand></Col>
+                <Col md="3" sm="5" xs="5" className="align-items-center text-black text-center" >
+                    <div data-testid="clock" className="mb-0 mt-0 p-0 m-0 align-items-center">
+                        <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
+                    </div></Col>
+                <Col md="4" sm="4" xs="4" className=" d-flex flex-row-reverse d-flex align-items-center">
+                    <div className="d-flex m-3 mt-0 mb-0 text-end justify-content-end">
+                        {props.showCart &&
+                            <Dropdown>
+                                <Dropdown.Toggle data-testid="cartIcon" key={"dropCart"} variant="white" className="bg-transparent p-0 m-0" id="cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-cart p-2" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                    </svg>
+                                    <Badge variant="black" className="bg-dark text-white m-0" pill>
+                                        {props.cart.length}
+                                    </Badge>
+                                </Dropdown.Toggle>
 
-                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.name}</ListGroup.Item>
-                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center"><Button className="p-2 pt-1 pb-1" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
-                                        </ListGroup>
-                                    </Dropdown.Item>
-                                ))
-                            }
-                            {props.cart.length !== 0 &&
+                                <Dropdown.Menu align="end" className="text-center">
+                                    {props.cart.length !== 0 &&
+                                        props.cart.map((c) => (
+                                            <Dropdown.Item key={c.id + "d"}>
+                                                <ListGroup key={c.id + "a"} horizontal>
 
-                                <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">Place order</Button>
+                                                    <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.name}</ListGroup.Item>
+                                                    <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                                    <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center"><Button className="p-2 pt-1 pb-1" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                                </ListGroup>
+                                            </Dropdown.Item>
+                                        ))
+                                    }
+                                    {props.cart.length !== 0 &&
 
-                            }
-                            {props.cart.length === 0 &&
-                                <span className="m-auto" id="cartpresence">No products here</span>
-                            }
-                        </Dropdown.Menu>
-                    </Dropdown>}
+                                        <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">Place order</Button>
+
+                                    }
+                                    {props.cart.length === 0 &&
+                                        <span className="m-auto" id="cartpresence">No products here</span>
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>}
 
 
-                <Dropdown className="no_bord">
-                    <Dropdown.Toggle className="d-flex p-2 bg-transparent no_bord" data-testid="userImg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" className="bi bi-person-fill text-dark no_bord" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        </svg>
-                    </Dropdown.Toggle>
+                        <Dropdown className="no_bord">
+                            <Dropdown.Toggle className="d-flex p-2 bg-transparent no_bord" data-testid="userImg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" className="bi bi-person-fill text-dark no_bord" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                            </Dropdown.Toggle>
 
-                    <Dropdown.Menu align="end" id="logout" className="bg-white">
-                        <Dropdown.Item className="text-center">
-                            <Button variant="danger" className="w-100 m-0 radius_button" onClick={() => handleLogout()}>Logout</Button>
-                        </Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
+                            <Dropdown.Menu align="end" id="logout" className="bg-white">
+                                <Dropdown.Item className="text-center">
+                                    <Button variant="danger" className="w-100 m-0 radius_button" onClick={() => handleLogout()}>Logout</Button>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div></Col>
+                    <Navbar.Collapse id="responsive-navbar-nav" className="mt-4">
+                        <Nav className="d-block d-sm-block d-xs-block d-md-none text-center nav-color">
+                            <ListGroup variant="flush" >
+                                {props.fil.map(x=>{
+                                    return( <ListGroup.Item className="bg_login2 m-0 p-2"><Nav.Link href={x.toLowerCase()} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
+                                    )
+                                })}
+
+                            </ListGroup>
+                        </Nav>
+                    </Navbar.Collapse>
+            </Row>
+
+
+
             {props.cart.length !== 0 &&
                 <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
             }

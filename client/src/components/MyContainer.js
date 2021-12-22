@@ -141,6 +141,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Profile", "Products", "My Orders", "Orders in shop"]} 
               ></MyNavBar>
               <Row>
                 <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -168,6 +169,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
                 <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -198,6 +200,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
               <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -232,6 +235,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={["Orders", "Products"]} 
               ></MyNavBar>
               <Row>
               <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
@@ -256,6 +260,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={["Orders", "Products"]} 
               ></MyNavBar>
               <Row>
               <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
@@ -285,6 +290,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={["Orders", "Products"]} 
               ></MyNavBar>
               <Row>
               <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
@@ -316,6 +322,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={["Orders", "Products"]} 
               ></MyNavBar>
               <Row>
                 <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
@@ -347,6 +354,8 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={fil} 
+                setFil={setFil}
               ></MyNavBar>
               <Row>
                 <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
@@ -371,6 +380,8 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                fil={fil} 
+                setFil={setFil}
               ></MyNavBar>
               <Row>
                 <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
@@ -451,6 +462,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -478,6 +490,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -505,6 +518,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
 
               <Row>
@@ -537,6 +551,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -560,6 +575,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
               <Row>
               <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -593,6 +609,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
+                fil={["Clients", "Products", "Orders"]} 
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>

@@ -68,7 +68,7 @@ function MyOrders(props) {
 
 
   return (
-    <Col sm={props.full?"12":"9"}>
+    <Col sm="12" md="9">
       <Container
         className={
           props.full
@@ -83,13 +83,13 @@ function MyOrders(props) {
         <ListGroup className="my-2 mx-3" variant="flush">
           <ListGroup.Item variant="warning">
             <Row className="p-3">
-              <Col sm="1"><b>Order</b></Col>
-              <Col sm="1"><b>User</b></Col>
-              {!props.full?<Col sm="2"><b>Products</b></Col>:<Col sm="3"><b>Products</b></Col>}
-              {!props.full?<Col sm="2"><b>Delivery</b></Col>:<Col sm="3"><b>Delivery</b></Col>}
-              <Col sm="2"><b>Amount</b></Col>
-              <Col sm="2"><b>Fulfilled</b></Col>
-              {!props.full?<Col sm="2"><b>Modify</b></Col>:<></>}
+              <Col sm="1" xs="1" className="p-0 m-0"><b>Order</b></Col>
+              <Col sm="1" xs="0" className="p-0 m-0 d-none d-xl-block d-lg-block d-md-block"><b>User</b></Col>
+              <Col sm="3" md="2" xs="3" ><b>Products</b></Col>
+              <Col sm="2" xs="2"><b>Delivery</b></Col>
+              <Col sm="2" xs="2"><b>Amount</b></Col>
+              <Col sm="2" xs="2"><b>Fulfilled</b></Col>
+              <Col sm="2" xs="1"><b>Modify</b></Col>
             </Row>
           </ListGroup.Item>
 
@@ -106,24 +106,20 @@ function MyOrders(props) {
                   <>
                     <ListGroup.Item>
                       <Row className="align-items-center text-center p-1 m-0">
-                        <Col  sm="1" className="align-items-center">{c.id}</Col>
-                        <Col sm="1">{c.userID}</Col>
-                        {!props.full?<Col sm="2" className="">
+                        <Col sm="1" xs="1" className="align-items-center">{c.id}</Col>
+                        <Col sm="1" xs="1" className="d-none d-xl-block d-lg-block d-md-block">{c.userID}</Col>
+                        <Col md="2" sm="3"  xs="3" className="">
                           {c.products.map((x) => {
                             let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
-                            return(elem);
+                            return (elem);
                           })}
-                        </Col>:<Col sm="3" className="">
-                          {c.products.map((x) => {
-                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
-                            return(elem);
-                          })}
-                        </Col>}
-                        {!props.full?<Col sm="2">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
-                        </Col>:<Col sm="3">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
-                        </Col>}
-                        <Col sm="2">{c.amount + " €"}</Col>
-                        <Col sm="2">{props.user.role === "client" ? (
+                        </Col>
+                        <Col sm="2" xs="2" className="d-xs-block d-sm-block d-xl-none d-lg-none d-md-none">{JSON.parse(c.address).address}
+                        </Col>                        
+                        <Col sm="2" xs="2" className="d-none d-xl-block d-lg-block d-md-block">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
+                        </Col>
+                        <Col sm="2" xs="2">{c.amount + " €"}</Col>
+                        <Col sm="2" xs="2">{props.user.role === "client" ? (
                           c.paid === 0 ? (
                             <Button
                               onClick={() => alert("Fake button")}
@@ -139,35 +135,31 @@ function MyOrders(props) {
                             onClick={() => {
                               updateHandler(c.id);
                             }}
-                            className="btn_hand p-2 m-0 radius_button_small"
+                            className="btn_hand p-1 px-2 m-0 radius_button_small"
                           >
                             HAND OUT
                           </Button>
                         ) : (
-                          <h6>Delivered</h6>
+                          <h6 className="p-0 m-0">DELIVERED</h6>
                         )}</Col>
-                        {!props.full?<Col sm="2">{c.conf || c.paid ? (
-                        <Button className="p-2 m-0 radius_button_small" disabled variant="success">
-                          MODIFY
-                        </Button>
-                      ) : (
-                        <>
-                          <Link to="/client/products">
-                            <Button
-                              className="p-2 m-0 radius_button_small"
-                              variant="success"
-                              onClick={() => {
-                                modifyHandler(c.id, c.products);
-                              }}
-                            >
-                              MODIFY
-                            </Button>
-                          </Link>
+                        <Col sm="2" xs="1">{c.conf || c.paid ?
+                          <>
+                            <Link to="/client/products">
+                              <Button
+                                className="px-1 py-3 m-0 radius_button_small"
+                                variant="success"
+                                onClick={() => {
+                                  modifyHandler(c.id, c.products);
+                                }}
+                              >
+                                MODIFY
+                              </Button>
+                            </Link>
 
-                        </>
-                      )}</Col>:<></>}
+                          </>:<></>
+                        }</Col>
                       </Row></ListGroup.Item>
-                    </>)
+                  </>)
 
               })
               }

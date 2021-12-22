@@ -75,7 +75,7 @@ function MyProducts(props) {
 
 
     return (
-        <Col sm="9">
+        <Col sm="12" md="9">
             <Container className="min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
                 <FloatingLabel label="Filter products:" className="pb-2">
                     <Form.Select className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
@@ -113,10 +113,9 @@ function MyProducts(props) {
                                                             <ListGroup.Item className="d-flex w-100 bg-transparent m-0 p-2">Price: <p className="text-end w-100 m-0 p-0">{p.price + " €/" + p.unit}</p></ListGroup.Item>
                                                         </ListGroup>
                                                         <Row className="p-0 m-0 mt-4">
-                                                        <Col sm="0" className="m-0 p-0"></Col>
-                                                            <Col sm="9" className="m-0 p-0">
+                                                            <Col md="9" sm="9" xs="10" className="m-0 p-0 mx-2">
                                                                 <Form.Control id={'pQnt' + p.id}
-                                                                    className="radius_button"
+                                                                    className="radius_button w-100"
                                                                     placeholder={0}
                                                                     required
                                                                     min={0}
@@ -125,8 +124,7 @@ function MyProducts(props) {
                                                                     onChange={(ev) => { setQuantity(ev.target.value) }}
                                                                 />
                                                             </Col>
-                                                            <Col sm="1" className="m-0 p-0"></Col>
-                                                            <Col sm="1" className="p-0 m-0"> <Button data-testid={'addCart' + p.id} variant="success" className="btn btn-circle btn-sm m-0 align-items-center" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}><h5>+</h5></Button></Col>
+                                                            <Col sm="1" xs="1" className="p-0"> <Button data-testid={'addCart' + p.id} variant="success" className="btn btn-circle btn-sm m-0 align-items-center" onClick={() => handleAddToCart(p.id, parseFloat(quantity), p.name, p.unit, p.price)}><h5>+</h5></Button></Col>
                                                         </Row>
                                                     </Card.Body>
                                                 </Card>
