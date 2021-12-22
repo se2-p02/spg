@@ -95,75 +95,77 @@ async function checkTimeAndConstraints() {
   }
 }
 
-if(process.env.NODE_ENV !== 'test') setInterval(checkTimeAndConstraints, 60000);
+if (process.env.NODE_ENV !== 'test') setInterval(checkTimeAndConstraints, 60000);
 
 exports.clearInt = () => {
   clearInterval(interval);
 }
 
 async function subscribe() {
-  if (botToken && process.env.NODE_ENV !== 'test' ) {
-    let response = await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ "offset": offset, "timeout": 30 }),
-      });
+  if (process.env.NODE_ENV !== 'test') {
+    if (botToken) {
+      let response = await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ "offset": offset, "timeout": 30 }),
+        });
 
-    if (response.status == 502) {
-      // Status 502 is a connection timeout error,
-      // may happen when the connection was pending for too long,
-      // and the remote server or a proxy closed it
-      // let's reconnect
-      await subscribe();
-    } else if (response.status != 200) {
-      // An error - let's show it
-      // Reconnect in one second
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      await subscribe();
-    } else {
-      // Get and show the message
-      let message = await response.json();
-      if (!(message.result.length === 0)) {
-        offset = message.result[message.result.length - 1].update_id + 1;
-        let updates = message.result;
-        updates.forEach(u => {
-          if (u.my_chat_member) {
-            if (u.my_chat_member.new_chat_member.status === "member") {
+      if (response.status == 502) {
+        // Status 502 is a connection timeout error,
+        // may happen when the connection was pending for too long,
+        // and the remote server or a proxy closed it
+        // let's reconnect
+        await subscribe();
+      } else if (response.status != 200) {
+        // An error - let's show it
+        // Reconnect in one second
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await subscribe();
+      } else {
+        // Get and show the message
+        let message = await response.json();
+        if (!(message.result.length === 0)) {
+          offset = message.result[message.result.length - 1].update_id + 1;
+          let updates = message.result;
+          updates.forEach(u => {
+            if (u.my_chat_member) {
+              if (u.my_chat_member.new_chat_member.status === "member") {
 
-              //create entry of telegramId where user.id = /start id
-              spgDao.createTelegramSubscriber(u.my_chat_member.from.id, { id: u.my_chat_member.from.id });
+                //create entry of telegramId where user.id = /start id
+                spgDao.createTelegramSubscriber(u.my_chat_member.from.id, { id: u.my_chat_member.from.id });
+              }
+              else if (u.my_chat_member.new_chat_member.status === "kicked") {
+                //delete entry of telegramId where telegramId = from.id
+                spgDao.setTelegramId("", { telegramId: u.my_chat_member.from.id });
+                spgDao.deleteTelegramSubscriber(u.my_chat_member.from.id);
+              }
             }
-            else if (u.my_chat_member.new_chat_member.status === "kicked") {
-              //delete entry of telegramId where telegramId = from.id
-              spgDao.setTelegramId("", { telegramId: u.my_chat_member.from.id });
-              spgDao.deleteTelegramSubscriber(u.my_chat_member.from.id);
-            }
-          }
-          else if (u.message) {
-            if (u.message.text) {
-              let text = u.message.text;
-              const myArray = text.split(" ");
-              if (myArray[0] === "/start") {
-                let userId = parseInt(myArray[1]);
-                if (!isNaN(userId)) {
-                  spgDao.setTelegramId(u.message.from.id, { id: userId });
+            else if (u.message) {
+              if (u.message.text) {
+                let text = u.message.text;
+                const myArray = text.split(" ");
+                if (myArray[0] === "/start") {
+                  let userId = parseInt(myArray[1]);
+                  if (!isNaN(userId)) {
+                    spgDao.setTelegramId(u.message.from.id, { id: userId });
+                  }
                 }
               }
             }
-          }
-        })
+          })
+        }
+        // Call subscribe() again to get the next message
+        await subscribe();
       }
-      // Call subscribe() again to get the next message
+    } else {
+      const tempTelegram = await spgDao.getTelegram();
+      botToken = tempTelegram.token;
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await subscribe();
     }
-  } else {
-    const tempTelegram = await spgDao.getTelegram();
-    botToken = tempTelegram.token;
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    await subscribe();
   }
 }
 
