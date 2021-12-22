@@ -17,11 +17,11 @@ function MyClock(props) {
   return (
     <>
       {value && props.clock &&
-        <Row className="d-flex align-items-center p-0 m-0">
+        <Row className=" align-items-center container">
 
-          <Col sm={8} className="d-flex justify-content-center p-0 m-0">
+          <Col sm={12} className=" align-items-center d-flex justify-content-start p-0 m-0 text-center vertical-center ">
 
-            <Card body className="clockButton m-0 p-0">
+            <Card body className="clockButton m-0 p-0 text-center align-items-center">
               <DateTimePicker
                 onChange={setValue}
                 value={value}

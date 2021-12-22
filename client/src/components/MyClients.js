@@ -31,16 +31,16 @@ function MyClients(props) {
 
 
     return (
-        <Col sm={9}>
+        <Col sm={12} md={9}>
             <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {clients &&
                     <>
                         <ListGroup className="my-3 mx-5" variant="flush">
                             <ListGroup.Item variant="warning" className="justify-content-center p-3">
                                 <Row>
-                                    <Col sm="4"><b>Id</b></Col>
-                                    <Col sm="4"><b>Name</b></Col>
-                                    <Col sm="4"><b>Surname</b></Col>
+                                    <Col sm="4" xs="4"><b>Id</b></Col>
+                                    <Col sm="4" xs="4"><b>Name</b></Col>
+                                    <Col sm="4" xs="4"><b>Surname</b></Col>
                                 </Row>
                             </ListGroup.Item>
 
@@ -49,9 +49,9 @@ function MyClients(props) {
                                     return (
                                         <ListGroup.Item className="clientButt p-2" as={Link} to={"/employee/clients/"+c.id} key={c.id} style={{textDecoration: 'none'}}>
                                             <Row>
-                                                <Col sm="4">{c.id}</Col>
-                                                <Col sm="4">{c.name}</Col>
-                                                <Col sm="4">{c.surname}</Col>
+                                                <Col sm="4" xs="4">{c.id}</Col>
+                                                <Col sm="4" xs="4">{c.name}</Col>
+                                                <Col sm="4" xs="4">{c.surname}</Col>
                                             </Row>
                                         </ListGroup.Item>
                                     );
@@ -63,11 +63,11 @@ function MyClients(props) {
                     </>
                 }
                 <Row>
-                    <Col sm="4"></Col>
-                    <Col sm="4" className="justify-content-left align-items-left m-0 p-0">
+                    <Col sm="4" xs="4"></Col>
+                    <Col sm="4" xs="4" className="justify-content-left align-items-left m-0 p-0">
                         <Button size="lg" className="add_btn p-2 w-100 mt-3 text-white mb-5" onClick={() => setGoNew(true)}>Add Client</Button>
                     </Col>
-                    <Col sm="4"></Col>
+                    <Col sm="4" xs="4"></Col>
                 </Row>
 
             </Container>
