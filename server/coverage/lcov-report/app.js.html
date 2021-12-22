@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.73% </span>
+                <span class="strong">51.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>251/476</span>
+                <span class='fraction'>242/474</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.55% </span>
+                <span class="strong">34.73% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>68/186</span>
+                <span class='fraction'>66/190</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.74% </span>
+                <span class="strong">63.93% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>42/62</span>
+                <span class='fraction'>39/61</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.04% </span>
+                <span class="strong">51.63% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>244/460</span>
+                <span class='fraction'>237/459</span>
             </div>
         
             
@@ -934,8 +934,7 @@
 <a name='L875'></a><a href='#L875'>875</a>
 <a name='L876'></a><a href='#L876'>876</a>
 <a name='L877'></a><a href='#L877'>877</a>
-<a name='L878'></a><a href='#L878'>878</a>
-<a name='L879'></a><a href='#L879'>879</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L878'></a><a href='#L878'>878</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1023,25 +1022,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1098,10 +1096,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1900,26 +1898,25 @@ let offset = 0;
 let botToken;
 &nbsp;
 //used to check time related tasks as sending the notification on telegram on saturday
-async function checkTimeAndConstraints() {
-  if (botToken) {
-    const clock = await spgDao.getClock();
-    const datetime = moment(clock.serverTime);
-    <span class="missing-if-branch" title="if path not taken" >I</span>if ((datetime.day() === 6 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >datetime.hour() === 9 </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >datetime.minute() === 0)</span>) {
-<span class="cstat-no" title="statement not covered" >      sendNewProductNotification();</span>
+async function <span class="fstat-no" title="function not covered" >checkTimeAndConstraints(</span>) {
+<span class="cstat-no" title="statement not covered" >  if (botToken) {</span>
+    const clock = <span class="cstat-no" title="statement not covered" >await spgDao.getClock();</span>
+    const datetime = <span class="cstat-no" title="statement not covered" >moment(clock.serverTime);</span>
+<span class="cstat-no" title="statement not covered" >    if ((datetime.day() === 6 &amp;&amp; datetime.hour() === 9 &amp;&amp; datetime.minute() === 0)) {</span>
+<span class="cstat-no" title="statement not covered" >      await sendNewProductNotification();</span>
     }
-    await new Promise(resolve =&gt; setTimeout(resolve, 59000));
   }
-  await new Promise(resolve =&gt; setTimeout(resolve, 1000));
-  await checkTimeAndConstraints();
-&nbsp;
-&nbsp;
 }
 &nbsp;
-checkTimeAndConstraints();
+<span class="missing-if-branch" title="if path not taken" >I</span>if(process.env.NODE_ENV !== 'test') <span class="cstat-no" title="statement not covered" >setInterval(checkTimeAndConstraints, 60000);</span>
+&nbsp;
+exports.clearInt = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >  clearInterval(interval);</span>
+}
 &nbsp;
 async function subscribe() {
-  if (botToken) {
-    let response = await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (botToken &amp;&amp; process.env.NODE_ENV !== 'test' ) {
+    let response = <span class="cstat-no" title="statement not covered" >await fetch("https://api.telegram.org/bot" + botToken + "/getUpdates",</span>
       {
         method: "POST",
         headers: {
@@ -2136,7 +2133,7 @@ app.put('/api/products/:id', async (req, res) =&gt; {
   try {
     const oldImage = await spgDao.getImage(req.params.id)
     //remove from server old image
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(product.product.delete) <span class="cstat-no" title="statement not covered" >fs.unlinkSync("./images/"+oldImage)</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (product.product.delete) <span class="cstat-no" title="statement not covered" >fs.unlinkSync("./images/" + oldImage)</span>
     const result = await spgDao.updateProduct(product.product, req.params.id, product.action);
     <span class="missing-if-branch" title="if path not taken" >I</span>if (result.err)
 <span class="cstat-no" title="statement not covered" >      res.status(404).json(result);</span>
@@ -2698,7 +2695,7 @@ module.exports = app;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 21 2021 12:19:45 GMT+0100 (Ora standard dell’Europa centrale)
+                at Wed Dec 22 2021 19:03:05 GMT+0100 (Ora standard dell’Europa centrale)
             </div>
         </div>
         <script src="prettify.js"></script>

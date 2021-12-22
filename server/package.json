@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server.js",
     "test": "jest --detectOpenHandles",
-    "test:cov": "jest --coverage  --detectOpenHandles --testResultsProcessor=jest-sonar-reporter",
+    "test:cov": "cross-env NODE_ENV=test jest --coverage  --detectOpenHandles --testResultsProcessor=jest-sonar-reporter",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
@@ -28,6 +28,7 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^27.3.1",
     "jest-sonar-reporter": "^2.0.0",
     "passport-mock-strategy": "^2.0.0",
