@@ -76,7 +76,7 @@ function MyProducts(props) {
 
     return (
         <Col sm="12" md="9">
-            <Container className="min-height-100 justify-content-center align-items-center text-center below-nav mt-3" fluid>
+            <Container className="min-height-100 justify-content-center align-items-center text-center below-nav mt-0" fluid>
                 <FloatingLabel label="Filter products:" className="pb-2">
                     <Form.Select className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
                         {filters.map((f, i) => <option key={'f' + i} value={f}>{f}</option>)}
