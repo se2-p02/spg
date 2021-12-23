@@ -7,7 +7,6 @@ const app = require("../app");
 var server = request.agent(app)
 
 
-
 function loginAdmin() {
     return function (done) {
         server
@@ -99,7 +98,7 @@ describe("Products test", () => {
     });
 });
 
-/*describe("Clients test", () => {
+describe("Clients test", () => {
   it("tests GET /api/clients", async () => {
     const response = await request(app).get("/api/clients");
     response.body.forEach((product) => {
@@ -137,13 +136,12 @@ describe("Orders test", () => {
     response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
         id: expect.any(Number),
-        products: expect.any(Object),
-        address: expect.any(Object),
         date: expect.any(String),
         time: expect.any(String),
         amount: expect.any(Number),
-        conf: expect.any(Boolean),
-        fulfilled: expect.any(Boolean)
+        conf: expect.any(Number),
+        fulfilled: expect.any(Number),
+        paid: expect.any(Number)
       });
     });
   });
@@ -153,13 +151,14 @@ describe("Orders test", () => {
     response.body.forEach((order) => {
       expect(order).toMatchSnapshot({
         id: expect.any(Number),
-        products: expect.any(Object),
+        products: expect.any(Array),
         address: expect.any(Object),
         date: expect.any(String),
         time: expect.any(String),
         amount: expect.any(Number),
-        conf: expect.any(Boolean),
-        fulfilled: expect.any(Boolean)
+        conf: expect.any(Number),
+        fulfilled: expect.any(Number),
+        paid: expect.any(Number)
       });
     });
   });
@@ -629,9 +628,10 @@ describe("Fulfill order", () => {
     await request(app).delete("/api/sessions/current").expect(200);
   });
 });
+*/
 
 describe("System clock", () => {
   it("tests get /api/clock", async () => {
     const clock = await server.get("/api/clock").expect(200);
   });
-});*/
+});

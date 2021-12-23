@@ -80,23 +80,3 @@ dist
 
 # TernJS port file
 .tern-port
-server/coverage/clover.xml
-server/coverage/clover.xml
-server/coverage/coverage-final.json
-server/coverage/lcov-report/app.js.html
-server/coverage/lcov-report/base.css
-server/coverage/lcov-report/block-navigation.js
-server/coverage/lcov-report/db.js.html
-server/coverage/lcov-report/index.html
-server/coverage/lcov-report/prettify.css
-server/coverage/lcov-report/prettify.js
-server/coverage/lcov-report/sorter.js
-server/coverage/lcov-report/spgDao.js.html
-server/coverage/lcov-report/userDao.js.html
-server/coverage/lcov.info
-server/test-report.xml
-server/coverage/clover.xml
-server/coverage/coverage-final.json
-server/coverage/lcov-report/app.js.html
-server/coverage/lcov-report/db.js.html
-server/coverage/coverage-final.json

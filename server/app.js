@@ -97,10 +97,6 @@ async function checkTimeAndConstraints() {
 
 if (process.env.NODE_ENV !== 'test') setInterval(checkTimeAndConstraints, 60000);
 
-exports.clearInt = () => {
-  clearInterval(interval);
-}
-
 async function subscribe() {
   if (process.env.NODE_ENV !== 'test') {
     if (botToken) {
