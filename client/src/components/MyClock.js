@@ -19,7 +19,7 @@ function MyClock(props) {
       {value && props.clock &&
         <Row className=" align-items-center container">
 
-          <Col sm={12} className=" align-items-center d-flex justify-content-start p-0 m-0 text-center vertical-center ">
+          <Col sm={5} className=" align-items-center justify-content-start p-0 m-0 text-center vertical-center ">
 
             <Card body className="clockButton m-0 p-0 text-center align-items-center">
               <DateTimePicker
@@ -32,11 +32,11 @@ function MyClock(props) {
               />
             </Card>
           </Col>
-          <Col>
+          <Col sm={2}>
 
-            <div className="p-0" style={{ display: 'inline', visibility: moment(value).format('YYYY-MM-DD HH:mm') !== props.clock.format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
-              <Button variant="success" onClick={() => props.updateClock(value)}><CheckLg size="27" /></Button>
-              <Button  variant="danger" onClick={() => setValue(() => new Date(props.clock))}><XLg size="27" /></Button>
+            <div className="p-0" style={{ visibility: moment(value).format('YYYY-MM-DD HH:mm') !== props.clock.format('YYYY-MM-DD HH:mm') ? 'visible' : 'hidden' }}>
+              <Button  variant="success" onClick={() => props.updateClock(value)}><CheckLg size="20" /></Button>
+              <Button  variant="danger" onClick={() => setValue(() => new Date(props.clock))}><XLg size="20" /></Button>
             </div>
           </Col>
 
