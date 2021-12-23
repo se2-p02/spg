@@ -75,22 +75,22 @@ function MyMyProducts(props) {
 
 
     return (
-        <Col sm="9">
+        <Col xs="12"  md="9">
             <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {(props.clock && (!((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9)) && !(props.clock.day() === 1 && props.clock.hour() < 9))
                     &&
-                    <Alert className="m-0 mt-1 mx-3 radius_button_small" variant="danger">{"You can add new products from "}<b>Friday to Saturday 9:00</b>{" and confirm products on "} <b>Monday by 9:00</b></Alert>)
+                    <Alert className="m-0 mt-1 mx-3 radius_button_xsall" variant="danger">{"You can add new products from "}<b>Friday to Saturday 9:00</b>{" and confirm products on "} <b>Monday by 9:00</b></Alert>)
                 }
 
                 <ListGroup className="my-2 mx-3 pt-1" variant="flush">
                     <ListGroup.Item variant="warning">
                         <Row className="p-3 align-items-center">
-                            <Col sm="1"><b>Id</b></Col>
-                            <Col sm="3"><b>Name</b></Col>
-                            <Col sm="2"><b>Quantity</b></Col>
-                            <Col sm="2"><b>Price</b></Col>
-                            <Col sm="2"><b>Modify</b></Col>
-                            <Col sm="2"><b>Confirm</b></Col>
+                            <Col xs="1"><b>Id</b></Col>
+                            <Col xs="3"><b>Name</b></Col>
+                            <Col xs="2"><b>Quantity</b></Col>
+                            <Col xs="2"><b>Price</b></Col>
+                            <Col xs="2"><b>Modify</b></Col>
+                            <Col xs="2"><b>Confirm</b></Col>
                         </Row>
                     </ListGroup.Item>
                     {products &&
@@ -100,16 +100,16 @@ function MyMyProducts(props) {
                                     return (
                                         <ListGroup.Item>
                                             <Row className="p-2 align-items-center">
-                                                <Col sm="1">{p.id}</Col>
-                                                <Col sm="3">{p.name}</Col>
-                                                <Col sm="2">{p.quantity + " " + p.unit}</Col>
-                                                <Col sm="2">{p.price + " €"}</Col>
-                                                <Col sm="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
+                                                <Col xs="1">{p.id}</Col>
+                                                <Col xs="3">{p.name}</Col>
+                                                <Col xs="2">{p.quantity + " " + p.unit}</Col>
+                                                <Col xs="2">{p.price + " €"}</Col>
+                                                <Col xs="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
                                                     <Button variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
                                                     :
                                                     <Button variant="light" className="border" ><PencilSquare /></Button>
                                                 }</Col>
-                                                <Col sm="2">{p.confirmed === 0 && (
+                                                <Col xs="2">{p.confirmed === 0 && (
                                                     (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
                                                         <Button variant="success" className="border" onClick={() => handleConfirm(p.id)}><CheckSquare /></Button>
                                                         :
@@ -129,16 +129,16 @@ function MyMyProducts(props) {
                     }
                 </ListGroup>
                 <Row className=" mt-2" data-testid="ciao2">
-                    <Col sm="4">
+                    <Col xs="4">
                     </Col>
-                    <Col sm="4">
+                    <Col xs="4">
                         {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
                             <Button size="lg" className="btn add_btn p-2 w-100 mt-3 " data-testid="apbw" onClick={() => { setModal('add'); handleShow();setOld_img(undefined) }}>New product</Button>
                             :
                             <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3" disabled>New product</Button>
                         }
                     </Col>
-                    <Col sm="4"></Col>
+                    <Col xs="4"></Col>
 
                 </Row>
 
@@ -348,7 +348,7 @@ function MyModal(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={4}>
+                        <Col xs={4}>
                             <Form.Group controlId="price">
                                 <Form.Label className=" w-100 mt-4"><h6>Price</h6></Form.Label>
                                 <Form.Control
@@ -399,12 +399,12 @@ function MyModal(props) {
             </Modal.Body>
             <Modal.Footer className="m-0">
                 <Row className=" w-100">
-                    <Col sm="4">{props.modal === 'modify' &&
+                    <Col xs="4">{props.modal === 'modify' &&
                         <Button variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
                     }</Col>
-                    <Col sm="4"><Button variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
+                    <Col xs="4"><Button variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
                     </Col>
-                    <Col sm="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
+                    <Col xs="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
                     </Col>
                 </Row>
 

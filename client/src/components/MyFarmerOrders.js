@@ -74,7 +74,7 @@ function MyFarmerOrders(props) {
         return <Navigate to={"/" + props.user.role}></Navigate>;
     }
     return (
-        <Col sm="9">
+        <Col sm="12" xs="12" md="9">
             <Container
                 className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
                 fluid
@@ -82,11 +82,13 @@ function MyFarmerOrders(props) {
                 <ListGroup className="my-3 mx-2" variant="flush">
                     <ListGroup.Item variant="warning" >
                         <Row className="p-2">
-                            <Col sm="1"><b>User</b></Col>
-                            <Col sm="2"><b>Products</b></Col>
-                            <Col sm="4"><b>Address</b></Col>
-                            <Col sm="2"><b>Date</b></Col>
-                            <Col sm="1"><b>Time</b></Col>
+                            <Col sm="1" xs="1"><b>User</b></Col>
+                            <Col sm="2" xs="3"><b>Products</b></Col>
+                            <Col sm="4" xs="3"><b>Address</b></Col>
+                            <Col sm="2" xs="3" ><b>Date</b></Col>
+                            <Col sm="1" xs="1" className="d-none d-xs-none d-sm-block d-md-block d-lg-block d-xl-block"><b>Time</b></Col>
+                            <Col sm="2" xs="2" ><b>Confirm</b></Col>
+
                         </Row>
                     </ListGroup.Item>
 
@@ -107,13 +109,14 @@ function MyFarmerOrders(props) {
                                         mydisabled[i] !== 0 &&
                                         <>
                                             <Row className="p-2 align-items-center">
-                                                <Col sm="1">{c.userID}</Col>
-                                                <Col sm="2">{j.map((x) => { return (<p className="m-0 p-1">{x.name + ": " + x.quantity}</p>) })}</Col>
-                                                <Col sm="4">{c.address.address}<br></br>
+                                                <Col sm="1" xs="1">{c.userID}</Col>
+                                                <Col sm="2" xs="3" className="">{j.map((x) => { return (<p className="m-0 p-1">{x.name + ": " + x.quantity}</p>) })}</Col>
+                                                <Col sm="4" xs="3" className="d-block d-xs-block d-sm-none">{c.address.address}</Col>
+                                                <Col sm="4" xs="3" className="d-none d-xs-none d-sm-block">{c.address.address}<br></br>
                                                     {c.address.deliveryOn}</Col>
-                                                <Col sm="2">{c.date}</Col>
-                                                <Col sm="1">{c.time}</Col>
-                                                <Col sm="2">{mydisabled[i] === 1 &&
+                                                <Col sm="2" xs="3">{c.date}</Col>
+                                                <Col sm="1" xs="1" className="d-none d-xs-none d-sm-block d-md-block d-lg-block d-xl-block">{c.time}</Col>
+                                                <Col sm="2" xs="2" >{mydisabled[i] === 1 &&
                                                     <OverlayTrigger
                                                         placement='bottom'
                                                         overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}

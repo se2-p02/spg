@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button"
 import { Link } from 'react-router-dom';
 import './MyNavBar.css';
 import carrot from './images/carrot.png'
+import teleg from './images/telegram.png'
 import API from "./API";
 
 
@@ -35,7 +36,16 @@ function LeftClient(props) {
                 }
 
                 {telegram &&
-                    <ListGroup.Item as={Button} data-testid="telegram" className="my-1 mx-1 " onClick={() => window.open("https://telegram.me/" + telegram + "?start=" + props.user.id, "_blank")}>Subscribe to the telegram bot</ListGroup.Item>
+                    <ListGroup.Item as={Button}  data-testid={"teleg"} onClick={() => window.open("https://telegram.me/" + telegram + "?start=" + props.user.id, "_blank")} action className="leftButton ">
+                        {<img
+                            alt=""
+                            src={teleg}
+                            width="20"
+                            height="20"
+                            className="m-2"
+                        />}
+                        {" Subscribe to telegram"}
+                    </ListGroup.Item>
 
                 }
             </ListGroup>
