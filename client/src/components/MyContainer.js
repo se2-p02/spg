@@ -36,7 +36,7 @@ function MyContainer(props) {
   const [orderId, setOrderId] = useState()
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
-  const [fil, setFil] = useState(undefined)
+  const [fil, setFil] = useState([])
 
 
   useEffect(() => {

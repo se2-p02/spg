@@ -45,7 +45,7 @@ function MyNavBar(props) {
 
                 <Col md="5" sm="2" xs="2" className="align-items-center text-black ">
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" ></Navbar.Toggle>
-                    
+
                     <Navbar.Brand id="lll" className="align-items-center d-none dl-sm-none d-xl-block d-lg-block d-md-block">
                         <Container className="d-flex align-items-center pt-0">
                             <img
@@ -115,17 +115,18 @@ function MyNavBar(props) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                    <Navbar.Collapse id="responsive-navbar-nav" className="mt-4">
-                        <Nav className="d-block d-sm-block d-xs-block d-md-none text-center nav-color">
-                            <ListGroup variant="flush" >
-                                {props.fil.map(x=>{
-                                    return( <ListGroup.Item className="bg_login2 m-0 p-2"><Nav.Link href={x.toLowerCase()} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
-                                    )
-                                })}
+                {props.fil && <Navbar.Collapse id="responsive-navbar-nav" className="mt-4">
+                    <Nav className="d-block d-sm-block d-xs-block d-md-none text-center nav-color">
+                        <ListGroup variant="flush" >
+                            {props.fil.map(x => {
+                                return (<ListGroup.Item className="bg_login2 m-0 p-2"><Nav.Link href={x.toLowerCase()} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
+                                )
+                            })}
 
-                            </ListGroup>
-                        </Nav>
-                    </Navbar.Collapse>
+                        </ListGroup>
+                    </Nav>
+                </Navbar.Collapse>
+                }
             </Row>
 
 
