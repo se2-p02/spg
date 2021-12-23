@@ -187,10 +187,11 @@ exports.addOrder = async (order) => {
 };
 
 //modify the order
-exports.modifyOrder = (items, id) => {
+exports.modifyOrder = (items,address, id) => {
+    console.log('from DAO '+items)
     return new Promise((resolve, reject) => {
-        const sql = 'UPDATE orders SET products=? WHERE id = ?';
-        db.run(sql, [items, id], function (err, rows) {
+        const sql = 'UPDATE orders SET products=?,address=? WHERE id = ?';
+        db.run(sql, [items,address, id], function (err, rows) {
             if (err) {
                 reject(err);
                 return;

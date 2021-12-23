@@ -200,7 +200,7 @@ function MyModal(props) {
         setErrorMsg(() => '');
         console.log(props.modify)
         if (props.modify) {
-            await API.modifyOrder(props.orderId, order.products).then((response) => {
+            await API.modifyOrder(props.orderId, order).then((response) => {
                 if (response.error === undefined) {
                     setSuccessful(true);
                     props.setCart([]);

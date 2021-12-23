@@ -456,11 +456,11 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 
 //PUT modify order
 app.put("/api/orders/modify/:id", async (req, res) => {
-  console.log(req.body)
-  const items = JSON.stringify(req.body);
-  console.log(items)
+  
+  const address = JSON.stringify(req.body.address);
+  const items = JSON.stringify(req.body.products);
   try {
-    await spgDao.modifyOrder(items, req.params.id);
+    await spgDao.modifyOrder(items,address,req.params.id);
     res.status(200).end();
   } catch {
     res.status(500).json({ error: "cannot update basket" });
