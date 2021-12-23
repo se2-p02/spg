@@ -91,8 +91,8 @@ function MyLogin(props) {
             <Container className=" min-height-100 justify-content-center m-0 p-0 below-nav pt-5 bg_login" style={{ display: 'flex' }} fluid>
 
                 <Row className="w-100 mt-5 vheight-100 m-0 p-0">
-                    <Col xs="3" sm="3" md="3"></Col>
-                    <Col xs="6" sm="6" md="6" className=' below-nav m-0 p-0 '>
+                    <Col xs="2" sm="2" md="3"></Col>
+                    <Col xs="8" sm="8" md="6" className=' below-nav m-0 p-0 '>
                         <Container className="radius_button p-5 mb-0 mt-5 bg-white border">
 
                             <Form className="pt-1 p-0 m-0">
@@ -177,7 +177,7 @@ function MyLogin(props) {
                             </Row>
                         </Container>
                     </Col>
-                    <Col xs="3" sm="3" md="3"></Col>
+                    <Col xs="2" sm="2" md="3"></Col>
                 </Row>
             </Container>
         </>

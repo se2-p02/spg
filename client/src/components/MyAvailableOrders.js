@@ -31,7 +31,7 @@ function MyAvailableOrders(props) {
   }
 
   return (
-    <Col sm="9">
+    <Col sm="12" xs="12" md="9">
       <Container
         className={props.id ? "justify-content-center align-items-center text-center" : " min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
         fluid

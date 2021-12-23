@@ -43,8 +43,8 @@ function MyNavBar(props) {
 
             <Row className="m-0 pt-3 pb-3 w-100 align-items-center">
 
-                <Col md="5" sm="2" xs="2" className="align-items-center text-black ">
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" ></Navbar.Toggle>
+                <Col md="5" sm="2" xs="2" className="align-items-center text-black">
+                    <Navbar.Toggle className={props.fil?"":"d-none"} aria-controls="responsive-navbar-nav" ></Navbar.Toggle>
 
                     <Navbar.Brand id="lll" className="align-items-center d-none dl-sm-none d-xl-block d-lg-block d-md-block">
                         <Container className="d-flex align-items-center pt-0">
@@ -59,7 +59,7 @@ function MyNavBar(props) {
                             <div className="navTitle text-black d-none d-xl-block d-lg-block d-md-none" data-testid="name"><h2>Social Purchasing Group</h2></div>
                         </Container>
                     </Navbar.Brand></Col>
-                <Col md="3" sm="5" xs="5" className="align-items-center text-black text-center" >
+                <Col md="3" sm="6" xs="6" className="align-items-center text-black text-center" >
                     <div data-testid="clock" className="mb-0 mt-0 p-0 m-0 align-items-center">
                         <MyClock clock={props.clock} updateClock={updateClock} setClock={props.setClock} />
                     </div></Col>
@@ -115,9 +115,9 @@ function MyNavBar(props) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                {props.fil && <Navbar.Collapse id="responsive-navbar-nav" className="mt-4">
+                {props.fil && <Navbar.Collapse id="responsive-navbar-nav" className="mt-0">
                     <Nav className="d-block d-sm-block d-xs-block d-md-none text-center nav-color">
-                        <ListGroup variant="flush" >
+                        <ListGroup variant="flush" className="mt-3">
                             {props.fil.map(x => {
                                 return (<ListGroup.Item className="bg_login2 m-0 p-2"><Nav.Link href={x.toLowerCase()} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
                                 )
