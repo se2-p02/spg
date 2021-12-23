@@ -25,6 +25,8 @@ import MyDeliveries from "./MyDeliveries";
 import LeftClient from "./LeftClient";
 import LeftFarmer from "./LeftFarmer";
 import LeftWManager from "./LeftWManager";
+import LeftWWorker from "./LeftWWorker";
+import LeftManager from "./LeftManager";
 
 
 function MyContainer(props) {
@@ -141,7 +143,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
-                fil={["Profile", "Products", "My Orders", "Orders in shop"]} 
+                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
                 <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -203,18 +205,18 @@ function MyContainer(props) {
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
 
-              <MyOrders
-                setModify={setModify}
-                clock={clock}
-                setClock={setClock}
-                user={user}
-                setOrderId={setOrderId}
-                cart={cart}
-                setCart={setCart}
-                full={0}
-              ></MyOrders>
+                <MyOrders
+                  setModify={setModify}
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  setOrderId={setOrderId}
+                  cart={cart}
+                  setCart={setCart}
+                  full={0}
+                ></MyOrders>
               </Row>
             </>
           }
@@ -235,11 +237,11 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]} 
+                fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
-              <MyFarmer clock={clock} setClock={setClock} user={user} />
+                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <MyFarmer clock={clock} setClock={setClock} user={user} />
 
               </Row>
             </>
@@ -260,18 +262,18 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]} 
+                fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
 
-              <MyFarmerOrders
-                clock={clock}
-                setClock={setClock}
-                user={user}
-              />
+                <MyFarmerOrders
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                />
               </Row>
-              
+
             </>
           }
         />
@@ -290,20 +292,20 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]} 
+                fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-              <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
 
-              <MyProducts
-                clock={clock}
-                setClock={setClock}
-                user={user}
-                cart={cart}
-                setCart={setCart}
-              />
+                <MyProducts
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  cart={cart}
+                  setCart={setCart}
+                />
               </Row>
-              
+
             </>
           }
         />
@@ -322,18 +324,72 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]} 
+                fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
                 <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
                 <MyMyProducts
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  cart={cart}
+                  setCart={setCart}
+                  showCart={true}
+                />
+              </Row>
+            </>
+          }
+        />
+        <Route
+          path="/wworker"
+          exact
+          element={
+            <>
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
+                modify={modify}
+                orderId={orderId}
                 clock={clock}
                 setClock={setClock}
-                user={user}
+                setUser={setUser}
                 cart={cart}
                 setCart={setCart}
-                showCart={true}
-              />
+                showCart={false}
+                fil={["Available Orders"]}
+                setFil={setFil}
+              ></MyNavBar>
+              <Row>
+                <LeftWWorker fil={fil} setFil={setFil}></LeftWWorker>
+                <></>
+
+              </Row>
+            </>
+          }
+        />
+
+        <Route
+          path="/wworker/notAvailableOrders"
+          element={
+            <>
+              <MyNavBar
+                user={user}
+                setModify={setModify}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setClock={setClock}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+                setUser={setUser}
+                fil={["Available Orders"]}
+                setFil={setFil}
+              ></MyNavBar>
+              <Row>
+                <LeftWWorker fil={fil} setFil={setFil}></LeftWWorker>
+                <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
+
               </Row>
             </>
           }
@@ -354,7 +410,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={fil} 
+                fil={["Deliveries", "Confirm Orders"]}
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -380,21 +436,73 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={fil} 
+                fil={["Deliveries", "Confirm Orders"]}
                 setFil={setFil}
               ></MyNavBar>
               <Row>
                 <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
                 <MyDeliveries
+                  clock={clock}
+                  setClock={setClock}
+                  user={user}
+                  cart={cart}
+                  setCart={setCart}
+                  showCart={false}
+                />
+              </Row>
+
+            </>
+          }
+        />
+        <Route
+          path="/manager"
+          exact
+          element={
+            <>
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
+                modify={modify}
+                orderId={orderId}
                 clock={clock}
                 setClock={setClock}
-                user={user}
+                setUser={setUser}
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-              />
+                fil={["Unretrieved Orders"]}
+                setFil={setFil}
+              ></MyNavBar>
+              <Row>
+                <LeftManager fil={fil} setFil={setFil}></LeftManager>
+                <></>
+
               </Row>
-              
+            </>
+          }
+        />
+        <Route
+          path="/manager/unretrievedOrders"
+          element={
+            <>
+              <MyNavBar setFil={setFil}
+                user={user}
+                setModify={setModify}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
+                cart={cart}
+                setCart={setCart}
+                showCart={false}
+                fil={["Unretrieved Orders"]}
+                setFil={setFil}
+              ></MyNavBar>
+              <Row>
+                <LeftManager fil={fil} setFil={setFil}></LeftManager>
+              </Row>
+
             </>
           }
         />
@@ -462,7 +570,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -490,7 +598,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -518,7 +626,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
 
               <Row>
@@ -551,7 +659,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -575,10 +683,10 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
 
 
                 <MyProducts
@@ -609,7 +717,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
-                fil={["Clients", "Products", "Orders"]} 
+                fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
                 <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
@@ -657,7 +765,7 @@ function MyContainer(props) {
           path="/wmanager/availableOrders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -668,34 +776,12 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
                 setUser={setUser}
+                fil={["Deliveries", "Confirm Orders"]}
+                setFil={setFil}
               ></MyNavBar>
               <Row>
                 <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
-              <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="VM" />
-
-              </Row>
-            </>
-          }
-        />
-        <Route
-          path="/wmanager/notAvailableOrders"
-          element={
-            <>
-              <MyNavBar setFil={setFil}
-                user={user}
-                setModify={setModify}
-                modify={modify}
-                orderId={orderId}
-                clock={clock}
-                setClock={setClock}
-                cart={cart}
-                setCart={setCart}
-                showCart={false}
-                setUser={setUser}
-              ></MyNavBar>
-              <Row>
-                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
-                <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
+                <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="VM" />
 
               </Row>
             </>
@@ -718,8 +804,8 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <Row>
-              <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
-              <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
+                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+                <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
 
               </Row>
             </>
