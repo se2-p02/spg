@@ -91,11 +91,11 @@ function MyLogin(props) {
             <Container className=" min-height-100 justify-content-center m-0 p-0 below-nav pt-5 bg_login" style={{ display: 'flex' }} fluid>
 
                 <Row className="w-100 mt-5 vheight-100 m-0 p-0">
-                    <Col sm={3}></Col>
-                    <Col sm={6} className='col-5 below-nav m-0 p-5 '>
-                        <Container className="radius_button p-5 mb-0 mt-4 bg-white border">
+                    <Col xs="3" sm="3" md="3"></Col>
+                    <Col xs="6" sm="6" md="6" className=' below-nav m-0 p-0 '>
+                        <Container className="radius_button p-5 mb-0 mt-5 bg-white border">
 
-                            <Form className="pt-0 p-0 m-0">
+                            <Form className="pt-1 p-0 m-0">
                                 <Form.Group className="mt-1 w-100">
                                     <Form.Label className=" w-100"><h5>Email</h5></Form.Label>
                                     <Form.Control
@@ -146,7 +146,7 @@ function MyLogin(props) {
                             </Form>
                             <p className="text p-0 pt-2 ">Not registered yet? <a className="text-primary" href="/signup">Sign up</a></p>
                             <Row className="pt-4 w-100 m-0">
-                                <Col sm={5} className="text-left m-0 p-0">
+                                <Col xs="5" sm="5" className="text-left m-0 p-0">
 
                                     <Button
                                         size="lg"
@@ -159,8 +159,8 @@ function MyLogin(props) {
                                         Back
                                     </Button>
                                 </Col>
-                                <Col sm={2} className=""></Col>
-                                <Col sm={5} className="text-right m-0 p-0">
+                                <Col sm="2" xs="2" className=""></Col>
+                                <Col sm="5" xs="5" className="text-right m-0 p-0">
                                     <Button
                                         size="lg"
                                         variant="success"
@@ -177,7 +177,7 @@ function MyLogin(props) {
                             </Row>
                         </Container>
                     </Col>
-                    <Col sm={3}></Col>
+                    <Col xs="3" sm="3" md="3"></Col>
                 </Row>
             </Container>
         </>
