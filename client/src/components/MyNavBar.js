@@ -18,6 +18,12 @@ function MyNavBar(props) {
 
     const handleRemoveFromCart = (p) => {
         props.setCart((c) => c.filter((old) => old !== p));
+        //update the product table **quantity field**
+        API.updateProductQuantity(p).then((response) => {
+            if (response.error === undefined) {
+                console.log("quantity updated")
+            };
+        });
     }
 
     const handleLogout = () => {

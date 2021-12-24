@@ -125,6 +125,22 @@ async function modifyOrder(id, order) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function updateProductQuantity(order) {
+    console.log(order)
+    const response = await fetch(URL + `/api/orders/modify/quantity/1`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(order),
+
+        });
+    if (response.ok) {
+        return true;
+    } else return { 'error': 'Failed to store data on server' }
+}
+
 async function updateProduct(product, action) {
     //action is something like { confirm: true }
     console.log(JSON.stringify({product: product, action: action}))
@@ -346,5 +362,5 @@ async function getTelegram() {
     } else return { 'error': 'Failed to load Telegram from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder, getTelegram };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder, getTelegram,updateProductQuantity };
 export default API;
