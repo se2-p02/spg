@@ -232,10 +232,11 @@ exports.addProduct = async (product, farmer, time) => {
         }
         const next_week = today.add(difference_from_sunday, 'day').format('YYYY-MM-DD');
         const sql = `INSERT INTO products (id, name, quantity, unit, farmer, confirmed, delivered, price, availability, filter, image)
-            SELECT MAX(id) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?
+            SELECT MAX(id) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             FROM products`;
         db.run(sql, [product.name, product.quantity, product.unit, farmer.id, 0, 0, product.price, next_week, product.filter, product.file], function (err) {
             if (err) {
+                console.log(err, "prova" + product.unit);
                 reject(500);
                 return;
             }
