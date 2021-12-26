@@ -484,15 +484,6 @@ app.put("/api/orders/modify/quantity/:id", async (req, res) => {
   const items = req.body;
   try {
 
-    // let flag = false;
-    // console.log(items);
-    //   items.forEach(async (prod) => {
-    //     console.log('from LOOOP'+prod.name);
-    //     const res_prod = await spgDao.orderPrep(prod);
-    //     if (res_prod.error) flag = true;
-    //   })
-    //   if (flag) return;
-
     await spgDao.updateProductQuantity(items);
 
     res.status(200).end();
