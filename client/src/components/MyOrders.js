@@ -142,7 +142,7 @@ function MyOrders(props) {
                         ) : (
                           <h6 className="p-0 m-0">DELIVERED</h6>
                         )}</Col>
-                        <Col sm="2" xs="1">{c.conf || c.paid ?
+                        <Col sm="2" xs="1">{!c.paid ?
                           <>
                             <Link to="/client/products">
                               <Button

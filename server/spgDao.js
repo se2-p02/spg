@@ -156,10 +156,30 @@ exports.getNextNumber = async () => {
 };
 
 exports.orderPrep = async (product) => {
+    console.log('from DAO'+ product.name,product.quantity)
     try {
         return await new Promise((resolve, reject) => {
-            const sql = 'UPDATE products SET quantity = quantity - ? WHERE name = ? ';
-            db.run(sql, [product.quantity, product.name], function (err) {
+            const sql = 'UPDATE products SET quantity = quantity - ? WHERE id = ? ';
+            db.run(sql, [product.quantity, product.id], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(true);
+            });
+        });
+    } catch (err) {
+        return;
+    }
+};
+
+//update the product table after removing one item from the order when modifying the order
+exports.updateProductQuantity = async (product) => {
+    console.log('from update'+ product.name,product.quantity)
+    try {
+        return await new Promise((resolve, reject) => {
+            const sql = 'UPDATE products SET quantity = quantity + ? WHERE id = ? ';
+            db.run(sql, [product.quantity, product.id], function (err) {
                 if (err) {
                     reject(err);
                     return;

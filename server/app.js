@@ -458,9 +458,34 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 app.put("/api/orders/modify/:id", async (req, res) => {
   
   const address = JSON.stringify(req.body.address);
-  const items = JSON.stringify(req.body.products);
+  const items = req.body.products;
   try {
-    await spgDao.modifyOrder(items,address,req.params.id);
+
+    let flag = false;
+    console.log(items);
+      items.forEach(async (prod) => {
+        console.log('from LOOOP'+prod.name);
+        const res_prod = await spgDao.orderPrep(prod);
+        if (res_prod.error) flag = true;
+      })
+      if (flag) return;
+
+    await spgDao.modifyOrder(JSON.stringify(items),address,req.params.id);
+
+    res.status(200).end();
+  } catch {
+    res.status(500).json({ error: "cannot update basket" });
+  }
+});
+
+//PUT modify order
+app.put("/api/orders/modify/quantity/:id", async (req, res) => {
+  console.log('form app'+req.body.id)
+  const items = req.body;
+  try {
+
+    await spgDao.updateProductQuantity(items);
+
     res.status(200).end();
   } catch {
     res.status(500).json({ error: "cannot update basket" });
