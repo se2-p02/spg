@@ -208,12 +208,6 @@ function MyModal(props) {
                 fileName = files[0].name.split("\n").pop()
                 del = 1;
             }
-            if(unit===undefined || unit===null){
-                tmp1="kg"
-            }
-            if(category===undefined || category===null){
-                tmp2="All-purpose"
-            }
             API.updateProduct({ id: props.product.id, name: name, quantity: quantity, price: price, unit: unit, filter: category, file: fileName, delete: del }, { update: true }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
@@ -235,13 +229,7 @@ function MyModal(props) {
                 handleImageUpload()
                 fileName = files[0].name.split("\n").pop()
             }
-            if(unit===undefined || unit===null){
-                tmp1="kg"
-            }
-            if(category===undefined || category===null){
-                tmp2="All-purpose"
-            }
-            API.createProduct({ name: name, quantity: quantity, unit: tmp1, price: price, filter: tmp2, file: fileName }).then((r) => {
+            API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category, file: fileName }).then((r) => {
                 if (r.error === undefined) {
                     props.setReqUpdate(true);
                 }

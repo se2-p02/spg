@@ -110,14 +110,14 @@ async function updateBasket(id, items) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
-async function modifyOrder(id, items) {
+async function modifyOrder(id, order) {
     const response = await fetch(URL + `/api/orders/modify/${id}`,
         {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(items),
+            body: JSON.stringify(order),
 
         });
     if (response.ok) {
