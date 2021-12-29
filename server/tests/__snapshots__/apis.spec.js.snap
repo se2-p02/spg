@@ -157,7 +157,7 @@ exports[`tests GET /api/orders 3`] = `
 Object {
   "address": Object {
     "address": "STORE PICKUP",
-    "deliveryOn": "2021-12-09 00:00",
+    "deliveryOn": "2021-12-29 00:00",
   },
   "amount": Any<Number>,
   "conf": Any<Number>,
@@ -167,31 +167,13 @@ Object {
   "paid": Any<Number>,
   "products": Array [
     Object {
-      "farmer": 2,
-      "id": 3,
-      "name": "Milk",
-      "price": 1.2,
-      "quantity": 2,
-      "status": 0,
-      "unit": "l",
-    },
-    Object {
       "farmer": 3,
-      "id": 7,
+      "id": 4,
       "name": "Cheese",
       "price": 10.3,
       "quantity": 1,
       "status": 0,
       "unit": "kg",
-    },
-    Object {
-      "farmer": 7,
-      "id": 10,
-      "name": "Sticks",
-      "price": 2,
-      "quantity": 3,
-      "status": 3,
-      "unit": "pcs",
     },
   ],
   "time": Any<String>,
@@ -203,7 +185,7 @@ exports[`tests GET /api/orders 4`] = `
 Object {
   "address": Object {
     "address": "STORE PICKUP",
-    "deliveryOn": "2021-12-16 08:00",
+    "deliveryOn": "2021-12-24 01:00",
   },
   "amount": Any<Number>,
   "conf": Any<Number>,
@@ -220,6 +202,43 @@ Object {
       "quantity": 1,
       "status": 0,
       "unit": "l",
+    },
+    Object {
+      "farmer": 7,
+      "id": 2,
+      "name": "Eggs",
+      "price": 7,
+      "quantity": 1,
+      "status": 0,
+      "unit": "pcs",
+    },
+  ],
+  "time": Any<String>,
+  "userID": 2,
+}
+`;
+
+exports[`tests GET /api/orders 5`] = `
+Object {
+  "address": Object {
+    "address": "STORE PICKUP",
+    "deliveryOn": "2021-12-29 00:00",
+  },
+  "amount": Any<Number>,
+  "conf": Any<Number>,
+  "date": Any<String>,
+  "fulfilled": Any<Number>,
+  "id": Any<Number>,
+  "paid": Any<Number>,
+  "products": Array [
+    Object {
+      "farmer": 2,
+      "id": 5,
+      "name": "Cheese",
+      "price": 4.5,
+      "quantity": 1,
+      "status": 0,
+      "unit": "kg",
     },
   ],
   "time": Any<String>,

@@ -501,15 +501,11 @@ describe("modify order test", () => {
   it("tests PUT /api/orders/modify/:id", async () => {
     await request(app)
       .put("/api/orders/modify/1")
-      .send([{
-        id: 3,
-        quantity: 1,
-        unit: "l",
-        price: 1.2,
-        farmer: 7,
-        status: 0,
-        name: "Milk",
-      }])
+      .send({address:{
+        address: "STORE PICKUP", deliveryOn: "2021-12-01 11:30"
+      }	, products:
+        [{id:4,quantity:1,unit:"kg",price:10.3,farmer:3,status:0,name:"Cheese"}]	
+    })
       .expect(200);
   });
 });
