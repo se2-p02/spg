@@ -19,13 +19,12 @@ describe('Test navbar', () => {
         let clock = moment("2021-11-28 15:55");
 
         render(<BrowserRouter>
-            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
+            <NavBar account={true} user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
         var element = screen.getByText("Social Purchasing Group")
         expect(element).toBeInTheDocument();
 
-        element = screen.getByTestId("clock")
-        expect(element).toBeInTheDocument();
+
 
         element = screen.getByTestId("userImg")
         expect(element).toBeInTheDocument();
@@ -76,7 +75,7 @@ describe('Test navbar', () => {
         }
         let clock = moment("2021-11-28 15:55");
         render(<BrowserRouter>
-            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
+            <NavBar account = {true} user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
 
         var element = screen.getByTestId("userImg")

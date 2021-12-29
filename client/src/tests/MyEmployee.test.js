@@ -19,7 +19,9 @@ describe('Test employee', () => {
     expect(element).toBeInTheDocument();
 
     element = screen.getByTestId("orders");
+    expect(element).toBeInTheDocument();
 
+    element = screen.getByTestId("clockButton")
     expect(element).toBeInTheDocument();
 
     expect(window.location.pathname === "/employee");
@@ -52,9 +54,6 @@ describe('Test employee', () => {
     element = screen.getByTestId("orders")
     fireEvent.click(element)
     expect(window.location.pathname === "/employee/orders");
-
-
-
 
 
   });

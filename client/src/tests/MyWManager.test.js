@@ -17,9 +17,6 @@ describe('Test employee', () => {
     element = screen.getByTestId("availableOrders")
     expect(element).toBeInTheDocument();
 
-    element = screen.getByTestId("notAvailableOrders");
-    expect(element).toBeInTheDocument();
-
     expect(window.location.pathname === "/wmanager");
 
 
@@ -47,9 +44,7 @@ describe('Test employee', () => {
       <LeftWManager fil={""} setFil={jest.fn()} />
     );
 
-    element = screen.getByTestId("notAvailableOrders")
-    fireEvent.click(element)
-    expect(window.location.pathname === "/wmanager/notAvailableOrders");
+   
 
 
   });
