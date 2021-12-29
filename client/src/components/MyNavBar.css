@@ -1,3 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+.title_font {
+  font-family: 'Dancing Script', sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+.clock_collapse{
+  color: rgb(81, 100, 89);
+}
+.clock_collapse:hover{
+  color: rgb(53, 66, 59);
+  background-color: #e6e6e6a2;
+}
+
+
+.clock_collapse:focus
+{
+  color: rgb(81, 100, 89);
+
+  background-color: #e6e6e6a2;
+}
+
+.time_button{
+  position:absolute;
+  left: 2%;
+  bottom: 1%;
+  box-shadow:5px 3px 6px grey;  
+  border-radius: 100%!important;
+  background-color: rgb(163, 163, 163);
+  border: 1px;
+}
+.time_button:hover{
+  background-color: rgb(102, 102, 102);
+}
+
 .navbar {
   width: 100vw!important;
 }
@@ -25,11 +62,18 @@
   width: auto
 }
 
+button{
+  box-shadow:2px 2px 4px grey;  
+
+}
+
 .add_btn{
   border-radius: 35px;
   background-color: #34c475;
   border: 2px;
   border-color: #000000;
+  box-shadow:2px 2px 4px grey;  
+
 }
 
 .add_btn:disabled{
@@ -37,6 +81,12 @@
   background-color: #696969;
   border: 2px;
   border-color: #000000;
+}
+
+
+.no_shadow{
+  box-shadow:0px 0px 0px rgba(128, 128, 128, 0);  
+
 }
 
 
@@ -60,6 +110,7 @@
 .bg_login2{
   background-color: #e6e6e6a2;
 }
+
 
 .radius_button{
   border-radius: 35px;

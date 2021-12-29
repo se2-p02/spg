@@ -132,7 +132,7 @@ function MyContainer(props) {
           path="/client"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -142,6 +142,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
+                account = {true}
                 showCart={true}
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
@@ -160,7 +161,7 @@ function MyContainer(props) {
           path="/client/profile"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -170,6 +171,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
+                account = {true}
                 showCart={true}
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
@@ -191,7 +193,7 @@ function MyContainer(props) {
           path="/client/orders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -202,6 +204,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                account = {true}
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
@@ -226,13 +229,14 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
+                account = {true}
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
@@ -251,7 +255,7 @@ function MyContainer(props) {
           path="/farmer/orders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -260,6 +264,7 @@ function MyContainer(props) {
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
+                account = {true}
                 setCart={setCart}
                 showCart={false}
                 fil={["Orders", "Products"]}
@@ -281,7 +286,7 @@ function MyContainer(props) {
           path="/farmer/products"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -289,6 +294,7 @@ function MyContainer(props) {
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
+                account = {true}
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
@@ -313,7 +319,7 @@ function MyContainer(props) {
           path="/farmer/myProducts"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -345,7 +351,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -399,7 +405,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -425,7 +431,7 @@ function MyContainer(props) {
           path="/wmanager/deliveries"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -459,7 +465,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -485,7 +491,7 @@ function MyContainer(props) {
           path="/manager/unretrievedOrders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -510,12 +516,12 @@ function MyContainer(props) {
           path="/login"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {false} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
-                clock={clock}
+                clock={undefined}
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
@@ -533,12 +539,13 @@ function MyContainer(props) {
           path="/signup"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {false} setShowModal={setShowModal}
+
                 user={user}
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
-                clock={clock}
+                clock={undefined}
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
@@ -559,7 +566,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -573,7 +580,7 @@ function MyContainer(props) {
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee  showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock} clock={clock}></LeftEmployee>
                 <MyEmployee
                   clock={clock}
                   setClock={setClock}
@@ -587,7 +594,7 @@ function MyContainer(props) {
           path="/employee/clients/:id"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -601,7 +608,7 @@ function MyContainer(props) {
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
                 <MySingleClient
                   clock={clock}
                   setClock={setClock}
@@ -615,7 +622,7 @@ function MyContainer(props) {
           path="/employee/orders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -626,11 +633,12 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                account = {true}
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
 
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
 
                 <MyOrders
                   clock={clock}
@@ -648,7 +656,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -659,10 +667,11 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                account = {true}
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
                 <MyClients clock={clock} setClock={setClock}></MyClients>
               </Row>
             </>
@@ -672,7 +681,7 @@ function MyContainer(props) {
           path="/client/products"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -683,6 +692,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
+                account = {true}
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
@@ -706,7 +716,7 @@ function MyContainer(props) {
           path="/employee/products"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -717,10 +727,11 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 setUser={setUser}
+                account = {true}
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
 
                 <MyProducts
                   clock={clock}
@@ -740,7 +751,7 @@ function MyContainer(props) {
           path="/employee/form"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -750,10 +761,11 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
+                account = {true}
                 setUser={setUser}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil}></LeftEmployee>
+                <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
 
                 <MyForm clock={clock} setClock={setClock} user={user} />
 
@@ -776,6 +788,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={false}
                 setUser={setUser}
+                account = {true}
                 fil={["Deliveries", "Confirm Orders"]}
                 setFil={setFil}
               ></MyNavBar>
@@ -791,7 +804,7 @@ function MyContainer(props) {
           path="/client/availableOrders"
           element={
             <>
-              <MyNavBar setFil={setFil}
+              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -800,6 +813,7 @@ function MyContainer(props) {
                 setClock={setClock}
                 cart={cart}
                 setCart={setCart}
+                account = {true}
                 showCart={false}
                 setUser={setUser}
               ></MyNavBar>

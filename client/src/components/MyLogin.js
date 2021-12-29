@@ -146,21 +146,9 @@ function MyLogin(props) {
                             </Form>
                             <p className="text p-0 pt-2 ">Not registered yet? <a className="text-primary" href="/signup">Sign up</a></p>
                             <Row className="pt-4 w-100 m-0">
-                                <Col xs="5" sm="5" className="text-left m-0 p-0">
-
-                                    <Button
-                                        size="lg"
-                                        variant="danger"
-                                        type="submit"
-                                        //className={errorMessagePassword ? "mt-1" : "mt-3 float-right mr-4"}
-                                        className="w-100 m-0 radius_button"
-                                        onClick={() => setGoBack(true)}
-                                    >
-                                        Back
-                                    </Button>
+                                <Col xs="3" sm="3" className="text-left m-0 p-0">
                                 </Col>
-                                <Col sm="2" xs="2" className=""></Col>
-                                <Col sm="5" xs="5" className="text-right m-0 p-0">
+                                <Col sm="6" xs="6" className="text-right m-0 p-0">
                                     <Button
                                         size="lg"
                                         variant="success"
@@ -174,6 +162,8 @@ function MyLogin(props) {
                                         Login
                                     </Button>
                                 </Col>
+                                <Col sm="3" xs="3" className=""></Col>
+
                             </Row>
                         </Container>
                     </Col>

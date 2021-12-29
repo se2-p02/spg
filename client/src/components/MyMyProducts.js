@@ -116,8 +116,10 @@ function MyMyProducts(props) {
                                                         <Button variant="light" className="border" ><CheckSquare /></Button>
                                                 )
                                                 }
-                                                    {p.confirmed !== 0 &&
-                                                        <h6 className="m-0 p-0">CONFIRMED</h6>
+                                                    {p.confirmed !== 0 && <>
+                                                        <h6 className="m-0 p-0 d-block d-xs-block d-sm-block d-md-none d-lg-none d-xl-none">CONF</h6>
+                                                        <h6 className="m-0 p-0 d-none d-xs-none d-sm-none d-md-block d-lg-block d-xl-block">CONFIRMED</h6>
+                                                        </>
                                                     }</Col>
                                             </Row>
 
