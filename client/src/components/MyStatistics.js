@@ -10,6 +10,7 @@ import './MyNavBar.css';
 function MyStatistics(props) {
   const [goBack, setGoBack] = useState(false)
   const [orders, setOrders] = useState([]);
+  const [tot, setTot] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
 
   useEffect(() => {
@@ -21,6 +22,15 @@ function MyStatistics(props) {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
             setOrders(c);
+            let products_to_sum = [...c.products]
+            products_to_sum.forEach((p) => {
+              let find_prod = tot.find((prod) => prod.name = p.name);
+              if (find_prod) {
+                find_prod.quantity += p.quantity;
+                setTot(tot.filter((prod) => prod.name = p.name))
+                setTot([...tot, find_prod]);
+              }
+            })
             setReqUpdate(false);
           } else {
             console.log(c.error)
@@ -123,7 +133,29 @@ function MyStatistics(props) {
                 <ListGroup.Item>
                   <Row className="p-3">
                     <Col className="p-0 m-0"><b>Total</b></Col>
-                    <Col className="p-0 m-0"><b>Products</b></Col>
+                    {tot !== [] && (
+                      <>
+                        {<Col className="">
+                          {tot.map((x) => {
+                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                            return (elem);
+                          })}
+                        </Col>
+
+                        }
+                      </>
+                    )
+                    }
+                    {tot === [] && (
+                      <>
+                        {<Col className="">
+                          <p>AAAAAAAAAAAA</p>
+                        </Col>
+
+                        }
+                      </>
+                    )
+                    }
                   </Row>
                 </ListGroup.Item>
 
