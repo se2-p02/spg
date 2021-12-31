@@ -11,10 +11,12 @@ function MyStatistics(props) {
   const [goBack, setGoBack] = useState(false)
   const [orders, setOrders] = useState([]);
   const [tot, setTot] = useState([]);
+  const [test, setTest] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
 
   useEffect(() => {
     if (reqUpdate && props.user) {
+      setTest([])
       //API to collect the orders
       //just for testing purposes this API is used
       API.loadAvailableOrders("available")
@@ -22,14 +24,26 @@ function MyStatistics(props) {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
             setOrders(c);
-            let products_to_sum = [...c.products]
-            products_to_sum.forEach((p) => {
-              let find_prod = tot.find((prod) => prod.name = p.name);
-              if (find_prod) {
-                find_prod.quantity += p.quantity;
-                setTot(tot.filter((prod) => prod.name = p.name))
-                setTot([...tot, find_prod]);
-              }
+            // Here I have all the products of the orders
+            let products_to_sum = c.map((x) => x.products)
+            setTest(products_to_sum)
+            products_to_sum.forEach((pts) => {
+              pts.forEach((p) => {
+                setTest(p)
+                let find_prod = tot.find((prod) => JSON.parse(prod).name === JSON.parse(p).name);
+
+                if (find_prod) {
+                  find_prod.quantity += p.quantity;
+                  setTot(tot.filter((prod) => prod.name !== p.name))
+                  setTot([...tot, find_prod]);
+                  //setTest([...test, "A"])
+                }
+                else {
+                  setTot([...tot, p]);
+                  //setTest([...test, "B"])
+                }
+              })
+
             })
             setReqUpdate(false);
           } else {
@@ -84,14 +98,14 @@ function MyStatistics(props) {
                   </>
                 )
                 }
-
+{/*
                 <ListGroup.Item>
                   <Row className="p-3">
                     <Col className="p-0 m-0"><b>Total</b></Col>
                     <Col className="p-0 m-0"><b>Products</b></Col>
                   </Row>
                 </ListGroup.Item>
-
+*/}
               </ListGroup>
             </Col>
             <Col lg="6">
@@ -130,34 +144,26 @@ function MyStatistics(props) {
                 )
                 }
 
-                <ListGroup.Item>
+                {/*<ListGroup.Item>
                   <Row className="p-3">
                     <Col className="p-0 m-0"><b>Total</b></Col>
-                    {tot !== [] && (
+                    {tot && (
                       <>
                         {<Col className="">
-                          {tot.map((x) => {
-                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
-                            return (elem);
+                          {tot.map((t) => {
+                            return JSON.parse(t).map((x) => {
+                              let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                              return (elem);
+                            })
                           })}
+                          <p className="m-0 p-0">{test}</p>
                         </Col>
-
-                        }
-                      </>
-                    )
-                    }
-                    {tot === [] && (
-                      <>
-                        {<Col className="">
-                          <p>AAAAAAAAAAAA</p>
-                        </Col>
-
                         }
                       </>
                     )
                     }
                   </Row>
-                </ListGroup.Item>
+                </ListGroup.Item>*/}
 
               </ListGroup>
             </Col>
