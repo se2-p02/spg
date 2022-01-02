@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { Button, ListGroup, Col, Row, Container } from "react-bootstrap";
 import API from "./API";
 import './MyNavBar.css';
+import moment from 'moment';
 
 
 
@@ -17,15 +18,17 @@ function MyStatistics(props) {
   useEffect(() => {
     if (reqUpdate && props.user) {
       setTest([])
+      const datetime = moment(props.clock).year()+"-"+moment(props.clock).month()+"-"+moment(props.clock).day();
       //API to collect the orders
       //just for testing purposes this API is used
-      API.loadAvailableOrders("available")
+      //API.loadUnretrievedOrders(datetime)
+      API.loadOrders()
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
             setOrders(c);
             // Here I have all the products of the orders
-            let products_to_sum = c.map((x) => x.products)
+            /* let products_to_sum = c.map((x) => x.products)
             setTest(products_to_sum)
             products_to_sum.forEach((pts) => {
               pts.forEach((p) => {
@@ -44,7 +47,7 @@ function MyStatistics(props) {
                 }
               })
 
-            })
+            }) */
             setReqUpdate(false);
           } else {
             console.log(c.error)

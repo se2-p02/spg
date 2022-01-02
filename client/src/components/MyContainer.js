@@ -508,7 +508,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftManager fil={fil} setFil={setFil}></LeftManager>
-                <MyStatistics user={user} />
+                <MyStatistics user={user} clock={clock}/>
               </Row>
 
             </>

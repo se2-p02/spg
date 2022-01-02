@@ -558,6 +558,22 @@ app.get("/api/orders", async (req, res) => {
   }
 });
 
+// GET unretrieved orders
+app.get("/api/unretrievedOrders/:datetime", async (req, res) => {
+  try {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA  "+req.params.datetime)
+    const orders = await spgDao.getUnretrievedOrders(req.params.datetime);
+    if (orders.error) {
+      res.status(404).json(orders);
+    } else {
+      res.json(orders);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 // DELETE order
 app.delete("/api/order/:id", async (req, res) => {
   const result = await spgDao.deleteOrder(req.params.id);
