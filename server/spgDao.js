@@ -362,6 +362,23 @@ exports.getOrders = (id, orderId) => {
 
 };
 
+// get unretrieved orders
+exports.getUnretrievedOrders = (datetime) => {
+    const sql = "SELECT * FROM orders WHERE date > ? AND fulfilled = 0"
+    return new Promise((resolve, reject) => {
+        db.all(sql, [datetime], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: JSON.parse(c.products), address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            console.log(orders)
+            resolve(orders);
+        });
+    });
+
+};
+
 // get all orders with a certain status
 exports.getOrdersByStatus = (status) => {
     return new Promise((resolve, reject) => {

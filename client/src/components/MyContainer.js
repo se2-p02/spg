@@ -27,6 +27,7 @@ import LeftFarmer from "./LeftFarmer";
 import LeftWManager from "./LeftWManager";
 import LeftWWorker from "./LeftWWorker";
 import LeftManager from "./LeftManager";
+import MyStatistics from "./MyStatistics";
 
 
 function MyContainer(props) {
@@ -507,6 +508,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftManager fil={fil} setFil={setFil}></LeftManager>
+                <MyStatistics user={user} clock={clock}/>
               </Row>
 
             </>

@@ -93,6 +93,13 @@ async function payOrder(order) {
     } else return { 'error': 'Failed to store data on server' }
 }
 
+async function loadUnretrievedOrders(datetime) {
+    let myURL = URL + `/api/unretrievedOrders/${datetime}`;
+    const response = await fetch(myURL);
+    if (response.ok) {
+        return response.json();
+    } else return { 'error': 'Failed to load Orders from server' }
+}
 
 
 async function updateBasket(id, items) {
@@ -362,5 +369,5 @@ async function getTelegram() {
     } else return { 'error': 'Failed to load Telegram from server' }
 }
 
-const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder, getTelegram,updateProductQuantity };
+const API = { loadProducts, loadClients, sendOrder, loadClient, createProduct, updateProduct, deleteProduct, login, logout, isLoggedIn, loadOrders, updateOrder, payOrder, addNewUser, loadNextProducts, getClock, setClock, updateBasket, loadWallet, confirmOrder, loadAvailableOrders, loadDeliveries, loadDeliverableProducts, createDelivery, confirmOrderForPickUp,modifyOrder, getTelegram,updateProductQuantity, loadUnretrievedOrders };
 export default API;
