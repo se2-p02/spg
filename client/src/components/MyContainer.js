@@ -147,7 +147,7 @@ function MyContainer(props) {
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+              <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
                 <MyEmployee clock={clock}
                   setClock={setClock}
                   user={user}
@@ -176,7 +176,7 @@ function MyContainer(props) {
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+              <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
 
                 <MyClientProfile
                   clock={clock}
@@ -208,7 +208,7 @@ function MyContainer(props) {
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+              <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
 
                 <MyOrders
                   setModify={setModify}
@@ -244,7 +244,7 @@ function MyContainer(props) {
                 fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
                 <MyFarmer clock={clock} setClock={setClock} user={user} />
 
               </Row>
@@ -270,7 +270,7 @@ function MyContainer(props) {
                 fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
 
                 <MyFarmerOrders
                   clock={clock}
@@ -301,7 +301,7 @@ function MyContainer(props) {
                 fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
 
                 <MyProducts
                   clock={clock}
@@ -333,7 +333,7 @@ function MyContainer(props) {
                 fil={["Orders", "Products"]}
               ></MyNavBar>
               <Row>
-                <LeftFarmer fil={fil} setFil={setFil}></LeftFarmer>
+                <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
                 <MyMyProducts
                   clock={clock}
                   setClock={setClock}
@@ -366,7 +366,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftWWorker fil={fil} setFil={setFil}></LeftWWorker>
+                <LeftWWorker showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWWorker>
                 <></>
 
               </Row>
@@ -393,7 +393,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftWWorker fil={fil} setFil={setFil}></LeftWWorker>
+                <LeftWWorker showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWWorker>
                 <MyNotAvailableOrders clock={clock} setClock={setClock} user={user} />
 
               </Row>
@@ -420,7 +420,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <LeftWManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWManager>
                 <MyWManager clock={clock} setClock={setClock} user={user} />
 
               </Row>
@@ -446,7 +446,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <LeftWManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWManager>
                 <MyDeliveries
                   clock={clock}
                   setClock={setClock}
@@ -696,7 +696,7 @@ function MyContainer(props) {
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+              <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
 
 
                 <MyProducts
@@ -793,7 +793,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftWManager fil={fil} setFil={setFil}></LeftWManager>
+                <LeftWManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWManager>
                 <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="VM" />
 
               </Row>
@@ -818,7 +818,7 @@ function MyContainer(props) {
                 setUser={setUser}
               ></MyNavBar>
               <Row>
-                <LeftClient fil={fil} setFil={setFil} user={user}></LeftClient>
+                <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
                 <MyAvailableOrders clock={clock} setClock={setClock} user={user} role="client" />
 
               </Row>

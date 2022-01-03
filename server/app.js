@@ -462,9 +462,7 @@ app.put("/api/orders/modify/:id", async (req, res) => {
   try {
 
     let flag = false;
-    console.log(items);
       items.forEach(async (prod) => {
-        console.log('from LOOOP'+prod.name);
         const res_prod = await spgDao.orderPrep(prod);
         if (res_prod.error) flag = true;
       })

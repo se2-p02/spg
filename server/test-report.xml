@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\Prophet\Desktop\SE2\spg\server\tests\apis.spec.js">
-    <testCase name="tests GET /api/products" duration="520"/>
-    <testCase name="tests GET /api/clients" duration="158"/>
-    <testCase name="tests GET /api/clients/:id" duration="136"/>
-    <testCase name="tests PUT /api/clients/:id/wallet" duration="175"/>
-    <testCase name="tests GET /api/orders" duration="138"/>
-    <testCase name="tests GET /api/orders/:id" duration="147"/>
-    <testCase name="tests POST /api/orders" duration="200"/>
-    <testCase name="tests POST /api/addNewUser" duration="635"/>
-    <testCase name="tests error POST /api/addNewUser" duration="151"/>
-    <testCase name="login" duration="292"/>
-    <testCase name="tests POST /api/products" duration="295"/>
-    <testCase name="tests PUT /api/products/:id" duration="379"/>
-    <testCase name="logout" duration="132"/>
-    <testCase name="tests delete /api/sessions/current" duration="135"/>
-    <testCase name="tests get /api/sessions/current" duration="134"/>
-    <testCase name="tests get /api/nextProducts without performing the login" duration="161"/>
-    <testCase name="login" duration="279"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="494"/>
-    <testCase name="login" duration="317"/>
-    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="225"/>
-    <testCase name="tests fet /api/nextProducts in the current week" duration="191"/>
-    <testCase name="login" duration="328"/>
-    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="133"/>
-    <testCase name="tests post /api/session" duration="341"/>
-    <testCase name="tests post /api/session error" duration="270"/>
-    <testCase name="tests PUT /api/clients/basket/:id" duration="130"/>
-    <testCase name="tests PUT /api/orders/modify/:id" duration="150"/>
-    <testCase name="tests GET /api/wallet/:id" duration="132"/>
-    <testCase name="login" duration="273"/>
-    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="157"/>
-    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="142"/>
-    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="187"/>
-    <testCase name="login" duration="267"/>
-    <testCase name="tests GET /api/orderswithstatus/:status" duration="146"/>
-    <testCase name="tests get /api/clock" duration="138"/>
+  <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/tests/apis.spec.js">
+    <testCase name="tests GET /api/products" duration="200"/>
+    <testCase name="tests GET /api/clients" duration="68"/>
+    <testCase name="tests GET /api/clients/:id" duration="76"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="85"/>
+    <testCase name="tests GET /api/orders" duration="67"/>
+    <testCase name="tests GET /api/orders/:id" duration="68"/>
+    <testCase name="tests POST /api/orders" duration="67"/>
+    <testCase name="tests POST /api/addNewUser" duration="258"/>
+    <testCase name="tests error POST /api/addNewUser" duration="56"/>
+    <testCase name="login" duration="141"/>
+    <testCase name="tests POST /api/products" duration="117"/>
+    <testCase name="tests PUT /api/products/:id" duration="169"/>
+    <testCase name="logout" duration="65"/>
+    <testCase name="tests delete /api/sessions/current" duration="64"/>
+    <testCase name="tests get /api/sessions/current" duration="62"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="71"/>
+    <testCase name="login" duration="142"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="179"/>
+    <testCase name="login" duration="138"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="107"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="92"/>
+    <testCase name="login" duration="122"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="87"/>
+    <testCase name="tests post /api/session" duration="146"/>
+    <testCase name="tests post /api/session error" duration="119"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="44"/>
+    <testCase name="tests PUT /api/orders/modify/:id" duration="90"/>
+    <testCase name="tests GET /api/wallet/:id" duration="69"/>
+    <testCase name="login" duration="130"/>
+    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="53"/>
+    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="68"/>
+    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="77"/>
+    <testCase name="login" duration="138"/>
+    <testCase name="tests GET /api/orderswithstatus/:status" duration="79"/>
+    <testCase name="tests get /api/clock" duration="66"/>
   </file>
 </testExecutions>
