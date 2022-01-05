@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641408268882" clover="3.2.0">
-  <project timestamp="1641408268883" name="All files">
+<coverage generated="1641408569820" clover="3.2.0">
+  <project timestamp="1641408569820" name="All files">
     <metrics statements="957" coveredstatements="490" conditionals="328" coveredconditionals="113" methods="225" coveredmethods="134" elements="1510" coveredelements="737" complexity="0" loc="957" ncloc="957" packages="1" files="4" classes="4"/>
     <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
       <metrics statements="477" coveredstatements="228" conditionals="196" coveredconditionals="60" methods="63" coveredmethods="37"/>
