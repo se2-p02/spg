@@ -4,7 +4,7 @@ import { Button, ListGroup, Col, Row, Container } from "react-bootstrap";
 import API from "./API";
 import './MyNavBar.css';
 import moment from 'moment';
-
+var dayjs = require('dayjs')
 
 
 
@@ -19,13 +19,12 @@ function MyStatistics(props) {
     if (reqUpdate && props.user) {
       setTest([])
       const datetime = moment(props.clock).year()+"-"+moment(props.clock).month()+"-"+moment(props.clock).day();
-      //API to collect the orders
-      //just for testing purposes this API is used
-      //API.loadUnretrievedOrders(datetime)
-      API.loadOrders()
+
+      API.loadUnretrievedOrders('2021-10-10')
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
+            console.log(c)
             setOrders(c);
             // Here I have all the products of the orders
             /* let products_to_sum = c.map((x) => x.products)
@@ -60,6 +59,26 @@ function MyStatistics(props) {
     return <Navigate to={"/" + props.user.role}></Navigate>;
   }
 
+  function month(o) {
+    return moment(o.date).year() === moment(props.clock).year() && moment(o.date).month() === moment(props.clock).month()
+  }
+  
+  function sameWeek(o) {
+    const datetime = dayjs(props.clock);
+    const dayOfTheWeek = datetime.day();
+    let first;
+    let second;
+    if (dayOfTheWeek === 0) {
+      // it's sunday
+      second = datetime;
+      first = datetime.add(-7, 'day');
+    }
+    else {
+      first = datetime.add(-1*dayOfTheWeek);
+      second = first.add(7, 'day')
+    }
+    return dayjs(o.date).isAfter(first) && dayjs(o.date).isBefore(second)
+  }
 
   return (
     <>
@@ -78,8 +97,8 @@ function MyStatistics(props) {
 
                 {orders && (
                   <>
-                    {orders.map((c) => {
-                      let j = JSON.parse(c.products)
+                    {orders.filter((o) => sameWeek(o)).map((c) => {
+                      let j = JSON.parse(JSON.stringify(c.products))
 
                       return (
                         <>
@@ -123,8 +142,8 @@ function MyStatistics(props) {
 
                 {orders && (
                   <>
-                    {orders.map((c) => {
-                      let j = JSON.parse(c.products)
+                    {orders.filter((o) => month(o)).map((c) => {
+                      let j = JSON.parse(JSON.stringify(c.products))
 
                       return (
                         <>
