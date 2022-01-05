@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52% </span>
+                <span class="strong">50.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>220/423</span>
+                <span class='fraction'>221/434</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.11% </span>
+                <span class="strong">35.45% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>39/108</span>
+                <span class='fraction'>39/110</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.04% </span>
+                <span class="strong">55.47% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>81/142</span>
+                <span class='fraction'>81/146</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.46% </span>
+                <span class="strong">50.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>211/410</span>
+                <span class='fraction'>212/420</span>
             </div>
         
             
@@ -754,7 +754,24 @@
 <a name='L695'></a><a href='#L695'>695</a>
 <a name='L696'></a><a href='#L696'>696</a>
 <a name='L697'></a><a href='#L697'>697</a>
-<a name='L698'></a><a href='#L698'>698</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L698'></a><a href='#L698'>698</a>
+<a name='L699'></a><a href='#L699'>699</a>
+<a name='L700'></a><a href='#L700'>700</a>
+<a name='L701'></a><a href='#L701'>701</a>
+<a name='L702'></a><a href='#L702'>702</a>
+<a name='L703'></a><a href='#L703'>703</a>
+<a name='L704'></a><a href='#L704'>704</a>
+<a name='L705'></a><a href='#L705'>705</a>
+<a name='L706'></a><a href='#L706'>706</a>
+<a name='L707'></a><a href='#L707'>707</a>
+<a name='L708'></a><a href='#L708'>708</a>
+<a name='L709'></a><a href='#L709'>709</a>
+<a name='L710'></a><a href='#L710'>710</a>
+<a name='L711'></a><a href='#L711'>711</a>
+<a name='L712'></a><a href='#L712'>712</a>
+<a name='L713'></a><a href='#L713'>713</a>
+<a name='L714'></a><a href='#L714'>714</a>
+<a name='L715'></a><a href='#L715'>715</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1113,6 +1130,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1815,6 +1849,23 @@ exports.getOrders = (id, orderId) =&gt; {
 &nbsp;
 };
 &nbsp;
+// get unretrieved orders
+exports.getUnretrievedOrders = <span class="fstat-no" title="function not covered" >(d</span>atetime) =&gt; {
+    const sql = <span class="cstat-no" title="statement not covered" >"SELECT * FROM orders WHERE date &gt; ? AND fulfilled = 0"</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        db.all(sql, [datetime], <span class="fstat-no" title="function not covered" >(e</span>rr, rows) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                reject(err);</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+            const orders = <span class="cstat-no" title="statement not covered" >rows.map(<span class="fstat-no" title="function not covered" >(c</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{ id: c.id, userID: c.userID, products: JSON.parse(c.products), address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid })</span>);</span>
+<span class="cstat-no" title="statement not covered" >            console.log(orders)</span>
+<span class="cstat-no" title="statement not covered" >            resolve(orders);</span>
+        });
+    });
+&nbsp;
+};
+&nbsp;
 // get all orders with a certain status
 exports.getOrdersByStatus = (status) =&gt; {
     return new Promise((resolve, reject) =&gt; {
@@ -2154,13 +2205,8 @@ exports.setTelegramId = <span class="fstat-no" title="function not covered" >(t<
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-<<<<<<< HEAD
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 29 2021 17:59:08 GMT+0100 (Ora standard dell’Europa centrale)
-=======
-                <a href="https://istanbul.js.org/" target="_blank"  rel="noopener">istanbul</a>
-                at Thu Dec 23 2021 10:13:04 GMT+0100 (Ora standard dell’Europa centrale)
->>>>>>> d9e4dd0f2f499983f4221081f11a713b6bba87cd
+                at Wed Jan 05 2022 19:49:29 GMT+0100 (Ora standard dell’Europa centrale)
             </div>
         </div>
         <script src="prettify.js"></script>
