@@ -170,6 +170,10 @@ describe("Orders test", () => {
       .send({ test })
       .expect(200);
   });
+
+  it("test GET /api/unretrievedOrders/:datetime", async () => {
+    const resonse = await request(app).get("/api/unretrievedOrders/2022-01-20").expect(200);
+  })
 });
 
 describe("Users test", () => {
