@@ -20,7 +20,7 @@ function MyStatistics(props) {
       setTest([])
       const datetime = moment(props.clock).year()+"-"+moment(props.clock).month()+"-"+moment(props.clock).day();
 
-      API.loadUnretrievedOrders('2021-10-10')
+      API.loadUnretrievedOrders(datetime)
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
