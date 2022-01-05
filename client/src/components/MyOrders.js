@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, Alert, Col, Row } from "react-bootstrap";
+import { Button, Alert, Col, Row, Accordion, Badge } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import "./MyNavBar.css";
@@ -72,103 +72,74 @@ function MyOrders(props) {
       <Container
         className={
           props.full
-            ? " justify-content-center align-items-center text-center mt-3"
-            : " min-height-100 justify-content-center align-items-center text-center below-nav mt-3"
+            ? " justify-content-center align-items-center mt-3"
+            : " min-height-100 justify-content-center align-items-center below-nav mt-3"
         } fluid>
         {!handouts && (
           <Alert variant="danger">
             You can hand out products from Wednesday 8:00 to Friday 19:00.
           </Alert>
         )}
-        <ListGroup className="my-2 mx-3" variant="flush">
-          <ListGroup.Item variant="warning">
-            <Row className="p-3">
-              <Col sm="1" xs="1" className="p-0 m-0"><b>Order</b></Col>
-              <Col sm="1" xs="0" className="p-0 m-0 d-none d-xl-block d-lg-block d-md-block"><b>User</b></Col>
-              <Col sm="3" md="2" xs="3" ><b>Products</b></Col>
-              <Col sm="2" xs="2"><b>Delivery</b></Col>
-              <Col sm="2" xs="2"><b>Amount</b></Col>
-              <Col sm="2" xs="2"><b>Fulfilled</b></Col>
-              <Col sm="2" xs="1"><b>Modify</b></Col>
-            </Row>
-          </ListGroup.Item>
 
-          {orders && (
-            <>
-              {orders.map((c) => {
-                let b = "primary";
-                //console.log(c.paid)
-                if (c.paid === 0) {
-                  b = "danger";
-                }
-
-                return (
-                  <>
-                    <ListGroup.Item>
-                      <Row className="align-items-center text-center p-1 m-0">
-                        <Col sm="1" xs="1" className="align-items-center">{c.id}</Col>
-                        <Col sm="1" xs="1" className="d-none d-xl-block d-lg-block d-md-block">{c.userID}</Col>
-                        <Col md="2" sm="3"  xs="3" className="">
-                          {c.products.map((x) => {
-                            let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
-                            return (elem);
-                          })}
-                        </Col>
-                        <Col sm="2" xs="2" className="d-xs-block d-sm-block d-xl-none d-lg-none d-md-none">{JSON.parse(c.address).address}
-                        </Col>                        
-                        <Col sm="2" xs="2" className="d-none d-xl-block d-lg-block d-md-block">{JSON.parse(c.address).address + " on " + JSON.parse(c.address).deliveryOn}
-                        </Col>
-                        <Col sm="2" xs="2">{c.amount + " €"}</Col>
-                        <Col sm="2" xs="2">{props.user.role === "client" ? (
-                          c.paid === 0 ? (
-                            <Button
-                              onClick={() => alert("Fake button")}
-                              className="btn_hand radius_button_small"
-                            >
-                              PAY
-                            </Button>
-                          ) : (
-                            <h6 className="m-0 p-0">PAID</h6>
-                          )
-                        ) : props.user.role === "employee" && c.fulfilled === 0 ? (
-                          <Button
-                            onClick={() => {
-                              updateHandler(c.id);
-                            }}
-                            className="btn_hand p-1 px-2 m-0 radius_button_small"
-                          >
-                            HAND OUT
-                          </Button>
-                        ) : (
-                          <h6 className="p-0 m-0">DELIVERED</h6>
-                        )}</Col>
-                        <Col sm="2" xs="1">{!c.paid ?
-                          <>
-                            <Link to="/client/products">
-                              <Button
-                                className="px-1 py-3 m-0 radius_button_small"
-                                variant="success"
-                                onClick={() => {
-                                  modifyHandler(c.id, c.products);
-                                }}
-                              >
-                                MODIFY
-                              </Button>
-                            </Link>
-
-                          </>:<></>
-                        }</Col>
-                      </Row></ListGroup.Item>
-                  </>)
-
-              })
-              }
-            </>
-          )
-          }
-
-
-        </ListGroup>
+        {orders.length !== 0 &&
+          <Accordion>
+            {orders.map((o, i) =>
+              <Accordion.Item eventKey={i}>
+                <Accordion.Header>
+                  <Row className="acc-header-row">
+                    <h4><Col><Badge bg="success">Order #{o.id}</Badge></Col></h4>
+                    <Col><h5><Badge bg="secondary">User #{o.userID}</Badge></h5></Col>
+                    {o.paid ? <Col><h5><Badge pill className="mb-1 badge_paid">Paid</Badge></h5></Col>
+                      : <Col><h5><Badge pill className="mb-1 badge_notpaid">Not paid</Badge></h5></Col>}
+                    {o.products.every(pr => pr.status >= 1) && !o.paid
+                      && <Col><h5><Badge pill bg="danger" className="mb-1">Pending Cancellation</Badge></h5></Col>}
+                    {(o.products.every(pr => pr.status >= 1) && !(o.products.every(pr => pr.status >= 2)))
+                      ? <Col><h5><Badge pill className="mb-1 badge_conf">Confirmed by Farmers</Badge></h5></Col>
+                      : (o.products.every(pr => pr.status >= 2) && !o.products.every(pr => pr.status >= 3))
+                      && <Col><h5><Badge pill className="mb-1 badge_confprep">In preparation</Badge></h5></Col>}
+                    {o.products.some(pr => pr.status === 0) && !o.fulfilled
+                      && <Col><h5><Badge pill bg="secondary" className="mb-1">Placed</Badge></h5></Col>}
+                    {o.status === 'available' && !o.fulfilled
+                      && <Col><h5><Badge pill bg="success" className="mb-1">Available for Pickup</Badge></h5></Col>}
+                    {o.fulfilled === 1
+                      && <Col><h5><Badge pill bg="success" className="mb-1">Fulfilled</Badge></h5></Col>}
+                  </Row>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Row className="align-items-center mt-2">
+                    <Col sm={3}><h5><Badge bg="secondary">Products</Badge></h5></Col>
+                    <Col>{o.products.map(p => <h5 className="orders-text">· {p.name}: {p.quantity}</h5>)}</Col>
+                  </Row>
+                  <hr className="mb-4" />
+                  <Row className="align-items-center mt-2">
+                    <Col sm={3}><h5><Badge bg="secondary">Delivery</Badge></h5></Col>
+                    <Col><h5 className="orders-text">{JSON.parse(o.address).address + " on " + JSON.parse(o.address).deliveryOn}</h5></Col>
+                  </Row>
+                  <hr className="mb-4" />
+                  <Row className="align-items-center mt-2">
+                    <Col sm={3}><h5><Badge bg="secondary">Amount</Badge></h5></Col>
+                    <Col><h5 className="orders-text">{o.amount} €</h5></Col>
+                  </Row>
+                  <hr className="mb-4" />
+                  {props.user.role === 'employee' &&
+                    <Row className="align-items-center">
+                      <Button disabled={o.fulfilled} onClick={() => updateHandler(o.id)} className="py-3 button_myorders radius_button_small">
+                        HAND OUT
+                      </Button>
+                    </Row>}
+                  <Row className="align-items-center justify-content-center mt-2">
+                    {o.products.every(pr => pr.status >= 1) ?
+                      <Button disabled variant="success" className="py-3 button_myorders radius_button_small">MODIFY</Button>
+                      : <Link to="/client/products" className="btn btn-success py-3 button_myorders radius_button_small"
+                        onClick={() => modifyHandler(o.id, o.products)}>
+                        MODIFY
+                      </Link>}
+                  </Row>
+                </Accordion.Body>
+              </Accordion.Item>
+            )}
+          </Accordion>
+        }
       </Container>
     </Col>
   );

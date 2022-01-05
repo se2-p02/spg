@@ -355,7 +355,7 @@ exports.getOrders = (id, orderId) => {
                 reject(err);
                 return;
             }
-            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: JSON.parse(c.products), address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid }));
+            const orders = rows.map((c) => ({ id: c.id, userID: c.userID, products: JSON.parse(c.products), address: JSON.parse(c.address), date: c.date, time: c.time, amount: c.amount, conf: c.confPreparation, fulfilled: c.fulfilled, paid: c.paid, status: c.status }));
             resolve(orders);
         });
     });

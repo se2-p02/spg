@@ -23,7 +23,8 @@
 }
 
 .time_button{
-  position:absolute;
+  position:fixed;
+  z-index: 1;
   left: 2%;
   bottom: 1%;
   box-shadow:5px 3px 6px grey;  
@@ -158,6 +159,12 @@ button{
   border-radius: 10px;
 }
 
+.button_myorders {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .below-nav{
   padding-top: 7rem;
 }
@@ -214,4 +221,35 @@ button{
   max-width: 60%;
   margin-left: auto;
   margin-right: auto;
+}
+
+a {
+  text-decoration: none;
+  padding-right: 0%;
+  padding-left: 0%;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.orders-text {
+  font-weight: normal;
+}
+
+.acc-header-row {
+  min-width: 100%;
+}
+
+.badge_conf {
+  background-color: #00b894!important;
+}
+.badge_confprep {
+  background-color: #686de0!important;
+}
+.badge_notpaid {
+  background-color: #e17055!important;
+}
+.badge_paid {
+  background-color: #6ab04c!important;
 }

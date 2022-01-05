@@ -116,6 +116,7 @@ function MyContainer(props) {
     return <Navigate to="/login" />;
   }
 
+  /* eslint-disable react/jsx-no-duplicate-props */
   return (
     <>
       <Routes>
@@ -830,6 +831,7 @@ function MyContainer(props) {
       </Routes>
     </>
   );
+  /* eslint-enable react/jsx-no-duplicate-props */
 }
 
 export default MyContainer;
