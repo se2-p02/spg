@@ -90,8 +90,8 @@ function MyStatistics(props) {
                 <ListGroup.Item> <b>Week</b> </ListGroup.Item>
                 <ListGroup.Item variant="warning">
                   <Row className="p-3">
-                    <Col className="p-0 m-0"><b>OrderID</b></Col>
-                    <Col className="p-0 m-0"><b>Products</b></Col>
+                    <Col className="p-0 m-0" data-testid="order_week"><b>OrderID</b></Col>
+                    <Col className="p-0 m-0" data-testid="product_week"><b>Products</b></Col>
                   </Row>
                 </ListGroup.Item>
 
@@ -135,8 +135,8 @@ function MyStatistics(props) {
                 <ListGroup.Item> <b>Month</b> </ListGroup.Item>
                 <ListGroup.Item variant="warning">
                   <Row className="p-3">
-                    <Col className="p-0 m-0"><b>OrderID</b></Col>
-                    <Col className="p-0 m-0"><b>Products</b></Col>
+                    <Col className="p-0 m-0" data-testid="order_month"><b>OrderID</b></Col>
+                    <Col className="p-0 m-0" data-testid="product_month"><b>Products</b></Col>
                   </Row>
                 </ListGroup.Item>
 
