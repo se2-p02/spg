@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641492130443" clover="3.2.0">
-  <project timestamp="1641492130443" name="All files">
+<coverage generated="1641495074163" clover="3.2.0">
+  <project timestamp="1641495074163" name="All files">
     <metrics statements="957" coveredstatements="503" conditionals="328" coveredconditionals="116" methods="225" coveredmethods="138" elements="1510" coveredelements="757" complexity="0" loc="957" ncloc="957" packages="1" files="4" classes="4"/>
     <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
       <metrics statements="477" coveredstatements="232" conditionals="196" coveredconditionals="61" methods="63" coveredmethods="38"/>
@@ -474,12 +474,12 @@
       <line num="891" count="1" type="stmt"/>
       <line num="892" count="1" type="stmt"/>
       <line num="898" count="1" type="stmt"/>
-      <line num="899" count="87" type="stmt"/>
-      <line num="900" count="87" type="stmt"/>
+      <line num="899" count="89" type="stmt"/>
+      <line num="900" count="89" type="stmt"/>
       <line num="905" count="1" type="stmt"/>
-      <line num="906" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="906" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="907" count="0" type="stmt"/>
-      <line num="910" count="1" type="stmt"/>
+      <line num="910" count="2" type="stmt"/>
       <line num="913" count="1" type="stmt"/>
     </file>
     <file name="db.js" path="C:\Users\Mattia\Desktop\spg\server\db.js">
