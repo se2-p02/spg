@@ -48,18 +48,18 @@ function MyModal(props) {
         <Modal show={props.show} className="mt-5 m-0">
             <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
             <Modal.Body>
-                <Row className="m-0 p-0">
+                <Row className="m-0 p-0" data-testid = "">
                     <MyClock value={value} setValue={setValue} clock={props.clock} />
-                    <Row className="w-100 m-0 p-0 mt-3">
-                        <Col xs={1} sm={1}></Col>
-                        <Col xs={4} sm={4}>
+                    <Row className="w-100 m-0 p-0 mt-3" data-testid = "">
+                        <Col xs={1} sm={1} data-testid = ""></Col>
+                        <Col xs={4} sm={4} data-testid = "">
                             <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100">Abort</Button>
                         </Col>
-                        <Col xs={2} sm={2}></Col>
-                        <Col xs={4} sm={4}>
+                        <Col xs={2} sm={2} data-testid = ""></Col>
+                        <Col xs={4} sm={4} data-testid = "">
                             <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100">Confirm</Button>
                         </Col>
-                        <Col xs={1} sm={1}></Col>
+                        <Col xs={1} sm={1} data-testid = ""></Col>
 
                     </Row>
                 </Row>
