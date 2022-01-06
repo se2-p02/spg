@@ -173,6 +173,10 @@ describe("Orders test", () => {
 
   it("test GET /api/unretrievedOrders/:datetime", async () => {
     const resonse = await request(app).get("/api/unretrievedOrders/2022-01-20").expect(200);
+  });
+  
+  it("test GET /api/unretrievedOrders/:datetime with a null datetime", async () => {
+    const resonse = await request(app).get("/api/unretrievedOrders/").expect(404);
   })
 });
 
@@ -519,6 +523,10 @@ describe("get wallet test", () => {
     const response = await request(app).get("/api/wallet/2");
     expect(200);
   });
+  it("tests GET /api/wallet/ with negative id", async () => {
+    const response = await request(app).get("/api/wallet/-7");
+    expect(404);
+  });
 });
 
 describe("Delivery tests", () => {
@@ -568,6 +576,12 @@ describe("get orders by status", () => {
   it("login", loginWManager());
   it("tests GET /api/orderswithstatus/:status", async () => {
     const res = await server.get("/api/orderswithstatus/available").expect(200);
+  });
+  it("tests GET /api/orderswithstatus/not_available", async () => {
+    const res = await server.get("/api/orderswithstatus/not_available").expect(200);
+  });
+  it("tests GET /api/orderswithstatus/ with null status", async () => {
+    const res = await server.get("/api/orderswithstatus/").expect(404);
   });
 });
 
@@ -633,5 +647,5 @@ describe("Fulfill order", () => {
 describe("System clock", () => {
   it("tests get /api/clock", async () => {
     const clock = await server.get("/api/clock").expect(200);
-  });
+  });  
 });
