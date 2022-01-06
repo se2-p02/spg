@@ -20,10 +20,10 @@ describe('Test employee', () => {
 
     element = screen.getByTestId("orders");
     expect(element).toBeInTheDocument();
-
+/*
     element = screen.getByTestId("clockButton")
     expect(element).toBeInTheDocument();
-
+*/
     expect(window.location.pathname === "/employee");
 
 
