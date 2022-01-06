@@ -31,7 +31,8 @@ function LeftEmployee(props) {
 
 function MyModal(props) {
     const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
+        API.setClock(moment(value).format('YYYY-MM-DD HH:mm'))
+        .then((response) => {
             if (response.error === undefined) props.setClock(() => moment(value));
         });
     };
@@ -48,16 +49,16 @@ function MyModal(props) {
         <Modal show={props.show} className="mt-5 m-0">
             <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
             <Modal.Body>
-                <Row className="m-0 p-0">
+                <Row className="m-0 p-0"  data-testid = "row emp">
                     <MyClock value={value} setValue={setValue} clock={props.clock} />
-                    <Row className="w-100 m-0 p-0 mt-3">
+                    <Row className="w-100 m-0 p-0 mt-3"  data-testid = "row emp 2">
                         <Col xs={1} sm={1}></Col>
-                        <Col xs={4} sm={4}>
-                            <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100">Abort</Button>
+                        <Col xs={4} sm={4} data-testid = "col emp">
+                            <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100" data-testid = "abort emp">Abort</Button>
                         </Col>
                         <Col xs={2} sm={2}></Col>
                         <Col xs={4} sm={4}>
-                            <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100">Confirm</Button>
+                            <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100" data-testid = "conf emp">Confirm</Button>
                         </Col>
                         <Col xs={1} sm={1}></Col>
 
