@@ -107,7 +107,8 @@ function MyStatistics(props) {
                               <Col className="align-items-center" data-testid = "">{c.id}</Col>
                               <Col className="" data-testid = "">
                                 {j.map((x) => {
-                                  return (<p className="m-0 p-0">{x.name + ": " + x.quantity}</p>);
+                                  let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                                  return (elem);
                                 })}
                               </Col>
                             </Row>
