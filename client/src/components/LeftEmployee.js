@@ -15,16 +15,16 @@ function LeftEmployee(props) {
     let filters = ["Clients", "Products", "Orders"];
 
     return (
-        <Col sm={3} className=" d-none d-xl-block d-lg-block d-md-block below-nav vheight-100 leftBG" >
+        <Col sm={3} className=" d-none d-xl-block d-lg-block d-md-block below-nav vheight-100 leftBG"  data-testid = "">
 
-            <ListGroup variant="flush" className=" p-2 m-2 mt-0 mb-0 mr-0 pt-0 pb-0">
+            <ListGroup variant="flush" className=" p-2 m-2 mt-0 mb-0 mr-0 pt-0 pb-0"  data-testid = "">
                 {filters.map(
                     (x) => {
-                        return (<FilterRow filterName={x} fil={props.fil} setFil={props.setFil} key={x} />)
+                        return (<FilterRow filterName={x} fil={props.fil} setFil={props.setFil} key={x}  />)
                     })
                 }
             </ListGroup>
-            <MyModal data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}></MyModal>
+            <MyModal data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}/>
         </Col>
     );
 }
@@ -40,14 +40,14 @@ function MyModal(props) {
     const [value, setValue] = useState();
 
     useEffect(() => {
-        if (props.clock) {
-            setValue(() => new Date(props.clock));
-        }
+        if (props.clock) setValue(() => new Date(props.clock));
     }, [props.clock]);
 
     return (
-        <Modal show={props.show} className="mt-5 m-0">
-            <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
+        <Modal show={props.show} className="mt-5 m-0" data-testid = "">
+            <Modal.Header className="m-0 p-2">
+                <h3>Please, select the date and time</h3>
+            </Modal.Header>
             <Modal.Body>
                 <Row className="m-0 p-0"  data-testid = "row emp">
                     <MyClock value={value} setValue={setValue} clock={props.clock} />

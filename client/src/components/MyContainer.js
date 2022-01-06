@@ -200,13 +200,13 @@ function MyContainer(props) {
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
-                clock={clock}
-                setClock={setClock}
-                setUser={setUser}
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
                 account = {true}
+                clock={clock}
+                setClock={setClock}
+                setUser={setUser}
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
@@ -234,16 +234,16 @@ function MyContainer(props) {
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
-                modify={modify}
-                orderId={orderId}
-                clock={clock}
-                setClock={setClock}
-                account = {true}
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
                 fil={["Orders", "Products"]}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setClock={setClock}
+                account = {true}
               ></MyNavBar>
               <Row>
                 <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
@@ -260,14 +260,14 @@ function MyContainer(props) {
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
-                modify={modify}
-                orderId={orderId}
-                clock={clock}
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
                 account = {true}
                 setCart={setCart}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
                 showCart={false}
                 fil={["Orders", "Products"]}
               ></MyNavBar>
@@ -295,12 +295,12 @@ function MyContainer(props) {
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
-                setUser={setUser}
-                account = {true}
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
                 fil={["Orders", "Products"]}
+                setUser={setUser}
+                account = {true}
               ></MyNavBar>
               <Row>
                 <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
@@ -322,17 +322,17 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+                clock={clock}
                 user={user}
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
-                clock={clock}
-                setClock={setClock}
                 setUser={setUser}
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
                 fil={["Orders", "Products"]}
+                setClock={setClock}
               ></MyNavBar>
               <Row>
                 <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
@@ -355,16 +355,16 @@ function MyContainer(props) {
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
+                setCart={setCart}
                 setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
+                fil={["Available Orders"]}
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
-                setCart={setCart}
                 showCart={false}
-                fil={["Available Orders"]}
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -381,17 +381,17 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar
+                fil={["Available Orders"]}
                 user={user}
-                setModify={setModify}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
                 cart={cart}
                 setCart={setCart}
+                setModify={setModify}
                 showCart={false}
                 setUser={setUser}
-                fil={["Available Orders"]}
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -411,12 +411,12 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                cart={cart}
+                setCart={setCart}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
-                cart={cart}
-                setCart={setCart}
                 showCart={false}
                 fil={["Deliveries", "Confirm Orders"]}
                 setFil={setFil}
@@ -435,17 +435,17 @@ function MyContainer(props) {
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
-                setModify={setModify}
+                setClock={setClock}
                 modify={modify}
+                fil={["Deliveries", "Confirm Orders"]}
                 orderId={orderId}
                 clock={clock}
-                setClock={setClock}
                 setUser={setUser}
+                showCart={false}
+                setFil={setFil}
                 cart={cart}
                 setCart={setCart}
-                showCart={false}
-                fil={["Deliveries", "Confirm Orders"]}
-                setFil={setFil}
+                setModify={setModify}
               ></MyNavBar>
               <Row>
                 <LeftWManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWManager>
@@ -468,15 +468,15 @@ function MyContainer(props) {
           element={
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
-                user={user}
                 setModify={setModify}
+                cart={cart}
                 modify={modify}
+                setCart={setCart}
                 orderId={orderId}
                 clock={clock}
+                user={user}
                 setClock={setClock}
                 setUser={setUser}
-                cart={cart}
-                setCart={setCart}
                 showCart={false}
                 fil={["Unretrieved Orders"]}
                 setFil={setFil}
@@ -495,17 +495,17 @@ function MyContainer(props) {
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
-                setModify={setModify}
-                modify={modify}
-                orderId={orderId}
-                clock={clock}
-                setClock={setClock}
-                setUser={setUser}
                 cart={cart}
                 setCart={setCart}
+                orderId={orderId}
+                clock={clock}
                 showCart={false}
-                fil={["Unretrieved Orders"]}
+                setUser={setUser}
                 setFil={setFil}
+                setClock={setClock}
+                fil={["Unretrieved Orders"]}
+                setModify={setModify}
+                modify={modify}
               ></MyNavBar>
               <Row>
                 <LeftManager fil={fil} setFil={setFil}></LeftManager>
