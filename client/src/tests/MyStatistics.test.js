@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import MyStatistics from '../components/MyStatistics'
 import React from 'react'
-import renderWithRouter from "./setupTestsRouter";
+import moment from 'moment'
 
 
 describe('Test MyStatistics', () => {
