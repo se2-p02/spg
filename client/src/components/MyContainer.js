@@ -19,6 +19,7 @@ import MyFarmerOrders from "./MyFarmerOrders";
 import MyNotAvailableOrders from "./MyNotAvailableOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
 import MyWManager from "./MyWManager";
+import MyManager from "./MyManager";
 import LeftEmployee from "./LeftEmployee";
 import MyDeliveries from "./MyDeliveries";
 import LeftClient from "./LeftClient";
@@ -482,7 +483,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftManager fil={fil} setFil={setFil}></LeftManager>
-                <></>
+                <MyManager clock={clock} setClock={setClock} user={user} />
 
               </Row>
             </>
@@ -748,7 +749,6 @@ function MyContainer(props) {
             </>
           }
         />
-        <Route path="/manager" element={<></>} />
         <Route
           path="/employee/form"
           element={

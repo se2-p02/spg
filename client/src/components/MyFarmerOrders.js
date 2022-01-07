@@ -94,6 +94,7 @@ function MyFarmerOrders(props) {
                             {
                                 orders.map((c, i) => {
                                     let j = c.products
+                                    let b;
                                     j = j.filter(x => props.user.id === x.farmer)
 
                                     //console.log(c.paid)
