@@ -12,9 +12,9 @@ function LeftWWorker(props) {
 
 
     return (
-        <Col sm={3} className="d-none d-xl-block d-lg-block d-md-block below-nav vheight-100 leftBG " id="navbarTogglerDemo01" >
+        <Col sm={3} className="d-none d-xl-block d-lg-block d-md-block below-nav vheight-100 leftBG " id="navbarTogglerDemo01" data-testid = "col lww">
 
-            <ListGroup variant="flush" className=" p-2 m-2 mt-0 mb-0 mr-0 pt-0 pb-0">
+            <ListGroup variant="flush" className=" p-2 m-2 mt-0 mb-0 mr-0 pt-0 pb-0" data-testid = "listg ww">
                 {filters.map(
                     (x) => {
                         return (<FilterRow filterName={x} fil={props.fil} setFil={props.setFil} key={x} />)
@@ -27,13 +27,14 @@ function LeftWWorker(props) {
 }
 
 function MyModal(props) {
-    const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(value));
-        });
-    };
 
     const [value, setValue] = useState();
+
+    const updateClock = (v) => {
+        API.setClock(moment(v).format('YYYY-MM-DD HH:mm')).then((response) => {
+            if (response.error === undefined) props.setClock(() => moment(v));
+        });
+    };
 
     useEffect(() => {
         if (props.clock) {
