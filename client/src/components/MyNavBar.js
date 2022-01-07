@@ -21,7 +21,7 @@ function MyNavBar(props) {
         API.updateProductQuantity(p).then((response) => {
             if (response.error === undefined) {
                 console.log("quantity updated")
-            };
+            }
         });
     }
 

@@ -31,17 +31,5 @@ describe('Test MyFarmerOrders', () => {
 
     });
 
-    it("tests components' behaviour", async () => {
-        renderWithRouter(<MyFarmerOrders
-            clock={moment('2021-11-25 7:55')}
-            setClock={jest.fn()}
-            user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
-
-        await waitFor(() => {
-            const element = screen.getByTestId('buttonGreen0');
-            expect(element).toBeInTheDocument();
-            act(() => fireEvent.click(element));
-        });
-
-    });
+    
 });
