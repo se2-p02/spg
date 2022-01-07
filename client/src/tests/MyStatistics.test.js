@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import MyStatistics from '../components/MyStatistics'
 import React from 'react'
-import moment from 'moment'
+import renderWithRouter from "./setupTestsRouter";
 
 
 describe('Test MyStatistics', () => {
   test('renders the page with the statistics', () => {
-    render(<MyStatistics
+    renderWithRouter(<MyStatistics
       clock="2021-11-30"
       user={{ id: 2, role: "farmer", username: "farmer@farmer.farmer" }}/>);
 
