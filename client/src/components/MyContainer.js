@@ -477,7 +477,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftManager fil={fil} setFil={setFil}></LeftManager>
-                <></>
+                <MyWelcomePage/>
 
               </Row>
             </>
@@ -741,7 +741,6 @@ function MyContainer(props) {
             </>
           }
         />
-        <Route path="/manager" element={<></>} />
         <Route
           path="/employee/form"
           element={
