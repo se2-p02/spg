@@ -627,15 +627,15 @@ function MyContainer(props) {
             <>
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
-                setModify={setModify}
-                modify={modify}
-                orderId={orderId}
-                clock={clock}
                 setClock={setClock}
-                setUser={setUser}
+                setModify={setModify}
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                modify={modify}
+                orderId={orderId}
+                clock={clock}
+                setUser={setUser}
                 account = {true}
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
