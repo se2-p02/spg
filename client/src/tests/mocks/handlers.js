@@ -64,5 +64,16 @@ export const handlers = [
                 ]
             ),
         )
+    }),
+    rest.get('http://localhost:3000/api/unretrievedOrders/:datetime', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    { id: 1, userID: 2, products: [{id:1, name:'Flour', quantity:2.0, farmer:7, status:0}], address: {address: 'Via Roma 3', deliveryOn: '2021-11-27'}, date: '2021-11-27', time: 'ooo', amount: 10.0, conf: 0, fulfilled: 0, paid: 0 },
+                    { id: 2, userID: 2, products: [{id:1, name:'Milk', quantity:3.0, farmer:7, status:0}], address: {address: 'Via Roma 3', deliveryOn: '2021-11-27'}, date: '2021-11-27', time: 'ooo', amount: 10.0, conf: 0, fulfilled: 0, paid: 0 }
+                ]
+            ),
+        )
     })
 ]

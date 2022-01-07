@@ -8,7 +8,7 @@ describe('Test MyStatistics', () => {
   test('renders the page with the statistics', () => {
     render(<MyStatistics
       clock="2021-11-30"
-      user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }}/>);
+      user={{ id: 2, role: "farmer", username: "farmer@farmer.farmer" }}/>);
 
     var element = screen.getByText("Week");
     expect(element).toBeInTheDocument();
