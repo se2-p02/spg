@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button, ListGroup, OverlayTrigger, Tooltip, Col, Row } from "react-bootstrap";
 import { Handbag, CheckSquare } from "react-bootstrap-icons";
 import Container from "react-bootstrap/Container";
-import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 
@@ -69,6 +68,7 @@ function MyFarmerOrders(props) {
         }
     }, [reqUpdate, props.user, props.clock]);
 
+    
     return (
         <Col sm="12" xs="12" md="9">
             <Container
@@ -95,11 +95,7 @@ function MyFarmerOrders(props) {
                                 orders.map((c, i) => {
                                     let j = c.products
                                     j = j.filter(x => props.user.id === x.farmer)
-
-                                    //console.log(c.paid)
-                                    if (c.paid === 0) {
-                                        b = "danger"
-                                    }
+                                    
                                     return (
                                         mydisabled[i] !== 0 &&
                                         <>

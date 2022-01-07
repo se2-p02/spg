@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Alert, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import API from "./API";

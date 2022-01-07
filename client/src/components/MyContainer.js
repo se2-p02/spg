@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyLogin from "./MyLogin";
-import MyEmployee from "./MyEmployee";
+import MyWelcomePage from "./MyWelcomePage";
 import API from "./API";
 import MyNavBar from "./MyNavBar";
 import Row from "react-bootstrap/Row"
@@ -11,14 +11,12 @@ import MySingleClient from "./MySingleClient";
 import MyProducts from "./MyProducts";
 import MyForm from "./MyForm";
 import MyOrders from "./MyOrders";
-import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
 import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
 import MyNotAvailableOrders from "./MyNotAvailableOrders";
 import MyAvailableOrders from "./MyAvailableOrders";
-import MyWManager from "./MyWManager";
 import LeftEmployee from "./LeftEmployee";
 import MyDeliveries from "./MyDeliveries";
 import LeftClient from "./LeftClient";
@@ -149,10 +147,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
-                <MyEmployee clock={clock}
-                  setClock={setClock}
-                  user={user}
-                />
+                <MyWelcomePage />
               </Row>
 
             </>
@@ -246,7 +241,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
-                <MyFarmer clock={clock} setClock={setClock} user={user} />
+                <MyWelcomePage />
 
               </Row>
             </>
@@ -422,7 +417,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftWManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftWManager>
-                <MyWManager clock={clock} setClock={setClock} user={user} />
+                <MyWelcomePage  />
 
               </Row>
             </>
@@ -583,11 +578,9 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftEmployee  showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock} clock={clock}></LeftEmployee>
-                <MyEmployee
-                  clock={clock}
-                  setClock={setClock}
-                  user={user}
-                ></MyEmployee>
+                <MyWelcomePage
+                  
+                ></MyWelcomePage>
               </Row>
             </>
           }
@@ -674,7 +667,7 @@ function MyContainer(props) {
               ></MyNavBar>
               <Row>
                 <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
-                <MyClients clock={clock} setClock={setClock}></MyClients>
+                <MyClients></MyClients>
               </Row>
             </>
           }

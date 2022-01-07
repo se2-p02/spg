@@ -122,7 +122,7 @@ function MyForm(props) {
 
     return (
         <Col sm="9">
-            <Container className="bg-white min-height-100 justify-content-center align-items-center text-center p-0 pt-5" fluid>
+            <Container data-testid="form" className="bg-white min-height-100 justify-content-center align-items-center text-center p-0 pt-5" fluid>
                 {registered === true && (
                     <>
                         <h1 className="text-black text-center mt-5 pt-5">User Registered Successfully!</h1>

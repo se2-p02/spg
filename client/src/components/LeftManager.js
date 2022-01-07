@@ -1,10 +1,8 @@
 import { ListGroup } from 'react-bootstrap'
 import React from "react";
 import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
 import { Link } from 'react-router-dom';
 import './MyNavBar.css';
-import API from "./API";
 
 
 function LeftManager(props) {
@@ -36,7 +34,7 @@ function FilterRow(props) {
     }
     if (props.filterName === "Unretrieved orders") {
         path = "unretrievedOrders"
-        icon = <img src="https://img.icons8.com/external-prettycons-lineal-prettycons/20/000000/external-stats-business-and-finance-prettycons-lineal-prettycons.png"/>
+        icon = <img alt="img" src="https://img.icons8.com/external-prettycons-lineal-prettycons/20/000000/external-stats-business-and-finance-prettycons-lineal-prettycons.png"/>
     }
     else {
         path = props.filterName.toLowerCase()

@@ -221,8 +221,7 @@ function MyModal(props) {
         else {
             const files = {...img}   
             let fileName
-            let tmp1
-            let tmp2
+
             if(files[0]===undefined){
                 fileName="no_image.png"
             }

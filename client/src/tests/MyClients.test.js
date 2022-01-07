@@ -1,67 +1,39 @@
-import LeftClient from '../components/LeftClient'
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import MyClients from '../components/MyClients'
 import React from 'react'
-import { screen, fireEvent } from '@testing-library/react';
+import { act } from "react-dom/test-utils"
 import renderWithRouter from './setupTestsRouter'
 
 
+describe('Test MyClient', () => {
 
-describe('Test employee', () => {
+    test('renders the clients list',  () => {
+        renderWithRouter(<MyClients />);
+        var element = screen.getByTestId("table")
+        expect(element).toBeInTheDocument();
+        element = screen.getByTestId("id")
+        expect(element).toBeInTheDocument();
+        element = screen.getByTestId("name")
+        expect(element).toBeInTheDocument();
+        element = screen.getByTestId("surname")
+        expect(element).toBeInTheDocument();
+        element = screen.getByTestId("add_client")
+        expect(element).toBeInTheDocument();
+        // await waitFor(() => {expect(screen.getByText("Nino")).toBeInTheDocument()})
 
-  test('renders the employee starting page', () => {
-    renderWithRouter(
-      <LeftClient fil={""} setFil={jest.fn()} />
-    );
-    var element = screen.getByTestId("profile")
-    expect(element).toBeInTheDocument();
+    });
+    test('test the button', async () => {
+        renderWithRouter(<MyClients />);
+        var element = screen.getByTestId("add_client")
+        expect(element).toBeInTheDocument();
 
-    element = screen.getByTestId("products")
-    expect(element).toBeInTheDocument();
+        act(() => {
+            fireEvent.click(element)
+        });
+        // await waitFor(() => {expect(screen.getByTestId("form")).toBeInTheDocument()})
 
-    element = screen.getByTestId("orders");
-    expect(element).toBeInTheDocument();
-
-    element = screen.getByTestId("availableOrders");
-    expect(element).toBeInTheDocument();
-
-    expect(window.location.pathname === "/client");
-
-
-  });
-
-  test('test employee buttons', () => {
-
-    renderWithRouter(
-      <LeftClient fil={""} setFil={jest.fn()} />
-    );
-
-    var element = screen.getByTestId("profile")
-    fireEvent.click(element)
-    expect(window.location.pathname === "/client/profile");
-
-    renderWithRouter(
-      <LeftClient fil={""} setFil={jest.fn()} />
-    );
-
-    element = screen.getByTestId("products")
-    fireEvent.click(element)
-    expect(window.location.pathname === "/client/products");
-
-    renderWithRouter(
-      <LeftClient fil={""} setFil={jest.fn()} />
-    );
-
-    element = screen.getByTestId("orders")
-    fireEvent.click(element)
-    expect(window.location.pathname === "/client/orders");
-
-    renderWithRouter(
-        <LeftClient fil={""} setFil={jest.fn()} />
-      );
-
-    element = screen.getByTestId("availableOrders")
-    fireEvent.click(element)
-    expect(window.location.pathname === "/client/availableOrders");
+        
 
 
-  });
+    });
 })

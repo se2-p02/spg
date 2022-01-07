@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 
 function MyNotAvailableOrders(props) {
-  const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
   const [availableProducts, setProducts] = useState([]);
@@ -35,9 +33,6 @@ function MyNotAvailableOrders(props) {
     }
   }, [reqUpdate, props.user]);
 
-  if (goBack) {
-    return <Navigate to={"/" + props.user.role}></Navigate>;
-  }
 
   const handleConfirmation = (order) => {
     // API to call to set the order as available
@@ -80,7 +75,6 @@ function MyNotAvailableOrders(props) {
             <>
               {orders.map((c) => {
                 let j = JSON.parse(c.products)
-                let b = "primary"
                 return (
                   <ListGroup.Item>
                     <Row className="p-2 align-items-center">

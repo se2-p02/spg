@@ -3,7 +3,7 @@ import './MyNavBar.css';
 import Logo from './images/solidarity_dark.png';
 import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col, Nav } from "react-bootstrap";
 import API from "./API";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 import DateTimePicker from 'react-datetime-picker';
@@ -35,11 +35,7 @@ function MyNavBar(props) {
         });
     }
 
-    const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(value));
-        });
-    };
+    
 
     return (
         <>
@@ -318,7 +314,7 @@ function MyModal(props) {
                                         setShowAddressForm(() => false);
                                     }} /> </>}
                             {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
-                                <Form.Control className="w-100" as="textarea" cols={100} rows={2} data-testid="addressBox" className="radius_button_small"
+                                <Form.Control as="textarea" cols={100} rows={2} data-testid="addressBox" className="radius_button_small w-100"
                                     placeholder="Please include street, number, city and country."
                                     onChange={(e) => setAddress(() => e.target.value)} /></>}
 
@@ -350,21 +346,6 @@ function MyModal(props) {
 }
 
 
-function FilterRow(props) {
 
-    let active = false;
-    let path = ""
-
-    if (props.fil === props.filterName) {
-        active = true;
-    }
-    if (props.filterName === "My Orders") {
-        path = "orders"
-    }
-    else {
-        path = props.filterName.toLowerCase()
-    }
-    return (<ListGroup.Item as={Link} to={"/client/" + path} onClick={(e) => { props.setFil(props.filterName) }} action active={active} className="leftButton ">{props.filterName}</ListGroup.Item>);
-}
 
 export default MyNavBar;

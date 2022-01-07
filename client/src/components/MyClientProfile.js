@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {  Col, Row, Container, Image } from "react-bootstrap";
-import { useParams } from "react-router";
 import './MyNavBar.css';
 import API from "./API";
 
@@ -12,7 +11,6 @@ function MyClientProfile(props) {
 
 
 
-    const { id } = useParams();
 
     useEffect(() => {
         if (reqUpdate) {
@@ -26,7 +24,7 @@ function MyClientProfile(props) {
                 console.log(err)
             });
         }
-    }, [reqUpdate, id]);
+    }, [reqUpdate, props.id]);
 
 
 

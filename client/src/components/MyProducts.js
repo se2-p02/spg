@@ -100,7 +100,7 @@ function MyProducts(props) {
                                             <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
                                                 <Card key={p.id} className="bg_login2 p-0">
                                                     <Card.Title className="text-truncate text-center">
-                                                    <img id="loadedimage" src={"http://localhost:3000/images/"+p.image} className="img_product"/>
+                                                    <img id="loadedimage" src={"http://localhost:3000/images/"+p.image} alt="myImg" className="img_product"/>
 
                                                     </Card.Title>
                                                     <Card.Body className="m-0 p-3 pt-2 ">

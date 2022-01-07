@@ -50,7 +50,7 @@ function MyStatistics(props) {
         })
         .catch((err) => { console.log(err) });
     }
-  }, [reqUpdate, props.user]);
+  }, [reqUpdate, props.user, props.clock]);
 
   function month(o) {
     return moment(o.date).year() === moment(props.clock).year() && moment(o.date).month() === moment(props.clock).month()

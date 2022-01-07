@@ -59,9 +59,9 @@ function LeftClient(props) {
 }
 
 function MyModal(props) {
-    const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(value));
+    const updateClock = (new_value) => {
+        API.setClock(moment(new_value).format('YYYY-MM-DD HH:mm')).then((response) => {
+            if (response.error === undefined) props.setClock(() => moment(new_value));
         });
     };
 
