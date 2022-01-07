@@ -8,7 +8,6 @@ import API from "./API";
 import './MyNavBar.css';
 
 function MyDeliveries(props) {
-    const [goBack, setGoBack] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
     const [handins] = useState(true);
@@ -33,9 +32,7 @@ function MyDeliveries(props) {
         }
     }, [reqUpdate, props.user]);
 
-    if (goBack) {
-        return <Navigate to={"/" + props.user.role}></Navigate>;
-    }
+    
 
     return (
         <Col sm="9">
@@ -66,7 +63,6 @@ function MyDeliveries(props) {
                                                         {console.log(deliveries)}
 
                         {deliveries.map((c) => {
-                            let b = "primary";
 
                             return (
                                 <ListGroup.Item>

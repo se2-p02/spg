@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import { Button, ListGroup, Col, Row, Container } from "react-bootstrap";
+import { ListGroup, Col, Row, Container } from "react-bootstrap";
 import API from "./API";
 import './MyNavBar.css';
 import moment from 'moment';
@@ -10,8 +9,7 @@ var dayjs = require('dayjs')
 
 function MyStatistics(props) {
   const [orders, setOrders] = useState([]);
-  const [tot, setTot] = useState([]);
-  const [test, setTest] = useState([]);
+
   const [reqUpdate, setReqUpdate] = useState(true);
 
   useEffect(() => {

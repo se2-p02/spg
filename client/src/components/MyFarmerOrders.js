@@ -7,7 +7,6 @@ import "./MyNavBar.css";
 import API from "./API";
 
 function MyFarmerOrders(props) {
-    const [goBack, setGoBack] = useState(false);
     const [orders, setOrders] = useState([]);
     const [reqUpdate, setReqUpdate] = useState(true);
     const [mydisabled, setDisabled] = useState([]);
@@ -70,9 +69,6 @@ function MyFarmerOrders(props) {
         }
     }, [reqUpdate, props.user, props.clock]);
 
-    if (goBack) {
-        return <Navigate to={"/" + props.user.role}></Navigate>;
-    }
     return (
         <Col sm="12" xs="12" md="9">
             <Container
@@ -100,7 +96,6 @@ function MyFarmerOrders(props) {
                                     let j = c.products
                                     j = j.filter(x => props.user.id === x.farmer)
 
-                                    let b = "primary"
                                     //console.log(c.paid)
                                     if (c.paid === 0) {
                                         b = "danger"

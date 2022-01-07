@@ -31,12 +31,12 @@ function LeftWManager(props) {
 }
 
 function MyModal(props) {
-    const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm'))
+    const updateClock = (new_value) => {
+        API.setClock(moment(new_value).format('YYYY-MM-DD HH:mm'))
         .then((response) => 
         {
             if (response.error === undefined) 
-                props.setClock(() => moment(value));
+                props.setClock(() => moment(new_value));
         });
     };
 

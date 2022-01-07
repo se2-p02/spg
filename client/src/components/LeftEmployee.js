@@ -7,7 +7,6 @@ import clients from './images/customer.png'
 import carrot from './images/carrot.png'
 import API from "./API";
 import moment from "moment";
-import DateTimePicker from 'react-datetime-picker';
 import MyClock from "./MyClock";
 
 
@@ -30,10 +29,10 @@ function LeftEmployee(props) {
 }
 
 function MyModal(props) {
-    const updateClock = (value) => {
-        API.setClock(moment(value).format('YYYY-MM-DD HH:mm'))
+    const updateClock = (new_value) => {
+        API.setClock(moment(new_value).format('YYYY-MM-DD HH:mm'))
         .then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(value));
+            if (response.error === undefined) props.setClock(() => moment(new_value));
         });
     };
 

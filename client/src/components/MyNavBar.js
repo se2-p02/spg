@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import './MyNavBar.css';
 import Logo from './images/solidarity_dark.png';
-import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col, Nav, NavDropdown } from "react-bootstrap";
+import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row, Col, Nav } from "react-bootstrap";
 import API from "./API";
-import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import MyClock from "./MyClock";
+import { useNavigate, Link } from "react-router-dom";
 import moment from "moment";
 
 import DateTimePicker from 'react-datetime-picker';

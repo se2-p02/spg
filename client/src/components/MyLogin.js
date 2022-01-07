@@ -15,7 +15,6 @@ function MyLogin(props) {
     const [error, setError] = useState("");
     const [errorMessageUsername, setErrorMessageUsername] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
-    const [goBack, setGoBack] = useState(false)
 
     const navigate = useNavigate();
 
@@ -79,10 +78,6 @@ function MyLogin(props) {
 
     if (props.user) {
         return (<Navigate to={"/" + props.user.role}></Navigate>)
-    }
-
-    if (goBack) {
-        return (<Navigate to="/"></Navigate>)
     }
 
 

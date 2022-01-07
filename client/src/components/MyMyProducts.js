@@ -199,8 +199,7 @@ function MyModal(props) {
             const files = {...img}   
             let fileName;
             let del;
-            let tmp1
-            let tmp2
+            
             if(files[0]===undefined){
                 fileName=props.old_img
                 del = 0;

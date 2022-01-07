@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup, Image } from "react-bootstrap";
+import { Button, Form, ListGroup, Container, FloatingLabel, Col, Row, InputGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { XCircleFill } from "react-bootstrap-icons";
 import Card from 'react-bootstrap/Card';
@@ -14,7 +14,6 @@ function MyProducts(props) {
     const [wordFilter, setWordFilter] = useState('');
     const [filters, setFilters] = useState(['All']);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [images, setImages]=useState([])
 
     useEffect(() => {
         if (props.cart) {
@@ -22,7 +21,6 @@ function MyProducts(props) {
                 if (p.error === undefined) {
                     setFilter('All');
                     setFilters(['All']);
-                    let i=-1;
                     p.forEach((prod) => {
                         let find = props.cart.find((c) => c.id === prod.id)
                         if (props.cart.find((c) => c.id === prod.id)) {

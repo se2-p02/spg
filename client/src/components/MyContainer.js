@@ -13,7 +13,6 @@ import MyForm from "./MyForm";
 import MyOrders from "./MyOrders";
 import MyFarmer from "./MyFarmer";
 import MyMyProducts from "./MyMyProducts";
-import MyClientPage from "./MyClientPage";
 import moment from 'moment';
 import MyClientProfile from './MyClientProfile';
 import MyFarmerOrders from "./MyFarmerOrders";
