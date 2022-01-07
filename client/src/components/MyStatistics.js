@@ -9,7 +9,6 @@ var dayjs = require('dayjs')
 
 
 function MyStatistics(props) {
-  const [goBack, setGoBack] = useState(false)
   const [orders, setOrders] = useState([]);
   const [tot, setTot] = useState([]);
   const [test, setTest] = useState([]);
@@ -17,7 +16,6 @@ function MyStatistics(props) {
 
   useEffect(() => {
     if (reqUpdate && props.user) {
-      setTest([])
       const datetime = moment(props.clock).year()+"-"+moment(props.clock).month()+"-"+moment(props.clock).day();
 
       API.loadUnretrievedOrders(datetime)
@@ -55,9 +53,6 @@ function MyStatistics(props) {
         .catch((err) => { console.log(err) });
     }
   }, [reqUpdate, props.user]);
-  if (goBack) {
-    return <Navigate to={"/" + props.user.role}></Navigate>;
-  }
 
   function month(o) {
     return moment(o.date).year() === moment(props.clock).year() && moment(o.date).month() === moment(props.clock).month()

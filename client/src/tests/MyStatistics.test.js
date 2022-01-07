@@ -7,7 +7,7 @@ import moment from 'moment'
 describe('Test MyStatistics', () => {
   test('renders the page with the statistics', () => {
     render(<MyStatistics
-      clock={moment()}
+      clock="2021-11-30"
       user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }}/>);
 
     var element = screen.getByText("Week");
