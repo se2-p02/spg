@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641495074163" clover="3.2.0">
-  <project timestamp="1641495074163" name="All files">
+<coverage generated="1641580742852" clover="3.2.0">
+  <project timestamp="1641580742853" name="All files">
     <metrics statements="957" coveredstatements="503" conditionals="328" coveredconditionals="116" methods="225" coveredmethods="138" elements="1510" coveredelements="757" complexity="0" loc="957" ncloc="957" packages="1" files="4" classes="4"/>
-    <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
+    <file name="app.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/app.js">
       <metrics statements="477" coveredstatements="232" conditionals="196" coveredconditionals="61" methods="63" coveredmethods="38"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
@@ -474,22 +474,22 @@
       <line num="891" count="1" type="stmt"/>
       <line num="892" count="1" type="stmt"/>
       <line num="898" count="1" type="stmt"/>
-      <line num="899" count="89" type="stmt"/>
-      <line num="900" count="89" type="stmt"/>
+      <line num="899" count="87" type="stmt"/>
+      <line num="900" count="87" type="stmt"/>
       <line num="905" count="1" type="stmt"/>
-      <line num="906" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="906" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="907" count="0" type="stmt"/>
-      <line num="910" count="2" type="stmt"/>
+      <line num="910" count="1" type="stmt"/>
       <line num="913" count="1" type="stmt"/>
     </file>
-    <file name="db.js" path="C:\Users\Mattia\Desktop\spg\server\db.js">
+    <file name="db.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/db.js">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="3" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
       <line num="7" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="10" count="1" type="stmt"/>
     </file>
-    <file name="spgDao.js" path="C:\Users\Mattia\Desktop\spg\server\spgDao.js">
+    <file name="spgDao.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/spgDao.js">
       <metrics statements="420" coveredstatements="221" conditionals="110" coveredconditionals="41" methods="146" coveredmethods="84"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -550,7 +550,7 @@
       <line num="97" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="98" count="0" type="stmt"/>
       <line num="99" count="0" type="stmt"/>
-      <line num="101" count="9" type="stmt"/>
+      <line num="101" count="10" type="stmt"/>
       <line num="102" count="1" type="stmt"/>
       <line num="108" count="1" type="stmt"/>
       <line num="109" count="1" type="stmt"/>
@@ -912,7 +912,7 @@
       <line num="710" count="0" type="stmt"/>
       <line num="713" count="0" type="stmt"/>
     </file>
-    <file name="userDao.js" path="C:\Users\Mattia\Desktop\spg\server\userDao.js">
+    <file name="userDao.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/userDao.js">
       <metrics statements="56" coveredstatements="46" conditionals="20" coveredconditionals="13" methods="15" coveredmethods="15"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
