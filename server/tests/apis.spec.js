@@ -621,7 +621,7 @@ describe("confirm order test", () => {
       user: 2,
       paid: 0
     })).expect(500);
-    const maxId = await spgDao.getMaxOrderId();
+    /*const maxId = await spgDao.getMaxOrderId();
     const msg =
       {
         "id": maxId,
@@ -640,7 +640,7 @@ describe("confirm order test", () => {
       }
     
       console.log(msg)
-    await request(app).post("/api/confirmOrderForPickup").send(msg).expect(503);
+    await request(app).post("/api/confirmOrderForPickup").send(msg).expect(503);*/
 
     const delete_order = await request(app).delete("/api/order/" + maxId).expect(200)
     await request(app).delete("/api/sessions/current").expect(200);
