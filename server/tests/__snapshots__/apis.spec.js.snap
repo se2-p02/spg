@@ -72,6 +72,14 @@ Object {
 }
 `;
 
+exports[`tests GET /api/clients 10`] = `
+Object {
+  "id": Any<Number>,
+  "name": Any<String>,
+  "surname": Any<String>,
+}
+`;
+
 exports[`tests GET /api/clients/:id 1`] = `
 Object {
   "address": null,
