@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641660836240" clover="3.2.0">
-  <project timestamp="1641660836240" name="All files">
+<coverage generated="1641661184218" clover="3.2.0">
+  <project timestamp="1641661184218" name="All files">
     <metrics statements="960" coveredstatements="542" conditionals="332" coveredconditionals="130" methods="226" coveredmethods="148" elements="1518" coveredelements="820" complexity="0" loc="960" ncloc="960" packages="1" files="4" classes="4"/>
     <file name="app.js" path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/app.js">
       <metrics statements="481" coveredstatements="256" conditionals="200" coveredconditionals="71" methods="64" coveredmethods="41"/>
