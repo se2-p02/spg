@@ -22,6 +22,8 @@ describe('Test MyStatistics', () => {
     expect(element).toBeInTheDocument();
     element = screen.getByText("Month");
     expect(element).toBeInTheDocument();
+    element = screen.getByTestId("container");
+    expect(element).toBeInTheDocument();
 
 
 })

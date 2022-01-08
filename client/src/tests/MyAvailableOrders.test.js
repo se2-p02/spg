@@ -15,9 +15,8 @@ describe('Test MyAvailableOrders', () => {
     expect(element).toBeInTheDocument();
     element = screen.getByText("Amount");
     expect(element).toBeInTheDocument();
-
-
-
+    element = screen.getByTestId("container");
+    expect(element).toBeInTheDocument();
 })
 
 
