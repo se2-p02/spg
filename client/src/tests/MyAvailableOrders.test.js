@@ -28,7 +28,15 @@ it("tests go back", async () => {
     user={{ id: 2, role: "client", username: "client@client.client" }}
     role = "client"/>, "/client/availableOrders");
   });
-   
+
+it("tests with id", async () => {
+  renderWithRouter(<MyAvailableOrders
+    clock={moment('2021-11-27 9:55')}
+    setClock={jest.fn()}
+    user={{ id: 2, role: "client", username: "client@client.client" }}
+    id="1"
+    role = "client"/>, "/client/availableOrders");
+});
    
 
 });

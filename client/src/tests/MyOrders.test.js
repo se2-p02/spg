@@ -37,6 +37,13 @@ describe('Test MyFarmerOrders', () => {
 
 
         });
+        it("tests with full", async () => {
+            renderWithRouter(<MyOrders
+                clock={moment('2021-11-27 7:55')}
+                setClock={jest.fn()}
+                user={{ id: 1, role: "employee", username: "admin@admin.admin" }} 
+                full=""/>, "/employee/orders");
+        });
 
         
     
