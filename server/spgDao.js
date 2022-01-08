@@ -208,21 +208,16 @@ exports.addOrder = async (order) => {
 
 //modify the order
 exports.modifyOrder = (products, address, amount, id) => {
-    try {
-        return new Promise((resolve, reject) => {
-            const sql = 'UPDATE orders SET products=?, address=?, amount=? WHERE id=?';
-            db.run(sql, [products, address, amount, id], function (err, rows) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve(id);
-            });
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE orders SET products=?, address=?, amount=? WHERE id=?';
+        db.run(sql, [products, address, amount, id], function (err, rows) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(id);
         });
-    } catch (err) {
-        console.log(err);
-        return err;
-    }
+    });
 };
 
 // insert a new product
