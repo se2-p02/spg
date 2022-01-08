@@ -106,6 +106,7 @@ describe("Clients test", () => {
         id: expect.any(Number),
         name: expect.any(String),
         surname: expect.any(String),
+        role: expect.any(String)
       });
     });
   });

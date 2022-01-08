@@ -84,12 +84,14 @@ export const handlers = [
                     {
                         id: 1,
                         name: "Nino",
-                        surname: "Frassica"
+                        surname: "Frassica",
+                        role: "employee"
                     },
                     {
                         id: 2,
                         name: "Gigi",
-                        surname: "Riva"
+                        surname: "Riva",
+                        role: "client"
                     }
                 ]
             ),
