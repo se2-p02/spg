@@ -512,7 +512,9 @@ describe("modify order test", () => {
       .send({address:{
         address: "STORE PICKUP", deliveryOn: "2021-12-01 11:30"
       }	, products:
-        [{id:4,quantity:1,unit:"kg",price:10.3,farmer:3,status:0,name:"Cheese"}]	
+        [{id:4,quantity:2,unit:"kg",price:10.3,farmer:3,status:0,name:"Cheese"}],
+        oldQ: [{id:4, quantity: 1}],
+        amount: 20.6	
     })
       .expect(200);
   });

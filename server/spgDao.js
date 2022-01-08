@@ -156,7 +156,6 @@ exports.getNextNumber = async () => {
 };
 
 exports.orderPrep = async (product) => {
-    console.log('from DAO'+ product.name,product.quantity)
     try {
         return await new Promise((resolve, reject) => {
             const sql = 'UPDATE products SET quantity = quantity - ? WHERE id = ? ';
@@ -169,13 +168,13 @@ exports.orderPrep = async (product) => {
             });
         });
     } catch (err) {
-        return;
+        console.log(err);
+        return err;
     }
 };
 
 //update the product table after removing one item from the order when modifying the order
 exports.updateProductQuantity = async (product) => {
-    console.log('from update'+ product.name,product.quantity)
     try {
         return await new Promise((resolve, reject) => {
             const sql = 'UPDATE products SET quantity = quantity + ? WHERE id = ? ';
@@ -188,7 +187,8 @@ exports.updateProductQuantity = async (product) => {
             });
         });
     } catch (err) {
-        return;
+        console.log(err);
+        return err;
     }
 };
 
@@ -207,11 +207,10 @@ exports.addOrder = async (order) => {
 };
 
 //modify the order
-exports.modifyOrder = (items,address, id) => {
-    console.log('from DAO '+items)
+exports.modifyOrder = (products, address, amount, id) => {
     return new Promise((resolve, reject) => {
-        const sql = 'UPDATE orders SET products=?,address=? WHERE id = ?';
-        db.run(sql, [items,address, id], function (err, rows) {
+        const sql = 'UPDATE orders SET products=?, address=?, amount=? WHERE id=?';
+        db.run(sql, [products, address, amount, id], function (err, rows) {
             if (err) {
                 reject(err);
                 return;
@@ -703,7 +702,7 @@ exports.setTelegramId = (telegramId, action) => {
             sql = 'UPDATE users SET telegramId = ? WHERE id = ?'
             params.push(action.id);
         } else return false;
-        
+
         db.run(sql, params, (err, row) => {
             if (err) {
                 reject(err);

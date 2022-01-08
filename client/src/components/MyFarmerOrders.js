@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, ListGroup, OverlayTrigger, Tooltip, Col, Row } from "react-bootstrap";
-import { Handbag, CheckSquare } from "react-bootstrap-icons";
+import { Button, Badge, Col, Row, Accordion, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import "./MyNavBar.css";
 import API from "./API";
@@ -10,6 +9,7 @@ function MyFarmerOrders(props) {
     const [reqUpdate, setReqUpdate] = useState(true);
     const [mydisabled, setDisabled] = useState([]);
     const [butDisable, setButDisable] = useState(false);
+    const [alertShow, setAlertShow] = useState(false);
 
     const handleUpdate = async (order, newStatus) => {
         let doPayment = order.paid ? false : true;
@@ -33,8 +33,10 @@ function MyFarmerOrders(props) {
     useEffect(() => {
         if (props.clock && !((props.clock.day() === 3 && props.clock.hour() >= 8) || props.clock.day() === 4 || (props.clock.day() === 5 && (props.clock.hour() >= 0 && props.clock.hour() <= 19)))) {
             setButDisable(true);
+            setAlertShow(true);
         } else {
             setButDisable(false);
+            setAlertShow(false);
         }
         if (reqUpdate && props.user) {
             const id = props.user.role === 'client' && props.user.id;
@@ -44,21 +46,17 @@ function MyFarmerOrders(props) {
                     console.log(props.user.id)
                     if (c.error === undefined) {
                         c.sort((a, b) => b.id - a.id);
+                        const farmerOrders = c.filter(o => o.products.some(p => p.farmer === props.user.id));
                         const disOrders = [];
-                        for (let elem of c) {
-                            let disable = 0;
-                            for (let p of elem.products) {
-                                if (props.user.id === p.farmer && p.status === 2)
-                                    disable = 3;
-                                else if (props.user.id === p.farmer && p.status === 1)
-                                    disable = 2;
-                                else if (props.user.id === p.farmer && p.status === 0)
-                                    disable = 1;
-                            }
-                            disOrders.push(disable);
-                        }
-                        setOrders(c);
+                        farmerOrders.forEach(fo => {
+                            if (fo.products.some(pr => pr.farmer === props.user.id && pr.status === 3)) disOrders.push(4);
+                            else if (fo.products.some(pr => pr.farmer === props.user.id && pr.status === 2)) disOrders.push(3);
+                            else if (fo.products.some(pr => pr.farmer === props.user.id && pr.status === 1)) disOrders.push(2);
+                            else if (fo.products.some(pr => pr.farmer === props.user.id && pr.status === 0)) disOrders.push(1);
+                        });
+                        setOrders(farmerOrders);
                         setDisabled(disOrders);
+                        console.log(disOrders)
                         setReqUpdate(false);
                     } else {
                         console.log(c.error)
@@ -72,79 +70,72 @@ function MyFarmerOrders(props) {
     return (
         <Col sm="12" xs="12" md="9">
             <Container
-                className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
-                fluid
-            >
-                <ListGroup className="my-3 mx-2" variant="flush">
-                    <ListGroup.Item variant="warning" >
-                        <Row className="p-2">
-                            <Col sm="1" xs="1"><b>User</b></Col>
-                            <Col sm="2" xs="3"><b>Products</b></Col>
-                            <Col sm="4" xs="3"><b>Address</b></Col>
-                            <Col sm="2" xs="3" ><b>Date</b></Col>
-                            <Col sm="1" xs="1" className="d-none d-xs-none d-sm-block d-md-block d-lg-block d-xl-block"><b>Time</b></Col>
-                            <Col sm="2" xs="2" ><b>Confirm</b></Col>
+                className={
+                    props.full
+                        ? " justify-content-center align-items-center mt-3"
+                        : " min-height-100 justify-content-center align-items-center below-nav mt-3"
+                } fluid>
+                {alertShow && <Alert variant="danger" onClose={() => setAlertShow(false)} dismissible>You can confirm your products from Wednesday 8:00 to Friday 19:00.</Alert>}
 
-                        </Row>
-                    </ListGroup.Item>
-
-                    {orders && (
-                        <ListGroup.Item >
-
-                            {
-                                orders.map((c, i) => {
-                                    let j = c.products
-                                    let b;
-                                    j = j.filter(x => props.user.id === x.farmer)
-                                    
-                                    return (
-                                        mydisabled[i] !== 0 &&
-                                        <>
-                                            <Row className="p-2 align-items-center">
-                                                <Col sm="1" xs="1">{c.userID}</Col>
-                                                <Col sm="2" xs="3" className="">{j.map((x) => { return (<p className="m-0 p-1">{x.name + ": " + x.quantity}</p>) })}</Col>
-                                                <Col sm="4" xs="3" className="d-block d-xs-block d-sm-none">{c.address.address}</Col>
-                                                <Col sm="4" xs="3" className="d-none d-xs-none d-sm-block">{c.address.address}<br></br>
-                                                    {c.address.deliveryOn}</Col>
-                                                <Col sm="2" xs="3">{c.date}</Col>
-                                                <Col sm="1" xs="1" className="d-none d-xs-none d-sm-block d-md-block d-lg-block d-xl-block">{c.time}</Col>
-                                                <Col sm="2" xs="2" >{mydisabled[i] === 1 &&
-                                                    <OverlayTrigger
-                                                        placement='bottom'
-                                                        overlay={<Tooltip><strong>Confirm</strong> the order.</Tooltip>}
-                                                    >
-                                                        {
-                                                            butDisable ?
-                                                                <Button data-testid={"buttonGreen" + i} variant='success' disabled ><CheckSquare /></Button>
-                                                                :
-                                                                <Button data-testid={"buttonGreen" + i} variant='success' onClick={() => handleUpdate(c, 1)}><CheckSquare /></Button>
-                                                        }
-                                                    </OverlayTrigger>}
-                                                    {mydisabled[i] === 2 &&
-                                                        <OverlayTrigger
-                                                            placement='bottom'
-                                                            overlay={<Tooltip>Confirm <strong>preparation</strong> of the order.</Tooltip>}
-                                                        >
-                                                            {
-                                                                butDisable ?
-                                                                    <Button data-testid={"buttonYellow" + i} variant='warning' disabled ><Handbag /></Button>
-                                                                    :
-                                                                    <Button data-testid={"buttonYellow" + i} variant='warning' onClick={() => handleUpdate(c, 2)}><Handbag /></Button>
-                                                            }
-                                                        </OverlayTrigger>}
-                                                    {mydisabled[i] === 3 && <h5>Confirmed</h5>}</Col>
-
-                                            </Row>
-
-                                        </>
-                                    );
-                                })
-                            }
-                        </ListGroup.Item>
-
-                    )}
-                </ListGroup>
-
+                {orders &&
+                    <Accordion>
+                        {orders.map((o, i) =>
+                            <Accordion.Item eventKey={i}>
+                                <Accordion.Header>
+                                    <Row className="acc-header-row">
+                                        <h4><Col><Badge bg="success">Order #{o.id}</Badge></Col></h4>
+                                        <Col><h5><Badge bg="secondary">User #{o.userID}</Badge></h5></Col>
+                                        <Col>{o.paid ? <h5><Badge pill className="mb-1 badge_paid">Paid</Badge></h5>
+                                            : <h5><Badge pill className="mb-1 badge_notpaid">Not paid</Badge></h5>}</Col>
+                                        <Col>{o.products.every(pr => pr.status >= 1) && !o.paid
+                                            && <h5><Badge pill bg="danger" className="mb-1">Pending Cancellation</Badge></h5>}
+                                            {(o.products.filter(prod => prod.farmer === props.user.id).every(pr => pr.status >= 1) && o.paid && !(o.products.filter(prod => prod.farmer === props.user.id).every(pr => pr.status >= 2)))
+                                                ? <h5><Badge pill className="mb-1 badge_conf">Confirmed by you</Badge></h5>
+                                                : (o.products.filter(prod => prod.farmer === props.user.id).every(pr => pr.status >= 2) && o.paid && !o.fulfilled)
+                                                && <h5><Badge pill className="mb-1 badge_confprep">Preparation confirmed</Badge></h5>}
+                                            {o.products.filter(prod => prod.farmer === props.user.id).every(pr => pr.status === 0) && !o.fulfilled
+                                                && <h5><Badge pill bg="secondary" className="mb-1">Placed</Badge></h5>}
+                                            {o.fulfilled === 1
+                                                && <h5><Badge pill bg="success" className="mb-1">Fulfilled</Badge></h5>}
+                                        </Col>
+                                    </Row>
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <Row className="align-items-center mt-2">
+                                        <Col sm={3}><h5><Badge bg="secondary">Products</Badge></h5></Col>
+                                        <Col>{o.products.map(p => <h5 className="orders-text">· {p.name}: {p.quantity}</h5>)}</Col>
+                                    </Row>
+                                    <hr className="mb-4" />
+                                    <Row className="align-items-center mt-2">
+                                        <Col sm={3}><h5><Badge bg="secondary">Date and Time</Badge></h5></Col>
+                                        <Col><h5 className="orders-text">{o.date + ' ' + o.time}</h5></Col>
+                                    </Row>
+                                    <hr className="mb-4" />
+                                    <Row className="align-items-center mt-2">
+                                        <Col sm={3}><h5><Badge bg="secondary">Delivery</Badge></h5></Col>
+                                        <Col><h5 className="orders-text">{o.address.address + " on " + o.address.deliveryOn}</h5></Col>
+                                    </Row>
+                                    <hr className="mb-4" />
+                                    <Row className="align-items-center mt-2">
+                                        <Col sm={3}><h5><Badge bg="secondary">Amount</Badge></h5></Col>
+                                        <Col><h5 className="orders-text">{o.amount} €</h5></Col>
+                                    </Row>
+                                    {mydisabled[i] === 1 ? <><hr className="mb-4" />
+                                        <Row className="align-items-center">
+                                            <Button data-testid={"buttonGreen" + i} onClick={() => handleUpdate(o, 1)} variant='success' disabled={butDisable} className="py-3 button_myorders radius_button_small">
+                                                Confirm your products
+                                            </Button>
+                                        </Row></>
+                                        : mydisabled[i] === 2 && <><hr className="mb-4" />
+                                            <Row className="align-items-center">
+                                                <Button data-testid={"buttonYellow" + i} onClick={() => handleUpdate(o, 2)} variant='warning' disabled={butDisable} className="py-3 button_myorders radius_button_small">
+                                                    Confirm preparation of your products
+                                                </Button>
+                                            </Row></>}
+                                </Accordion.Body>
+                            </Accordion.Item>)}
+                    </Accordion>
+                }
             </Container>
         </Col >
     );

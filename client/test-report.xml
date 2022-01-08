@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyFarmerOrders.test.js">
+    <testCase name="Test MyFarmerOrders tests components" duration="53"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\LeftClient.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="149"/>
+    <testCase name="Test employee test employee buttons" duration="112"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyForm.test.js">
+    <testCase name="renders signup page" duration="193"/>
+    <testCase name="tests go back with undefined user" duration="89"/>
+    <testCase name="tests go back with a valid user" duration="27"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyMyProducts.test.js">
+    <testCase name="Test MyMyproducts tests components" duration="148"/>
+    <testCase name="Test MyMyproducts tests modal" duration="147"/>
+    <testCase name="Test MyMyproducts tests time error" duration="24"/>
+    <testCase name="Test MyMyproducts tests error in modal" duration="145"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyNavBar.test.js">
+    <testCase name="Test navbar renders all components" duration="96"/>
+    <testCase name="Test navbar renders cart" duration="444"/>
+    <testCase name="Test navbar test logout" duration="40"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyWManager.test.js">
+    <testCase name="Test employee renders the wmanaer left page" duration="38"/>
+    <testCase name="Test employee test wmanager buttons" duration="96"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyLogin.test.js">
+    <testCase name="Test login form unit Test login form appearance" duration="37"/>
+    <testCase name="Test login form e2e Test filling out login form" duration="62"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyProducts.test.js">
+    <testCase name="Test MyProducts renders the products page" duration="156"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\App.test.js">
+    <testCase name="renders app homepage" duration="110"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyClients.test.js">
+    <testCase name="Test MyClient renders the clients list" duration="44"/>
+    <testCase name="Test MyClient test the button" duration="32"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyFormSignUp.test.js">
+    <testCase name="renders signup page" duration="147"/>
+    <testCase name="tests go back with undefined user" duration="72"/>
+    <testCase name="tests go back with a valid user" duration="24"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyWWorker.test.js">
+    <testCase name="Test wworker renders the wworker left page" duration="132"/>
+    <testCase name="Test wworker test left manager buttons" duration="20"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyFarmer.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="71"/>
+    <testCase name="Test employee test employee buttons" duration="34"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyClientPage.test.js">
+    <testCase name="renders app form" duration="28"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyContainer.test.js">
+    <testCase name="renders container" duration="81"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyDeliveries.test.js">
+    <testCase name="Test MyDeliveries renders the deliveries page" duration="50"/>
+    <testCase name="Test MyDeliveries tests go back" duration="266"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyEmployee.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="85"/>
+    <testCase name="Test employee test employee buttons" duration="48"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyManager.test.js">
+    <testCase name="Test manager renders the manager left page" duration="26"/>
+    <testCase name="Test manager test left manager buttons" duration="20"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyAvailableOrders.test.js">
+    <testCase name="Test MyAvailableOrders renders the page with the list of available orders" duration="25"/>
+    <testCase name="Test MyAvailableOrders tests go back" duration="28"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MySingleClient.test.js">
+    <testCase name="renders the info of a client from employee page" duration="44"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyStatistics.test.js">
+    <testCase name="Test MyStatistics renders the page with the statistics" duration="50"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyOrders.test.js">
+    <testCase name="Test MyFarmerOrders tests components" duration="38"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\ModalWindow.test.js">
+    <testCase name="modal window.js tests renders modal window for alert" duration="81"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyClientProfile.test.js">
+    <testCase name="renders the client profile" duration="55"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyNotAvailableOrders.test.js">
+    <testCase name="Test MyAvailableOrders renders the page with the list of not jet available orders" duration="25"/>
+  </file>
+  <file path="C:\Users\work\Documents\GitHub\spg\client\src\tests\MyWelcome.test.js">
+    <testCase name="Test employee renders the employee starting page" duration="18"/>
+  </file>
+</testExecutions>

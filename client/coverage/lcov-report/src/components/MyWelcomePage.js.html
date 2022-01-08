@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/MyClock.js</title>
+    <title>Code coverage report for src/components/MyWelcomePage.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> MyClock.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> MyWelcomePage.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,7 +91,21 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,47 +121,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import {  Card } from 'react-bootstrap';
-import DateTimePicker from 'react-datetime-picker';
-import './MyClock.css';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import { Col, Container, Row, Modal, Button } from "react-bootstrap";
 &nbsp;
-function <span class="fstat-no" title="function not covered" >MyClock(</span>props) {
-  
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;&gt;
-      {props.value &amp;&amp; props.clock &amp;&amp;
-        &lt;Card body className="clockButton m-0 p-0 text-center align-items-center"&gt;
-          &lt;DateTimePicker
-            onChange={props.setValue}
-            value={props.value}
-            format='yyyy-MM-dd HH:mm'
-            required={true}
-            clearIcon={null}
-            locale='en-us'
-          /&gt;
-        &lt;/Card&gt;
-      }
-    &lt;/&gt;
-  );
+function MyWelcomePage(props) {
 &nbsp;
+    return (&lt;&gt;
+        &lt;Col sm={9}&gt;
+            &lt;Container className=" min-height-100 justify-content-center align-items-center text-center below-nav" fluid&gt;
+                &lt;h3&gt;Welcome&lt;/h3&gt;
+                &lt;h5 className="mt-4"&gt;Please select a page from the menu&lt;/h5&gt;
+            &lt;/Container&gt;
+        &lt;/Col&gt;
+        {props.user &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >props.user.role === 'client' </span>&amp;&amp;
+<span class="branch-2 cbranch-no" title="branch not covered" >        &lt;Modal show={props.walletAlert} className="mt-5 m-0"&gt;</span>
+            &lt;Modal.Header closeButton&gt;&lt;h4&gt;Insufficient balance&lt;/h4&gt;&lt;/Modal.Header&gt;
+            &lt;Modal.Body&gt;
+                &lt;Row&gt;
+                    &lt;h5&gt;Your wallet balance is insufficient for one or more orders. Please check your wallet and your orders.&lt;/h5&gt;
+                &lt;/Row&gt;
+                &lt;Row className="mt-3"&gt;
+                    &lt;Button variant="danger" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >props.setWalletAlert(false)}</span>&gt;Close&lt;/Button&gt;
+                &lt;/Row&gt;
+            &lt;/Modal.Body&gt;
+        &lt;/Modal&gt;}
+        &lt;/&gt;
+    );
 }
 &nbsp;
-&nbsp;
-export default MyClock;</pre></td></tr></table></pre>
+export default MyWelcomePage;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

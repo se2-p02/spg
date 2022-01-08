@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+<<<<<<< HEAD
   <file path="/Users/pietromacori/Documents/git/SoftEng2/SPG/server/tests/apis.spec.js">
     <testCase name="tests GET /api/products" duration="303"/>
     <testCase name="tests GET /api/clients" duration="202"/>
@@ -41,5 +42,48 @@
     <testCase name="tests GET /api/orderswithstatus/not_available" duration="87"/>
     <testCase name="tests GET /api/orderswithstatus/ with null status" duration="53"/>
     <testCase name="tests get /api/clock" duration="52"/>
+=======
+  <file path="C:\Users\work\Documents\GitHub\spg\server\tests\apis.spec.js">
+    <testCase name="tests GET /api/products" duration="209"/>
+    <testCase name="tests GET /api/clients" duration="40"/>
+    <testCase name="tests GET /api/clients/:id" duration="36"/>
+    <testCase name="tests PUT /api/clients/:id/wallet" duration="44"/>
+    <testCase name="tests GET /api/orders" duration="32"/>
+    <testCase name="tests GET /api/orders/:id" duration="32"/>
+    <testCase name="tests POST /api/orders" duration="44"/>
+    <testCase name="test GET /api/unretrievedOrders/:datetime" duration="41"/>
+    <testCase name="test GET /api/unretrievedOrders/:datetime with a null datetime" duration="32"/>
+    <testCase name="tests POST /api/addNewUser" duration="182"/>
+    <testCase name="tests error POST /api/addNewUser" duration="37"/>
+    <testCase name="login" duration="92"/>
+    <testCase name="tests POST /api/products" duration="67"/>
+    <testCase name="tests PUT /api/products/:id" duration="90"/>
+    <testCase name="logout" duration="31"/>
+    <testCase name="tests delete /api/sessions/current" duration="31"/>
+    <testCase name="tests get /api/sessions/current" duration="29"/>
+    <testCase name="tests get /api/nextProducts without performing the login" duration="44"/>
+    <testCase name="login" duration="85"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer not on sunday" duration="121"/>
+    <testCase name="login" duration="88"/>
+    <testCase name="tests get /api/nextProducts after the login as a customer on sunday" duration="56"/>
+    <testCase name="tests fet /api/nextProducts in the current week" duration="42"/>
+    <testCase name="login" duration="88"/>
+    <testCase name="tests get /api/nextProducts after the login as a farmer" duration="33"/>
+    <testCase name="tests post /api/session" duration="96"/>
+    <testCase name="tests post /api/session error" duration="87"/>
+    <testCase name="tests PUT /api/clients/basket/:id" duration="31"/>
+    <testCase name="tests PUT /api/orders/modify/:id" duration="41"/>
+    <testCase name="tests GET /api/wallet/:id" duration="32"/>
+    <testCase name="tests GET /api/wallet/ with negative id" duration="32"/>
+    <testCase name="login" duration="89"/>
+    <testCase name="tests get /api/deliverableProducts after the login as a wmanager" duration="41"/>
+    <testCase name="tests get /api/deliveries after the login as a wmanager" duration="36"/>
+    <testCase name="tests post /api/deliveries after the login as a wmanager" duration="46"/>
+    <testCase name="login" duration="88"/>
+    <testCase name="tests GET /api/orderswithstatus/:status" duration="43"/>
+    <testCase name="tests GET /api/orderswithstatus/not_available" duration="33"/>
+    <testCase name="tests GET /api/orderswithstatus/ with null status" duration="34"/>
+    <testCase name="tests get /api/clock" duration="32"/>
+>>>>>>> bd9674381ca30b2f92084865be9b97efdbe298d6
   </file>
 </testExecutions>
