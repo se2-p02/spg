@@ -7,23 +7,23 @@ import './MyNavBar.css';
 
 
 function MyForm(props) {
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [repeat, setRepeat] = useState("");
-
     const [errorMessageEmail, setErrorMessageEmail] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
+    const [registered, setRegistered] = useState(false);
     const [errorMessageFields, setErrorMessageFields] = useState("");
     const [goBack, setGoBack] = useState(false);
-    const [registered, setRegistered] = useState(false);
+
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [surname, setSurname] = useState("");
+    const [email, setEmail] = useState("");
+    const [repeat, setRepeat] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [address, setAddress] = useState("");
     const [errorNumber, setErrorNumber] = useState("");
     const [city, setCity] = useState("");
-    const [address, setAddress] = useState("");
     const [country, setCountry] = useState("");
 
     function resetForm() {
@@ -99,6 +99,10 @@ function MyForm(props) {
         }
     }
 
+    function handleGoBack() {
+        setRegistered(false);
+        setGoBack(true);
+    }
 
     function checkPassword(password_to_check, repeat_to_check) {
         if (password_to_check !== repeat_to_check) {
@@ -115,20 +119,16 @@ function MyForm(props) {
         }
     }
 
-    function handleGoBack() {
-        setRegistered(false);
-        setGoBack(true);
-    }
 
     return (
         <Col sm="9">
             <Container data-testid="form" className="bg-white min-height-100 justify-content-center align-items-center text-center p-0 pt-5" fluid>
                 {registered === true && (
                     <>
-                        <h1 className="text-black text-center mt-5 pt-5">User Registered Successfully!</h1>
-                        <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5">
+                        <h1 className="text-black text-center mt-5 pt-5" data-testid="">User Registered Successfully!</h1>
+                        <Row className="justify-content-center m-0 p-0 w-100 pt-5 mt-5 mb-5" data-testid="">
                             <Col lg={1} />
-                            <Col className=" m-0 p-0" sm={5} lg={3}>
+                            <Col className=" m-0 p-0" sm={5} lg={3} data-testid="">
                                 <Button
                                     size="lg"
                                     variant="danger"
@@ -139,20 +139,21 @@ function MyForm(props) {
                                     Back
                                 </Button>
                             </Col>
-                            <Col sm={2} />
+                            <Col sm={2} data-testid=""/>
                             <br />
-                            <Col className=" m-0 p-0" sm={5} lg={3}>
+                            <Col className=" m-0 p-0" sm={5} lg={3} data-testid="">
                                 <Button
                                     size="lg"
                                     variant="success"
                                     type="submit"
                                     className="w-100 m-0 p-2"
                                     onClick={() => setRegistered(false)}
+                                    data-testid=""
                                 >
                                     Register another user
                                 </Button>
                             </Col>
-                            <Col lg={1} />
+                            <Col lg={1} data-testid=""/>
                         </Row>
                         <h1>User registration completed!</h1>
 
@@ -225,7 +226,7 @@ function MyForm(props) {
                             <Row>
                                 <Col lg={2}></Col>
                                 <Col>
-                                    <Form.Group controlId="Password">
+                                    <Form.Group controlId="Password" data-testid="">
                                         <Form.Label className="text-black pt-4"><h6>Password</h6></Form.Label>
                                         <InputGroup>
                                             <Form.Control
@@ -235,21 +236,23 @@ function MyForm(props) {
                                                 required
                                                 onChange={(ev) => { setPassword(ev.target.value); }}
                                                 value={password}
+                                                data-testid=""
                                             />
-                                            <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="27" /> : <EyeFill size="27" />}</Button>
+                                            <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="27" /> : <EyeFill size="27" data-testid="" />}</Button>
                                         </InputGroup>
                                     </Form.Group>
                                     {errorMessagePassword.length !== 0 && (
                                         <div
                                             className="alert alert-danger alert-float-static fade show"
                                             role="alert"
+                                            data-testid=""
                                         >
                                             {errorMessagePassword}
                                         </div>
                                     )}
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="repeatPassword">
+                                    <Form.Group controlId="repeatPassword"  data-testid="">
                                         <Form.Label className="text-black pt-4"><h6>Repeat Password</h6></Form.Label>
                                         <InputGroup>
                                             <Form.Control
@@ -259,6 +262,7 @@ function MyForm(props) {
                                                 required
                                                 onChange={(ev) => { setRepeat(ev.target.value) }}
                                                 value={repeat}
+                                                data-testid=""
                                             />
                                             <Button variant="secondary" onClick={() => setShowPassword((sp) => !sp)}>{showPassword ? <EyeSlashFill size="27" /> : <EyeFill size="27" />}</Button>
                                         </InputGroup>
@@ -267,6 +271,7 @@ function MyForm(props) {
                                         <div
                                             className="alert alert-danger alert-float-static fade show"
                                             role="alert"
+                                            data-testid=""
                                         >
                                             {errorMessagePassword}
                                         </div>
