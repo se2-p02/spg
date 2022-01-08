@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.83% </span>
+                <span class="strong">19.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/48</span>
+                <span class='fraction'>10/52</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.58% </span>
+                <span class="strong">14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/48</span>
+                <span class='fraction'>7/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.09% </span>
+                <span class="strong">8.69% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/22</span>
+                <span class='fraction'>2/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.72% </span>
+                <span class="strong">20.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/44</span>
+                <span class='fraction'>10/48</span>
             </div>
         
             
@@ -211,7 +211,13 @@
 <a name='L146'></a><a href='#L146'>146</a>
 <a name='L147'></a><a href='#L147'>147</a>
 <a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,6 +284,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -293,10 +304,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -322,6 +329,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -420,11 +432,16 @@ function MyOrders(props) {
 &nbsp;
   //handle the modify button
   const modifyHandler = <span class="fstat-no" title="function not covered" >(i</span>d, products) =&gt; {
-    const newProducts = <span class="cstat-no" title="statement not covered" >products;</span>
-<span class="cstat-no" title="statement not covered" >    console.log(newProducts);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(products);</span>
 <span class="cstat-no" title="statement not covered" >    props.setOrderId(id);</span>
-<span class="cstat-no" title="statement not covered" >    props.setCart(newProducts);</span>
+<span class="cstat-no" title="statement not covered" >    props.setCart(products);</span>
+    const oldQ = <span class="cstat-no" title="statement not covered" >products.map(<span class="fstat-no" title="function not covered" >p </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return {id: p.id, quantity: p.quantity}</span>
+    });
+<span class="cstat-no" title="statement not covered" >    console.log(oldQ)</span>
+<span class="cstat-no" title="statement not covered" >    props.setOldQuantities(oldQ);</span>
 <span class="cstat-no" title="statement not covered" >    props.setModify(true);</span>
+<span class="cstat-no" title="statement not covered" >    props.setFil('Products');</span>
   };
 &nbsp;
 &nbsp;
@@ -436,11 +453,7 @@ function MyOrders(props) {
             ? <span class="branch-0 cbranch-no" title="branch not covered" >" justify-content-center align-items-center mt-3"</span>
             : " min-height-100 justify-content-center align-items-center below-nav mt-3"
         } fluid&gt;
-        {!handouts &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;Alert variant="danger"&gt;</span>
-            You can hand out products from Wednesday 8:00 to Friday 19:00.
-          &lt;/Alert&gt;
-        )}
+        {!handouts &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;Alert variant="danger"&gt;You can hand out products from Wednesday 8:00 to Friday 19:00.&lt;/Alert&gt;}</span>
 &nbsp;
         {orders.length !== 0 &amp;&amp;
 <span class="branch-1 cbranch-no" title="branch not covered" >          &lt;Accordion&gt;</span>
@@ -450,26 +463,31 @@ function MyOrders(props) {
                   &lt;Row className="acc-header-row"&gt;
                     &lt;h4&gt;&lt;Col&gt;&lt;Badge bg="success"&gt;Order #{o.id}&lt;/Badge&gt;&lt;/Col&gt;&lt;/h4&gt;
                     &lt;Col&gt;&lt;h5&gt;&lt;Badge bg="secondary"&gt;User #{o.userID}&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;
-                    {o.paid ? &lt;Col&gt;&lt;h5&gt;&lt;Badge pill className="mb-1 badge_paid"&gt;Paid&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;
-                      : &lt;Col&gt;&lt;h5&gt;&lt;Badge pill className="mb-1 badge_notpaid"&gt;Not paid&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
-                    {o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> &amp;&amp; !o.paid
-                      &amp;&amp; &lt;Col&gt;&lt;h5&gt;&lt;Badge pill bg="danger" className="mb-1"&gt;Pending Cancellation&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
-                    {(o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> &amp;&amp; !(o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 2)</span>))
-                      ? &lt;Col&gt;&lt;h5&gt;&lt;Badge pill className="mb-1 badge_conf"&gt;Confirmed by Farmers&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;
-                      : (o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 2)</span> &amp;&amp; !o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 3)</span>)
-                      &amp;&amp; &lt;Col&gt;&lt;h5&gt;&lt;Badge pill className="mb-1 badge_confprep"&gt;In preparation&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
-                    {o.products.some(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status === 0)</span> &amp;&amp; !o.fulfilled
-                      &amp;&amp; &lt;Col&gt;&lt;h5&gt;&lt;Badge pill bg="secondary" className="mb-1"&gt;Placed&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
-                    {o.status === 'available' &amp;&amp; !o.fulfilled
-                      &amp;&amp; &lt;Col&gt;&lt;h5&gt;&lt;Badge pill bg="success" className="mb-1"&gt;Available for Pickup&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
-                    {o.fulfilled === 1
-                      &amp;&amp; &lt;Col&gt;&lt;h5&gt;&lt;Badge pill bg="success" className="mb-1"&gt;Fulfilled&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;}
+                    &lt;Col&gt;{o.paid ? &lt;h5&gt;&lt;Badge pill className="mb-1 badge_paid"&gt;Paid&lt;/Badge&gt;&lt;/h5&gt;
+                      : &lt;h5&gt;&lt;Badge pill className="mb-1 badge_notpaid"&gt;Not paid&lt;/Badge&gt;&lt;/h5&gt;}&lt;/Col&gt;
+                    &lt;Col&gt;{o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> &amp;&amp; !o.paid
+                      &amp;&amp; &lt;h5&gt;&lt;Badge pill bg="danger" className="mb-1"&gt;Pending Cancellation&lt;/Badge&gt;&lt;/h5&gt;}
+                      {(o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> &amp;&amp; o.paid &amp;&amp; !(o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 2)</span>))
+                        ? &lt;h5&gt;&lt;Badge pill className="mb-1 badge_conf"&gt;Confirmed by Farmers&lt;/Badge&gt;&lt;/h5&gt;
+                        : (o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 2)</span> &amp;&amp; o.paid &amp;&amp; !o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 3)</span>)
+                        &amp;&amp; &lt;h5&gt;&lt;Badge pill className="mb-1 badge_confprep"&gt;In preparation&lt;/Badge&gt;&lt;/h5&gt;}
+                      {o.products.some(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status === 0)</span> &amp;&amp; !o.fulfilled
+                        &amp;&amp; &lt;h5&gt;&lt;Badge pill bg="secondary" className="mb-1"&gt;Placed&lt;/Badge&gt;&lt;/h5&gt;}
+                      {o.status === 'available' &amp;&amp; !o.fulfilled
+                        &amp;&amp; &lt;h5&gt;&lt;Badge pill bg="success" className="mb-1"&gt;Available for Pickup&lt;/Badge&gt;&lt;/h5&gt;}&lt;/Col&gt;
+                    &lt;Col&gt;{o.fulfilled === 1
+                      &amp;&amp; &lt;h5&gt;&lt;Badge pill bg="success" className="mb-1"&gt;Fulfilled&lt;/Badge&gt;&lt;/h5&gt;}&lt;/Col&gt;
                   &lt;/Row&gt;
                 &lt;/Accordion.Header&gt;
                 &lt;Accordion.Body&gt;
                   &lt;Row className="align-items-center mt-2"&gt;
                     &lt;Col sm={3}&gt;&lt;h5&gt;&lt;Badge bg="secondary"&gt;Products&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;
                     &lt;Col&gt;{o.products.map(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >&lt;h5 className="orders-text"&gt;· {p.name}: {p.quantity}&lt;/h5&gt;)</span>}&lt;/Col&gt;
+                  &lt;/Row&gt;
+                  &lt;hr className="mb-4" /&gt;
+                  &lt;Row className="align-items-center mt-2"&gt;
+                    &lt;Col sm={3}&gt;&lt;h5&gt;&lt;Badge bg="secondary"&gt;Date and Time&lt;/Badge&gt;&lt;/h5&gt;&lt;/Col&gt;
+                    &lt;Col&gt;&lt;h5 className="orders-text"&gt;{o.date + ' ' + o.time}&lt;/h5&gt;&lt;/Col&gt;
                   &lt;/Row&gt;
                   &lt;hr className="mb-4" /&gt;
                   &lt;Row className="align-items-center mt-2"&gt;
@@ -491,7 +509,7 @@ function MyOrders(props) {
                   &lt;Row className="align-items-center justify-content-center mt-2"&gt;
                     {o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> ?
                       &lt;Button disabled variant="success" className="py-3 button_myorders radius_button_small"&gt;MODIFY&lt;/Button&gt;
-                      : &lt;Link to="/client/products" className="btn btn-success py-3 button_myorders radius_button_small"
+                      : &lt;Link to={'/'+props.user.role+'/products'} className="btn btn-success py-3 button_myorders radius_button_small"
                         onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >modifyHandler(o.id, o.products)}</span>&gt;
                         MODIFY
                       &lt;/Link&gt;}
@@ -514,7 +532,7 @@ export default MyOrders;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Jan 07 2022 18:09:56 GMT+0100 (Ora standard dell’Europa centrale)
+                at Sat Jan 08 2022 15:03:12 GMT+0100 (Ora standard dell’Europa centrale)
             </div>
         </div>
         <script src="../../prettify.js"></script>

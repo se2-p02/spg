@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.64% </span>
+                <span class="strong">22.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/39</span>
+                <span class='fraction'>8/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/20</span>
+                <span class='fraction'>6/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.77% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/36</span>
+                <span class='fraction'>8/32</span>
             </div>
         
             
@@ -181,21 +181,13 @@
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
 <a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -223,9 +215,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -268,7 +257,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,12 +302,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect } from "react";
 import { Button, ListGroup, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Navigate } from "react-router-dom";
 import "./MyNavBar.css";
 import API from "./API";
 &nbsp;
 function MyNotAvailableOrders(props) {
-  const [goBack, setGoBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
   const [availableProducts, setProducts] = useState([]);
@@ -348,9 +334,6 @@ function MyNotAvailableOrders(props) {
     }
   }, [reqUpdate, props.user]);
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (goBack) {
-<span class="cstat-no" title="statement not covered" >    return &lt;Navigate to={"/" + props.user.role}&gt;&lt;/Navigate&gt;;</span>
-  }
 &nbsp;
   const handleConfirmation = <span class="fstat-no" title="function not covered" >(o</span>rder) =&gt; {
     // API to call to set the order as available
@@ -393,7 +376,6 @@ function MyNotAvailableOrders(props) {
             &lt;&gt;
               {orders.map(<span class="fstat-no" title="function not covered" >(c</span>) =&gt; {
                 let j = <span class="cstat-no" title="statement not covered" >JSON.parse(c.products)</span>
-                let b = <span class="cstat-no" title="statement not covered" >"primary"</span>
 <span class="cstat-no" title="statement not covered" >                return (</span>
                   &lt;ListGroup.Item&gt;
                     &lt;Row className="p-2 align-items-center"&gt;
@@ -442,7 +424,7 @@ export default MyNotAvailableOrders;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Fri Jan 07 2022 18:09:56 GMT+0100 (Ora standard dell’Europa centrale)
+                at Sat Jan 08 2022 15:03:12 GMT+0100 (Ora standard dell’Europa centrale)
             </div>
         </div>
         <script src="../../prettify.js"></script>
