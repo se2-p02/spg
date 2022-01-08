@@ -17,4 +17,18 @@ describe('Test employee', () => {
         expect(element).toBeInTheDocument();
     });
 
+    test('test pop up', () => {
+        renderWithRouter(
+            <MyWelcomePage user={{ id: 1, role: "client", username: "admin@admin.admin" }}
+            walletAlert={true}
+            setWalletAlert={jest.fn()}/>
+        );
+        let element = screen.getByText("Insufficient balance")
+        expect(element).toBeInTheDocument();
+        element = screen.getByText("Your wallet balance is insufficient for one or more orders. Please check your wallet and your orders")
+        expect(element).toBeInTheDocument();
+        
+        
+    });
+
 })

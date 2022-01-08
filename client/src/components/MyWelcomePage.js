@@ -16,7 +16,7 @@ function MyWelcomePage(props) {
             <Modal.Header closeButton><h4>Insufficient balance</h4></Modal.Header>
             <Modal.Body>
                 <Row>
-                    <h5>Your wallet balance is insufficient for one or more orders. Please check your wallet and your orders.</h5>
+                    <h5>Your wallet balance is insufficient for one or more orders. Please check your wallet and your orders</h5>
                 </Row>
                 <Row className="mt-3">
                     <Button variant="danger" onClick={() => props.setWalletAlert(false)}>Close</Button>

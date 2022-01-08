@@ -23,6 +23,7 @@ describe('Test MyStatistics', () => {
     element = screen.getByText("Month");
     expect(element).toBeInTheDocument();
 
+
 })
 
 });

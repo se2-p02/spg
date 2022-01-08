@@ -80,7 +80,7 @@ function MyStatistics(props) {
           <Row>
             <Col lg="6">
               <ListGroup className="my-2 mx-3 mt-3" variant="flush">
-                <ListGroup.Item data-testid = ""> <b>Week</b> </ListGroup.Item>
+                <ListGroup.Item > <b>Week</b> </ListGroup.Item>
                 <ListGroup.Item variant="warning" data-testid = "">
                   <Row className="p-3">
                     <Col className="p-0 m-0" data-testid="order_week"><b>OrderID</b></Col>
@@ -95,9 +95,9 @@ function MyStatistics(props) {
 
                       return (
                         <>
-                          <ListGroup.Item>
-                            <Row className="align-items-center text-center p-1 m-0" data-testid = "">
-                              <Col className="align-items-center" data-testid = "">{c.id}</Col>
+                          <ListGroup.Item data-testid = "a">
+                            <Row className="align-items-center text-center p-1 m-0" data-testid = "a">
+                              <Col className="align-items-center" data-testid = "a">{c.id}</Col>
                               <Col className="" data-testid = "">
                                 {j.map((x) => {
                                   let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
@@ -125,7 +125,7 @@ function MyStatistics(props) {
             </Col>
             <Col lg="6">
               <ListGroup className="my-2 mx-3 mt-3" variant="flush">
-                <ListGroup.Item> <b>Month</b> </ListGroup.Item>
+                <ListGroup.Item ><b>Month</b> </ListGroup.Item>
                 <ListGroup.Item variant="warning">
                   <Row className="p-3">
                     <Col className="p-0 m-0" data-testid="order_month"><b>OrderID</b></Col>
