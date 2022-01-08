@@ -58,7 +58,7 @@ function MyOrders(props) {
   }, [reqUpdate, props.user]);
 
   //handle the modify button
-  const modifyHandler = (id, products) => {
+  const modifyHandler = (id, products, uid) => {
     console.log(products);
     props.setOrderId(id);
     props.setCart(products);
@@ -68,6 +68,7 @@ function MyOrders(props) {
     console.log(oldQ)
     props.setOldQuantities(oldQ);
     props.setModify(true);
+    props.setMOrderUId(uid);
     props.setFil('Products');
   };
 
@@ -137,7 +138,7 @@ function MyOrders(props) {
                     {o.products.every(pr => pr.status >= 1) ?
                       <Button disabled variant="success" className="py-3 button_myorders radius_button_small">MODIFY</Button>
                       : <Link to={'/'+props.user.role+'/products'} className="btn btn-success py-3 button_myorders radius_button_small"
-                        onClick={() => modifyHandler(o.id, o.products)}>
+                        onClick={() => modifyHandler(o.id, o.products, o.userID)}>
                         MODIFY
                       </Link>}
                   </Row>
