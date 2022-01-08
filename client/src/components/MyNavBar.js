@@ -113,7 +113,7 @@ function MyNavBar(props) {
 
                                     <Dropdown.Menu align="end" id="logout" className="bg-white">
                                         <Dropdown.Item className="text-center">
-                                            <Button variant="danger" className="w-100 m-0 radius_button " onClick={() => handleLogout()}>Logout</Button>
+                                            <Button data-testid="aaa" variant="danger" className="w-100 m-0 radius_button " onClick={() => handleLogout()}>Logout</Button>
                                         </Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>

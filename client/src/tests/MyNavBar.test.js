@@ -19,7 +19,7 @@ describe('Test navbar', () => {
         let clock = moment("2021-11-28 15:55");
 
         render(<BrowserRouter>
-            <NavBar account={true} user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
+            <NavBar account={true} user={user} clock={clock} setClock={() => jest.fn()} setShowModal={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
         var element = screen.getByText("Social Purchasing Group")
         expect(element).toBeInTheDocument();
@@ -37,6 +37,14 @@ describe('Test navbar', () => {
         expect(element).toBeInTheDocument();
         act(() => fireEvent.click(element));
         expect(screen.getByText('No products here'));
+
+
+        element = screen.getByTestId("clockButton")
+        expect(element).toBeInTheDocument();
+        act(() => fireEvent.click(element));
+        
+
+
     });
 
     test('renders cart', () => {
@@ -69,8 +77,8 @@ describe('Test navbar', () => {
     test("test logout", () => {
         let user = {
             id: 1,
-            name: "nino",
-            surname: "frassica",
+            name: "admin",
+            surname: "admin",
             wallet: 1300
         }
         let clock = moment("2021-11-28 15:55");
@@ -80,13 +88,12 @@ describe('Test navbar', () => {
 
         var element = screen.getByTestId("userImg")
         act(() => fireEvent.click(element));
-        var button = screen.getByText("Logout");
+        var button = screen.getByTestId("aaa");
         expect(button).toBeInTheDocument();
         act(() => {
-            fireEvent.click(screen.getByText("Logout"));
+            fireEvent.click(button);
         });
-        expect(window.location.pathname === "/login");
-
+        expect(window.location.pathname).toBe("/");
 
     })
 

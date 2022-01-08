@@ -6,29 +6,65 @@ test('renders the client profile', () => {
     render(<MyClientProfile />);
     var element = screen.getByTestId("profileName")
     expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("profileName_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("img")
+    expect(element).toBeInTheDocument();
+
     
-    var element = screen.getByTestId("surname")
+    element = screen.getByTestId("surname")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("email")
+    element = screen.getByTestId("surname_val")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("role")
+    element = screen.getByTestId("email")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("wallet")
+    element = screen.getByTestId("email_val")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("phone")
+    element = screen.getByTestId("role")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("address")
+    element = screen.getByTestId("wallet")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("city")
+    element = screen.getByTestId("phone")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("country")
+    element = screen.getByTestId("address")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("city")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("country")
+    expect(element).toBeInTheDocument();
+
+    
+
+
+
+
+    element = screen.getByTestId("role_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("wallet_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("phone_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("address_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("city_val")
+    expect(element).toBeInTheDocument();
+
+    element = screen.getByTestId("country_val")
     expect(element).toBeInTheDocument();
   
   });

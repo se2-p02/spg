@@ -43,7 +43,6 @@ describe('Test employee', () => {
   });
 
   test('test employee buttons', () => {
-
     renderWithRouter(
       <LeftClient fil={""} setFil={jest.fn()} clock={clock} setClock={jest.fn()} user={user} showModal={false} setShowModal={jest.fn()} />
     );
@@ -81,8 +80,9 @@ describe('Test employee', () => {
     );
     element = screen.getByTestId("teleg")
     fireEvent.click(element)
-    //console.log(window.location.pathname)
     expect(window.location.pathname).toEqual("/");
 
   });
+
+  
 })
