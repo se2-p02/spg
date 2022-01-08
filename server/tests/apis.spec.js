@@ -642,7 +642,7 @@ describe("confirm order test", () => {
       console.log(msg)
     await request(app).post("/api/confirmOrderForPickup").send(msg).expect(503);*/
 
-    const delete_order = await request(app).delete("/api/order/" + maxId).expect(200)
+    //const delete_order = await request(app).delete("/api/order/" + maxId).expect(200)
     await request(app).delete("/api/sessions/current").expect(200);
   });
 
