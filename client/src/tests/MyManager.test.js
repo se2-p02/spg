@@ -11,7 +11,7 @@ describe('Test manager', () => {
     renderWithRouter(
       <LeftManager fil={""} setFil={jest.fn()} />
     );
-    var element = screen.getByText("Unretrieved orders")
+    var element = screen.getByText("Unretrieved Orders")
     expect(element).toBeInTheDocument();
 
   });
@@ -22,7 +22,7 @@ describe('Test manager', () => {
       <LeftManager fil={""} setFil={jest.fn()} />
     );
 
-    var element = screen.getByText("Unretrieved orders")
+    var element = screen.getByText("Unretrieved Orders")
     fireEvent.click(element)
     expect(window.location.pathname === "/manager/unretrievedOrders");
    
