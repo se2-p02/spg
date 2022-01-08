@@ -824,18 +824,18 @@ app.post("/api/deliveries", async (req, res) => {
 app.post("/api/confirmOrderForPickup", async (req, res) => {
   try {
     const order = req.body;
+    console.log(req.body)
     const products = JSON.parse(order.products)
-    console.log(products)
     var result;
     products.forEach(async (p) => {
       result = await spgDao.subtractQuantities(p.quantity, p.id);
       if (result.error) {
-        res.status(500).json(result);
+        res.status(501).json(result);
       }
     })
     result = await spgDao.setOrderStatus("available", order.id);
     if (result.error) {
-      res.status(500).json(result);
+      res.status(502).json(result);
     }
     else {
       res.status(200).json(result)
@@ -843,7 +843,7 @@ app.post("/api/confirmOrderForPickup", async (req, res) => {
   }
   catch (error) {
     console.log(error);
-    res.status(500).end();
+    res.status(503).end();
   }
 })
 
