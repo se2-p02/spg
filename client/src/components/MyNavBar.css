@@ -253,3 +253,8 @@ a {
 .badge_paid {
   background-color: #6ab04c!important;
 }
+
+.modify_label {
+  color: gray;
+  font-weight: 450;
+}

@@ -33,8 +33,11 @@ function MyContainer(props) {
   const [login, setLogin] = useState();
   const [clock, setClock] = useState();
   const [modify, setModify] = useState(false);
+  const [oldQuantities, setOldQuantities] = useState([]);
+  const [updateProducts, setUpdateProducts] = useState(false);
   const [orderId, setOrderId] = useState()
   const [showModal, setShowModal] = useState(false);
+  const [walletAlert, setWalletAlert] = useState(false);
   const location = useLocation();
   const [fil, setFil] = useState([])
 
@@ -74,7 +77,7 @@ function MyContainer(props) {
       API.loadWallet(user.id)
         .then((c) => {
           if (c.error === undefined)
-            setShowModal(c);
+            setWalletAlert(c);
         })
         .catch((err) => {
           console.log(err);
@@ -141,13 +144,16 @@ function MyContainer(props) {
                 setUser={setUser}
                 cart={cart}
                 setModify={setModify}
+                setUpdateProducts={setUpdateProducts}
                 modify={modify}
                 showCart={true}
                 fil={["Profile", "Products", "My Orders", "Orders in shop"]}
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
-                <MyWelcomePage />
+                <MyWelcomePage user={user}
+                  walletAlert={walletAlert}
+                  setWalletAlert={setWalletAlert}/>
               </Row>
 
             </>
@@ -160,6 +166,7 @@ function MyContainer(props) {
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
+                setUpdateProducts={setUpdateProducts}
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -192,7 +199,10 @@ function MyContainer(props) {
               <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
+                setOldQuantities={setOldQuantities}
+                oldQ={oldQuantities}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 cart={cart}
                 setCart={setCart}
@@ -208,6 +218,8 @@ function MyContainer(props) {
 
                 <MyOrders
                   setModify={setModify}
+                  setOldQuantities={setOldQuantities}
+                  setFil={setFil}
                   clock={clock}
                   setClock={setClock}
                   user={user}
@@ -567,6 +579,7 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -593,6 +606,7 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -625,6 +639,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setUser={setUser}
@@ -636,9 +651,15 @@ function MyContainer(props) {
                 <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
 
                 <MyOrders
+                  setModify={setModify}
+                  setOldQuantities={setOldQuantities}
+                  setFil={setFil}
                   clock={clock}
                   setClock={setClock}
                   user={user}
+                  setOrderId={setOrderId}
+                  cart={cart}
+                  setCart={setCart}
                   full={0}
                 ></MyOrders>
               </Row>
@@ -655,6 +676,7 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -680,6 +702,9 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                oldQ={oldQuantities}
+                setOldQuantities={setOldQuantities}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -699,6 +724,10 @@ function MyContainer(props) {
                   setClock={setClock}
                   user={user}
                   cart={cart}
+                  modify={modify}
+                  oldQ={oldQuantities}
+                  updateProducts={updateProducts}
+                  setUpdateProducts={setUpdateProducts}
                   setCart={setCart}
                   showCart={true}
                 ></MyProducts>
@@ -715,6 +744,9 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                oldQ={oldQuantities}
+                setOldQuantities={setOldQuantities}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -733,6 +765,10 @@ function MyContainer(props) {
                   setClock={setClock}
                   user={user}
                   cart={cart}
+                  modify={modify}
+                  oldQ={oldQuantities}
+                  updateProducts={updateProducts}
+                  setUpdateProducts={setUpdateProducts}
                   setCart={setCart}
                   showCart={true}
                 ></MyProducts>
@@ -749,6 +785,7 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}
@@ -802,6 +839,7 @@ function MyContainer(props) {
                 user={user}
                 setModify={setModify}
                 modify={modify}
+                setUpdateProducts={setUpdateProducts}
                 orderId={orderId}
                 clock={clock}
                 setClock={setClock}

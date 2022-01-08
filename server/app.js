@@ -410,8 +410,9 @@ app.get('/api/wallet/:id', async (req, res) => {
       res.status(404).json(wallet);
     }
     else {
-      orders.forEach(o => { if (o.paid === 0 && o.amount > wallet[0].wallet) res.json(true); });
-      res.json(false);
+      let flag = false;
+      orders.forEach(o => { if(o.paid === 0 && o.amount > wallet[0].wallet) flag = true; });
+      res.status(200).json(flag);
     }
   } catch (err) {
     console.log(err)
@@ -456,29 +457,32 @@ app.put('/api/clients/basket/:id', async (req, res) => {
 
 //PUT modify order
 app.put("/api/orders/modify/:id", async (req, res) => {
-  
-  const address = JSON.stringify(req.body.address);
-  const items = req.body.products;
+  const order = req.body;
   try {
-
+    //restoring old quantities
     let flag = false;
-      items.forEach(async (prod) => {
-        const res_prod = await spgDao.orderPrep(prod);
-        if (res_prod.error) flag = true;
-      })
-      if (flag) return;
-
-    await spgDao.modifyOrder(JSON.stringify(items),address,req.params.id);
-
+    order.oldQ.forEach(async (pr) => {
+      const res_prod = await spgDao.updateProductQuantity(pr);
+      if (res_prod.error) flag = true;
+    })
+    if (flag) return;
+    //setting new quantities
+    order.products.forEach(async (prod) => {
+      const res_prod = await spgDao.orderPrep(prod);
+      if (res_prod.error) flag = true;
+    })
+    if (flag) return;
+    await spgDao.modifyOrder(JSON.stringify(order.products), JSON.stringify(order.address), order.amount, req.params.id);
     res.status(200).end();
-  } catch {
-    res.status(500).json({ error: "cannot update basket" });
+  }
+  catch(err) {
+    res.status(500).json({ error: err });
   }
 });
 
 //PUT modify order
 app.put("/api/orders/modify/quantity/:id", async (req, res) => {
-  console.log('form app'+req.body.id)
+  console.log('form app' + req.body.id)
   const items = req.body;
   try {
 

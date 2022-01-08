@@ -10,30 +10,49 @@ import API from "./API";
 function MyProducts(props) {
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(0);
+    const [allProducts, setAllProducts] = useState([]);
     const [filter, setFilter] = useState('All');
     const [wordFilter, setWordFilter] = useState('');
     const [filters, setFilters] = useState(['All']);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
-        if (props.cart) {
-            API.loadNextProducts().then((p) => {
-                if (p.error === undefined) {
-                    setFilter('All');
-                    setFilters(['All']);
-                    p.forEach((prod) => {
-                        let find = props.cart.find((c) => c.id === prod.id)
-                        if (props.cart.find((c) => c.id === prod.id)) {
-                            prod.quantity = prod.quantity - find.quantity;
-                        }
-                    });
-                    setProducts(p.filter((prod) => prod.quantity > 0));
-                }
-            }).catch((err) => {
-                console.log(err)
-            });
+        API.loadNextProducts().then(p => {
+            setFilter('All');
+            setFilters(['All']);
+            if (props.modify) {
+                props.cart.forEach(prod => {
+                    const modp = p.find(pro => pro.id === prod.id);
+                    if (modp) modp.quantity = modp.quantity + prod.quantity;
+                    else p.push(Object.assign({}, prod));
+                });
+            }
+            setAllProducts(p.filter(pr => pr.quantity > 0));
+        });
+    }, [props.clock]);
+
+    useEffect(() => {
+        if (props.updateProducts) {
+            API.loadNextProducts().then(p => setAllProducts(p.filter(pr => pr.quantity > 0)));
+            props.setUpdateProducts(false);
         }
-    }, [props.cart, props.clock]);
+    }, [props.updateProducts]);
+
+    useEffect(() => {
+        if (allProducts.length !== 0) {
+            if (props.cart.length === 0) setProducts(allProducts);
+            else {
+                const newP = [];
+                allProducts.forEach(prod => {
+                    const tempP = Object.assign({}, prod);
+                    const cart_find = props.cart.find((c) => c.id === prod.id);
+                    if (cart_find) tempP.quantity = prod.quantity - cart_find.quantity;
+                    newP.push(tempP);
+                });
+                setProducts(newP.filter(prod => prod.quantity > 0));
+            }
+        }
+    }, [allProducts, props.cart]);
 
     useEffect(() => {
         if (products.length !== 0) {
@@ -49,8 +68,6 @@ function MyProducts(props) {
         if (products.length !== 0) setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));
     }, [products, filter, wordFilter]);
 
-
-
     const handleAddToCart = (id, q, name, unit, price) => {
         let items = [...products];
         let cartItems = [...props.cart];
@@ -59,15 +76,13 @@ function MyProducts(props) {
         let tempProductCart = cartItems.find((prod) => prod.id === id);
         if (tempProductCart) {
             tempProductCart.quantity = props.cart.find((prod) => prod.id === id).quantity + q;
+            //const oldCart = props.cart.filter(prod => prod !== props.cart.find(product => product.id === id))
             props.setCart((old) => old.filter((prod) => prod !== props.cart.find((product) => product.id === id)));
             props.setCart((old) => [...old, tempProductCart].sort((a, b) => a.id - b.id));
         }
         else {
             props.setCart((c) => [...c, { ...tempProduct, quantity: q }]);
         }
-        tempProduct.quantity = products.find((prod) => prod.id === id).quantity - q;
-        setProducts((old) => old.filter((prod) => prod !== products.find((product) => product.id === id)));
-        if (tempProduct.quantity > 0) setProducts((old) => [...old, tempProduct].sort((a, b) => a.id - b.id));
         document.getElementById('pQnt' + id).value = 0;
     }
 
@@ -96,12 +111,10 @@ function MyProducts(props) {
                                 filteredProducts.map(p => {
                                     return (
                                         <>
-
                                             <Col className="align-items-center my-4 px-3" sm={6} md={6} lg={4}>
                                                 <Card key={p.id} className="bg_login2 p-0">
                                                     <Card.Title className="text-truncate text-center">
-                                                    <img id="loadedimage" src={"http://localhost:3000/images/"+p.image} alt="myImg" className="img_product"/>
-
+                                                        <img id="loadedimage" src={"http://localhost:3000/images/" + p.image} alt="myImg" className="img_product" />
                                                     </Card.Title>
                                                     <Card.Body className="m-0 p-3 pt-2 ">
                                                         <ListGroup variant="flush" className="bg-white radius_button_small border" >
@@ -127,7 +140,6 @@ function MyProducts(props) {
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
-
                                         </>
                                     );
                                 })
@@ -135,9 +147,7 @@ function MyProducts(props) {
                         </Row>
                     </>
                 }
-
             </Container>
-
         </Col>
     );
 }

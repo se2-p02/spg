@@ -9,33 +9,26 @@ import moment from "moment";
 import DateTimePicker from 'react-datetime-picker';
 
 function MyNavBar(props) {
-
     const [show, setShow] = useState(false);
-
-
     const navigate = useNavigate();
 
     const handleRemoveFromCart = (p) => {
         props.setCart((c) => c.filter((old) => old !== p));
-        //update the product table **quantity field**
-        API.updateProductQuantity(p).then((response) => {
-            if (response.error === undefined) {
-                console.log("quantity updated")
-            }
-        });
     }
 
     const handleLogout = () => {
         API.logout().then((response) => {
             if (response.error === undefined) {
-                props.setUser(undefined)
-                props.setFil(undefined)
+                props.setUser(undefined);
+                props.setFil(undefined);
+                props.setCart([]);
+                props.setModify(false);
                 navigate("/login");
             }
         });
     }
 
-    
+
 
     return (
         <>
@@ -76,29 +69,39 @@ function MyNavBar(props) {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu align="end" className="text-center">
-                                        {props.cart.length !== 0 &&
-                                            props.cart.map((c) => (
-                                                <Dropdown.Item key={c.id + "d"}>
-                                                    <ListGroup key={c.id + "a"} horizontal>
-
-                                                        <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.name}</ListGroup.Item>
-                                                        <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                                        <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center"><Button className="p-2 pt-1 pb-1 no_shadow" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
-                                                    </ListGroup>
-                                                </Dropdown.Item>
-                                            ))
-                                        }
-                                        {props.cart.length !== 0 &&
-
-                                            <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">Place order</Button>
-
-                                        }
-                                        {props.cart.length === 0 &&
-                                            <span className="m-auto" id="cartpresence">No products here</span>
-                                        }
+                                        {props.modify && <Row>
+                                            <p className="modify_label mt-1 mb-1">You are modifying order #{props.orderId}</p>
+                                        </Row>}
+                                        <Row>
+                                            {props.cart.length !== 0 &&
+                                                props.cart.map((c) => (
+                                                    <Dropdown.Item style={{ cursor: 'text' }} onClick={e => e.stopPropagation()} key={c.id + "d"}>
+                                                        <ListGroup key={c.id + "a"} horizontal>
+                                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center">{c.name}</ListGroup.Item>
+                                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center">{c.quantity + " " + c.unit}</ListGroup.Item>
+                                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center"><Button className="p-2 pt-1 pb-1 no_shadow" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                                        </ListGroup>
+                                                    </Dropdown.Item>
+                                                ))
+                                            }
+                                        </Row>
+                                        <Row><Col>
+                                            {props.cart.length !== 0 &&
+                                                <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">
+                                                    {props.modify ? 'Modify order' : 'Place order'}
+                                                </Button>
+                                            }
+                                            {props.cart.length === 0 &&
+                                                <span className="m-auto" id="cartpresence">No products here</span>
+                                            }
+                                        </Col></Row>
+                                        <Row><Col>
+                                            {props.modify &&
+                                                <Button variant="danger" onClick={() => { props.setCart([]); props.setModify(false); props.setUpdateProducts(true); }} className="mt-2 radius_button">Cancel</Button>
+                                            }
+                                        </Col></Row>
                                     </Dropdown.Menu>
                                 </Dropdown>}
-
 
                             {props.account ?
                                 <Dropdown className="no_bord no_shadow">
@@ -131,24 +134,21 @@ function MyNavBar(props) {
                     }
                 </Row>
 
-
-
                 {props.cart.length !== 0 &&
-                    <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                    <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} oldQ={props.oldQ} setOldQuantities={props.setOldQuantities} setUpdateProducts={props.setUpdateProducts} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
                 }
             </Navbar>
-            <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 p-3" onClick={() => { props.setShowModal(true) }}>
+            {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 p-3" onClick={() => { props.setShowModal(true) }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-alarm" viewBox="0 0 16 16">
                     <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z" />
                     <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z" />
                 </svg>
-            </Button>
+            </Button>}
         </>
     );
 }
 
 function MyModal(props) {
-
     const [successful, setSuccessful] = useState(false);
     const [ordersClosed, setOrdersClosed] = useState(true);
     const [orderMethod, setOrderMethod] = useState('store');
@@ -211,15 +211,17 @@ function MyModal(props) {
         setErrorMsg(() => '');
         console.log(props.modify)
         if (props.modify) {
-            await API.modifyOrder(props.orderId, order).then((response) => {
+            const m_order = Object.assign({}, order);
+            m_order.oldQ = props.oldQ;
+            await API.modifyOrder(props.orderId, m_order).then((response) => {
                 if (response.error === undefined) {
                     setSuccessful(true);
                     props.setCart([]);
                     props.setShow(false);
-                    props.setModify(false)
+                    props.setModify(false);
+                    props.setOldQuantities([]);
                 }
             }).catch((response) => { console.log(response) });
-            console.log(order);
         } else {
             await API.sendOrder(order).then((response) => {
                 if (response.error === undefined) {
@@ -230,13 +232,14 @@ function MyModal(props) {
             }).catch((response) => { console.log(response) });
             console.log(order);
         }
-
-
+        props.setUpdateProducts(true);
     }
 
     useEffect(() => {
-        const datetime = moment(props.clock.format('YYYY-MM-DD HH:mm'));
-        setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
+        if (props.clock) {
+            const datetime = moment(props.clock.format('YYYY-MM-DD HH:mm'));
+            setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
+        }
     }, [props.clock]);
 
     return (
