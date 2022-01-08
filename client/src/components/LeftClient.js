@@ -38,10 +38,10 @@ function LeftClient(props) {
                     })
                 }
 
-                {telegram &&
-                    <ListGroup.Item as={Button}  data-testid={"teleg"} onClick={() => window.open("https://telegram.me/" + telegram + "?start=" + props.user.id, "_blank")} action className="leftButton no_shadow">
+                {true &&
+                    <ListGroup.Item as={Button}  data-testid="teleg"  onClick={() => window.open("https://telegram.me/" + telegram + "?start=" + props.user.id, "_blank")} action className="leftButton no_shadow border-0">
                         {<img
-                            alt=""
+                            alt="teleg"
                             src={teleg}
                             width="20"
                             height="20"
@@ -49,6 +49,7 @@ function LeftClient(props) {
                         />}
                         {" Subscribe to telegram"}
                     </ListGroup.Item>
+
                 }
                 
                 <MyModal data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}></MyModal>

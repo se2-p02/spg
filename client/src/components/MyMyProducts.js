@@ -79,7 +79,7 @@ function MyMyProducts(props) {
             <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {(props.clock && (!((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9)) && !(props.clock.day() === 1 && props.clock.hour() < 9))
                     &&
-                    <Alert className="m-0 mt-1 mx-3 radius_button_xsall" variant="danger">{"You can add new products from "}<b>Friday to Saturday 9:00</b>{" and confirm products on "} <b>Monday by 9:00</b></Alert>)
+                    <Alert data-testid="alert1" className="m-0 mt-1 mx-3 radius_button_xsall" variant="danger">{"You can add new products from "}<b>Friday to Saturday 9:00</b>{" and confirm products on "} <b>Monday by 9:00</b></Alert>)
                 }
 
                 <ListGroup className="my-2 mx-3 pt-1" variant="flush">
@@ -293,7 +293,7 @@ function MyModal(props) {
                     <Row>
                         <Col>
                             <Form.Group controlId="name">
-                                <Form.Label className="w-100"><h6>Name</h6></Form.Label>
+                                <Form.Label className="w-100"  data-testid="name"><h6>Name</h6></Form.Label>
                                 <Form.Control
                                     className="w-100 p-2"
                                     type="name"
@@ -307,10 +307,11 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="quantity">
-                                <Form.Label className="w-100"><h6>Quantity</h6></Form.Label>
+                                <Form.Label className="w-100" data-testid="qnt"><h6>Quantity</h6></Form.Label>
                                 <Form.Control
                                     className="w-100 p-2"
                                     type="number"
+                                    data-testid="qnt_form"
                                     placeholder="0"
                                     min={0}
                                     required
@@ -322,11 +323,11 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="unit">
-                                <Form.Label className=" w-100"><h6>Unit</h6></Form.Label>
+                                <Form.Label className=" w-100" data-testid="unit"><h6>Unit</h6></Form.Label>
                                 <Form.Select style={{
                                     backgroundColor: "unset",
                                     marginTop: "unset"
-                                }} className="w-100 p-2" onChange={(ev) => { setUnit(ev.target.value); }}>
+                                }} className="w-100 p-2" data-testid="unit_form" onChange={(ev) => { setUnit(ev.target.value); }}>
                                     <option key="kg">kg</option>
                                     <option key="g">g</option>
                                     <option key="pcs">pcs</option>
@@ -338,10 +339,11 @@ function MyModal(props) {
                     <Row>
                         <Col xs={4}>
                             <Form.Group controlId="price">
-                                <Form.Label className=" w-100 mt-4"><h6>Price</h6></Form.Label>
+                                <Form.Label className=" w-100 mt-4" data-testid="price"><h6>Price</h6></Form.Label>
                                 <Form.Control
                                     className="w-100 p-2"
                                     type="number"
+                                    data-testid="price_form"
                                     placeholder="0"
                                     min={0}
                                     required
@@ -353,11 +355,11 @@ function MyModal(props) {
                         </Col>
                         <Col>
                             <Form.Group controlId="category">
-                                <Form.Label className=" w-100 mt-4"><h6>Category</h6></Form.Label>
+                                <Form.Label className=" w-100 mt-4"  data-testid="cat"><h6>Category</h6></Form.Label>
                                 <Form.Select style={{
                                     backgroundColor: "unset",
                                     marginTop: "unset"
-                                }} className="w-100 p-2" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
+                                }} className="w-100 p-2"  data-testid="cat_form" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
                                     <option key="All-purpose">All-purpose</option>
                                     <option key="Fish">Fish</option>
                                     <option key="Dairy and Eggs">Dairy and Eggs</option>
@@ -373,8 +375,8 @@ function MyModal(props) {
                     </Row>
                     <Row>
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label className=" w-100 mt-4"><h6>Image</h6></Form.Label>
-                            <Form.Control type="file" id="fileUpload" accept="image/*" onChange={storeValue}/>
+                            <Form.Label className=" w-100 mt-4" data-testid="img"><h6>Image</h6></Form.Label>
+                            <Form.Control data-testid="img_form" type="file" id="fileUpload" accept="image/*" onChange={storeValue}/>
                             
                         </Form.Group>
                     </Row>
@@ -390,7 +392,7 @@ function MyModal(props) {
                     <Col xs="4">{props.modal === 'modify' &&
                         <Button variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
                     }</Col>
-                    <Col xs="4"><Button variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
+                    <Col xs="4"><Button data-testid="close" variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
                     </Col>
                     <Col xs="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
                     </Col>
