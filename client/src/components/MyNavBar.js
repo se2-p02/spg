@@ -191,7 +191,7 @@ function MyModal(props) {
             products: products,
             amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
-            user: (props.user.role === "employee" && !props.modify) ? client.id : props.user.id,
+            user: (props.user.role === "employee" && !props.modify) ? client && client.id : props.user.id,
             paid: 0
         }
 
