@@ -78,7 +78,7 @@ function MyStatistics(props) {
                               <Col className="align-items-center" data-testid = "a">{c.id}</Col>
                               <Col className="" data-testid = "">
                                 {j.map((x) => {
-                                  let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                                  let elem = <p className="m-0 p-0" data-testid="test waitfor">{x.name + ": " + x.quantity}</p>
                                   return (elem);
                                 })}
                               </Col>
@@ -112,7 +112,7 @@ function MyStatistics(props) {
                         <>
                           <ListGroup.Item>
                             <Row className="align-items-center text-center p-1 m-0">
-                              <Col className="align-items-center">{c.id}</Col>
+                              <Col className="align-items-center" data-testid="col id">{c.id}</Col>
                               <Col className="">
                                 {j.map((x) => {
                                   let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
