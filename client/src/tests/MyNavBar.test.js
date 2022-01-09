@@ -1,8 +1,9 @@
-import NavBar from '../components/MyNavBar'
+import MyNavBar from '../components/MyNavBar'
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
+import renderWithRouter from './setupTestsRouter'
 
 const moment = require('moment');
 
@@ -19,7 +20,7 @@ describe('Test navbar', () => {
         let clock = moment("2021-11-28 15:55");
 
         render(<BrowserRouter>
-            <NavBar account={true} user={user} clock={clock} setClock={() => jest.fn()} setShowModal={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
+            <MyNavBar account={true} user={user} clock={clock} setClock={() => jest.fn()} setShowModal={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
         var element = screen.getByText("Social Purchasing Group")
         expect(element).toBeInTheDocument();
@@ -48,18 +49,18 @@ describe('Test navbar', () => {
     });
 
     test('renders cart', () => {
-        let user = {
+        const user = {
             id: 1,
             name: "nino",
             surname: "frassica",
             wallet: 1300
         }
-        let clock = moment("2021-11-28 15:55");
+        const clock = moment("2021-11-28 15:55");
 
         render(<BrowserRouter>
-            <NavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[{ id: 1, name: 'Milk', quantity: 2.0, unit: 'l' }]} />
+            <MyNavBar user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[{ id: 1, name: 'Milk', quantity: 2.0, unit: 'l' }]} />
         </BrowserRouter>);
-        var element = screen.getByTestId("cartIcon")
+        let element = screen.getByTestId("cartIcon")
         expect(element).toBeInTheDocument();
         act(() => fireEvent.click(element));
         element = screen.getByText('Place order')
@@ -83,7 +84,7 @@ describe('Test navbar', () => {
         }
         let clock = moment("2021-11-28 15:55");
         render(<BrowserRouter>
-            <NavBar account = {true} user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
+            <MyNavBar account = {true} user={user} clock={clock} setClock={() => jest.fn()} setUser={() => jest.fn()} setCart={() => jest.fn()} showCart={true} cart={[]} />
         </BrowserRouter>);
 
         var element = screen.getByTestId("userImg")
@@ -95,6 +96,18 @@ describe('Test navbar', () => {
         });
         expect(window.location.pathname).toBe("/");
 
+    });
+
+    it('test modal', async () => {
+        renderWithRouter(<MyNavBar showCart={true} setCart={jest.fn()} setClock={jest.fn()} clock={moment('2021-11-18 09:55')} user={{ id: 1, role: "employee", username: "admin@admin.admin" }}
+        cart={[{ id: 2, name: 'Milk', quantity: 2.0, unit: 'l' }, { id: 4, name: 'Flour', quantity: 1.0, unit: 'kg' }]}/>, '/employee');
+
+        const cartBtn = screen.getByTestId('cartIcon');
+        await waitFor(() => {
+            act(() => fireEvent.click(cartBtn));
+            expect(screen.getByTestId('removeBtn2')).toBeInTheDocument();
+            act(() => fireEvent.click(screen.getByTestId('removeBtn2')));
+        })
     })
 
 })

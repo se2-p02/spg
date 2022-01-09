@@ -79,7 +79,7 @@ function MyNavBar(props) {
                                                         <ListGroup key={c.id + "a"} horizontal>
                                                             <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center">{c.name}</ListGroup.Item>
                                                             <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center">{c.quantity + " " + c.unit}</ListGroup.Item>
-                                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center"><Button className="p-2 pt-1 pb-1 no_shadow" data-testid="removeBtn" variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
+                                                            <ListGroup.Item variant="secondary" className="d-flex w-100 align-items-center justify-content-center"><Button className="p-2 pt-1 pb-1 no_shadow" data-testid={"removeBtn"+c.id} variant="danger" onClick={() => handleRemoveFromCart(c)}>-</Button></ListGroup.Item>
                                                         </ListGroup>
                                                     </Dropdown.Item>
                                                 ))
@@ -87,7 +87,7 @@ function MyNavBar(props) {
                                         </Row>
                                         <Row><Col>
                                             {props.cart.length !== 0 &&
-                                                <Button variant="success" onClick={() => setShow(true)} className="add_btn mt-2">
+                                                <Button data-testid="placeBtn" variant="success" onClick={() => setShow(true)} className="add_btn mt-2">
                                                     {props.modify ? 'Modify order' : 'Place order'}
                                                 </Button>
                                             }
@@ -273,9 +273,8 @@ function MyModal(props) {
             show={props.show}
             onHide={handleClose}
         >
-
             <Modal.Body data-testid="orderBody">
-                <h4 className="text-center mt-3">Summary</h4>
+                <h4 className="text-center mt-2">Summary</h4>
                 <ListGroup className="my-1" variant="flush">
                     {props.cart.map((c) => (
                         <ListGroup.Item>

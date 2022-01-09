@@ -93,18 +93,18 @@ function MyProducts(props) {
                     : " min-height-100 justify-content-center align-items-center below-nav mt-3"
             } fluid>
                 <FloatingLabel label="Filter products:" className="pb-2">
-                    <Form.Select className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
-                        {filters.map((f, i) => <option key={'f' + i} value={f}>{f}</option>)}
+                    <Form.Select data-testid="filterBar" className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
+                        {filters.map((f, i) => <option key={'f'+i} data-testid={'f'+i} value={f}>{f}</option>)}
                     </Form.Select>
                 </FloatingLabel>
                 <InputGroup className="mt-3 d-flex search-form" >
-                    <Form.Control
+                    <Form.Control data-testid="searchBar"
                         size="sm"
                         type="text"
                         placeholder="Search for a product"
                         value={wordFilter}
                         onChange={(e) => setWordFilter(() => e.target.value)} />
-                    <Button variant="secondary" size="lg" onClick={() => setWordFilter(() => '')}><XCircleFill size="25" /></Button>
+                    <Button data-testid='sbX' variant="secondary" size="lg" onClick={() => setWordFilter(() => '')}><XCircleFill size="25" /></Button>
                 </InputGroup>
                 {filteredProducts &&
                     <>
@@ -128,6 +128,7 @@ function MyProducts(props) {
                                                         <Row className="p-0 m-0 mt-4">
                                                             <Col md="9" sm="9" xs="10" className="m-0 p-0 mx-2">
                                                                 <Form.Control id={'pQnt' + p.id}
+                                                                    data-testid={'pQnt' + p.id}
                                                                     className="radius_button w-100"
                                                                     placeholder={0}
                                                                     required
