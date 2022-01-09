@@ -44,10 +44,6 @@ test('renders the client profile', () => {
     element = screen.getByTestId("country")
     expect(element).toBeInTheDocument();
 
-    
-
-
-
 
     element = screen.getByTestId("role_val")
     expect(element).toBeInTheDocument();

@@ -107,5 +107,31 @@ export const handlers = [
             ),
         )
     }),
+    rest.get('http://localhost:3000/api/nextProducts', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    {
+                        id: 2,
+                        name: "Milk",
+                        quantity: 1,
+                        unit: "pcs",
+                        filter: "Dairy and Eggs",
+                        farmer: 7,
+                        farmerName: "FattoriaBella",
+                        price: 7,
+                        confirmed: 1,
+                        availability: "2021-11-29",
+                        image: "eggs.jpg"
+                    }
+                    
+                ]
+            ),
+        )
+    }),
     
 ]
+
+
+

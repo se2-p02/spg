@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import MyMyProducts from "../components/MyMyProducts";
 import moment from 'moment'
@@ -145,6 +145,28 @@ describe('Test MyMyproducts', () => {
         err = screen.getByText("Price should be greater than 0")
         expect(err).toBeInTheDocument();
 
+    });
+
+    it("tests products", async () => {
+        render(<MyMyProducts
+            clock={moment('2021-11-27 9:55')}
+            setClock={jest.fn()}
+            user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }}
+            cart={[]}
+            setCart={jest.fn()}
+            showCart={true} />);
+
+        await waitFor( () => {
+            expect(screen.getByText("Milk")).toBeInTheDocument()
+            expect(screen.getByText("7 €")).toBeInTheDocument()
+            expect(screen.getByText("CONFIRMED")).toBeInTheDocument()
+            let mod_button = screen.getByTestId("mod")
+            expect(mod_button).toBeInTheDocument()
+            act(() => {
+                fireEvent.click(mod_button)
+            });
+            
+        })
     });
 
 });

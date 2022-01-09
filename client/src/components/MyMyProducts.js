@@ -105,9 +105,9 @@ function MyMyProducts(props) {
                                                 <Col xs="2">{p.quantity + " " + p.unit}</Col>
                                                 <Col xs="2">{p.price + " €"}</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                    <Button variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
+                                                    <Button data-testid="mod" variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
                                                     :
-                                                    <Button variant="light" className="border" ><PencilSquare /></Button>
+                                                    <Button data-testid="mod" variant="light" className="border" ><PencilSquare /></Button>
                                                 }</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (
                                                     (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
@@ -135,9 +135,9 @@ function MyMyProducts(props) {
                     </Col>
                     <Col xs="4">
                         {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 " data-testid="apbw" onClick={() => { setModal('add'); handleShow();setOld_img(undefined) }}>New product</Button>
+                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 mb-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow();setOld_img(undefined) }}>New product</Button>
                             :
-                            <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3" disabled>New product</Button>
+                            <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3 mb-3" disabled>New product</Button>
                         }
                     </Col>
                     <Col xs="4"></Col>
