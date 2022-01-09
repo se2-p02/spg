@@ -96,6 +96,16 @@ export const handlers = [
                 ]
             ),
         )
-    })
+    }),
+    rest.get('http://localhost:3000/api/orderswithstatus/available', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    { id: 1, userID: 2, products: [{id:1, name:'Flour', quantity:2.0, farmer:7, status:0}], address: {address: 'Via Roma 3', deliveryOn: '2002-22-10'}, date: 'eee', time: 'ooo', amount: 10.0, conf: 0, fulfilled: 0, paid: 0 }
+                ]
+            ),
+        )
+    }),
     
 ]
