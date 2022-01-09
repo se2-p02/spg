@@ -12,13 +12,15 @@ describe('Test MyFarmerOrders', () => {
             clock={moment('2021-11-27 7:55')}
             setClock={jest.fn()}
             user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
+
+        await waitFor(()=>{
+            expect(screen.getByText("Order #1")).toBeInTheDocument();
+            expect(screen.getByText("User #2")).toBeInTheDocument();
+            expect(screen.getByText("Products")).toBeInTheDocument();
+            expect(screen.getByText("Delivery")).toBeInTheDocument();
+            expect(screen.getByText("Amount")).toBeInTheDocument();
+        })
+
     });
-    
-    it("tests with full", async () => {
-        renderWithRouter(<MyFarmerOrders
-            clock={moment('2021-11-27 7:55')}
-            setClock={jest.fn()}
-            full = ""
-            user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
-    });
+
 });

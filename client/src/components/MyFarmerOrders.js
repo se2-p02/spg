@@ -42,8 +42,7 @@ function MyFarmerOrders(props) {
             const id = props.user.role === 'client' && props.user.id;
             API.loadOrders(id)
                 .then((c) => {
-                    console.log(c)
-                    console.log(props.user.id)
+                    
                     if (c.error === undefined) {
                         c.sort((a, b) => b.id - a.id);
                         const farmerOrders = c.filter(o => o.products.some(p => p.farmer === props.user.id));
