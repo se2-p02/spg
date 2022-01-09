@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641724479814" clover="3.2.0">
-  <project timestamp="1641724479814" name="All files">
+<coverage generated="1641725009091" clover="3.2.0">
+  <project timestamp="1641725009091" name="All files">
     <metrics statements="960" coveredstatements="544" conditionals="332" coveredconditionals="133" methods="226" coveredmethods="148" elements="1518" coveredelements="825" complexity="0" loc="960" ncloc="960" packages="1" files="4" classes="4"/>
     <file name="app.js" path="C:\Users\Mattia\Desktop\spg\server\app.js">
       <metrics statements="481" coveredstatements="256" conditionals="200" coveredconditionals="71" methods="64" coveredmethods="41"/>
@@ -478,8 +478,8 @@
       <line num="895" count="1" type="stmt"/>
       <line num="896" count="1" type="stmt"/>
       <line num="902" count="1" type="stmt"/>
-      <line num="903" count="111" type="stmt"/>
-      <line num="904" count="111" type="stmt"/>
+      <line num="903" count="109" type="stmt"/>
+      <line num="904" count="109" type="stmt"/>
       <line num="909" count="1" type="stmt"/>
       <line num="910" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="911" count="0" type="stmt"/>
@@ -920,13 +920,13 @@
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
-      <line num="8" count="29" type="stmt"/>
-      <line num="9" count="29" type="stmt"/>
-      <line num="10" count="29" type="stmt"/>
-      <line num="11" count="29" type="cond" truecount="1" falsecount="1"/>
+      <line num="8" count="28" type="stmt"/>
+      <line num="9" count="28" type="stmt"/>
+      <line num="10" count="28" type="stmt"/>
+      <line num="11" count="28" type="cond" truecount="1" falsecount="1"/>
       <line num="12" count="0" type="stmt"/>
-      <line num="13" count="29" type="cond" truecount="2" falsecount="0"/>
-      <line num="14" count="2" type="stmt"/>
+      <line num="13" count="28" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="1" type="stmt"/>
       <line num="17" count="27" type="stmt"/>
       <line num="18" count="27" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
