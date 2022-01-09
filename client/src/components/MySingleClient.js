@@ -56,61 +56,61 @@ function MySingleClient(props) {
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Surname: </b>
+                                    <Col sm="4" className="m-0 p-0" data-testid="Surname"><b>Surname: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.surname}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Email: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Email">Email: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.email}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Role: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Role">Role: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.role}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Wallet: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Wallet">Wallet: </b>
                                     </Col>
                                     <Col sm="3" className="m-0 p-0">{client.wallet + " €"}
                                     </Col>
                                     <Col sm="2" className="m-0 p-0" fluid="true">
                                         <Button className="bg-transparent border-white text-dangers  p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
-                                            <Image testid="plus" height={"50%"} width={"50%"} src={plus} className="m-0 mt-0 mb-0 p-1 pt-0 " fluid />
+                                            <Image data-testid="plus" height={"50%"} width={"50%"} src={plus} className="m-0 mt-0 mb-0 p-1 pt-0 " fluid />
                                         </Button>
                                     </Col>
                                     <Col sm="2" className="m-0 p-0" fluid="true">
                                         <Button className="bg-transparent border-white   p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
-                                            <Image testid="minus" height={"50%"} width={"50%"} src={minus} className="m-0 mt-0 mb-0 p-1 pt-0" fluid />
+                                            <Image data-testid="minus" height={"50%"} width={"50%"} src={minus} className="m-0 mt-0 mb-0 p-1 pt-0" fluid />
                                         </Button>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col sm="6" className=" m-0 p-0">
                                 <Row className="m-0 p-4 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Phone: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Phone">Phone: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.phone === null ? "NaN" : client.phone}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Address: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Address">Address: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.address}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>City: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="City">City: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.city}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b>Country: </b>
+                                    <Col sm="4" className="m-0 p-0"><b data-testid="Country">Country: </b>
                                     </Col>
                                     <Col sm="8" className="m-0 p-0">{client.country}
                                     </Col>
@@ -127,13 +127,13 @@ function MySingleClient(props) {
                     border: '0',
                     borderTop: '1px solid rgba(0, 0, 0, 0.1)'
                 }} />
-                <h3 testid="header" className="text-black text-center">Orders</h3>
+                <h3 testid="header" className="text-black text-center" data-testid="Orders">Orders</h3>
 
                 {!reqUpdate && <MyOrders setUser={props.setUser} user={client.id} full={1} />}
                 <Row>
                     <Col sm="4"></Col>
                     <Col sm="4">
-                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3 radius_button mb-3" onClick={() => setGoBack(true)}>Back</Button>
+                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3 radius_button mb-3" onClick={() => setGoBack(true)} data-testid="Back">Back</Button>
                     </Col>
                     <Col sm="4"></Col>
                 </Row>

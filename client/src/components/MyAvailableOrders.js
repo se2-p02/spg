@@ -6,7 +6,6 @@ import "./MyNavBar.css";
 import API from "./API";
 
 function MyAvailableOrders(props) {
-  const [goBack] = useState(false);
   const [orders, setOrders] = useState([]);
   const [reqUpdate, setReqUpdate] = useState(true);
 
@@ -26,15 +25,12 @@ function MyAvailableOrders(props) {
     }
   }, [reqUpdate, props.user]);
 
-  if (goBack) {
-    return <Navigate to={"/" + props.user.role}></Navigate>;
-  }
-
   return (
     <Col sm="12" xs="12" md="9">
       <Container
         className={props.id ? "justify-content-center align-items-center text-center" : " min-height-100 justify-content-center align-items-center text-center below-nav mt-3"}
         fluid
+        data-testid="container"
       >
         
         <ListGroup

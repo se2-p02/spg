@@ -92,13 +92,13 @@ exports.getClientsSummary = () => {
 // get all clients
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT id, name, surname FROM users WHERE id >= 0';
+        const sql = 'SELECT id, name, surname, role FROM users WHERE id >= 0';
         db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname }));
+            const clients = rows.map((c) => ({ id: c.id, name: c.name, surname: c.surname, role: c.role }));
             resolve(clients);
         });
     });

@@ -13,4 +13,12 @@ describe('Test MyFarmerOrders', () => {
             setClock={jest.fn()}
             user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
     });
+    
+    it("tests with full", async () => {
+        renderWithRouter(<MyFarmerOrders
+            clock={moment('2021-11-27 7:55')}
+            setClock={jest.fn()}
+            full = ""
+            user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }} />, "/farmer/orders");
+    });
 });

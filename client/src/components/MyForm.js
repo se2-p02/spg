@@ -271,7 +271,7 @@ function MyForm(props) {
                                         <div
                                             className="alert alert-danger alert-float-static fade show"
                                             role="alert"
-                                            data-testid=""
+                                            data-testid="alert password"
                                         >
                                             {errorMessagePassword}
                                         </div>

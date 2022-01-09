@@ -5,48 +5,45 @@ import React from 'react'
 
 test('renders the info of a client from employee page', () => {
     render(<MySingleClient />);
-    {/*
+    
     var element = screen.getByTestId("profileName")
     expect(element).toBeInTheDocument();
 
     
-    var element = screen.getByText("Surname")
+    element = screen.getByTestId("Surname")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Email")
+    element = screen.getByTestId("Email")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Role")
+    element = screen.getByTestId("Role")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Wallet")
+    element = screen.getByTestId("Wallet")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Phone")
+    element = screen.getByTestId("Phone")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Address")
+    element = screen.getByTestId("Address")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("City")
+    element = screen.getByTestId("City")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Country")
+    element = screen.getByTestId("Country")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Back")
+    element = screen.getByTestId("Back")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByText("Orders")
+    element = screen.getByTestId("Orders")
     expect(element).toBeInTheDocument();
   
-    var element = screen.getByTestId("plus")
+    element = screen.getByTestId("plus")
     expect(element).toBeInTheDocument();
 
-    var element = screen.getByTestId("minus")
+    element = screen.getByTestId("minus")
     expect(element).toBeInTheDocument();
-
-    var element = screen.getByTestId("header")
-    expect(element).toBeInTheDocument();
-    */}
+    
   });

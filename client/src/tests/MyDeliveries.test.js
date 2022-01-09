@@ -24,6 +24,10 @@ describe('Test MyDeliveries', () => {
 
   });
 
+  test('renders the deliveries page with id', () => {
+    render(<MyDeliveries id = "1"/>);
+  });
+
   it("tests go back", async () => {
     act(() => {
         renderWithRouter(<MyDeliveries

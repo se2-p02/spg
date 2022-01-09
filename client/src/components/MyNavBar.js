@@ -135,7 +135,7 @@ function MyNavBar(props) {
                 </Row>
 
                 {props.cart.length !== 0 &&
-                    <MyModal setModify={props.setModify} orderId={props.orderId} modify={props.modify} oldQ={props.oldQ} setOldQuantities={props.setOldQuantities} setUpdateProducts={props.setUpdateProducts} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
+                    <MyModal setModify={props.setModify} orderId={props.orderId} mOrderUId={props.mOrderUId} modify={props.modify} oldQ={props.oldQ} setOldQuantities={props.setOldQuantities} setUpdateProducts={props.setUpdateProducts} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
                 }
             </Navbar>
             {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 mb-3 p-3 px-3" onClick={() => { props.setShowModal(true) }}>
@@ -155,6 +155,7 @@ function MyModal(props) {
     const [address, setAddress] = useState('');
     const [datetime, setDatetime] = useState();
     const [client, setClient] = useState();
+    const [clients, setClients] = useState([]);
     const [errorMsg, setErrorMsg] = useState('');
     const [showAddressForm, setShowAddressForm] = useState(true);
 
@@ -170,11 +171,7 @@ function MyModal(props) {
     }
 
     const handleSubmit = async () => {
-        let order;
-        let products = [];
-        let u = undefined;
-        if (props.user.role !== "employee") u = props.user.id;
-
+        const products = [];
         props.cart.forEach((prod) => {
             let p = {
                 id: prod.id,
@@ -188,11 +185,13 @@ function MyModal(props) {
             }
             products.push(p)
         });
-        order = {
+
+        if (!client && props.user.role === 'employee' && !props.modify) return setErrorMsg(() => 'Please select a user to place the order.');
+        const order = {
             products: products,
             amount: props.cart.reduce((a, b) => a + b.quantity * b.price, 0).toFixed(2),
             address: undefined,
-            user: u,
+            user: (props.user.role === "employee" && !props.modify) ? client && client.id : props.user.id,
             paid: 0
         }
 
@@ -239,6 +238,7 @@ function MyModal(props) {
         if (props.clock) {
             const datetime = moment(props.clock.format('YYYY-MM-DD HH:mm'));
             setOrdersClosed(() => (datetime.day() === 0 && datetime.hour() === 23) || (datetime.day() === 1 && (datetime.hour() >= 0 && datetime.hour() <= 8)));
+            API.loadClients().then(c => setClients(c.filter(cl => cl.role === 'client')));
         }
     }, [props.clock]);
 
@@ -287,7 +287,8 @@ function MyModal(props) {
                                 id="checkdelivery"
                                 label="Deliver to address"
                                 onClick={() => {
-                                    if (!client) API.loadClient(props.user.id).then((c) => { if (c.error === undefined) setClient(c); });
+                                    if (props.user.role === 'client') API.loadClient(props.user.id).then((c) => { if (c.error === undefined) setClient(c); });
+                                    else if (props.user.role === 'employee' && props.modify) API.loadClient(props.mOrderUId).then((c) => { if (c.error === undefined) setClient(c); });
                                     setOrderMethod(() => 'address');
                                 }} />
                         </Form>
@@ -295,6 +296,13 @@ function MyModal(props) {
 
                     <ListGroup.Item className="d-flex w-100 bg_login2 justify-content-center align-items-center">
                         <Form data-testid="orderForm">
+                            {props.user && props.user.role === 'employee' && !props.modify && <>
+                                <Form.Label>Select a user:</Form.Label>
+                                <Form.Select className="bg-transparent mt-0 mb-3" onChange={e => API.loadClient(e.target.value).then(c => setClient(c))}>
+                                    <option>Click to open</option>
+                                    {clients.map((c, i) => <option key={'opt' + i} value={c.id}>#{c.id} {c.name} {c.surname}</option>)}
+                                </Form.Select></>}
+
                             {orderMethod === 'address' && <><Form.Check defaultChecked
                                 type="radio"
                                 name="addressgroup"
@@ -304,7 +312,7 @@ function MyModal(props) {
                                     setAddress(() => '');
                                     setShowAddressForm(() => true);
                                 }} />
-                                <Form.Check
+                                <Form.Check className="mb-3"
                                     type="radio"
                                     name="addressgroup"
                                     id="checkdefadd"
@@ -316,12 +324,12 @@ function MyModal(props) {
                                         }
                                         setShowAddressForm(() => false);
                                     }} /> </>}
-                            {orderMethod === 'address' && showAddressForm && <><Form.Label className="mt-3">Your complete address:</Form.Label>
-                                <Form.Control as="textarea" cols={100} rows={2} data-testid="addressBox" className="radius_button_small w-100"
+                            {orderMethod === 'address' && showAddressForm && <><Form.Label className="mb-2">Your complete address:</Form.Label>
+                                <Form.Control as="textarea" cols={100} rows={2} data-testid="addressBox" className="radius_button_small w-100 mb-3"
                                     placeholder="Please include street, number, city and country."
                                     onChange={(e) => setAddress(() => e.target.value)} /></>}
 
-                            <Form.Label className={orderMethod === 'store' ? 'mt-0' : 'mt-3'}>Select a date and a time for the {orderMethod === 'store' ? 'pickup' : 'delivery'}:</Form.Label>
+                            <Form.Label>Select a date and a time for the {orderMethod === 'store' ? 'pickup' : 'delivery'}:</Form.Label>
                             <DateTimePicker className="mb-2"
                                 onChange={setDatetime}
                                 value={datetime}

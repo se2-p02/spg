@@ -57,6 +57,7 @@ function MyNotAvailableOrders(props) {
       <Container
         className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
         fluid
+        data-testid="container"
       >
         <ListGroup className="my-3 mx-2" variant="flush">
           <ListGroup.Item variant="warning">

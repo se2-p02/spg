@@ -5,6 +5,7 @@ const spgDao = require("../spgDao");
 const moment = require("moment");
 const app = require("../app");
 var server = request.agent(app)
+const userDao = require("../userDao")
 
 
 function loginAdmin() {
@@ -106,6 +107,7 @@ describe("Clients test", () => {
         id: expect.any(Number),
         name: expect.any(String),
         surname: expect.any(String),
+        role: expect.any(String)
       });
     });
   });
@@ -673,3 +675,19 @@ describe("System clock", () => {
   });
 });
 
+describe("userDao tests", () => {
+  it("getUserById with invalid id", async () => {
+    try {
+      await userDao.getUserById(400000)
+    }
+    catch (e) {
+      expect(e).toEqual({
+        error: 'User not found.'
+      })
+    }
+  })
+
+  it("getUser invalid email", async () => {
+    await expect(userDao.getUser("5")).resolves.toEqual(false);
+  })
+})

@@ -55,17 +55,15 @@ function MyProducts(props) {
     }, [allProducts, props.cart]);
 
     useEffect(() => {
-        if (products.length !== 0) {
-            const t_filters = filters;
-            products.forEach(p => {
-                if (!t_filters.includes(p.filter)) t_filters.push(p.filter);
-            });
-            setFilters(() => t_filters);
-        }
+        const t_filters = filters;
+        products.forEach(p => {
+            if (!t_filters.includes(p.filter)) t_filters.push(p.filter);
+        });
+        setFilters(() => t_filters);
     }, [products, filters]);
 
     useEffect(() => {
-        if (products.length !== 0) setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));
+        setFilteredProducts(() => products.filter(p => (filter === 'All' || p.filter === filter) && (!wordFilter || p.name.toLowerCase().includes(wordFilter.toLowerCase()))));
     }, [products, filter, wordFilter]);
 
     const handleAddToCart = (id, q, name, unit, price) => {
@@ -89,7 +87,11 @@ function MyProducts(props) {
 
     return (
         <Col sm="12" md="9">
-            <Container className="min-height-100 justify-content-center align-items-center text-center below-nav mt-0" fluid>
+            <Container className={
+                props.full
+                    ? " justify-content-center align-items-center mt-3"
+                    : " min-height-100 justify-content-center align-items-center below-nav mt-3"
+            } fluid>
                 <FloatingLabel label="Filter products:" className="pb-2">
                     <Form.Select className="bg-transparent" onChange={(e) => setFilter(() => e.target.value)}>
                         {filters.map((f, i) => <option key={'f' + i} value={f}>{f}</option>)}

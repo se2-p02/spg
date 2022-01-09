@@ -20,29 +20,7 @@ function MyStatistics(props) {
         .then((c) => {
           if (c.error === undefined) {
             c.sort((a, b) => a.id - b.id);
-            console.log(c)
             setOrders(c);
-            // Here I have all the products of the orders
-            /* let products_to_sum = c.map((x) => x.products)
-            setTest(products_to_sum)
-            products_to_sum.forEach((pts) => {
-              pts.forEach((p) => {
-                setTest(p)
-                let find_prod = tot.find((prod) => JSON.parse(prod).name === JSON.parse(p).name);
-
-                if (find_prod) {
-                  find_prod.quantity += p.quantity;
-                  setTot(tot.filter((prod) => prod.name !== p.name))
-                  setTot([...tot, find_prod]);
-                  //setTest([...test, "A"])
-                }
-                else {
-                  setTot([...tot, p]);
-                  //setTest([...test, "B"])
-                }
-              })
-
-            }) */
             setReqUpdate(false);
           } else {
             console.log(c.error)
@@ -76,7 +54,7 @@ function MyStatistics(props) {
   return (
     <>
       <Col sm="12" md="9">
-        <Container className={props.id ? "justify-content-center align-items-center text-center" : "min-height-100 justify-content-center align-items-center text-center below-nav mt-3"} fluid>
+        <Container className={props.id ? "justify-content-center align-items-center text-center" : "min-height-100 justify-content-center align-items-center text-center below-nav mt-3"} fluid data-testid="container">
           <Row>
             <Col lg="6">
               <ListGroup className="my-2 mx-3 mt-3" variant="flush">
@@ -100,7 +78,7 @@ function MyStatistics(props) {
                               <Col className="align-items-center" data-testid = "a">{c.id}</Col>
                               <Col className="" data-testid = "">
                                 {j.map((x) => {
-                                  let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
+                                  let elem = <p className="m-0 p-0" data-testid="test waitfor">{x.name + ": " + x.quantity}</p>
                                   return (elem);
                                 })}
                               </Col>
@@ -113,14 +91,6 @@ function MyStatistics(props) {
                   </>
                 )
                 }
-{/*
-                <ListGroup.Item>
-                  <Row className="p-3">
-                    <Col className="p-0 m-0"><b>Total</b></Col>
-                    <Col className="p-0 m-0"><b>Products</b></Col>
-                  </Row>
-                </ListGroup.Item>
-*/}
               </ListGroup>
             </Col>
             <Col lg="6">
@@ -142,7 +112,7 @@ function MyStatistics(props) {
                         <>
                           <ListGroup.Item>
                             <Row className="align-items-center text-center p-1 m-0">
-                              <Col className="align-items-center">{c.id}</Col>
+                              <Col className="align-items-center" data-testid="col id">{c.id}</Col>
                               <Col className="">
                                 {j.map((x) => {
                                   let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
@@ -158,28 +128,6 @@ function MyStatistics(props) {
                   </>
                 )
                 }
-
-                {/*<ListGroup.Item>
-                  <Row className="p-3">
-                    <Col className="p-0 m-0"><b>Total</b></Col>
-                    {tot && (
-                      <>
-                        {<Col className="">
-                          {tot.map((t) => {
-                            return JSON.parse(t).map((x) => {
-                              let elem = <p className="m-0 p-0">{x.name + ": " + x.quantity}</p>
-                              return (elem);
-                            })
-                          })}
-                          <p className="m-0 p-0">{test}</p>
-                        </Col>
-                        }
-                      </>
-                    )
-                    }
-                  </Row>
-                </ListGroup.Item>*/}
-
               </ListGroup>
             </Col>
           </Row>

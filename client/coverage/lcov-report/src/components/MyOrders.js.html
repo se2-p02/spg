@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.23% </span>
+                <span class="strong">18.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/52</span>
+                <span class='fraction'>10/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.83% </span>
+                <span class="strong">20.4% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/48</span>
+                <span class='fraction'>10/49</span>
             </div>
         
             
@@ -217,7 +217,8 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,11 +227,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,10 +253,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -277,7 +278,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -288,10 +289,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -431,7 +433,7 @@ function MyOrders(props) {
   }, [reqUpdate, props.user]);
 &nbsp;
   //handle the modify button
-  const modifyHandler = <span class="fstat-no" title="function not covered" >(i</span>d, products) =&gt; {
+  const modifyHandler = <span class="fstat-no" title="function not covered" >(i</span>d, products, uid) =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log(products);</span>
 <span class="cstat-no" title="statement not covered" >    props.setOrderId(id);</span>
 <span class="cstat-no" title="statement not covered" >    props.setCart(products);</span>
@@ -441,6 +443,7 @@ function MyOrders(props) {
 <span class="cstat-no" title="statement not covered" >    console.log(oldQ)</span>
 <span class="cstat-no" title="statement not covered" >    props.setOldQuantities(oldQ);</span>
 <span class="cstat-no" title="statement not covered" >    props.setModify(true);</span>
+<span class="cstat-no" title="statement not covered" >    props.setMOrderUId(uid);</span>
 <span class="cstat-no" title="statement not covered" >    props.setFil('Products');</span>
   };
 &nbsp;
@@ -510,7 +513,7 @@ function MyOrders(props) {
                     {o.products.every(<span class="fstat-no" title="function not covered" >pr</span> =&gt; <span class="cstat-no" title="statement not covered" >pr.status &gt;= 1)</span> ?
                       &lt;Button disabled variant="success" className="py-3 button_myorders radius_button_small"&gt;MODIFY&lt;/Button&gt;
                       : &lt;Link to={'/'+props.user.role+'/products'} className="btn btn-success py-3 button_myorders radius_button_small"
-                        onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >modifyHandler(o.id, o.products)}</span>&gt;
+                        onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >modifyHandler(o.id, o.products, o.userID)}</span>&gt;
                         MODIFY
                       &lt;/Link&gt;}
                   &lt;/Row&gt;
@@ -532,7 +535,7 @@ export default MyOrders;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Sat Jan 08 2022 15:03:12 GMT+0100 (Ora standard dell’Europa centrale)
+                at Sat Jan 08 2022 22:58:12 GMT+0100 (Ora standard dell’Europa centrale)
             </div>
         </div>
         <script src="../../prettify.js"></script>
