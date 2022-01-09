@@ -123,7 +123,30 @@ function MyNavBar(props) {
                         <Nav className="d-block d-sm-block d-xs-block d-md-none text-center nav-color">
                             <ListGroup variant="flush" className="mt-3 ">
                                 {props.fil.map(x => {
-                                    return (<ListGroup.Item className="bg_login2 m-0  p-2 rounded"><Nav.Link href={x.toLowerCase()} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
+                                    let url
+                                    if(x === "My Orders"){
+                                        url = "/"+props.role+"/"+"orders"
+
+                                    }
+                                    else if(x === "Orders in shop"){
+                                        url = "/"+props.role+"/"+"availableOrders"
+                                    }
+                                    else if(x === "Subscribe to Telegram"){
+                                        url = "https://telegram.me/P02SPG_bot?start=2"
+                                    }
+                                    else if(x === "Unretrieved Orders"){
+                                        url = "/"+props.role+"/"+"unretrievedOrders"
+                                    }
+                                    else if(x === "Confirm Orders"){
+                                        url = "/"+props.role+"/"+"availableOrders"
+                                    }
+                                    else if(x === "Available Orders"){
+                                        url = "/"+props.role+"/"+"notAvailableOrders"
+                                    }
+                                    else{
+                                        url = "/"+props.role+"/"+x.toLowerCase()
+                                    }
+                                    return (<ListGroup.Item className="bg_login2 m-0  p-2 rounded"><Nav.Link href={url} className="p-0 m-0"><h5 className="p-0 m-0">{x}</h5></Nav.Link></ListGroup.Item>
                                     )
                                 })}
 
@@ -138,7 +161,7 @@ function MyNavBar(props) {
                     <MyModal setModify={props.setModify} orderId={props.orderId} mOrderUId={props.mOrderUId} modify={props.modify} oldQ={props.oldQ} setOldQuantities={props.setOldQuantities} setUpdateProducts={props.setUpdateProducts} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
                 }
             </Navbar>
-            {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 mb-3 p-3 px-3" onClick={() => { props.setShowModal(true) }}>
+            {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 mb-3 p-3 px-3 d-block d-xs-none d-sm-none d-md-block" onClick={() => { props.setShowModal(true) }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
   <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>

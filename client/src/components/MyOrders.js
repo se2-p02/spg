@@ -72,9 +72,15 @@ function MyOrders(props) {
     props.setFil('Products');
   };
 
-
+  let cn
+  if (props.dim === undefined){
+    cn = 'xs = "12" sm = "12" md="12"'
+  }
+  else{
+    cn = 'sm = "12"'
+  }
   return (
-    <Col sm="12" md="9">
+    <Col className={cn}>
       <Container
         className={
           props.full

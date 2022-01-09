@@ -40,7 +40,7 @@ function MySingleClient(props) {
 
 
     return (
-        <Col sm="9">
+        <Col sm="12" xs="12" md="9">
             <Container className="bg-white min-height-100  align-items-center text-left below-nav" fluid>
                 <Row className="p-0 pt-4">
                     <Col sm="3" className="p-0 m-0 text-center pt-3">
@@ -48,75 +48,79 @@ function MySingleClient(props) {
                     </Col>
                     <Col sm="9">
                         <Row>
-                            <Col sm="6" className=" m-0 p-0">
+                            <Col sm="6" xs="6" className=" m-0 p-0">
                                 <Row className="m-0 p-4 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="profileName">Name: </b>
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="profileName">Name: </b>
                                     </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.name}
-                                    </Col>
-                                </Row>
-                                <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0" data-testid="Surname"><b>Surname: </b>
-                                    </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.surname}
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.name}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Email">Email: </b>
+                                    <Col sm="5" xs="5" className="m-0 p-0" data-testid="Surname"><b>Surname: </b>
                                     </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.email}
-                                    </Col>
-                                </Row>
-                                <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Role">Role: </b>
-                                    </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.role}
+                                    <Col sm="7" xs="7" className="m-0 p-0">{client.surname}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Wallet">Wallet: </b>
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="Email">Email: </b>
                                     </Col>
-                                    <Col sm="3" className="m-0 p-0">{client.wallet + " €"}
-                                    </Col>
-                                    <Col sm="2" className="m-0 p-0" fluid="true">
-                                        <Button className="bg-transparent border-white text-dangers  p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
-                                            <Image data-testid="plus" height={"50%"} width={"50%"} src={plus} className="m-0 mt-0 mb-0 p-1 pt-0 " fluid />
-                                        </Button>
-                                    </Col>
-                                    <Col sm="2" className="m-0 p-0" fluid="true">
-                                        <Button className="bg-transparent border-white   p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
-                                            <Image data-testid="minus" height={"50%"} width={"50%"} src={minus} className="m-0 mt-0 mb-0 p-1 pt-0" fluid />
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col sm="6" className=" m-0 p-0">
-                                <Row className="m-0 p-4 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Phone">Phone: </b>
-                                    </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.phone === null ? "NaN" : client.phone}
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.email}
                                     </Col>
                                 </Row>
                                 <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Address">Address: </b>
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="Role">Role: </b>
                                     </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.address}
-                                    </Col>
-                                </Row>
-                                <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="City">City: </b>
-                                    </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.city}
-                                    </Col>
-                                </Row>
-                                <Row className="m-0 p-4 pt-0 pb-2">
-                                    <Col sm="4" className="m-0 p-0"><b data-testid="Country">Country: </b>
-                                    </Col>
-                                    <Col sm="8" className="m-0 p-0">{client.country}
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.role}
                                     </Col>
                                 </Row>
 
                             </Col>
+                            <Col sm="6" xs="6" className=" m-0 p-0">
+                                <Row className="m-0 p-4 pb-2">
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="Phone">Phone: </b>
+                                    </Col>
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.phone === null ? "NaN" : client.phone}
+                                    </Col>
+                                </Row>
+                                <Row className="m-0 p-4 pt-0 pb-2">
+                                    <Col sm="5" xs="5" className="m-0 p-0"><b data-testid="Address">Address: </b>
+                                    </Col>
+                                    <Col sm="7" xs="7" className="m-0 p-0">{client.address}
+                                    </Col>
+                                </Row>
+                                <Row className="m-0 p-4 pt-0 pb-2">
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="City">City: </b>
+                                    </Col>
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.city}
+                                    </Col>
+                                </Row>
+                                <Row className="m-0 p-4 pt-0 pb-2">
+                                    <Col sm="4" xs="4" className="m-0 p-0"><b data-testid="Country">Country: </b>
+                                    </Col>
+                                    <Col sm="8" xs="8" className="m-0 p-0">{client.country}
+                                    </Col>
+                                </Row>
+
+                            </Col>
+                            <Row className="py-2"></Row>
+                            <br></br>
+                            <Row className="m-0 p-4 pt-0 pb-0">
+                                <Col xs="2" sm="2" className="m-0 p-0 mt-1"><b data-testid="Wallet">Wallet: </b>
+                                </Col>
+                                <Col xs="3" sm="3" className="m-0 p-0 mt-1">{client.wallet + " €"}
+                                </Col>
+                                <Col xs="1" sm="1" className="m-0 p-0" fluid="true">
+                                    <Button className="bg-transparent border-white text-dangers border-0 no_shadow p-0 m-0 mt-0 mb-0" onClick={() => { setText("add"); setShowMod(true) }}>
+                                        <Image data-testid="plus" height={"75%"} width={"100%"} src={plus} className="m-0 mt-0 mb-0 p-2 pt-0 border-0" fluid />
+                                    </Button>
+                                </Col>
+                                <Col xs="1" sm="1" className="m-0 p-0" fluid="true">
+                                    <Button className="bg-transparent border-white  border-0 no_shadow   p-0 m-0 mt-0 mb-0" onClick={() => { setText("subtract"); setShowMod(true) }}>
+                                        <Image data-testid="minus" height={"75%"} width={"100%"} src={minus} className="m-0 mt-0 mb-0 p-2 pt-0" fluid />
+                                    </Button>
+                                </Col>
+                            </Row>
+                            
                         </Row>
                     </Col>
                 </Row>
@@ -125,17 +129,17 @@ function MySingleClient(props) {
                     marginTop: '1rem',
                     marginBottom: '1rem',
                     border: '0',
-                    borderTop: '1px solid rgba(0, 0, 0, 0.1)'
+                    borderTop: '1px solid rgba(0, 0, 0, 1)'
                 }} />
                 <h3 testid="header" className="text-black text-center" data-testid="Orders">Orders</h3>
 
-                {!reqUpdate && <MyOrders setUser={props.setUser} user={client.id} full={1} />}
+                {!reqUpdate && <MyOrders dim={1} setUser={props.setUser} user={client.id} full={1} />}
                 <Row>
-                    <Col sm="4"></Col>
-                    <Col sm="4">
-                                <Button size="lg"  className="btn-danger p-2 w-100 mt-3 radius_button mb-3" onClick={() => setGoBack(true)} data-testid="Back">Back</Button>
+                    <Col sm="4" xs="4"></Col>
+                    <Col sm="4" xs="4">
+                        <Button size="lg" className="btn-danger p-2 w-100 mt-3 radius_button mb-3" onClick={() => setGoBack(true)} data-testid="Back">Back</Button>
                     </Col>
-                    <Col sm="4"></Col>
+                    <Col sm="4" xs="4"></Col>
                 </Row>
                 <MyModal show={showMod} setShow={setShowMod} id={id} wallet={client.wallet} setUpdate={setReqUpdate} text={text}></MyModal>
             </Container>
@@ -211,7 +215,7 @@ function MyModal(props) {
                     <Col sm="5"><Button size="lg" variant="success" className="p-auto m-0 w-100 radius_button" onClick={() => { setTrigger(true); setAmount(amount); props.setUpdate(true) }}>Confirm</Button></Col>
 
                 </Row>
-                
+
             </Container>
         </Modal>
     );

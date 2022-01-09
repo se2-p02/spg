@@ -149,7 +149,7 @@ function MyContainer(props) {
                 setUpdateProducts={setUpdateProducts}
                 modify={modify}
                 showCart={true}
-                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
+                fil={["Profile", "Products", "My Orders", "Orders in shop", "Subscribe to Telegram"]} role="client"
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -179,7 +179,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 account = {true}
                 showCart={true}
-                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
+                fil={["Profile", "Products", "My Orders", "Orders in shop", "Subscribe to Telegram"]} role="client"
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -215,7 +215,8 @@ function MyContainer(props) {
                 clock={clock}
                 setClock={setClock}
                 setUser={setUser}
-                fil={["Profile", "Products", "My Orders", "Orders in shop"]}
+                fil={["Profile", "Products", "My Orders", "Orders in shop", "Subscribe to Telegram"]} 
+                role="client"
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -249,7 +250,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]}
+                fil={["Orders", "Products"]} role="farmer"
                 modify={modify}
                 orderId={orderId}
                 clock={clock}
@@ -280,7 +281,7 @@ function MyContainer(props) {
                 orderId={orderId}
                 clock={clock}
                 showCart={false}
-                fil={["Orders", "Products"]}
+                fil={["Orders", "Products"]} role="farmer"
               ></MyNavBar>
               <Row>
                 <LeftFarmer showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftFarmer>
@@ -309,7 +310,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]}
+                fil={["Orders", "Products"]} role="farmer"
                 setUser={setUser}
                 account = {true}
               ></MyNavBar>
@@ -342,7 +343,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={false}
-                fil={["Orders", "Products"]}
+                fil={["Orders", "Products"]} role="farmer"
                 setClock={setClock}
               ></MyNavBar>
               <Row>
@@ -372,6 +373,7 @@ function MyContainer(props) {
                 orderId={orderId}
                 clock={clock}
                 fil={["Available Orders"]}
+                role="wworker"
                 setClock={setClock}
                 setUser={setUser}
                 cart={cart}
@@ -393,6 +395,7 @@ function MyContainer(props) {
             <>
               <MyNavBar
                 fil={["Available Orders"]}
+                role="wworker"
                 user={user}
                 modify={modify}
                 orderId={orderId}
@@ -430,6 +433,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 showCart={false}
                 fil={["Deliveries", "Confirm Orders"]}
+                role="wmanager"
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -449,6 +453,7 @@ function MyContainer(props) {
                 setClock={setClock}
                 modify={modify}
                 fil={["Deliveries", "Confirm Orders"]}
+                role="wmanager"
                 orderId={orderId}
                 clock={clock}
                 setUser={setUser}
@@ -490,6 +495,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 showCart={false}
                 fil={["Unretrieved Orders"]}
+                role="manager"
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -515,6 +521,7 @@ function MyContainer(props) {
                 setFil={setFil}
                 setClock={setClock}
                 fil={["Unretrieved Orders"]}
+                role = "manager"
                 setModify={setModify}
                 modify={modify}
               ></MyNavBar>
@@ -593,6 +600,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                role="employee"
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
@@ -621,6 +629,7 @@ function MyContainer(props) {
                 cart={cart}
                 setCart={setCart}
                 showCart={true}
+                role="employee"
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
@@ -652,6 +661,7 @@ function MyContainer(props) {
                 clock={clock}
                 setUser={setUser}
                 account = {true}
+                role="employee"
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
 
@@ -695,6 +705,7 @@ function MyContainer(props) {
                 setCart={setCart}
                 showCart={true}
                 account = {true}
+                role="employee"
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
@@ -724,7 +735,7 @@ function MyContainer(props) {
                 showCart={true}
                 setUser={setUser}
                 account = {true}
-                fil={["Clients", "Products", "Orders"]}
+                fil={["Profile", "Products", "My Orders", "Orders in shop", "Subscribe to Telegram"]} role="client"
               ></MyNavBar>
               <Row>
               <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>
@@ -767,6 +778,7 @@ function MyContainer(props) {
                 showCart={true}
                 setUser={setUser}
                 account = {true}
+                role="employee"
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
@@ -807,6 +819,9 @@ function MyContainer(props) {
                 showCart={false}
                 account = {true}
                 setUser={setUser}
+                role="employee"
+                fil={["Clients", "Products", "Orders"]}
+
               ></MyNavBar>
               <Row>
                 <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
@@ -834,6 +849,7 @@ function MyContainer(props) {
                 setUser={setUser}
                 account = {true}
                 fil={["Deliveries", "Confirm Orders"]}
+                role="wmanager"
                 setFil={setFil}
               ></MyNavBar>
               <Row>
@@ -862,6 +878,7 @@ function MyContainer(props) {
                 account = {true}
                 showCart={false}
                 setUser={setUser}
+                fil={["Profile", "Products", "My Orders", "Orders in shop", "Subscribe to Telegram"]} role="client"
               ></MyNavBar>
               <Row>
                 <LeftClient showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil} user={user}></LeftClient>

@@ -15,6 +15,7 @@ function MyClients() {
         if (reqUpdate) {
             API.loadClients().then((c) => {
                 if (c.error === undefined) {
+                    c = c.filter(x => x.role==="client")
                     setClients(c);
                     setReqUpdate(false);
                 }
