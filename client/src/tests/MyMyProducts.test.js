@@ -160,7 +160,7 @@ describe('Test MyMyproducts', () => {
             expect(screen.getByText("Milk")).toBeInTheDocument()
             expect(screen.getByText("7 €")).toBeInTheDocument()
             expect(screen.getByText("CONFIRMED")).toBeInTheDocument()
-            let mod_button = screen.getByTestId("mod")
+            let mod_button = screen.getByTestId("mod2")
             expect(mod_button).toBeInTheDocument()
             act(() => {
                 fireEvent.click(mod_button)

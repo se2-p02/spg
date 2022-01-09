@@ -124,7 +124,20 @@ export const handlers = [
                         confirmed: 1,
                         availability: "2021-11-29",
                         image: "eggs.jpg"
-                    }
+                    },
+                    {
+                        id: 9,
+                        name: "Findus",
+                        quantity: 3,
+                        unit: "kg",
+                        filter: "Fish",
+                        farmer: 7,
+                        farmerName: "FattoriaBella",
+                        price: 5,
+                        confirmed: 0,
+                        availability: "2021-11-28",
+                        image: "findus.png"
+                    },
                     
                 ]
             ),

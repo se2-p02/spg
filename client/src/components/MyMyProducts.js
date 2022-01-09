@@ -105,9 +105,9 @@ function MyMyProducts(props) {
                                                 <Col xs="2">{p.quantity + " " + p.unit}</Col>
                                                 <Col xs="2">{p.price + " €"}</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                    <Button data-testid="mod" variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
+                                                    <Button data-testid={"mod"+p.id} variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
                                                     :
-                                                    <Button data-testid="mod" variant="light" className="border" ><PencilSquare /></Button>
+                                                    <Button data-testid={"mod"+p.id} variant="light" className="border" ><PencilSquare /></Button>
                                                 }</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (
                                                     (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
