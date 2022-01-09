@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import MyOrders from "../components/MyOrders";
 import moment from 'moment'
@@ -12,40 +12,76 @@ describe('Test MyFarmerOrders', () => {
             clock={moment('2021-11-27 7:55')}
             setClock={jest.fn()}
             user={{ id: 1, role: "employee", username: "admin@admin.admin" }} />, "/employee/orders");
-        /*
-            let elem = screen.getByText("Order")
-            expect(elem).toBeInTheDocument();
+            await waitFor( () => {
+                expect(screen.getByText("Order #1")).toBeInTheDocument()
+                expect(screen.getByText("User #2")).toBeInTheDocument()
+                expect(screen.getByText("Placed")).toBeInTheDocument()
+                expect(screen.getByTestId("elem")).toBeInTheDocument()
+                expect(screen.getByTestId("header")).toBeInTheDocument()
+                expect(screen.getByTestId("body")).toBeInTheDocument()
 
-            elem = screen.getByText("User")
-            expect(elem).toBeInTheDocument()
+                act(()=>{
+                    fireEvent.click(screen.getByTestId("elem"))
+                })
+                expect(screen.getByText("MODIFY")).toBeInTheDocument()
+                expect(screen.getByText("HAND OUT")).toBeInTheDocument()
 
-            elem = screen.getByText("Products")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("Delivery")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("Amount")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("Fulfilled")
-            expect(elem).toBeInTheDocument()
-
-            elem = screen.getByText("Modify")
-            expect(elem).toBeInTheDocument()
-*/
-
-
+            })
         });
-        it("tests with full", async () => {
+        it("tests buttons MODIFY BUTTON", async () => {    
             renderWithRouter(<MyOrders
+                full={0}
+                cart={[]}
+                setOrderId={()=>{jest.fn()}}
+                setCart={()=>{jest.fn()}}
+                setMOrderUId={()=>{jest.fn()}}
+                setModify={()=>{jest.fn()}}
+                setOldQuantities={()=>{jest.fn()}}
+                setFil={()=>{jest.fn()}}
                 clock={moment('2021-11-27 7:55')}
                 setClock={jest.fn()}
-                user={{ id: 1, role: "employee", username: "admin@admin.admin" }} 
-                full=""/>, "/employee/orders");
-        });
-
-        
+                user={{ id: 1, role: "employee", username: "admin@admin.admin" }} />, "/employee/orders");
+                await waitFor( () => {
     
+                    act(()=>{
+                        fireEvent.click(screen.getByTestId("elem"))
+                    })
+                    expect(screen.getByText("MODIFY")).toBeInTheDocument()
+                    expect(screen.getByText("HAND OUT")).toBeInTheDocument()
+                    act(()=>{
+                        fireEvent.click(screen.getByText("MODIFY"))
+                    })
+                    expect(window.location.pathname).toBe("/employee/products")
+    
+                })
+            });
+
+            it("tests buttons MODIFY BUTTON", async () => {    
+                renderWithRouter(<MyOrders
+                    full={0}
+                    cart={[]}
+                    setOrderId={()=>{jest.fn()}}
+                    setCart={()=>{jest.fn()}}
+                    setMOrderUId={()=>{jest.fn()}}
+                    setModify={()=>{jest.fn()}}
+                    setOldQuantities={()=>{jest.fn()}}
+                    setFil={()=>{jest.fn()}}
+                    clock={moment('2021-11-27 7:55')}
+                    setClock={jest.fn()}
+                    user={{ id: 1, role: "employee", username: "admin@admin.admin" }} />, "/employee/orders");
+                    await waitFor( () => {
+        
+                        act(()=>{
+                            fireEvent.click(screen.getByTestId("elem"))
+                        })
+                        expect(screen.getByText("MODIFY")).toBeInTheDocument()
+                        expect(screen.getByText("HAND OUT")).toBeInTheDocument()
+                        act(()=>{
+                            fireEvent.click(screen.getByText("HAND OUT"))
+                        })
+        
+                    })
+                });
+   
 
 });

@@ -390,7 +390,7 @@ function MyModal(props) {
             <Modal.Footer className="m-0">
                 <Row className=" w-100">
                     <Col xs="4">{props.modal === 'modify' &&
-                        <Button variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
+                        <Button data-testid="delete" variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
                     }</Col>
                     <Col xs="4"><Button data-testid="close" variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
                     </Col>

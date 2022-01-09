@@ -86,12 +86,12 @@ function MyOrders(props) {
         {orders.length !== 0 &&
           <Accordion>
             {orders.map((o, i) =>
-              <Accordion.Item eventKey={i}>
-                <Accordion.Header>
+              <Accordion.Item data-testid="elem" eventKey={i}>
+                <Accordion.Header data-testid="header">
                   <Row className="acc-header-row">
                     <h4><Col><Badge bg="success">Order #{o.id}</Badge></Col></h4>
                     <Col><h5><Badge bg="secondary">User #{o.userID}</Badge></h5></Col>
-                    <Col>{o.paid ? <h5><Badge pill className="mb-1 badge_paid">Paid</Badge></h5>
+                    <Col>{o.paid ? <h5><Badge pill className="mb-1 badge_paid" data-testid="paid">Paid</Badge></h5>
                       : <h5><Badge pill className="mb-1 badge_notpaid">Not paid</Badge></h5>}</Col>
                     <Col>{o.products.every(pr => pr.status >= 1) && !o.paid
                       && <h5><Badge pill bg="danger" className="mb-1">Pending Cancellation</Badge></h5>}
@@ -107,7 +107,7 @@ function MyOrders(props) {
                       && <h5><Badge pill bg="success" className="mb-1">Fulfilled</Badge></h5>}</Col>
                   </Row>
                 </Accordion.Header>
-                <Accordion.Body>
+                <Accordion.Body data-testid="body">
                   <Row className="align-items-center mt-2">
                     <Col sm={3}><h5><Badge bg="secondary">Products</Badge></h5></Col>
                     <Col>{o.products.map(p => <h5 className="orders-text">· {p.name}: {p.quantity}</h5>)}</Col>

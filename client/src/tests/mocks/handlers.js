@@ -130,6 +130,41 @@ export const handlers = [
             ),
         )
     }),
+    rest.get('http://localhost:3000/api/orders', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    {
+                        id: 1,
+                        userID: 2,
+                        products: [
+                            {
+                                id: 4,
+                                quantity: 2,
+                                unit: "kg",
+                                price: 10.3,
+                                farmer: 3,
+                                status: 0,
+                                name: "Cheese"
+                            }
+                        ],
+                        address: {
+                            address: "STORE PICKUP",
+                            deliveryOn: "2021-12-01 11:30"
+                        },
+                        date: "2021-11-30",
+                        time: "09:22",
+                        amount: 20.6,
+                        conf: 0,
+                        fulfilled: 0,
+                        paid: 1,
+                        status: "not_available"
+                    }
+                ]
+            ),
+        )
+    })
     
 ]
 
