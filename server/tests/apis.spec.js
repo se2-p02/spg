@@ -690,13 +690,4 @@ describe("userDao tests", () => {
   it("getUser invalid email", async () => {
     await expect(userDao.getUser("5")).resolves.toEqual(false);
   })
-
-  it("deleteUser invalid email", async () => {
-    try {
-      await expect(userDao.deleteUser("5"))
-    }
-    catch (e) {
-      expect(e).toEqual()
-    }
-  })
 })
