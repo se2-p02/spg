@@ -177,9 +177,68 @@ export const handlers = [
                 ]
             ),
         )
+    }),
+    rest.get('http://localhost:3000/api/unretrievedOrders/2021-10-4', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [{
+                    address: { address: 'STORE PICKUP', deliveryOn: '2021-12-01 11:30' },
+                    amount: 20.6,
+                    conf: 0,
+                    date: "2021-11-30",
+                    fulfilled: 0,
+                    id: 1,
+                    paid: 1,
+                    products: [{
+                        farmer: 3,
+                        id: 4,
+                        name: "Cheese",
+                        price: 10.3,
+                        quantity: 2,
+                        status: 0,
+                        unit: "kg"
+                    }],
+                    length: 1,
+                    time: "09:22",
+                    userID: 2,
+                },
+                {
+                    address: { address: 'STORE PICKUP', deliveryOn: '2021-12-01 11:30' },
+                    amount: 10.9,
+                    conf: 0,
+                    date: "2021-11-30",
+                    fulfilled: 0,
+                    id: 2,
+                    paid: 1,
+                    products: [
+                        { id: 3, quantity: 1, unit: 'l', price: 1.2, farmer: 2, status: 3 },
+                        { id: 7, quantity: 1, unit: 'kg', price: 10.3, farmer: 7, status: 3 }
+                    ],
+                    length: 2,
+                    time: "09:22",
+                    userID: 2,
+                },
+                {
+                    address: { address: 'STORE PICKUP', deliveryOn: '2021-12-29 00:00' },
+                    amount: 6,
+                    conf: 0,
+                    date: "2021-11-30",
+                    fulfilled: 0,
+                    id: 3,
+                    paid: 0,
+                    products: [{ id: 4, quantity: 1, unit: 'kg', price: 10.3, farmer: 3, status: 1 }],
+                    length: 1,
+                    time: "11:55",
+                    userID: 2
+                }
+                ]
+            ),
+        )
     })
     
 ]
+
 
 
 
