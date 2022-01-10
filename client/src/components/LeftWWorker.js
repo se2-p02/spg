@@ -21,50 +21,8 @@ function LeftWWorker(props) {
                     })
                 }
             </ListGroup>
-            <MyModal data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}></MyModal>
         </Col>
     );
-}
-
-function MyModal(props) {
-
-    const [value, setValue] = useState();
-
-    const updateClock = (v) => {
-        API.setClock(moment(v).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(v));
-        });
-    };
-
-    useEffect(() => {
-        if (props.clock) {
-            setValue(() => new Date(props.clock));
-        }
-    }, [props.clock]);
-
-    return (
-        <Modal show={props.show} className="mt-5 m-0">
-            <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
-            <Modal.Body>
-                <Row className="m-0 p-0" data-testid = "row ww">
-                    <MyClock value={value} setValue={setValue} clock={props.clock} />
-                    <Row className="w-100 m-0 p-0 mt-3" data-testid = "ro2 wworker">
-                        <Col xs={1} sm={1} data-testid = "col ww"></Col>
-                        <Col xs={4} sm={4}>
-                            <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100" data-testid = "abort ww">Abort</Button>
-                        </Col>
-                        <Col xs={2} sm={2} data-testid = "col 2 wwork"></Col>
-                        <Col xs={4} sm={4} data-testid = "c">
-                            <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100" data-testid = "confirm ww">Confirm</Button>
-                        </Col>
-                        <Col xs={1} sm={1}></Col>
-
-                    </Row>
-                </Row>
-
-            </Modal.Body>
-        </Modal>
-    )
 }
 
 

@@ -135,7 +135,7 @@ function MyContainer(props) {
           path="/client"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setCart={setCart}
                 account = {true}
@@ -165,7 +165,7 @@ function MyContainer(props) {
           path="/client/profile"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 setUpdateProducts={setUpdateProducts}
@@ -199,7 +199,7 @@ function MyContainer(props) {
           path="/client/orders"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 setOldQuantities={setOldQuantities}
@@ -243,7 +243,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 setUser={setUser}
@@ -269,7 +269,7 @@ function MyContainer(props) {
           path="/farmer/orders"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 setClock={setClock}
@@ -300,7 +300,7 @@ function MyContainer(props) {
           path="/farmer/products"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -333,7 +333,7 @@ function MyContainer(props) {
           path="/farmer/myProducts"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 clock={clock}
                 user={user}
                 setModify={setModify}
@@ -365,7 +365,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setCart={setCart}
                 setModify={setModify}
@@ -395,6 +395,7 @@ function MyContainer(props) {
             <>
               <MyNavBar
                 fil={["Available Orders"]}
+                showModal={showModal} setShowModal={setShowModal}
                 role="wworker"
                 user={user}
                 modify={modify}
@@ -421,7 +422,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -448,7 +449,7 @@ function MyContainer(props) {
           path="/wmanager/deliveries"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setClock={setClock}
                 modify={modify}
@@ -483,7 +484,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 setModify={setModify}
                 cart={cart}
                 modify={modify}
@@ -510,7 +511,7 @@ function MyContainer(props) {
           path="/manager/unretrievedOrders"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 cart={cart}
                 setCart={setCart}
@@ -537,7 +538,7 @@ function MyContainer(props) {
           path="/login"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {false} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {false} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -560,7 +561,7 @@ function MyContainer(props) {
           path="/signup"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {false} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {false} showModal={showModal} setShowModal={setShowModal}
 
                 user={user}
                 setModify={setModify}
@@ -587,7 +588,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -604,7 +605,7 @@ function MyContainer(props) {
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee  showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock} clock={clock}></LeftEmployee>
+                <LeftEmployee  showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock} ></LeftEmployee>
                 <MyWelcomePage
                   
                 ></MyWelcomePage>
@@ -616,7 +617,7 @@ function MyContainer(props) {
           path="/employee/clients/:id"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -647,7 +648,7 @@ function MyContainer(props) {
           path="/employee/orders"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setClock={setClock}
                 setModify={setModify}
@@ -691,7 +692,7 @@ function MyContainer(props) {
           exact
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -719,7 +720,7 @@ function MyContainer(props) {
           path="/client/products"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -762,7 +763,7 @@ function MyContainer(props) {
           path="/employee/products"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -805,7 +806,7 @@ function MyContainer(props) {
           path="/employee/form"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -836,7 +837,7 @@ function MyContainer(props) {
           path="/wmanager/availableOrders"
           element={
             <>
-              <MyNavBar
+              <MyNavBar showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
@@ -864,7 +865,7 @@ function MyContainer(props) {
           path="/client/availableOrders"
           element={
             <>
-              <MyNavBar setFil={setFil} account = {true} setShowModal={setShowModal}
+              <MyNavBar setFil={setFil} account = {true} showModal={showModal} setShowModal={setShowModal}
                 user={user}
                 setModify={setModify}
                 modify={modify}
