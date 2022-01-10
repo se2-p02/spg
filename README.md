@@ -39,6 +39,7 @@ Products inserted in the DB can be viewed from 22 to 28 November 2021.
 
 - Route `/`: main page with links to main page
 - Route `/login`: login form for that in future will redirect to the user page
+- Route `/signup`: signup page for register an user
 - Route `/employee`: display the possible actions available for an employee
 - Route `/employee/clients`: display a the list of registered clients
 - Route `/employee/clients/:id`: display the informations and orders of the client with client id = {id}
@@ -53,15 +54,23 @@ Products inserted in the DB can be viewed from 22 to 28 November 2021.
 - Route `/client/profile`: display the informations of the client
 - Route `/client/products`: display the list of available products
 - Route `/client/orders`: display the list of all orders of a client
+- Router `/wworker`: display the page of the warehouse worker
+- Router `/wworker/notAvailableOrders`: display the main page of the warehouse worker
+- Router `/wmanager/deliveries`: display the delivery info for the warehouse manager
+- Router `/wmanager/availableOrders`: display the page of the warehouse worker for seing the confirmed orders 
+- Router `/manager/unretrievedOrders`: display the page of the statistics
 
   
 ## Database Tables
 
 - Table `users` - contains **id name username email wallet basket hash email phoneNumber city address country role farmedId**
-- Table `products` - contains **id name quantity unit farmer confirmed delivered price**
-- Table `orders` - contains **id userID products address date time amount confPreparation**
+- Table `products` - contains **id name quantity unit farmer confirmed delivered price availability filter image**
+- Table `orders` - contains **id userID products address date time amount confPreparation fulfilled paid status**
 - Table `farmers` - contains **id name confirmed**
 - Table `clock` - contains **serverTime**
+- Table `telegram` - contains **name token**
+- Table `telegramSubscribers` - contains **telegramId**
+- Table `F_delieveres` - contains **id productUd farmerId quantity orderId**
 
 ## API Server
 
