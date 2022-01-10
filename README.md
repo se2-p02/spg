@@ -21,12 +21,19 @@
 
 ## Accounts
  | Name     | Role              | Email                      | Password |
-|----------|-------------------|----------------------------|----------|
-| Nino     | Employee          | admin@admin.admin          | admin    |
-| Gigi     | Customer          | client@client.client       | client   |
-| Paolo    | Customer          | client1@client1.client1    | client1  |
-| farmer   | Farmer            | farmer@farmer.farmer       | farmer   |
-| wmanager | Warehouse Manager | wmanager@wmanager.wmanager | wmanager |
+ | -------- | ----------------- | -------------------------- | -------- |
+ | Nino     | Employee          | admin@admin.admin          | admin    |
+ | Gigi     | Customer          | client@client.client       | client   |
+ | Paolo    | Customer          | client1@client1.client1    | client1  |
+ | farmer   | Farmer            | farmer@farmer.farmer       | farmer   |
+ | farmer1  | Farmer            | farmer1@farmer1.farmer1    | farmer1  |
+ | farmer2  | Farmer            | farmer2@farmer2.farmer2    | farmer2  |
+ | wmanager | Warehouse Manager | wmanager@wmanager.wmanager | wmanager |
+ | wworker  | Warehouse Worker  | wworker@wworker.wworker    | wworker  |
+ | manager  | Manager           | manager@manager.manager    | manager  |
+
+## Data in the DB
+Products inserted in the DB can be viewed from 22 to 28 November 2021.
 
 ## React Client Application Routes
 
