@@ -2,14 +2,14 @@ version: "3.9"
 services:
   server:
     build: ./server
-    image: s290168/se02-spg-server:release1
+    image: s290168/se02-spg-server:release2
     ports:
       - "3001:3001"
     networks:
       - webappnetwork
   client:
     build: ./client
-    image: s290168/se02-spg-client:release1
+    image: s290168/se02-spg-client:release2
     ports:
       - "3000:3000"
     stdin_open: true

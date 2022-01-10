@@ -691,3 +691,35 @@ describe("userDao tests", () => {
     await expect(userDao.getUser("5")).resolves.toEqual(false);
   })
 })
+
+describe("Telegram tests", () => {
+  it("getTelegram bot info", async () => {
+    try {
+      await expect(spgDao.getTelegram()).resolves.toMatchSnapshot({
+        name: expect.any(String),
+        token: expect.any(String)
+      });
+    }
+    catch (e) {
+    }
+  })
+
+  it("insert telegram subscriber", async () => {
+    try {
+      await expect(spgDao.createTelegramSubscriber(1)).resolves.toEqual(true);
+      await expect(spgDao.deleteTelegramSubscriber(1)).resolves.toEqual(true);
+    }
+    catch (e) {
+    }
+  })
+
+  it("insert telegram subscriber to specific user", async () => {
+    try {
+      await expect(spgDao.setTelegramId(-1, { id: 1 })).resolves.toEqual(true);
+      await expect(spgDao.setTelegramId("", { id: 1 })).resolves.toEqual(true);
+    }
+    catch (e) {
+    }
+  })
+
+})

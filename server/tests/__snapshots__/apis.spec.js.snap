@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`getTelegram bot info 1`] = `
+Object {
+  "name": Any<String>,
+  "token": Any<String>,
+}
+`;
+
 exports[`tests GET /api/clients 1`] = `
 Object {
   "id": Any<Number>,
