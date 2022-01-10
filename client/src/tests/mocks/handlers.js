@@ -270,7 +270,20 @@ export const handlers = [
                 ]
             ),
         )
+    }),
+    rest.post('http://localhost:3000/api/products', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(true),
+        )
+    }),
+    rest.put('http://localhost:3000//api/products/:pid', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(true),
+        )
     })
+    
     
 ]
 
