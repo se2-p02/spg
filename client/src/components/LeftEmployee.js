@@ -1,13 +1,11 @@
 import { ListGroup, Button, Modal, Row } from 'react-bootstrap'
 import Col from "react-bootstrap/Col"
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './MyNavBar.css';
 import clients from './images/customer.png'
 import carrot from './images/carrot.png'
-import API from "./API";
-import moment from "moment";
-import MyClock from "./MyClock";
+
 
 
 function LeftEmployee(props) {

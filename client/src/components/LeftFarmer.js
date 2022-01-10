@@ -1,12 +1,9 @@
 import { ListGroup, Button, Row, Modal } from 'react-bootstrap'
 import Col from "react-bootstrap/Col"
 import { Link } from 'react-router-dom';
-import MyClock from "./MyClock";
-import React, { useState, useEffect } from "react";
-import moment from "moment";
+import React from "react";
 import './MyNavBar.css';
 import carrot from './images/carrot.png'
-import API from "./API";
 
 
 function LeftFarmer(props) {

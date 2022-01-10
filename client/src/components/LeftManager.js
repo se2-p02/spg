@@ -1,11 +1,8 @@
 import Col from "react-bootstrap/Col"
 import { Link } from 'react-router-dom';
 import './MyNavBar.css';
-import API from "./API";
-import MyClock from "./MyClock";
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { ListGroup, Button, Row, Modal } from 'react-bootstrap'
+import React from "react";
+import { ListGroup} from 'react-bootstrap'
 
 
 function LeftManager(props) {
