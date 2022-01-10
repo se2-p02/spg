@@ -499,7 +499,7 @@ function MyContainer(props) {
                 setFil={setFil}
               ></MyNavBar>
               <Row>
-                <LeftManager fil={fil} setFil={setFil}></LeftManager>
+                <LeftManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftManager>
                 <MyWelcomePage/>
 
               </Row>
@@ -526,7 +526,7 @@ function MyContainer(props) {
                 modify={modify}
               ></MyNavBar>
               <Row>
-                <LeftManager fil={fil} setFil={setFil}></LeftManager>
+                <LeftManager showModal={showModal} setShowModal={setShowModal} clock={clock} setClock={setClock} fil={fil} setFil={setFil}></LeftManager>
                 <MyStatistics user={user} clock={clock}/>
               </Row>
 
@@ -633,7 +633,7 @@ function MyContainer(props) {
                 fil={["Clients", "Products", "Orders"]}
               ></MyNavBar>
               <Row>
-                <LeftEmployee fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
+                <LeftEmployee showModal={showModal} setShowModal={setShowModal} fil={fil} setFil={setFil} setClock={setClock} clock={clock}></LeftEmployee>
                 <MySingleClient
                   clock={clock}
                   setClock={setClock}

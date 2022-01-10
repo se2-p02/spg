@@ -53,7 +53,7 @@ function MyMyProducts(props) {
         }
     }, [reqUpdate, props.cart, props.user, props.clock]);
 
-   
+
 
     const handleModify = (id) => {
         setProduct(products.find((prod) => prod.id === id));
@@ -75,7 +75,7 @@ function MyMyProducts(props) {
 
 
     return (
-        <Col xs="12"  md="9">
+        <Col xs="12" md="9">
             <Container className="bg-white min-height-100 justify-content-center align-items-center text-center below-nav" fluid>
                 {(props.clock && (!((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9)) && !(props.clock.day() === 1 && props.clock.hour() < 9))
                     &&
@@ -105,9 +105,9 @@ function MyMyProducts(props) {
                                                 <Col xs="2">{p.quantity + " " + p.unit}</Col>
                                                 <Col xs="2">{p.price + " €"}</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                                                    <Button data-testid={"mod"+p.id} variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image)}}><PencilSquare /></Button>
+                                                    <Button data-testid={"mod" + p.id} variant="warning" className="border" onClick={() => { setModal('modify'); handleModify(p.id); setOld_img(p.image) }}><PencilSquare /></Button>
                                                     :
-                                                    <Button data-testid={"mod"+p.id} variant="light" className="border" ><PencilSquare /></Button>
+                                                    <Button data-testid={"mod" + p.id} variant="light" className="border" ><PencilSquare /></Button>
                                                 }</Col>
                                                 <Col xs="2">{p.confirmed === 0 && (
                                                     (props.clock && (props.clock.day() === 1 && props.clock.hour() < 9)) ?
@@ -119,7 +119,7 @@ function MyMyProducts(props) {
                                                     {p.confirmed !== 0 && <>
                                                         <h6 className="m-0 p-0 d-block d-xs-block d-sm-block d-md-none d-lg-none d-xl-none">CONF</h6>
                                                         <h6 className="m-0 p-0 d-none d-xs-none d-sm-none d-md-block d-lg-block d-xl-block">CONFIRMED</h6>
-                                                        </>
+                                                    </>
                                                     }</Col>
                                             </Row>
 
@@ -135,7 +135,7 @@ function MyMyProducts(props) {
                     </Col>
                     <Col xs="4">
                         {(props.clock && ((props.clock.day() === 5) || (props.clock.day() === 6 && props.clock.hour() < 9))) ?
-                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 mb-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow();setOld_img(undefined) }}>New product</Button>
+                            <Button size="lg" className="btn add_btn p-2 w-100 mt-3 mb-3" data-testid="apbw" onClick={() => { setModal('add'); handleShow(); setOld_img(undefined) }}>New product</Button>
                             :
                             <Button size="lg" data-testId="apbnw" className="btn btn-success radius_button p-2 w-100 mt-3 mb-3" disabled>New product</Button>
                         }
@@ -160,6 +160,7 @@ function MyModal(props) {
     const [category, setCategory] = useState("All-purpose");
     const [message, setMessage] = useState([]);
     const [img, setImg] = useState(undefined);
+    const [imgName, setImgName] = useState('');
 
     useEffect(() => {
         if (props.modal === 'modify') {
@@ -179,12 +180,13 @@ function MyModal(props) {
         setPrice("0");
         setUnit("kg");
         props.setShow(false);
-        setImg(undefined)
+        setImg(undefined);
+        setImgName('');
     }
 
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setMessage([]);
         let tmp_msg = []
 
@@ -196,16 +198,16 @@ function MyModal(props) {
             return;
         }
         if (props.modal === 'modify') {
-            const files = {...img}   
+            const files = { ...img }
             let fileName;
             let del;
-            
-            if(files[0]===undefined){
-                fileName=props.old_img
+
+            if (files[0] === undefined) {
+                fileName = props.old_img
                 del = 0;
             }
-            else{
-                handleImageUpload()
+            else {
+                handleImageUpload();
                 fileName = files[0].name.split("\n").pop()
                 del = 1;
             }
@@ -219,15 +221,15 @@ function MyModal(props) {
             });
         }
         else {
-            const files = {...img}   
-            let fileName
+            const files = { ...img }
+            let fileName;
 
-            if(files[0]===undefined){
-                fileName="no_image.png"
+            if (files[0] === undefined) {
+                fileName = "no_image.png"
             }
-            else{
-                handleImageUpload()
-                fileName = files[0].name.split("\n").pop()
+            else {
+                fileName = await handleImageUpload();
+                console.log(fileName)
             }
             API.createProduct({ name: name, quantity: quantity, unit: unit, price: price, filter: category, file: fileName }).then((r) => {
                 if (r.error === undefined) {
@@ -255,155 +257,154 @@ function MyModal(props) {
 
     const storeValue = (event) => {
         const files = event.target.files
-        setImg({...files})
+        setImg({ ...files })
     }
 
-    const handleImageUpload = () => {
-        const files = {...img}    
-        
+    const handleImageUpload = async () => {
+        const files = { ...img }
+
         const formData = new FormData()
         formData.append('myFile', files[0])
 
-        fetch('/api/farmer/image', {
+        const response = await fetch('/api/farmer/image', {
             method: 'POST',
             body: formData
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.path)
-            })
             .catch(error => {
                 console.error(error)
             })
+        const responseJSON = await response.json();
+        console.log(responseJSON.path);
+        return responseJSON.path.split('/')[responseJSON.path.split('/').length - 1];
     }
 
 
     return (
         <>
-        <Modal
-            {...props}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-            data-testid="product_modal"
-        >
+            <Modal
+                {...props}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+                data-testid="product_modal"
+            >
 
-            <Modal.Body>
-                <Form>
-                    <Row>
-                        <Col>
-                            <Form.Group controlId="name">
-                                <Form.Label className="w-100"  data-testid="name"><h6>Name</h6></Form.Label>
-                                <Form.Control
-                                    className="w-100 p-2"
-                                    type="name"
-                                    placeholder="Name"
-                                    required
-                                    onChange={(ev) => { setName(ev.target.value); }}
-                                    value={name ? name : ""}
-                                />
-                                <Form.Text className="text-muted"></Form.Text>
+                <Modal.Body>
+                    <Form>
+                        <Row>
+                            <Col>
+                                <Form.Group controlId="name">
+                                    <Form.Label className="w-100" data-testid="name"><h6>Name</h6></Form.Label>
+                                    <Form.Control
+                                        className="w-100 p-2"
+                                        type="name"
+                                        placeholder="Name"
+                                        required
+                                        onChange={(ev) => { setName(ev.target.value); }}
+                                        value={name ? name : ""}
+                                    />
+                                    <Form.Text className="text-muted"></Form.Text>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="quantity">
+                                    <Form.Label className="w-100" data-testid="qnt"><h6>Quantity</h6></Form.Label>
+                                    <Form.Control
+                                        className="w-100 p-2"
+                                        type="number"
+                                        data-testid="qnt_form"
+                                        placeholder="0"
+                                        min={0}
+                                        required
+                                        onChange={(ev) => { setQuantity(ev.target.value); }}
+                                        value={quantity ? quantity : ""}
+                                    />
+                                    <Form.Text className="text-muted"></Form.Text>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="unit">
+                                    <Form.Label className=" w-100" data-testid="unit"><h6>Unit</h6></Form.Label>
+                                    <Form.Select style={{
+                                        backgroundColor: "unset",
+                                        marginTop: "unset"
+                                    }} className="w-100 p-2" data-testid="unit_form" onChange={(ev) => { setUnit(ev.target.value); }}>
+                                        <option key="kg">kg</option>
+                                        <option key="g">g</option>
+                                        <option key="pcs">pcs</option>
+                                        <option key="l">l</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={4}>
+                                <Form.Group controlId="price">
+                                    <Form.Label className=" w-100 mt-4" data-testid="price"><h6>Price</h6></Form.Label>
+                                    <Form.Control
+                                        className="w-100 p-2"
+                                        type="number"
+                                        data-testid="price_form"
+                                        placeholder="0"
+                                        min={0}
+                                        required
+                                        onChange={(ev) => { setPrice(ev.target.value); }}
+                                        value={price ? price : ""}
+                                    />
+                                    <Form.Text className="text-muted"></Form.Text>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="category">
+                                    <Form.Label className=" w-100 mt-4" data-testid="cat"><h6>Category</h6></Form.Label>
+                                    <Form.Select style={{
+                                        backgroundColor: "unset",
+                                        marginTop: "unset"
+                                    }} className="w-100 p-2" data-testid="cat_form" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
+                                        <option key="All-purpose">All-purpose</option>
+                                        <option key="Fish">Fish</option>
+                                        <option key="Dairy and Eggs">Dairy and Eggs</option>
+                                        <option key="Meat">Meat</option>
+                                        <option key="Vegetables">Vegetables</option>
+                                        <option key="Beverages">Beverages</option>
+                                        <option key="Fruit">Fruit</option>
+                                        <option key="Gastronomy">Gastronomy</option>
+                                        <option key="Home and Garden">Home and Garden</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Form.Group controlId="formFile" className="mb-3">
+                                <Form.Label className=" w-100 mt-4" data-testid="img"><h6>Image</h6></Form.Label>
+                                <Form.Control data-testid="img_form" type="file" id="fileUpload" accept="image/*" onChange={storeValue} />
+
                             </Form.Group>
+                        </Row>
+                        <Row>
+                            {message.map((x) => {
+                                return <p className="text-danger m-0 p-1 mx-2 mt-1">{x}</p>
+                            })}
+                        </Row>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer className="m-0">
+                    <Row className=" w-100">
+                        <Col xs="4">{props.modal === 'modify' &&
+                            <Button data-testid="delete" variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
+                        }</Col>
+                        <Col xs="4"><Button data-testid="close" variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
                         </Col>
-                        <Col>
-                            <Form.Group controlId="quantity">
-                                <Form.Label className="w-100" data-testid="qnt"><h6>Quantity</h6></Form.Label>
-                                <Form.Control
-                                    className="w-100 p-2"
-                                    type="number"
-                                    data-testid="qnt_form"
-                                    placeholder="0"
-                                    min={0}
-                                    required
-                                    onChange={(ev) => { setQuantity(ev.target.value); }}
-                                    value={quantity ? quantity : ""}
-                                />
-                                <Form.Text className="text-muted"></Form.Text>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="unit">
-                                <Form.Label className=" w-100" data-testid="unit"><h6>Unit</h6></Form.Label>
-                                <Form.Select style={{
-                                    backgroundColor: "unset",
-                                    marginTop: "unset"
-                                }} className="w-100 p-2" data-testid="unit_form" onChange={(ev) => { setUnit(ev.target.value); }}>
-                                    <option key="kg">kg</option>
-                                    <option key="g">g</option>
-                                    <option key="pcs">pcs</option>
-                                    <option key="l">l</option>
-                                </Form.Select>
-                            </Form.Group>
+                        <Col xs="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={4}>
-                            <Form.Group controlId="price">
-                                <Form.Label className=" w-100 mt-4" data-testid="price"><h6>Price</h6></Form.Label>
-                                <Form.Control
-                                    className="w-100 p-2"
-                                    type="number"
-                                    data-testid="price_form"
-                                    placeholder="0"
-                                    min={0}
-                                    required
-                                    onChange={(ev) => { setPrice(ev.target.value); }}
-                                    value={price ? price : ""}
-                                />
-                                <Form.Text className="text-muted"></Form.Text>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="category">
-                                <Form.Label className=" w-100 mt-4"  data-testid="cat"><h6>Category</h6></Form.Label>
-                                <Form.Select style={{
-                                    backgroundColor: "unset",
-                                    marginTop: "unset"
-                                }} className="w-100 p-2"  data-testid="cat_form" value={category} onChange={(ev) => { setCategory(ev.target.value); }}>
-                                    <option key="All-purpose">All-purpose</option>
-                                    <option key="Fish">Fish</option>
-                                    <option key="Dairy and Eggs">Dairy and Eggs</option>
-                                    <option key="Meat">Meat</option>
-                                    <option key="Vegetables">Vegetables</option>
-                                    <option key="Beverages">Beverages</option>
-                                    <option key="Fruit">Fruit</option>
-                                    <option key="Gastronomy">Gastronomy</option>
-                                    <option key="Home and Garden">Home and Garden</option>
-                                </Form.Select>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label className=" w-100 mt-4" data-testid="img"><h6>Image</h6></Form.Label>
-                            <Form.Control data-testid="img_form" type="file" id="fileUpload" accept="image/*" onChange={storeValue}/>
-                            
-                        </Form.Group>
-                    </Row>
-                    <Row>
-                        {message.map((x) => {
-                            return <p className="text-danger m-0 p-1 mx-2 mt-1">{x}</p>
-                        })}
-                    </Row>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer className="m-0">
-                <Row className=" w-100">
-                    <Col xs="4">{props.modal === 'modify' &&
-                        <Button data-testid="delete" variant="danger" className="radius_button w-100" onClick={handleDelete}>Delete</Button>
-                    }</Col>
-                    <Col xs="4"><Button data-testid="close" variant="secondary" className="radius_button w-100" onClick={handleClose}>Close</Button>
-                    </Col>
-                    <Col xs="4"><Button variant="success" className="radius_button w-100" data-testid="submit" onClick={() => { handleSubmit(); }}>Submit</Button>
-                    </Col>
-                </Row>
 
 
-            </Modal.Footer>
-            
-        </Modal >
-        
-    </>
+                </Modal.Footer>
+
+            </Modal >
+
+        </>
 
     );
 }

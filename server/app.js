@@ -193,7 +193,22 @@ async function sendNewProductNotification() {
 
 /*** APIs ***/
 app.post('/api/farmer/image', (req, res) => {
-  const fileName = req.files.myFile.name
+  let fileName = req.files.myFile.name
+  let flag = true;
+  let i = 1;
+  if (fs.existsSync(__dirname + '/images/' + fileName)) {
+    while (flag) {
+      if (!fs.existsSync(__dirname + '/images/' + fileName.split('.')[0] + '_' + i + '.' + fileName.split('.')[1])) {
+        fileName = fileName.split('.')[0] + '_' + i + '.' + fileName.split('.')[1];
+        flag = false;
+      }
+      else {
+        i++;
+      }
+    }
+  }
+
+
   let image = req.files.myFile
   const path = __dirname + '/images/' + fileName
 
@@ -411,7 +426,7 @@ app.get('/api/wallet/:id', async (req, res) => {
     }
     else {
       let flag = false;
-      orders.forEach(o => { if(o.paid === 0 && o.amount > wallet[0].wallet) flag = true; });
+      orders.forEach(o => { if (o.paid === 0 && o.amount > wallet[0].wallet) flag = true; });
       res.status(200).json(flag);
     }
   } catch (err) {
@@ -475,7 +490,7 @@ app.put("/api/orders/modify/:id", async (req, res) => {
     await spgDao.modifyOrder(JSON.stringify(order.products), JSON.stringify(order.address), order.amount, req.params.id);
     res.status(200).end();
   }
-  catch(err) {
+  catch (err) {
     res.status(500).json({ error: err });
   }
 });

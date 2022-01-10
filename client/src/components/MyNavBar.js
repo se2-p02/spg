@@ -126,7 +126,6 @@ function MyNavBar(props) {
                                     let url
                                     if(x === "My Orders"){
                                         url = "/"+props.role+"/"+"orders"
-
                                     }
                                     else if(x === "Orders in shop"){
                                         url = "/"+props.role+"/"+"availableOrders"
@@ -142,6 +141,9 @@ function MyNavBar(props) {
                                     }
                                     else if(x === "Available Orders"){
                                         url = "/"+props.role+"/"+"notAvailableOrders"
+                                    }
+                                    else if(x === "Products" && props.role === 'farmer'){
+                                        url = "/"+props.role+"/"+"myProducts"
                                     }
                                     else{
                                         url = "/"+props.role+"/"+x.toLowerCase()
