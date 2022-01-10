@@ -746,8 +746,8 @@ describe("images submit test", () => {
       .delete("/api/farmer/image")
       .send({ name: "testImage_1.jpg" })
       .expect(200);
-    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('\\')) + "/images/testImage.jpg");    
-    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('\\')) + "/images/testImage_1.jpg");
+    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage.jpg");    
+    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage_1.jpg");
   })
 })
 
