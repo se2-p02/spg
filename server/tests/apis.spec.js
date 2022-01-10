@@ -737,17 +737,11 @@ describe("images submit test", () => {
 
 
     await request(app).post('/api/farmer/image').set('content-type', 'multipart/form-data').attach('myFile', fs.readFileSync(`${__dirname}/testImage.jpg`), 'testImage.jpg').expect(200);
-    await request(app).post('/api/farmer/image').set('content-type', 'multipart/form-data').attach('myFile', fs.readFileSync(`${__dirname}/testImage.jpg`), 'testImage.jpg').expect(200);
     await request(app)
       .delete("/api/farmer/image")
       .send({ name: "testImage.jpg" })
       .expect(200);
-    await request(app)
-      .delete("/api/farmer/image")
-      .send({ name: "testImage_1.jpg" })
-      .expect(200);
-    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage.jpg");    
-    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage_1.jpg");
+    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage.jpg");
   })
 })
 
