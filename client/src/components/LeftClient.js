@@ -7,8 +7,7 @@ import './MyNavBar.css';
 import carrot from './images/carrot.png'
 import teleg from './images/telegram.png'
 import API from "./API";
-import moment from "moment";
-import MyClock from "./MyClock";
+
 
 
 
@@ -52,52 +51,12 @@ function LeftClient(props) {
 
                 }
                 
-                <MyModal data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}></MyModal>
 
             </ListGroup>
         </Col>
     );
 }
 
-function MyModal(props) {
-    const updateClock = (new_value) => {
-        API.setClock(moment(new_value).format('YYYY-MM-DD HH:mm')).then((response) => {
-            if (response.error === undefined) props.setClock(() => moment(new_value));
-        });
-    };
-
-    const [value, setValue] = useState();
-
-    useEffect(() => {
-        if (props.clock) {
-            setValue(() => new Date(props.clock));
-        }
-    }, [props.clock]);
-
-    return (
-        <Modal show={props.show} className="mt-5 m-0">
-            <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
-            <Modal.Body>
-                <Row className="m-0 p-0">
-                    <MyClock value={value} setValue={setValue} clock={props.clock} />
-                    <Row className="w-100 m-0 p-0 mt-3">
-                        <Col xs={1} sm={1}></Col>
-                        <Col xs={4} sm={4}>
-                            <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100">Abort</Button>
-                        </Col>
-                        <Col xs={2} sm={2}></Col>
-                        <Col xs={4} sm={4}>
-                            <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100">Confirm</Button>
-                        </Col>
-                        <Col xs={1} sm={1}></Col>
-
-                    </Row>
-                </Row>
-
-            </Modal.Body>
-        </Modal>
-    )
-}
 
 function FilterRow(props) {
 

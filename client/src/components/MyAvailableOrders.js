@@ -38,10 +38,10 @@ function MyAvailableOrders(props) {
           variant="flush">
 
           <ListGroup.Item className=" p-3" variant="warning">
-            <Row className="align-items-center">
-              <Col sm="4"><b>Order ID</b></Col>
-              <Col sm="4"><b>Products</b></Col>
-              <Col sm="4"><b>Amount</b></Col>
+            <Row className="align-items-center text-center">
+              <Col xs="2" sm="2"><b>Order ID</b></Col>
+              <Col xs="2" sm="8"><b>Products</b></Col>
+              <Col sm="2" sm="2"><b>Amount</b></Col>
             </Row>
           </ListGroup.Item>
           {orders && (
@@ -51,10 +51,10 @@ function MyAvailableOrders(props) {
 
                 return (
                   <ListGroup.Item>
-                    <Row className="align-items-center p-2">
-                      <Col sm="4" className="d-flex justify-content-center align-items-center">{c.id}</Col>
-                      <Col sm="4" className="d-flex justify-content-center align-items-center">{j.map((x) => {return(x.name + ": " + x.quantity+" "+x.unit)} )}</Col>
-                      <Col sm="4" className="d-flex justify-content-center align-items-center">{c.amount + " €"}</Col>
+                    <Row className="align-items-center p-2 text-center">
+                      <Col sm="2" sm="2" className="d-flex justify-content-center align-items-center">{c.id}</Col>
+                      <Col sm="8" sm="8" className="d-flex justify-content-center align-items-center">{j.map((x) => {return(<ul>{x.name + ": " + x.quantity+" "+x.unit}</ul>)} )}</Col>
+                      <Col sm="2" sm="2" className="d-flex justify-content-center align-items-center">{c.amount + " €"}</Col>
                     </Row>
                   </ListGroup.Item>
                 );

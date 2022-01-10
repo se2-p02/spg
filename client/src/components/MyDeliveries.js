@@ -34,7 +34,7 @@ function MyDeliveries(props) {
     
 
     return (
-        <Col sm="12" xs="12" ms="9">
+        <Col sm="12" xs="12" md="9">
             <Container
                 className={props.id ? "bg-white justify-content-center align-items-center text-center" : "bg-white min-height-100 justify-content-center align-items-center text-center below-nav"}
                 fluid

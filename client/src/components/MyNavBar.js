@@ -5,6 +5,7 @@ import { Badge, Dropdown, ListGroup, Modal, Button, Navbar, Form, Container, Row
 import API from "./API";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import MyClock from "./MyClock";
 
 import DateTimePicker from 'react-datetime-picker';
 
@@ -163,15 +164,60 @@ function MyNavBar(props) {
                     <MyModal setModify={props.setModify} orderId={props.orderId} mOrderUId={props.mOrderUId} modify={props.modify} oldQ={props.oldQ} setOldQuantities={props.setOldQuantities} setUpdateProducts={props.setUpdateProducts} user={props.user} cart={props.cart} setCart={props.setCart} show={show} setShow={setShow} clock={props.clock} />
                 }
             </Navbar>
-            {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 mb-3 p-3 px-3 d-block d-xs-none d-sm-none d-md-block" onClick={() => { props.setShowModal(true) }}>
+            {props.user && <Button data-testid="clockButton" variant="secondary" className="time_button text-end align-items-end m-2 mb-3 p-3 px-3 d-none d-xs-none d-sm-none d-md-block" onClick={() => { props.setShowModal(true) }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
   <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
 </svg>
             </Button>}
+            <ModalClock data-testid="modalTime" setShow={props.setShowModal} show={props.showModal} setClock={props.setClock} clock={props.clock}></ModalClock>
+
         </>
     );
 }
+
+
+
+function ModalClock(props) {
+    const updateClock = (new_value) => {
+        API.setClock(moment(new_value).format('YYYY-MM-DD HH:mm')).then((response) => {
+            if (response.error === undefined) props.setClock(() => moment(new_value));
+        });
+    };
+
+    const [value, setValue] = useState();
+
+    useEffect(() => {
+        if (props.clock) {
+            setValue(() => new Date(props.clock));
+        }
+    }, [props.clock]);
+
+    return (
+        <Modal show={props.show} className="mt-5 m-0">
+            <Modal.Header className="m-0 p-2"><h3>Please, select the date and time</h3></Modal.Header>
+            <Modal.Body>
+                <Row className="m-0 p-0">
+                    <MyClock value={value} setValue={setValue} clock={props.clock} />
+                    <Row className="w-100 m-0 p-0 mt-3">
+                        <Col xs={1} sm={1}></Col>
+                        <Col xs={4} sm={4}>
+                            <Button onClick={() => { setValue(() => new Date(props.clock)); props.setShow(false) }} variant="danger" className="button radius_button w-100">Abort</Button>
+                        </Col>
+                        <Col xs={2} sm={2}></Col>
+                        <Col xs={4} sm={4}>
+                            <Button onClick={() => { updateClock(value); props.setShow(false) }} variant="success" className="button add_btn w-100">Confirm</Button>
+                        </Col>
+                        <Col xs={1} sm={1}></Col>
+
+                    </Row>
+                </Row>
+
+            </Modal.Body>
+        </Modal>
+    )
+}
+
 
 function MyModal(props) {
     const [successful, setSuccessful] = useState(false);
