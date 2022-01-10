@@ -6,6 +6,7 @@ const moment = require("moment");
 const app = require("../app");
 var server = request.agent(app)
 const userDao = require("../userDao")
+const fs = require('fs');
 
 
 function loginAdmin() {
@@ -723,3 +724,26 @@ describe("Telegram tests", () => {
   })
 
 })
+
+describe("images submit test", () => {
+
+
+  it("send image", async () => {
+    var imgFile = fs.readFileSync(__dirname + "/testImage.jpg", { encoding: "base64" })
+
+
+    await request(app).post('/api/farmer/image').set('content-type', 'multipart/form-data').attach('myFile', fs.readFileSync(`${__dirname}/testImage.jpg`), 'testImage.jpg').expect(200);
+    await request(app).post('/api/farmer/image').set('content-type', 'multipart/form-data').attach('myFile', fs.readFileSync(`${__dirname}/testImage.jpg`), 'testImage.jpg').expect(200);
+    await request(app)
+      .delete("/api/farmer/image")
+      .send({ name: "testImage.jpg" })
+      .expect(200);
+    await request(app)
+      .delete("/api/farmer/image")
+      .send({ name: "testImage_1.jpg" })
+      .expect(200);
+    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage.jpg");    
+    fs.unlinkSync(__dirname.substring(0, __dirname.lastIndexOf('/')) + "/images/testImage_1.jpg");
+  })
+})
+

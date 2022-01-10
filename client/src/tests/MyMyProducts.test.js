@@ -145,27 +145,56 @@ describe('Test MyMyproducts', () => {
         err = screen.getByText("Price should be greater than 0")
         expect(err).toBeInTheDocument();
 
+        await waitFor(() => {
+            act(() => {
+                fireEvent.change(screen.getByTestId("price_form"), {
+                    target: { value: '2.0' },
+                });
+                fireEvent.click(screen.getByTestId('submit'));
+            });
+
+            act(() => {
+                fireEvent.click(screen.getByTestId("close"));
+            });
+        })
+
     });
 
     it("tests products", async () => {
         render(<MyMyProducts
-            clock={moment('2021-11-27 9:55')}
+            clock={moment('2021-11-26 9:55')}
             setClock={jest.fn()}
             user={{ id: 7, role: "farmer", username: "farmer@farmer.farmer" }}
             cart={[]}
             setCart={jest.fn()}
             showCart={true} />);
 
-        await waitFor( () => {
+        await waitFor(() => {
             expect(screen.getByText("Milk")).toBeInTheDocument()
             expect(screen.getByText("7 €")).toBeInTheDocument()
             expect(screen.getByText("CONFIRMED")).toBeInTheDocument()
-            let mod_button = screen.getByTestId("mod2")
+            let mod_button = screen.getByTestId("mod9")
             expect(mod_button).toBeInTheDocument()
             act(() => {
-                fireEvent.click(mod_button)
+                fireEvent.click(mod_button);
+                fireEvent.change(screen.getByTestId("unit_form"), {
+                    target: { value: 'g' },
+                });
+                fireEvent.change(screen.getByTestId("cat_form"), {
+                    target: { value: 'Fish' },
+                });
+                fireEvent.change(screen.getByTestId("img_form"), {
+                    target: { files: [] },
+                });
+                fireEvent.click(screen.getByTestId('submit'));
+            });
+
+            act(() => {
+                fireEvent.click(mod_button);
+                fireEvent.click(screen.getByTestId('delete'));
             });
             
+
         })
     });
 
