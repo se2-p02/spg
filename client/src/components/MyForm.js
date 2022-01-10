@@ -155,7 +155,6 @@ function MyForm(props) {
                             </Col>
                             <Col lg={1} data-testid=""/>
                         </Row>
-                        <h1>User registration completed!</h1>
 
                     </>
                 )}
