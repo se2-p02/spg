@@ -131,7 +131,7 @@ async function subscribe() {
               if (u.my_chat_member.new_chat_member.status === "member") {
 
                 //create entry of telegramId where user.id = /start id
-                spgDao.createTelegramSubscriber(u.my_chat_member.from.id, { id: u.my_chat_member.from.id });
+                spgDao.createTelegramSubscriber(u.my_chat_member.from.id);
               }
               else if (u.my_chat_member.new_chat_member.status === "kicked") {
                 //delete entry of telegramId where telegramId = from.id
@@ -143,11 +143,21 @@ async function subscribe() {
               if (u.message.text) {
                 let text = u.message.text;
                 const myArray = text.split(" ");
-                if (myArray[0] === "/start") {
-                  let userId = parseInt(myArray[1]);
-                  if (!isNaN(userId)) {
-                    spgDao.setTelegramId(u.message.from.id, { id: userId });
+                if (text === "/start") {
+                  spgDao.deleteTelegramSubscriber(u.message.from.id);
+                  spgDao.createTelegramSubscriber(u.message.from.id);
+                }
+                else {                  
+                  if (myArray[0] === "/start") {
+                    let userId = parseInt(myArray[1]);
+                    if (!isNaN(userId)) {
+                      spgDao.setTelegramId(u.message.from.id, { id: userId });
+                    }
                   }
+                }
+
+                if (myArray[0] === "/stop") {
+                  spgDao.deleteTelegramSubscriber(u.message.from.id);
                 }
               }
             }
