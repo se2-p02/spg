@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000"
+const URL = "http://localhost:3002"
 
 async function confirmOrder(order){
 
