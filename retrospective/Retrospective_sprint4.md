@@ -2,9 +2,6 @@
 Team P-02 - Fourth Sprint Retrospective
 =====================================
 
-The retrospective should include _at least_ the following
-sections:
-
 - [process measures](#process-measures)
 - [quality measures](#quality-measures)
 - [general assessment](#assessment)
@@ -69,22 +66,20 @@ sections:
 ## ASSESSMENT
 
 - What caused your errors in estimation?<br/>
-We are starting to produce balanced estimations with minor differences between estimated and actual spent hours: some tasks have still a noticeable difference but this is mostly due to initial considerations on the desired behaviour.
+The main cause of errors in the estimation was due to a story that was not completed from the previous sprint and since the assignee of the story couldn't finish it also in this sprint, another teammate worked on it, almost doubling the time needed. This error is compensated by a miss prediction in the technical story which includes some tasks that are really complex to estimate as TD management, docker setups, and code review.
 
 - What lessons did you learn (both positive and negative) in this sprint?<br/>
-First of all we learned how to properly configure SonarCloud, which was having issues with the CI scan.
-From the point of view of estimations, we still slightly overestimate story-related tasks (we are getting used to the web app mechanics) and underestimate technical tasks like Technical Debt management or Unit/E2E testing, since it's difficult to know in advance what you are going to test.
-A negative lesson learned could be that sometimes all it takes is some wrong coding from a teammate to break the behaviour of the entire app.
+A lesson we learned is that we have to divide the tasks taking into account the skills of the team members and help as much as possible the ones that are less confident with coding. Previously, we just divide the workload equally, while now we learned that a person may be more useful developing a complex component while another could help during less technical tasks.
+Another thing we learned is to test components using mock functions to simulate the APIs. This was a huge step that simplified the testing tasks and allowed us to increase a lot the coverage.
 
 - Which improvement goals set in the previous retrospective were you able to achieve? <br/>
-We are continuing with regular scrums in order to keep everyone on track.
-We managed to increase total coverage (29.1% -> 54.7%) by configuring SonarCloud and completing tests left over from the previous sprint; this was the important objective set in the previous retrospective. 
+In the previous sprint, our goal was to improve the overall interface of the application (as requested by the stakeholders). This became one of the main goals of this sprint and this is the reason why we had to do only three stories. The GUI is now way more clear and less aggressive than before.
 
 - Which ones you were not able to achieve? Why?<br/>
-We have not yet achieved the suggested SonarCloud coverage of 80%, but it's a good point.
+We didn't reach 80% of coverage as suggested by SonarCloud but we reached the level we considered acceptable (60% as discussed with the professor).
 
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)<br/>
-In the next sprint we would like to improve the overall interface of the application, make it cleaner and more pleasant to the eye.
+In the next sprint, the main goal will be to develop more user stories than we did during this sprint. The interface is now fixed and it will more important to add functionality to the system that improves the GUI.
 
 - One thing you are proud of as a Team!!<br/>
-The team coordination reached high levels: we understand each other, some tasks are done in 2+ people and generally working on something that another teammate started is not a problem.
+The team tuning has reached a great level. We can understand the code of each other with no problems (which helps during the code review phase) and in general, we trust a lot the code/tests written by other team members. 
